@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+	<LinearLayout
+		android:orientation="vertical"
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent">
+	
+		<RelativeLayout
+		    android:layout_width="fill_parent"
+		    android:layout_height="48dip"
+		    android:paddingLeft="10dip"
+		    android:background="@drawable/footer_normal">
+		    <TextView android:id="@+id/title"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_centerInParent="true"
+		        android:textSize="28sp"
+		        android:textColor="#FFFFFF"
+		        android:text="@string/categories" />
+		</RelativeLayout>
+		
+		<LinearLayout android:id="@+id/main_layout"
+		    android:layout_width="fill_parent"
+		    android:layout_height="wrap_content"
+		    android:orientation="vertical"
+		    android:paddingTop="10dip"
+		    android:visibility="visible"
+		    android:layout_weight="1">
+			<ListView android:id="@android:id/list"
+			    android:layout_width="fill_parent"
+			    android:layout_height="fill_parent"
+				android:background="#000000"
+			    android:cacheColorHint="#00000000"
+		    	android:listSelector="@android:color/transparent"
+			    android:divider="@android:color/transparent"
+			    android:dividerHeight="10dip"
+			    android:textFilterEnabled="true" />
+			
+			<LinearLayout android:id="@android:id/empty"
+			    android:layout_width="fill_parent"
+			    android:layout_height="fill_parent"
+			    android:orientation="vertical"
+			    android:layout_gravity="center"
+			    android:gravity="center">
+			    <TextView android:id="@+id/no_data_text"
+			        android:layout_width="fill_parent"
+			        android:layout_height="wrap_content"
+			        android:padding="10dip"
+			        android:gravity="center"
+			        android:lineSpacingExtra="3dip"
+			        android:textColor="#FFFFFF"
+			        android:textSize="16sp"
+			        android:text="@string/no_categories" />
+			</LinearLayout>
+		</LinearLayout>
+		<Button android:id="@+id/more_apps"  
+		    android:layout_height="wrap_content"
+		    android:layout_width="match_parent"
+		    android:layout_weight="0.2"
+		    android:text="@string/more_apps"
+	    	android:onClick="onMoreButtonClick"
+	    	android:background="@android:color/transparent"
+	    	android:textColor="@android:color/white"
+	    	android:layout_gravity="center"
+	    	android:textSize="17sp">
+		    
+		</Button>
+	</LinearLayout>
+</FrameLayout>

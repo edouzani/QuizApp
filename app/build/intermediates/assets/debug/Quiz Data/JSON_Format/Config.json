@@ -1,0 +1,17 @@
+{ "Config" : { "AboutText" : "This application is developed by Heaven apps.\n \n We are specialised in software development in following areas,\n \n1 ) iOS \n2) Android \n3) Web (Drupal, Word Press, Facebook and Ruby on Rails) \n\nContact us for your development requirements and demo app links which we have developed. \nEmail : heavenapps@gmail.com \nSkype : satish.nerlekar \nhttp://www.facebook.com/heaven.apps \n",
+      "AdSupportNeeded" : false,
+      "AppKey64Bit" : "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAhD7yC6fiGraho0HLyXeZSCdTrUXTkv8XMliC/gp3CPMYNtNzsgy4PUYaDYV9GBhiLhLT/3ems66gsozZ8yZONGzCR5DGJFRgI02dCJ7y6VK09IYu/h9azVi+HOuUDuDrIap2m4KoL86IN27Uh5Le4HFhJdrqyCXACIO0mlEeYXw5HoHq80ZceZoblJuz9BRhoSU2ZPEJQE3MMPB7SHp20M7Q2xHCQVZf9+2i0bCOBwOkacsTtAHDBxta2je55SpB6sOHpY4jyazUQOsEEEn+/xfgF+xy6a+F+nQp4X8YFnMEioMv0i435Jg7ZrM+2iX4XgQNc5GPVr9dT14CFUcimQIDAQAB",
+      "CategoryScreenTitle" : "Quiz App",
+      "CategoryScreenTitleFontSize" : 18,
+      "ChartboostAppID" : "4f7b433509b6025804000002",
+      "ChartboostAppSecret" : "dd2d41b69ac01b80f443f5b6cf06096d457f82bd",
+      "FinalScreenTitleFontSize" : 18,
+      "GameServicesSupportNeeded" : true,
+      "HighlightCorrectOptionWhenAnswered" : true,
+      "MainScreenTitle" : "Знание сила",
+      "PlayCorrectWronSoundOnAnswering" : true,
+      "RemoveAdsSKU" : "quiz_remove_ads",
+      "ShuffleAnswerOptions" : true,
+      "ShuffleQuestions" : true,
+      "UseAnimationTypeForAnswers" : "1"
+    } }

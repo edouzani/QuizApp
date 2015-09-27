@@ -1,0 +1,48 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 22
+    buildToolsVersion "22.0.1"
+
+    defaultConfig {
+        applicationId "com.quizapp.android"
+        minSdkVersion 15
+        targetSdkVersion 21
+    }
+
+    signingConfigs {
+        debug {
+            storeFile file("debug.keystore")
+        }
+        release {
+            storeFile file("almadev_keystore")
+            storePassword "7fqhyw8j"
+            keyAlias "luuk"
+            keyPassword "7fqhyw8j"
+        }
+    }
+
+    buildTypes {
+        release {
+            debuggable false
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+        }
+
+        debug {
+            debuggable true
+            minifyEnabled false
+            signingConfig signingConfigs.debug
+        }
+    }
+}
+
+dependencies {
+    compile 'com.android.support:support-v4:22.0.0'
+    compile files('libs/chartboost.jar')
+    compile files('libs/commons-io-2.0.1.jar')
+    compile files('libs/google-play-services.jar')
+    compile 'com.squareup.okhttp:okhttp:2.5.0'
+    compile files('libs/gson-2.3.1.jar')
+    compile 'de.greenrobot:eventbus:2.4.0'
+}

@@ -1,0 +1,128 @@
+-- Merging decision tree log ---
+manifest
+ADDED from D:\Android_Projects\QuizApp_Android 2.0\app\src\main\AndroidManifest.xml:2:1-45:12
+	xmlns:android
+		ADDED from D:\Android_Projects\QuizApp_Android 2.0\app\src\main\AndroidManifest.xml:2:11-69
+	package
+		ADDED from D:\Android_Projects\QuizApp_Android 2.0\app\src\main\AndroidManifest.xml:3:5-37
+		INJECTED from D:\Android_Projects\QuizApp_Android 2.0\app\src\main\AndroidManifest.xml
+		INJECTED from D:\Android_Projects\QuizApp_Android 2.0\app\src\main\AndroidManifest.xml
+	android:versionName
+		ADDED from D:\Android_Projects\QuizApp_Android 2.0\app\src\main\AndroidManifest.xml:5:5-30
+	android:versionCode
+		ADDED from D:\Android_Projects\QuizApp_Android 2.0\app\src\main\AndroidManifest.xml:4:5-28
+		INJECTED from D:\Android_Projects\QuizApp_Android 2.0\app\src\main\AndroidManifest.xml
+		INJECTED from D:\Android_Projects\QuizApp_Android 2.0\app\src\main\AndroidManifest.xml
+uses-sdk
+ADDED from D:\Android_Projects\QuizApp_Android 2.0\app\src\main\AndroidManifest.xml:7:5-43
+MERGED from [com.android.support:support-v4:22.0.0] D:\Android_Projects\QuizApp_Android 2.0\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.0.0\AndroidManifest.xml:20:5-43
+	android:targetSdkVersion
+		INJECTED from D:\Android_Projects\QuizApp_Android 2.0\app\src\main\AndroidManifest.xml
+		INJECTED from D:\Android_Projects\QuizApp_Android 2.0\app\src\main\AndroidManifest.xml
+	android:minSdkVersion
+		ADDED from D:\Android_Projects\QuizApp_Android 2.0\app\src\main\AndroidManifest.xml:7:15-40
+		INJECTED from D:\Android_Projects\QuizApp_Android 2.0\app\src\main\AndroidManifest.xml
+		INJECTED from D:\Android_Projects\QuizApp_Android 2.0\app\src\main\AndroidManifest.xml
+uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
+ADDED from D:\Android_Projects\QuizApp_Android 2.0\app\src\main\AndroidManifest.xml:9:5-81
+	android:name
+		ADDED from D:\Android_Projects\QuizApp_Android 2.0\app\src\main\AndroidManifest.xml:9:22-78
+uses-permission#android.permission.INTERNET
+ADDED from D:\Android_Projects\QuizApp_Android 2.0\app\src\main\AndroidManifest.xml:11:2-63
+	android:name
+		ADDED from D:\Android_Projects\QuizApp_Android 2.0\app\src\main\AndroidManifest.xml:11:19-61
+uses-permission#android.permission.ACCESS_WIFI_STATE
+ADDED from D:\Android_Projects\QuizApp_Android 2.0\app\src\main\AndroidManifest.xml:12:2-72
+	android:name
+		ADDED from D:\Android_Projects\QuizApp_Android 2.0\app\src\main\AndroidManifest.xml:12:19-70
+uses-permission#android.permission.READ_PHONE_STATE
+ADDED from D:\Android_Projects\QuizApp_Android 2.0\app\src\main\AndroidManifest.xml:13:2-71
+	android:name
+		ADDED from D:\Android_Projects\QuizApp_Android 2.0\app\src\main\AndroidManifest.xml:13:19-69
+uses-permission#android.permission.ACCESS_NETWORK_STATE
+ADDED from D:\Android_Projects\QuizApp_Android 2.0\app\src\main\AndroidManifest.xml:14:2-75
+	android:name
+		ADDED from D:\Android_Projects\QuizApp_Android 2.0\app\src\main\AndroidManifest.xml:14:19-73
+uses-permission#com.android.vending.BILLING
+ADDED from D:\Android_Projects\QuizApp_Android 2.0\app\src\main\AndroidManifest.xml:15:2-64
+	android:name
+		ADDED from D:\Android_Projects\QuizApp_Android 2.0\app\src\main\AndroidManifest.xml:15:19-61
+application
+ADDED from D:\Android_Projects\QuizApp_Android 2.0\app\src\main\AndroidManifest.xml:17:5-43:19
+MERGED from [com.android.support:support-v4:22.0.0] D:\Android_Projects\QuizApp_Android 2.0\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.0.0\AndroidManifest.xml:22:5-20
+	android:label
+		ADDED from D:\Android_Projects\QuizApp_Android 2.0\app\src\main\AndroidManifest.xml:19:9-41
+	android:icon
+		ADDED from D:\Android_Projects\QuizApp_Android 2.0\app\src\main\AndroidManifest.xml:18:9-45
+	android:theme
+		ADDED from D:\Android_Projects\QuizApp_Android 2.0\app\src\main\AndroidManifest.xml:19:42-95
+meta-data#com.google.android.gms.games.APP_ID
+ADDED from D:\Android_Projects\QuizApp_Android 2.0\app\src\main\AndroidManifest.xml:22:9-23:43
+	android:name
+		ADDED from D:\Android_Projects\QuizApp_Android 2.0\app\src\main\AndroidManifest.xml:22:20-70
+	android:value
+		ADDED from D:\Android_Projects\QuizApp_Android 2.0\app\src\main\AndroidManifest.xml:23:10-40
+meta-data#com.google.android.gms.version
+ADDED from D:\Android_Projects\QuizApp_Android 2.0\app\src\main\AndroidManifest.xml:24:9-122
+	android:name
+		ADDED from D:\Android_Projects\QuizApp_Android 2.0\app\src\main\AndroidManifest.xml:24:20-65
+	android:value
+		ADDED from D:\Android_Projects\QuizApp_Android 2.0\app\src\main\AndroidManifest.xml:24:66-119
+activity#com.almadev.znaniesila.HAStartScreen
+ADDED from D:\Android_Projects\QuizApp_Android 2.0\app\src\main\AndroidManifest.xml:28:9-35:20
+	android:screenOrientation
+		ADDED from D:\Android_Projects\QuizApp_Android 2.0\app\src\main\AndroidManifest.xml:29:65-101
+	android:label
+		ADDED from D:\Android_Projects\QuizApp_Android 2.0\app\src\main\AndroidManifest.xml:30:13-45
+	android:name
+		ADDED from D:\Android_Projects\QuizApp_Android 2.0\app\src\main\AndroidManifest.xml:29:13-64
+	android:launchMode
+		ADDED from D:\Android_Projects\QuizApp_Android 2.0\app\src\main\AndroidManifest.xml:30:46-77
+intent-filter#android.intent.action.MAIN+android.intent.category.LAUNCHER
+ADDED from D:\Android_Projects\QuizApp_Android 2.0\app\src\main\AndroidManifest.xml:31:13-34:29
+action#android.intent.action.MAIN
+ADDED from D:\Android_Projects\QuizApp_Android 2.0\app\src\main\AndroidManifest.xml:32:17-69
+	android:name
+		ADDED from D:\Android_Projects\QuizApp_Android 2.0\app\src\main\AndroidManifest.xml:32:25-66
+category#android.intent.category.LAUNCHER
+ADDED from D:\Android_Projects\QuizApp_Android 2.0\app\src\main\AndroidManifest.xml:33:17-77
+	android:name
+		ADDED from D:\Android_Projects\QuizApp_Android 2.0\app\src\main\AndroidManifest.xml:33:27-74
+activity#com.almadev.znaniesila.HACategoriesScreen
+ADDED from D:\Android_Projects\QuizApp_Android 2.0\app\src\main\AndroidManifest.xml:37:9-147
+	android:screenOrientation
+		ADDED from D:\Android_Projects\QuizApp_Android 2.0\app\src\main\AndroidManifest.xml:37:76-112
+	android:name
+		ADDED from D:\Android_Projects\QuizApp_Android 2.0\app\src\main\AndroidManifest.xml:37:19-75
+	android:launchMode
+		ADDED from D:\Android_Projects\QuizApp_Android 2.0\app\src\main\AndroidManifest.xml:37:113-144
+activity#com.almadev.znaniesila.HAQuizScreen
+ADDED from D:\Android_Projects\QuizApp_Android 2.0\app\src\main\AndroidManifest.xml:38:9-141
+	android:screenOrientation
+		ADDED from D:\Android_Projects\QuizApp_Android 2.0\app\src\main\AndroidManifest.xml:38:70-106
+	android:name
+		ADDED from D:\Android_Projects\QuizApp_Android 2.0\app\src\main\AndroidManifest.xml:38:19-69
+	android:launchMode
+		ADDED from D:\Android_Projects\QuizApp_Android 2.0\app\src\main\AndroidManifest.xml:38:107-138
+activity#com.almadev.znaniesila.HAFinalScreen
+ADDED from D:\Android_Projects\QuizApp_Android 2.0\app\src\main\AndroidManifest.xml:39:9-142
+	android:screenOrientation
+		ADDED from D:\Android_Projects\QuizApp_Android 2.0\app\src\main\AndroidManifest.xml:39:71-107
+	android:name
+		ADDED from D:\Android_Projects\QuizApp_Android 2.0\app\src\main\AndroidManifest.xml:39:19-70
+	android:launchMode
+		ADDED from D:\Android_Projects\QuizApp_Android 2.0\app\src\main\AndroidManifest.xml:39:108-139
+activity#com.almadev.znaniesila.videoplayer.MovieView
+ADDED from D:\Android_Projects\QuizApp_Android 2.0\app\src\main\AndroidManifest.xml:40:9-41:48
+	android:screenOrientation
+		ADDED from D:\Android_Projects\QuizApp_Android 2.0\app\src\main\AndroidManifest.xml:40:79-115
+	android:name
+		ADDED from D:\Android_Projects\QuizApp_Android 2.0\app\src\main\AndroidManifest.xml:40:19-78
+	android:launchMode
+		ADDED from D:\Android_Projects\QuizApp_Android 2.0\app\src\main\AndroidManifest.xml:41:14-45
+activity#com.almadev.znaniesila.AboutScreen
+ADDED from D:\Android_Projects\QuizApp_Android 2.0\app\src\main\AndroidManifest.xml:42:9-108
+	android:screenOrientation
+		ADDED from D:\Android_Projects\QuizApp_Android 2.0\app\src\main\AndroidManifest.xml:42:69-105
+	android:name
+		ADDED from D:\Android_Projects\QuizApp_Android 2.0\app\src\main\AndroidManifest.xml:42:19-68

@@ -1,0 +1,116 @@
+package com.almadev.znaniesila.network;
+
+import com.almadev.znaniesila.events.NeedUpdateQuizesEvent;
+import com.almadev.znaniesila.model.CategoriesList;
+import com.almadev.znaniesila.model.Question;
+import com.almadev.znaniesila.model.Quiz;
+import com.almadev.znaniesila.model.QuizHolder;
+import com.almadev.znaniesila.utils.Constants;
+import com.google.gson.Gson;
+import com.squareup.okhttp.OkHttpClient;
+import com.squareup.okhttp.Request;
+import com.squareup.okhttp.Response;
+
+import java.io.IOException;
+
+import de.greenrobot.event.EventBus;
+
+/**
+ * Created by Aleksey on 24.09.2015.
+ */
+public class CategoriesDownloader {
+
+    interface DownloaderCallback {
+    }
+
+    public interface QuizDownloadCallback {
+        void downloadFinished(Quiz quiz);
+    }
+
+    public interface CategoriesDownloadCallback {
+        void downloadFinished(CategoriesList list);
+    }
+
+    private CategoriesDownloader() {
+    }
+
+    private static OkHttpClient httpClient = new OkHttpClient();
+
+    private static final String QZ_VERSION_HEADER    = "QZ-VERSION";
+    private static final String IF_NONE_MATCH_HEADER = "If-None-Match";
+    private static final String ETAG_HEADER          = "ETAG";
+
+    public static void downloadCategoriesList(final CategoriesList currentList, final QuizHolder quizHolder, final CategoriesDownloadCallback callback) {
+        new Thread(new Runnable() {
+
+            @Override
+            public void run() {
+                String ver;
+                if (currentList == null || currentList.getVersion() == null) {
+                    ver = "0";
+                } else {
+                    ver = currentList.getVersion();
+                }
+                Request request = new Request.Builder().url(Constants.API_CATEGORIES_LIST)
+                                                       .addHeader(IF_NONE_MATCH_HEADER, ver)
+                                                       .addHeader("Content-Type", "application/json").build();
+
+                Response response = null;
+                try {
+                    response = httpClient.newCall(request).execute();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                if (response == null) {
+                    callback.downloadFinished(null);
+                }
+
+                if (response.code() == 304) {
+                    callback.downloadFinished(null);
+                }
+
+                CategoriesList list = null;
+                try {
+                    String jsonStr = response.body().string();
+                    list = new Gson().fromJson(jsonStr, CategoriesList.class);
+                    list.setVersion(response.header(ETAG_HEADER));
+                    quizHolder.saveCategories(list);
+                    EventBus.getDefault().post(new NeedUpdateQuizesEvent(list.getVersion()));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                callback.downloadFinished(list);
+            }
+        }).start();
+    }
+
+    public static Quiz downloadQuiz(final String quizId) {
+        Request request = new Request.Builder().url(Constants.API_CATEGORY + quizId + ".json")
+                                               .addHeader(QZ_VERSION_HEADER, QuizHolder.getQuizVersion())
+                                               .addHeader("Content-Type", "application/json").build();
+
+        Response response = null;
+        try {
+            response = httpClient.newCall(request).execute();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        if (response == null || !response.isSuccessful()) {
+            return null;
+        }
+
+        Quiz quiz = null;
+        try {
+            String jsonStr = response.body().string();
+            quiz = new Gson().fromJson(jsonStr, Quiz.class);
+            quiz.setId(quizId);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return quiz;
+    }
+}

@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:paddingBottom="10dip">
+	<RelativeLayout android:id="@+id/title_layout"
+	    android:layout_width="fill_parent"
+	    android:layout_height="48dip"
+	    android:paddingLeft="10dip"
+	    android:background="@drawable/footer_normal">
+	    <TextView android:id="@+id/title"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_centerInParent="true"
+	        android:textSize="18sp"
+	        android:textColor="#FFFFFF" />
+        <ImageView android:id="@+id/home"
+            android:layout_width="36dip"
+            android:layout_height="36dip"
+            android:src="@drawable/ic_home_normal"
+            android:scaleType="centerCrop"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true" />
+        <Button android:id="@+id/share"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/share_button_normal"
+            android:text="Share"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:paddingLeft="10dip"
+            android:paddingRight="10dip"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true" />
+	</RelativeLayout>
+	
+    <TextView android:id="@+id/high_score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/title_layout"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dip"
+        android:textStyle="bold"
+        android:text="@string/high_scores"
+        android:textSize="22sp"
+        android:textColor="#FFFFFF" />
+	
+	<ImageView android:id="@+id/prize"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_below="@id/high_score"
+	    android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dip"
+	    android:src="@drawable/ic_prize_normal" />
+	
+	<ListView android:id="@android:id/list"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:background="@drawable/highscore_box"
+	    android:cacheColorHint="#00000000"
+	    android:listSelector="@android:color/transparent"
+	    android:footerDividersEnabled="false"
+	    android:headerDividersEnabled="false"
+	    android:divider="@android:color/white"
+	    android:dividerHeight="2dip"
+	    android:layout_below="@id/high_score"
+	    android:layout_centerHorizontal="true"
+	    android:layout_marginLeft="20dip"
+	    android:layout_marginRight="20dip"
+        android:layout_marginTop="20dip"
+	    android:layout_marginBottom="45dip" />
+		
+	<!-- <FrameLayout
+	    android:layout_width="fill_parent"
+	    android:layout_height="fill_parent"
+	    android:layout_below="@id/title_layout">
+		<ImageView android:id="@+id/prize"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_gravity="center"
+		    android:src="@drawable/ic_prize_normal" />
+	</FrameLayout> -->
+	
+	<LinearLayout android:layout_height="wrap_content"
+	    android:layout_width="wrap_content"
+	    android:layout_alignParentBottom="true"
+		android:layout_centerHorizontal="true"
+		android:orientation="vertical">
+        
+	
+			<Button android:id="@+id/score"
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"
+			    android:gravity="center"
+			    android:textSize="16sp"
+			    android:textColor="#FFFFFF"
+			    android:background="@drawable/final_score_normal"/>
+			
+			<Button android:id="@+id/world_score"
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"
+			    android:gravity="center"
+			    android:layout_gravity="center"
+			    android:textSize="16sp"
+			    android:textColor="#FFFFFF"
+			    android:background="@drawable/final_score_normal"
+			    android:text="@string/world_score" 
+			    android:layout_marginTop="10dp"
+			    android:onClick="onLeaderBoardButtonClick"/>
+			
+			<Button android:id="@+id/more_apps"  
+				    android:layout_height="wrap_content"
+				    android:layout_width="wrap_content"
+				    android:text="@string/more_apps"
+			    	android:onClick="onMoreButtonClick"
+			    	android:background="@android:color/transparent"
+			    	android:textColor="@android:color/white"
+			    	android:layout_gravity="center"
+			    	android:layout_marginTop="20dp"
+			    	android:textSize="17sp"/>
+	</LinearLayout>	
+	
+</RelativeLayout><!-- From: file:/D:/Android_Projects/QuizApp_Android%202.0/app/src/main/res/layout/final_screen.xml -->

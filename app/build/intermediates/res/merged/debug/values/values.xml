@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- From: file:/D:/Android_Projects/QuizApp_Android%202.0/app/src/main/res/values/version.xml -->
+    <eat-comment/>
+    <integer name="google_play_services_version">4132500</integer>
+    <!-- From: file:/D:/Android_Projects/QuizApp_Android%202.0/app/src/main/res/values/strings.xml -->
+    <eat-comment/>
+    <string name="about">About</string>
+    <string name="app_id">286312204670</string>
+    <string name="app_name">Quiz</string>
+    <string name="categories">Categories</string>
+    <string name="chartboost_error_msg">Either Chartboost AppID or AppSecret is not configured</string>
+    <string name="final_score">You have scored %d points</string>
+    <string name="gamehelper_app_misconfigured">The application is incorrectly configured. Check that the package name and signing certificate match the client ID created in Developer Console. Also, if the application is not yet published, check that the account you are trying to sign in with is listed as a tester account. See logs for more information.</string>
+    <string name="gamehelper_license_failed">License check failed.</string>
+    <string name="gamehelper_sign_in_failed">Failed to sign in. Please check your network connection and try again.</string>
+    <string name="gamehelper_unknown_error">Unknown error.</string>
+    <string name="hello">Hello World, QuizAppActivity!</string>
+    <string name="high_scores">High Scores</string>
+    <string name="loading_video">Loading Video, please wait...</string>
+    <string name="more_apps">More Apps</string>
+    <string name="no_categories">Please add Quiz Categories</string>
+    <string name="play_quiz">Play Quiz</string>
+    <string name="remove_ads">Remove Ads</string>
+    <string name="restore">Restore</string>
+    <string name="share_points">I just scored %d points on Quiz</string>
+    <string name="tap_to_play">Tap to play</string>
+    <string name="tap_to_zoom">Tap to zoom</string>
+    <!-- From: file:/D:/Android_Projects/QuizApp_Android%202.0/app/src/main/res/values/ids.xml -->
+    <eat-comment/>
+    <string name="top_scores_leaderboard">CgkIp-KLp-gPEAIQAQ</string>
+    <!-- From: file:/D:/Android_Projects/QuizApp_Android%202.0/app/src/main/res/values/strings.xml -->
+    <eat-comment/>
+    <string name="world_score">World Score</string>
+</resources>

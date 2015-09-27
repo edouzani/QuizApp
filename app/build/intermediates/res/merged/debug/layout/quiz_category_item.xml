@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:paddingLeft="8dip"
+    android:paddingRight="8dip">
+<RelativeLayout
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/category_item_bg"
+    android:layout_gravity="center_vertical"
+    android:paddingLeft="10dip"
+    android:focusable="false"
+    android:focusableInTouchMode="false">
+    
+    <TextView android:id="@+id/name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+	    android:textColor="#FFFFFF"
+	    android:paddingTop="2dip"
+	    android:textSize="12sp"
+	    android:textStyle="bold"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+    
+    <ImageView android:id="@+id/image"
+        android:layout_width="22dip"
+        android:layout_height="22dip"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="10dip"
+        android:layout_marginBottom="8dip" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/image"
+        android:paddingRight="10dip">
+	    <TextView android:id="@+id/description"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_weight="1"
+	        android:textColor="#FFFFFF"
+	        android:maxLines="2"
+	        android:ellipsize="end"
+	        android:textSize="14sp" />
+	    <ImageView
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_gravity="center_vertical"
+	        android:src="@drawable/arrow_right"
+	        android:layout_weight="0" />
+	</LinearLayout>
+</RelativeLayout>
+</LinearLayout><!-- From: file:/D:/Android_Projects/QuizApp_Android%202.0/app/src/main/res/layout/quiz_category_item.xml -->

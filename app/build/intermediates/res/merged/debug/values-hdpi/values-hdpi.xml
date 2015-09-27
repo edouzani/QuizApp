@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- From: file:/D:/Android_Projects/QuizApp_Android%202.0/app/src/main/res/values-hdpi/dimens.xml -->
+    <eat-comment/>
+    <dimen name="left_offset1">22dip</dimen>
+    <dimen name="left_offset2">16dip</dimen>
+    <dimen name="progress_bar_max_height">14dip</dimen>
+    <dimen name="top_offset">1dip</dimen>
+</resources>

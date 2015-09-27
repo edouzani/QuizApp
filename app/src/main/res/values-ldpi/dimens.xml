@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="left_offset1">16dip</dimen>
+    <dimen name="left_offset2">11dip</dimen>
+    <dimen name="top_offset">5dip</dimen>
+    <dimen name="progress_bar_max_height">14dip</dimen>
+</resources>
