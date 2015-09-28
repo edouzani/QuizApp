@@ -1,5 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- From: file:/D:/Android_Projects/QuizApp_Android%202.0/app/src/main/res/values/colors.xml -->
+    <eat-comment/>
+    <color name="dark">#7a000000</color>
+    <declare-styleable name="Timer"><attr format="color" name="circleColor"/><attr format="string" name="circleLabel"/><attr format="color" name="labelColor"/></declare-styleable>
+    <!-- From: file:/D:/Android_Projects/QuizApp_Android%202.0/app/src/main/res/values/dimens.xml -->
+    <eat-comment/>
+    <dimen name="quiz_option_buttons_height">60dp</dimen>
+    <dimen name="quiz_option_buttons_margin_bottom">70dp</dimen>
+    <dimen name="quiz_option_buttons_width">140dp</dimen>
+    <dimen name="quiz_points_margin">35dp</dimen>
+    <dimen name="quiz_points_top_margin">80dp</dimen>
+    <dimen name="quiz_points_width">120dp</dimen>
     <!-- From: file:/D:/Android_Projects/QuizApp_Android%202.0/app/src/main/res/values/version.xml -->
     <eat-comment/>
     <integer name="google_play_services_version">4132500</integer>
@@ -21,6 +33,7 @@
     <string name="more_apps">More Apps</string>
     <string name="no_categories">Please add Quiz Categories</string>
     <string name="play_quiz">Play Quiz</string>
+    <string name="quiz_skip_text">ПРОПУСТИТЬ</string>
     <string name="remove_ads">Remove Ads</string>
     <string name="restore">Restore</string>
     <string name="share_points">I just scored %d points on Quiz</string>

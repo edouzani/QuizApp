@@ -13,6 +13,8 @@ public class Quiz implements Serializable {
 
     private String id;
 
+    private int record;
+    private int answeredQuestions;
 
     public List<Question> getQuestions() {
         return Questions;
@@ -24,5 +26,21 @@ public class Quiz implements Serializable {
 
     public void setId(String pId) {
         id = pId;
+    }
+
+    public int getRecord() {
+        return record;
+    }
+
+    public void setRecord(int pRecord) {
+        record = pRecord;
+    }
+
+    public int getAnsweredQuestions() {
+        return answeredQuestions;
+    }
+
+    public void setAnsweredQuestions(int pAnsweredQuestions) {
+        answeredQuestions = pAnsweredQuestions;
     }
 }

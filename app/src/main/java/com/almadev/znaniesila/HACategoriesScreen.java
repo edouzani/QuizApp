@@ -1,16 +1,17 @@
 package com.almadev.znaniesila;
 
-import java.io.InputStream;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.List;
 import java.util.Random;
 
 import android.app.ListActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -20,24 +21,23 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.almadev.znaniesila.R;
+import com.almadev.znaniesila.model.CategoriesList;
 import com.almadev.znaniesila.model.Category;
 import com.almadev.znaniesila.model.Question;
-import com.almadev.znaniesila.model.Quiz;
 import com.almadev.znaniesila.model.QuizHolder;
-import com.almadev.znaniesila.utils.CategoriesParser;
 import com.almadev.znaniesila.utils.Constants;
 import com.almadev.znaniesila.utils.RunningState;
 import com.almadev.znaniesila.utils.RunningState.QuizCategory;
 import com.chartboost.sdk.Chartboost;
 
 public class HACategoriesScreen extends ListActivity {
-	
-	private RunningState mState;
+
 	private CategoryAdapter mAdapter;
 	private TextView mTitle;
 	private SharedPreferences mPrefsmanager;
@@ -57,10 +57,9 @@ public class HACategoriesScreen extends ListActivity {
 
 		int size = mPrefsmanager.getInt(Constants.CATEGORY_TITLE_FONT_SIZE, 18);
 		mTitle.setTextSize(size);
-		
-		mState = RunningState.getInstance(getApplicationContext());
-		readCategories();
-		ArrayList<QuizCategory> listItems = new ArrayList<QuizCategory>(mState.getQuizCategories().values());
+
+		//readCategories();
+		List<Category> listItems = QuizHolder.getInstance(this).getCategories().getCategories();
 		Collections.sort(listItems,new CategoryComparator());
 		mAdapter = new CategoryAdapter(new WeakReference<Context>(this), listItems);
 		setListAdapter(mAdapter);
@@ -74,7 +73,7 @@ public class HACategoriesScreen extends ListActivity {
 			String appId = mPrefsmanager.getString(Constants.CHARTBOOST_APPID,"");
 			String appSecret = mPrefsmanager.getString(Constants.CHARTBOOST_APPSECRET,"");
 			if(appId.trim().equals("") || appSecret.trim().equals("")){
-				Toast.makeText(this, getResources().getString(R.string.chartboost_error_msg), 1000).show();
+				Toast.makeText(this, getResources().getString(R.string.chartboost_error_msg), Toast.LENGTH_SHORT).show();
 				moreAppsButton.setVisibility(View.GONE);
 			}else{
 				this.cb = Chartboost.sharedChartboost();
@@ -129,37 +128,38 @@ public class HACategoriesScreen extends ListActivity {
 			 this.cb.showMoreApps();
 	 }
 	
-	private void readCategories() {
-
-		mState = RunningState.getInstance(this);
-		for (Category c : QuizHolder.getInstance(this).getCategories().getCategories()) {
-			QuizCategory qc = mState.new QuizCategory();
-			qc.description = c.getCategory_description();
-			qc.id = "" + c.getCategory_id();
-			qc.image = c.getCategory_image_path();
-			qc.leaderBoardId = c.getLeaderboard_id();
-			qc.limit = c.getCategory_question_max_limit();
-			qc.name = c.getCategory_name();
-			mState.addQuizCategory(qc);
-
-            ArrayList<RunningState.Quiz> questionsList = new ArrayList<RunningState.Quiz>();
-            for (Question q : QuizHolder.getInstance(this).getQuiz(qc.id).getQuestions()) {
-                RunningState.Quiz question = mState.new Quiz();
-                question.answer = q.getAnswer();
-                question.duration = q.getDuration_in_seconds();
-                question.mediaName = null;
-                question.negativePoints = q.getNegative_points();
-                question.points = q.getPoints();
-                question.question = q.getQuestion();
-                question.questionType = q.getQuestion_type();
-
-                questionsList.add(question);
-            }
-
-            Collections.shuffle(questionsList, new Random(System.currentTimeMillis()));
-
-            mState.addQuizQuestions(qc.id, questionsList);
-		}
+//	private void readCategories() {
+//
+//		mState = RunningState.getInstance(this);
+//		for (Category c : QuizHolder.getInstance(this).getCategories().getCategories()) {
+//			QuizCategory qc = mState.new QuizCategory();
+//			qc.description = c.getCategory_description();
+//			qc.id = "" + c.getCategory_id();
+//			qc.image = c.getCategory_image_path();
+//			qc.leaderBoardId = c.getLeaderboard_id();
+//			qc.limit = c.getCategory_question_max_limit();
+//			qc.name = c.getCategory_name();
+//			qc.color = c.getCategory_color();
+//			mState.addQuizCategory(qc);
+//
+//            ArrayList<RunningState.Quiz> questionsList = new ArrayList<RunningState.Quiz>();
+//            for (Question q : QuizHolder.getInstance(this).getQuiz(qc.id).getQuestions()) {
+//                RunningState.Quiz question = mState.new Quiz();
+//                question.answer = q.getAnswer();
+//                question.duration = q.getDuration_in_seconds();
+//                question.mediaName = null;
+//                question.negativePoints = q.getNegative_points();
+//                question.points = q.getPoints();
+//                question.question = q.getQuestion();
+//                question.questionType = q.getQuestion_type();
+//
+//                questionsList.add(question);
+//            }
+//
+//            Collections.shuffle(questionsList, new Random(System.currentTimeMillis()));
+//
+//            mState.addQuizQuestions(qc.id, questionsList);
+//		}
 
 //		try {
 //			InputStream assetFileDescriptor = getResources().getAssets().open(
@@ -170,25 +170,25 @@ public class HACategoriesScreen extends ListActivity {
 //		} catch(Exception e) {
 //			e.printStackTrace();
 //		}
-	}
+//	}
 	
 	@Override
 	protected void onListItemClick(ListView l, View v, int position, long id) {
 		super.onListItemClick(l, v, position, id);
-		QuizCategory category = mAdapter.getItem(position);
+		Category category = mAdapter.getItem(position);
 		Intent intent = new Intent(this, HAQuizScreen.class);
-		intent.putExtra(Constants.CATGEORY_ID, category.id);
+		intent.putExtra(Constants.CATEGORY_ID, category.getCategory_id());
 		startActivity(intent);
 		finish();
 	}
 	
 	private static class CategoryAdapter extends BaseAdapter {
 
-		private ArrayList<QuizCategory> mData;
+		private List<Category> mData;
 		private LayoutInflater sInflater;
 		private WeakReference<Context> wContext;
 
-		public CategoryAdapter(WeakReference<Context> context, ArrayList<QuizCategory> data) {
+		public CategoryAdapter(WeakReference<Context> context, List<Category> data) {
 			wContext = context;
 			mData = data;
 			sInflater = (LayoutInflater)context.get().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -200,7 +200,7 @@ public class HACategoriesScreen extends ListActivity {
 		}
 
 		@Override
-		public QuizCategory getItem(int position) {
+		public Category getItem(int position) {
 			return mData.get(position);
 		}
 
@@ -215,6 +215,8 @@ public class HACategoriesScreen extends ListActivity {
 			if(convertiView == null) {
 				convertiView = sInflater.inflate(R.layout.quiz_category_item, null);
 			}
+			View root = (LinearLayout)convertiView.findViewById(R.id.category_item_layout);
+
 			TextView name = (TextView) convertiView.findViewById(R.id.name);
 			TextView description = (TextView) convertiView.findViewById(R.id.description);
 			ImageView image = (ImageView) convertiView.findViewById(R.id.image);
@@ -222,15 +224,16 @@ public class HACategoriesScreen extends ListActivity {
 				image.getDrawable().setCallback(null);
 			}
 			
-			QuizCategory qCategory = getItem(position);
+			Category qCategory = getItem(position);
 
-			name.setText(qCategory.name);
-			description.setText(qCategory.description);
+			root.setBackgroundColor(Color.parseColor("#" + qCategory.getCategory_color().trim()));
+			name.setText(qCategory.getCategory_name());
+			description.setText(qCategory.getCategory_description());
 			
 			try {
 				image.setImageDrawable(Drawable.createFromStream(wContext.get().getAssets().open(
-									"Quiz Data/Pictures_Or_Videos/Quiz_Category_" +
-									qCategory.id + "/" + qCategory.image), null));
+									qCategory.getCategory_image_path()), null));
+
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -238,11 +241,11 @@ public class HACategoriesScreen extends ListActivity {
 		}
 	}
 	
-	private class CategoryComparator implements Comparator<QuizCategory>{
+	private class CategoryComparator implements Comparator<Category>{
 
 		@Override
-		public int compare(QuizCategory lhs, QuizCategory rhs) {
-			if(Integer.valueOf(lhs.id)>Integer.valueOf(rhs.id))
+		public int compare(Category lhs, Category rhs) {
+			if(Integer.valueOf(lhs.getCategory_id()) > Integer.valueOf(rhs.getCategory_id()))
 				return 1;
 			else
 				return -1;

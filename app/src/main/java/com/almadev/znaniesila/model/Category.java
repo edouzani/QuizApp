@@ -10,12 +10,15 @@ public class Category implements Serializable {
 
     private String category_color;
     private boolean timer_required;
-    private int category_id;
+    private String category_id;
     private String category_name;
     private String leaderboard_id;
     private String category_description;
     private String category_image_path;
     private int category_questions_max_limit;
+    private String productIdentifier;
+
+    private int record;
 
     public String getCategory_color() {
         return category_color;
@@ -25,7 +28,7 @@ public class Category implements Serializable {
         return timer_required;
     }
 
-    public int getCategory_id() {
+    public String getCategory_id() {
         return category_id;
     }
 
@@ -47,5 +50,9 @@ public class Category implements Serializable {
 
     public int getCategory_question_max_limit() {
         return category_questions_max_limit;
+    }
+
+    public String getProductIdentifier() {
+        return productIdentifier;
     }
 }

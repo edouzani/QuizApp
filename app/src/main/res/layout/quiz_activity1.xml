@@ -1,190 +1,175 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-     android:background="@drawable/quest_bg"
-    android:layout_height="fill_parent">
-	<LinearLayout
-	    android:layout_width="fill_parent"
-	    android:layout_height="fill_parent"
-	    android:orientation="vertical">
-	            
-	    <SeekBar android:id="@+id/time_out"
-	        android:layout_width="fill_parent"
-	        android:layout_height="wrap_content"
-	        android:paddingLeft="15dip"
-	        android:paddingRight="15dip"
-	        android:maxHeight="@dimen/progress_bar_max_height"
-	        android:progressDrawable="@drawable/progressbar_bg" />
-	    
-	    <ScrollView
-	        android:layout_width="fill_parent"
-	        android:layout_height="fill_parent"
-	        android:layout_weight="1"
-	    	android:padding="10dip">
-	        <LinearLayout
-	            android:layout_width="fill_parent"
-	            android:layout_height="fill_parent"
-	            android:orientation="vertical">
-	            
-	            <LinearLayout
-	                android:layout_width="fill_parent"
-	                android:layout_height="wrap_content"
-	                android:orientation="horizontal"
-	                android:layout_gravity="center_vertical"
-	                android:background="@drawable/question_bg"
-	                android:padding="10dip">
-	                <LinearLayout android:id="@+id/small_layout"
-	                    android:layout_width="wrap_content"
-	                    android:layout_height="wrap_content"
-	                    android:orientation="vertical"
-		                android:layout_marginRight="10dip"
-		                android:paddingBottom="5dip"
-	                    android:gravity="center_horizontal">
-		                <ImageView android:id="@+id/small_image"
-		                    android:layout_width="80dip"
-		                    android:layout_height="80dip"
-		                    android:scaleType="fitXY" />
-		                <TextView android:id="@+id/tap_text"
-		                    android:layout_width="wrap_content"
-		                    android:layout_height="wrap_content"
-		                    android:textSize="12sp"
-		                    android:textColor="#EEEEEE"
-		                    android:gravity="center_horizontal"
-		                    android:layout_gravity="center_horizontal"
-		                    android:text="@string/tap_to_zoom" />
-		            </LinearLayout>
-	                <TextView android:id="@+id/question"
-	                    android:layout_width="fill_parent"
-	                    android:layout_height="wrap_content"
-	                    android:paddingTop="7dip"
-	                    android:textColor="#FFFFFF"
-	                    android:textSize="15sp" />
-	            </LinearLayout>
-	            
-	            <RelativeLayout android:id="@+id/points_layout"
-	                android:layout_width="fill_parent"
-	                android:layout_height="wrap_content"
-	                android:background="@drawable/points_bg_normal"
-	                android:layout_marginBottom="10dip"
-	                android:paddingRight="30dip"
-	                android:paddingLeft="20dip">
-	                <TextView android:id="@+id/total_points"
-	                    android:layout_width="wrap_content"
-	                    android:layout_height="wrap_content"
-	                    android:textColor="#FFFFFF"
-	                    android:textSize="18sp"
-	                    android:layout_centerInParent="true" />
-	                <TextView android:id="@+id/question_number"
-	                    android:layout_width="wrap_content"
-	                    android:layout_height="wrap_content"
-	                    android:textColor="#FFFFFF"
-	                    android:textSize="16sp"
-	                    android:layout_alignParentLeft="true"
-	                    android:layout_centerVertical="true" />
-	                <TextView android:id="@+id/current_points"
-	                    android:layout_width="wrap_content"
-	                    android:layout_height="wrap_content"
-	                    android:textColor="#FFFFFF"
-	                    android:textSize="16sp"
-	                    android:layout_alignParentRight="true"
-	                    android:layout_centerVertical="true" />
-	            </RelativeLayout>
-	            
-	            <com.almadev.znaniesila.ui.TwoTextButton
-					android:id="@+id/option1"
-	                android:layout_width="fill_parent"
-	                android:layout_height="wrap_content"
-	                android:background="@drawable/left_btn_selector"
-	                android:visibility="gone"
-	                android:gravity="left|center_vertical"
-	                android:paddingLeft="50dip"
-	                android:layout_marginBottom="8dip"
-	                android:textColor="#FFFFFF" />
-	            
-	            <com.almadev.znaniesila.ui.TwoTextButton
-					android:id="@+id/option2"
-	                android:layout_width="fill_parent"
-	                android:layout_height="wrap_content"
-	                android:background="@drawable/options_button"
-	                android:visibility="gone"
-	                android:gravity="left|center_vertical"
-	                android:paddingLeft="50dip"
-	                android:layout_marginBottom="8dip"
-	                android:textColor="#FFFFFF" />
-	            
-	            <com.almadev.znaniesila.ui.TwoTextButton
-					android:id="@+id/option3"
-	                android:layout_width="fill_parent"
-	                android:layout_height="wrap_content"
-	                android:background="@drawable/options_button"
-	                android:visibility="gone"
-	                android:gravity="left|center_vertical"
-	                android:paddingLeft="50dip"
-	                android:layout_marginBottom="8dip"
-	                android:textColor="#FFFFFF" />
-	            
-	            <com.almadev.znaniesila.ui.TwoTextButton
-					android:id="@+id/option4"
-	                android:layout_width="fill_parent"
-	                android:layout_height="wrap_content"
-	                android:background="@drawable/options_button"
-	                android:visibility="gone"
-	                android:gravity="left|center_vertical"
-	                android:paddingLeft="50dip"
-	                android:layout_marginBottom="8dip"
-	                android:textColor="#FFFFFF" />
-	        </LinearLayout>
-	    </ScrollView>
-	    
-	    <RelativeLayout
-			android:id="@+id/footer_layout"
-	        android:layout_width="fill_parent"
-	        android:layout_height="wrap_content"
-	        android:paddingLeft="10dip"
-	        android:paddingRight="10dip"
-	        android:layout_weight="0">
-	        <ImageView android:id="@+id/next_question"
-	            android:layout_width="36dip"
-	            android:layout_height="36dip"
-	            android:src="@drawable/ic_next_normal"
-	            android:scaleType="centerCrop"
-	            android:layout_centerVertical="true"
-	            android:layout_alignParentRight="true" />
-            <TextView
-                android:layout_width="wrap_content"
-				android:text="@string/quiz_skip_text"
-                android:layout_centerHorizontal="true"
-                android:layout_height="wrap_content"/>
-	    </RelativeLayout>
-	</LinearLayout>
-	
-	<FrameLayout android:id="@+id/large_media"
-	    android:layout_width="fill_parent"
-	    android:layout_height="fill_parent"
-                 android:visibility="gone"
-	    android:background="#000000">
-        <ImageView android:id="@+id/large_image"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:scaleType="center" />
-		<SurfaceView android:id="@+id/large_video"
-		    android:layout_width="fill_parent"
-		    android:layout_height="fill_parent"
-		    android:gravity="center_vertical" />
-	</FrameLayout>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:custom="http://schemas.android.com/apk/res-auto"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="@drawable/quest_bg">
 
     <ImageView android:id="@+id/home"
+               android:layout_marginLeft="30dp"
+               android:layout_marginTop="30dp"
                android:layout_width="36dip"
                android:layout_height="36dip"
-               android:src="@drawable/ic_home_normal"
-               android:layout_centerVertical="true"
+               android:src="@drawable/back_icon"
                android:layout_alignParentLeft="true" />
-    
-    <TextView android:id="@+id/secondary_progress"
+
+    <TextView
+        android:id="@+id/cat_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="КОСМОС"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentTop="true"
+
+        />
+    <TextView
+        android:id="@+id/question_number"
+        android:layout_width="@dimen/quiz_points_width"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/quiz_points_margin"
+        android:layout_marginTop="@dimen/quiz_points_top_margin"
+        android:gravity="center_horizontal"
         android:textColor="#FFFFFF"
-        android:textSize="18sp"
-        android:layout_gravity="top|right"
-        android:padding="15dip" />
-</FrameLayout>
+        android:text="2/5"
+        android:textStyle="bold"
+        android:textSize="40sp"/>
+    <TextView
+        android:id="@+id/question_number_text"
+        android:layout_width="@dimen/quiz_points_width"
+        android:gravity="center"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/question_number"
+        android:layout_alignLeft="@id/question_number"
+        android:textColor="#FFFFFF"
+        android:text="вопросов"
+        android:textSize="16sp"/>
+
+    <com.almadev.znaniesila.ui.Timer
+        android:id="@+id/timer"
+        android:layout_marginTop="@dimen/quiz_points_top_margin"
+        android:layout_centerHorizontal="true"
+        android:layout_width="@dimen/quiz_points_width"
+        custom:circleColor="@color/dark"
+        android:layout_height="70dp"/>
+
+    <TextView
+        android:id="@+id/current_points"
+        android:layout_width="@dimen/quiz_points_width"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/quiz_points_margin"
+        android:layout_marginTop="@dimen/quiz_points_top_margin"
+        android:layout_alignParentRight="true"
+        android:gravity="center_horizontal"
+        android:textColor="#FFFFFF"
+        android:text="5"
+        android:textStyle="bold"
+        android:textSize="40sp"/>
+    <TextView
+        android:id="@+id/current_points_text"
+        android:layout_width="@dimen/quiz_points_width"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/current_points"
+        android:gravity="center"
+        android:layout_alignLeft="@id/current_points"
+        android:textColor="#FFFFFF"
+        android:text="баллов"
+        android:textSize="16sp"/>
+
+
+    <ImageView
+        android:id="@+id/small_image"
+        android:layout_width="80dip"
+        android:layout_height="80dip"
+        android:scaleType="fitXY"/>
+
+    <View
+        android:id="@+id/center"
+        android:layout_width="0dp"
+        android:layout_centerInParent="true"
+        android:layout_height="0dp"/>
+    <TextView
+        android:id="@+id/question"
+        android:layout_below="@id/center"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#FFFFFF"
+        android:text="Asdfsdfsdfsdfsdfsdfsdfsdfsd\nsdfsdfdfsdf\nsdfsdfsdfsdfsdf\nsdfsdfsdfsdf\nasdasdasd"
+        android:gravity="center"
+        android:textSize="17sp"/>
+
+    <Button
+        android:layout_width="@dimen/quiz_option_buttons_width"
+        android:id="@+id/left_btn"
+        android:background="@drawable/btn_left"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginBottom="@dimen/quiz_option_buttons_margin_bottom"
+        android:layout_height="@dimen/quiz_option_buttons_height"/>
+
+    <Button
+        android:layout_width="@dimen/quiz_option_buttons_width"
+        android:id="@+id/right_btn"
+        android:background="@drawable/btn_right"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="@dimen/quiz_option_buttons_margin_bottom"
+        android:layout_height="@dimen/quiz_option_buttons_height"/>
+
+
+    <com.almadev.znaniesila.ui.TwoTextButton
+        android:id="@+id/option1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dip"
+        android:background="@drawable/options_button"
+        android:gravity="left|center_vertical"
+        android:paddingLeft="50dip"
+        android:textColor="#FFFFFF"
+        android:visibility="gone"/>
+
+    <com.almadev.znaniesila.ui.TwoTextButton
+        android:id="@+id/option2"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dip"
+        android:background="@drawable/options_button"
+        android:gravity="left|center_vertical"
+        android:paddingLeft="50dip"
+        android:textColor="#FFFFFF"
+        android:visibility="gone"/>
+
+    <com.almadev.znaniesila.ui.TwoTextButton
+        android:id="@+id/option3"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dip"
+        android:background="@drawable/options_button"
+        android:gravity="left|center_vertical"
+        android:paddingLeft="50dip"
+        android:textColor="#FFFFFF"
+        android:visibility="gone"/>
+
+    <com.almadev.znaniesila.ui.TwoTextButton
+        android:id="@+id/option4"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dip"
+        android:background="@drawable/options_button"
+        android:gravity="left|center_vertical"
+        android:paddingLeft="50dip"
+        android:textColor="#FFFFFF"
+        android:visibility="gone"/>
+
+    <TextView
+        android:id="@+id/next_question"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:textStyle="bold"
+        android:layout_marginBottom="30dp"
+        android:layout_centerHorizontal="true"
+        android:text="@string/quiz_skip_text"/>
+
+
+</RelativeLayout>

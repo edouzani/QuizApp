@@ -34,6 +34,7 @@ public class RunningState {
 		public String description;
 		public int limit;
 		public String leaderBoardId;
+		public String color;
 	}
 	
 	public class Quiz {

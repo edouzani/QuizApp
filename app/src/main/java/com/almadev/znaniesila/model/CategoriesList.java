@@ -24,4 +24,13 @@ public class CategoriesList implements Serializable {
     public List<Category> getCategories() {
         return Categories;
     }
+
+    public Category getCategoryById(String id) {
+        for (Category c : Categories) {
+            if (c.getCategory_id().equals(id)) {
+                return c;
+            }
+        }
+        return null;
+    }
 }

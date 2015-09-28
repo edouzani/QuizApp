@@ -1,16 +1,28 @@
 package com.almadev.znaniesila.model;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.almadev.znaniesila.questions.QuestionsAdapter;
 import com.google.gson.Gson;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.ObjectInput;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutput;
+import java.io.ObjectOutputStream;
+import java.io.OutputStream;
+import java.io.StreamCorruptedException;
 import java.io.Writer;
 import java.util.HashMap;
 
@@ -30,6 +42,7 @@ public class QuizHolder {
     private static String quizVersion = "0";
 
     private QuizHolder(Context context) {
+//        questionsDir = new File(context.getExternalFilesDir(null).getAbsolutePath() + File.separatorChar + QUESTIONS_DIR);
         questionsDir = new File(context.getFilesDir().getAbsolutePath() + File.separatorChar + QUESTIONS_DIR);
     }
 
@@ -63,8 +76,13 @@ public class QuizHolder {
         }
         try {
             quizFile.createNewFile();
-            final Writer writer = new FileWriter(quizFile);
-            gson.toJson(quiz, writer);
+
+            OutputStream file = new FileOutputStream(quizFile);
+            OutputStream buffer = new BufferedOutputStream(file);
+            ObjectOutput output = new ObjectOutputStream(buffer);
+
+            output.writeObject(quiz);
+            output.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -94,16 +112,25 @@ public class QuizHolder {
             return null;
         }
 
-        BufferedReader br = null;
+        Quiz quiz = null;
         try {
-            br = new BufferedReader(new FileReader(quizFile));
+            InputStream file = new FileInputStream(quizFile);
+            InputStream buffer = new BufferedInputStream(file);
+            ObjectInput input = new ObjectInputStream(buffer);
+
+            quiz = (Quiz)input.readObject();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
             return null;
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (StreamCorruptedException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
-        final Gson gson = new Gson();
-        return gson.fromJson(br, Quiz.class);
+        return quiz;
     }
 
     public void saveCategories(CategoriesList list) {
@@ -115,10 +142,17 @@ public class QuizHolder {
         }
         try {
             categoriesListFile.createNewFile();
-            final Writer writer = new FileWriter(categoriesListFile);
-            gson.toJson(list, writer);
+
+            OutputStream file = new FileOutputStream(categoriesListFile);
+            OutputStream buffer = new BufferedOutputStream(file);
+            ObjectOutput output = new ObjectOutputStream(buffer);
+
+            output.writeObject(list);
+
+            output.close();
         } catch (IOException e) {
             e.printStackTrace();
+            Log.e("QuizHolder", "Something wrong on saveCats");
         }
 
         mCategoriesList = list;
@@ -136,17 +170,29 @@ public class QuizHolder {
             return null;
         }
 
-        BufferedReader br = null;
+        CategoriesList list = null;
         try {
-            br = new BufferedReader(new FileReader(categoriesListFile));
+            InputStream file = new FileInputStream(categoriesListFile);
+            InputStream buffer = new BufferedInputStream(file);
+            ObjectInput input = new ObjectInputStream(buffer);
+
+            list = (CategoriesList)input.readObject();
+            if (list != null) {
+                setQuizVersion(list.getVersion());
+            } else {
+                Log.e("QuizHolder", "deserealization failed");
+            }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
             return null;
+        } catch (StreamCorruptedException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
         }
 
-        final Gson gson = new Gson();
-        CategoriesList list = gson.fromJson(br, CategoriesList.class);
-        setQuizVersion(list.getVersion());
         return list;
     }
 }

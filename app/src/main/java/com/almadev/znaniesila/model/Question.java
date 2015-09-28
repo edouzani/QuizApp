@@ -17,6 +17,8 @@ public class Question implements Serializable {
     private int duration_in_seconds;
     private int question_type;
 
+    private QuestionState state;
+
     public int getPoints() {
         return points;
     }
@@ -47,5 +49,13 @@ public class Question implements Serializable {
 
     public int getQuestion_type() {
         return question_type;
+    }
+
+    public QuestionState isAnswered() {
+        return state;
+    }
+
+    public void setState(QuestionState pState) {
+        state = pState;
     }
 }

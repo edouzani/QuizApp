@@ -64,10 +64,12 @@ public class CategoriesDownloader {
 
                 if (response == null) {
                     callback.downloadFinished(null);
+                    return;
                 }
 
                 if (response.code() == 304) {
                     callback.downloadFinished(null);
+                    return;
                 }
 
                 CategoriesList list = null;
@@ -82,6 +84,7 @@ public class CategoriesDownloader {
                 }
 
                 callback.downloadFinished(list);
+                return;
             }
         }).start();
     }
