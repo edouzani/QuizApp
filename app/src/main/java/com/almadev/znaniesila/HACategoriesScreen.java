@@ -45,10 +45,16 @@ public class HACategoriesScreen extends ListActivity {
 	private Boolean adsDisabledAfterPurchase;
 	private Boolean adSupportEnabled;
 	private Button moreAppsButton;
+	private boolean isKnowledgeCats;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		Intent intent = getIntent();
+		isKnowledgeCats = intent.getBooleanExtra(Constants.CATEGORY_FOR_KNOWLEDGE, false);
+		if (isKnowledgeCats) {
+			///
+		}
 		setContentView(R.layout.quiz_categories_layout);
 		mTitle = (TextView)findViewById(R.id.title);
 		mPrefsmanager = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
@@ -176,8 +182,15 @@ public class HACategoriesScreen extends ListActivity {
 	protected void onListItemClick(ListView l, View v, int position, long id) {
 		super.onListItemClick(l, v, position, id);
 		Category category = mAdapter.getItem(position);
-		Intent intent = new Intent(this, HAQuizScreen.class);
-		intent.putExtra(Constants.CATEGORY_ID, category.getCategory_id());
+        Intent intent;
+        if (isKnowledgeCats ) {
+            intent = new Intent(this, KnowledgeActivity.class);
+            intent.putExtra(Constants.CATEGORY, category);
+        } else {
+            intent = new Intent(this, HAQuizScreen.class);
+            intent.putExtra(Constants.CATEGORY_ID, category.getCategory_id());
+        }
+
 		startActivity(intent);
 		finish();
 	}
@@ -215,10 +228,11 @@ public class HACategoriesScreen extends ListActivity {
 			if(convertiView == null) {
 				convertiView = sInflater.inflate(R.layout.quiz_category_item, null);
 			}
-			View root = (LinearLayout)convertiView.findViewById(R.id.category_item_layout);
+			View root = convertiView.findViewById(R.id.category_item_layout);
 
 			TextView name = (TextView) convertiView.findViewById(R.id.name);
 			TextView description = (TextView) convertiView.findViewById(R.id.description);
+            TextView numberAnswered = (TextView) convertiView.findViewById(R.id.answeredQuestions);
 			ImageView image = (ImageView) convertiView.findViewById(R.id.image);
 			if(image.getDrawable() != null) {
 				image.getDrawable().setCallback(null);
@@ -228,11 +242,13 @@ public class HACategoriesScreen extends ListActivity {
 
 			root.setBackgroundColor(Color.parseColor("#" + qCategory.getCategory_color().trim()));
 			name.setText(qCategory.getCategory_name());
+            numberAnswered.setText("0/" + QuizHolder.getInstance(convertiView.getContext()).getQuiz(qCategory.getCategory_id()).getQuestions().size());
 			description.setText(qCategory.getCategory_description());
 			
 			try {
-				image.setImageDrawable(Drawable.createFromStream(wContext.get().getAssets().open(
-									qCategory.getCategory_image_path()), null));
+                Drawable d = Drawable.createFromStream(wContext.get().getAssets().open(
+                        qCategory.getCategory_image_path()), null);
+				image.setImageDrawable(d);
 
 			} catch (Exception e) {
 				e.printStackTrace();

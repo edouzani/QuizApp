@@ -7,4 +7,5 @@ public enum QuestionState {
     CORRECT,
     WRONG,
     VIEWED,
+    UNDEF,
 }

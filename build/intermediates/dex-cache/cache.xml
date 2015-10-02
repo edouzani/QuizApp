@@ -2,25 +2,11 @@
 <items version="2" >
 
     <item
-        jar="C:\Users\Aleksey\.gradle\caches\modules-2\files-2.1\com.squareup.okhttp\okhttp\2.5.0\4de2b4ed3445c37ec1720a7d214712e845a24636\okhttp-2.5.0.jar"
+        jar="D:\Android_Projects\QuizApp_Android 2.0\app\build\intermediates\exploded-aar\com.android.support\cardview-v7\23.0.1\jars\classes.jar"
         jumboMode="false"
-        revision="22.0.1"
-        sha1="4de2b4ed3445c37ec1720a7d214712e845a24636">
-        <dex dex="D:\Android_Projects\QuizApp_Android 2.0\app\build\intermediates\pre-dexed\debug\okhttp-2.5.0-40e99fbf80a9f327a199ff68f6344b883dc3c3fb.jar" />
-    </item>
-    <item
-        jar="D:\Android_Projects\QuizApp_Android 2.0\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.0.0\jars\libs\internal_impl-22.0.0.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="b5b92f469d515a13d778900f6d50c03d12f35504">
-        <dex dex="D:\Android_Projects\QuizApp_Android 2.0\app\build\intermediates\pre-dexed\debug\internal_impl-22.0.0-951eecf978748cb54ac4e01354a41e68fe559d56.jar" />
-    </item>
-    <item
-        jar="D:\Android_Projects\QuizApp_Android 2.0\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.0.0\jars\classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="4e86306289ace4aa0cfec44a05ed2b410d36989d">
-        <dex dex="D:\Android_Projects\QuizApp_Android 2.0\app\build\intermediates\pre-dexed\debug\classes-e82d8972863161922bd58b23fbcfcb096af21e0c.jar" />
+        revision="23.0.1"
+        sha1="39ae02ce40c3ac828abbf780ce0ff5d7a28b7d6a">
+        <dex dex="D:\Android_Projects\QuizApp_Android 2.0\app\build\intermediates\pre-dexed\debug\classes-a1c0a72bdf960a4ff93b8032ed2129feeb17bb9b.jar" />
     </item>
     <item
         jar="D:\Android_Projects\QuizApp_Android 2.0\app\libs\chartboost.jar"
@@ -30,11 +16,46 @@
         <dex dex="D:\Android_Projects\QuizApp_Android 2.0\app\build\intermediates\pre-dexed\debug\chartboost-e0746d56b82f6bd15f48c14d54d0f00c1b15f504.jar" />
     </item>
     <item
-        jar="D:\Android\extras\android\m2repository\com\android\support\support-annotations\22.0.0\support-annotations-22.0.0.jar"
+        jar="D:\Android_Projects\QuizApp_Android 2.0\app\libs\google-play-services.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="826507592fec9d8e26db18364e709df133c749ce">
+        <dex dex="D:\Android_Projects\QuizApp_Android 2.0\app\build\intermediates\pre-dexed\debug\google-play-services-f0065bcc3d93b9d764c31430503dbbffc120172e.jar" />
+    </item>
+    <item
+        jar="D:\Android_Projects\QuizApp_Android 2.0\app\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\23.0.1\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="4356e230a981d1bbf047d848b91bc0d9b7c5bacc">
+        <dex dex="D:\Android_Projects\QuizApp_Android 2.0\app\build\intermediates\pre-dexed\debug\classes-13792a3365a25edddee1ef1751533192a0103317.jar" />
+    </item>
+    <item
+        jar="C:\Users\Aleksey\.gradle\caches\modules-2\files-2.1\de.greenrobot\eventbus\2.4.0\ddd166d01b3158d1c00576d29f7ed15c030df719\eventbus-2.4.0.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="ddd166d01b3158d1c00576d29f7ed15c030df719">
+        <dex dex="D:\Android_Projects\QuizApp_Android 2.0\app\build\intermediates\pre-dexed\debug\eventbus-2.4.0-37b4d13fc4aec387d0b526f539f58d4779b15e1c.jar" />
+    </item>
+    <item
+        jar="D:\Android\extras\android\m2repository\com\android\support\support-annotations\23.0.1\support-annotations-23.0.1.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="1fce89a6428c51467090d7f424e4c9c3dbd55f7e">
+        <dex dex="D:\Android_Projects\QuizApp_Android 2.0\app\build\intermediates\pre-dexed\debug\support-annotations-23.0.1-60355b4bc9a05b0bf8e264a519c837ef3d3076a8.jar" />
+    </item>
+    <item
+        jar="C:\Users\Aleksey\.gradle\caches\modules-2\files-2.1\com.squareup.okhttp\okhttp\2.5.0\4de2b4ed3445c37ec1720a7d214712e845a24636\okhttp-2.5.0.jar"
         jumboMode="false"
         revision="22.0.1"
-        sha1="685d0b2c590447e85284ed84712cb363ba04eff8">
-        <dex dex="D:\Android_Projects\QuizApp_Android 2.0\app\build\intermediates\pre-dexed\debug\support-annotations-22.0.0-976a2286167f5f97fb580a43b2a35922b324e052.jar" />
+        sha1="4de2b4ed3445c37ec1720a7d214712e845a24636">
+        <dex dex="D:\Android_Projects\QuizApp_Android 2.0\app\build\intermediates\pre-dexed\debug\okhttp-2.5.0-40e99fbf80a9f327a199ff68f6344b883dc3c3fb.jar" />
+    </item>
+    <item
+        jar="D:\Android_Projects\QuizApp_Android 2.0\app\libs\gson-2.3.1.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="ecb6e1f8e4b0e84c4b886c2f14a1500caf309757">
+        <dex dex="D:\Android_Projects\QuizApp_Android 2.0\app\build\intermediates\pre-dexed\debug\gson-2.3.1-dbb870a54fdd36e7a332b51c57137399d447025f.jar" />
     </item>
     <item
         jar="C:\Users\Aleksey\.gradle\caches\modules-2\files-2.1\com.squareup.okio\okio\1.6.0\98476622f10715998eacf9240d6b479f12c66143\okio-1.6.0.jar"
@@ -42,13 +63,6 @@
         revision="22.0.1"
         sha1="98476622f10715998eacf9240d6b479f12c66143">
         <dex dex="D:\Android_Projects\QuizApp_Android 2.0\app\build\intermediates\pre-dexed\debug\okio-1.6.0-40a9b81b1c2008bb472e4ea2d7cb8324f8f25dd4.jar" />
-    </item>
-    <item
-        jar="D:\Android_Projects\QuizApp_Android 2.0\app\libs\gson-2.3.1.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="ecb6e1f8e4b0e84c4b886c2f14a1500caf309757">
-        <dex dex="D:\Android_Projects\QuizApp_Android 2.0\app\build\intermediates\pre-dexed\debug\gson-2.3.1-dbb870a54fdd36e7a332b51c57137399d447025f.jar" />
     </item>
     <item
         jar="D:\Android_Projects\QuizApp_Android 2.0\app\libs\google-play-services.jar"
@@ -60,9 +74,37 @@
     <item
         jar="D:\Android_Projects\QuizApp_Android 2.0\app\libs\commons-io-2.0.1.jar"
         jumboMode="false"
+        revision="23.0.1"
+        sha1="7ffdb02f95af1c1a208544e076cea5b8e66e731a">
+        <dex dex="D:\Android_Projects\QuizApp_Android 2.0\app\build\intermediates\pre-dexed\debug\commons-io-2.0.1-b42e026db5e996be9c9a2c82bee1fc0e585b48ff.jar" />
+    </item>
+    <item
+        jar="D:\Android_Projects\QuizApp_Android 2.0\app\libs\commons-io-2.0.1.jar"
+        jumboMode="false"
         revision="22.0.1"
         sha1="7ffdb02f95af1c1a208544e076cea5b8e66e731a">
         <dex dex="D:\Android_Projects\QuizApp_Android 2.0\app\build\intermediates\pre-dexed\debug\commons-io-2.0.1-b42e026db5e996be9c9a2c82bee1fc0e585b48ff.jar" />
+    </item>
+    <item
+        jar="D:\Android_Projects\QuizApp_Android 2.0\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.0.1\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="c31e21b53ff2f74664e498248d01453a32e32d48">
+        <dex dex="D:\Android_Projects\QuizApp_Android 2.0\app\build\intermediates\pre-dexed\debug\classes-2f74a2234d0700cc915a3868a11c44d4b14d23f1.jar" />
+    </item>
+    <item
+        jar="C:\Users\Aleksey\.gradle\caches\modules-2\files-2.1\com.squareup.okio\okio\1.6.0\98476622f10715998eacf9240d6b479f12c66143\okio-1.6.0.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="98476622f10715998eacf9240d6b479f12c66143">
+        <dex dex="D:\Android_Projects\QuizApp_Android 2.0\app\build\intermediates\pre-dexed\debug\okio-1.6.0-40a9b81b1c2008bb472e4ea2d7cb8324f8f25dd4.jar" />
+    </item>
+    <item
+        jar="D:\Android_Projects\QuizApp_Android 2.0\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.0.1\jars\libs\internal_impl-23.0.1.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="aa92916125166649d8ad4ba3940c3dd7515596d3">
+        <dex dex="D:\Android_Projects\QuizApp_Android 2.0\app\build\intermediates\pre-dexed\debug\internal_impl-23.0.1-dd02d1cd817834690a0c0b52aed3a42d9cc1c8a4.jar" />
     </item>
     <item
         jar="C:\Users\Aleksey\.gradle\caches\modules-2\files-2.1\de.greenrobot\eventbus\2.4.0\ddd166d01b3158d1c00576d29f7ed15c030df719\eventbus-2.4.0.jar"
@@ -70,6 +112,27 @@
         revision="22.0.1"
         sha1="ddd166d01b3158d1c00576d29f7ed15c030df719">
         <dex dex="D:\Android_Projects\QuizApp_Android 2.0\app\build\intermediates\pre-dexed\debug\eventbus-2.4.0-37b4d13fc4aec387d0b526f539f58d4779b15e1c.jar" />
+    </item>
+    <item
+        jar="D:\Android_Projects\QuizApp_Android 2.0\app\libs\gson-2.3.1.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="ecb6e1f8e4b0e84c4b886c2f14a1500caf309757">
+        <dex dex="D:\Android_Projects\QuizApp_Android 2.0\app\build\intermediates\pre-dexed\debug\gson-2.3.1-dbb870a54fdd36e7a332b51c57137399d447025f.jar" />
+    </item>
+    <item
+        jar="C:\Users\Aleksey\.gradle\caches\modules-2\files-2.1\com.squareup.okhttp\okhttp\2.5.0\4de2b4ed3445c37ec1720a7d214712e845a24636\okhttp-2.5.0.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="4de2b4ed3445c37ec1720a7d214712e845a24636">
+        <dex dex="D:\Android_Projects\QuizApp_Android 2.0\app\build\intermediates\pre-dexed\debug\okhttp-2.5.0-40e99fbf80a9f327a199ff68f6344b883dc3c3fb.jar" />
+    </item>
+    <item
+        jar="D:\Android_Projects\QuizApp_Android 2.0\app\libs\chartboost.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="093026760409f1c029bf98964444101c46f318ea">
+        <dex dex="D:\Android_Projects\QuizApp_Android 2.0\app\build\intermediates\pre-dexed\debug\chartboost-e0746d56b82f6bd15f48c14d54d0f00c1b15f504.jar" />
     </item>
 
 </items>

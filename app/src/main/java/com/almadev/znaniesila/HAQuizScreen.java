@@ -1,32 +1,20 @@
 package com.almadev.znaniesila;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.List;
-
-import org.apache.commons.io.IOUtils;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Bitmap;
-import android.graphics.Bitmap.CompressFormat;
 import android.graphics.Color;
 import android.graphics.drawable.LevelListDrawable;
 import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnBufferingUpdateListener;
 import android.media.MediaPlayer.OnCompletionListener;
-import android.media.ThumbnailUtils;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
-import android.os.Looper;
 import android.os.Message;
 import android.preference.PreferenceManager;
-import android.provider.MediaStore.Images.Thumbnails;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.TypedValue;
@@ -46,89 +34,90 @@ import android.widget.Toast;
 
 import com.almadev.znaniesila.model.Category;
 import com.almadev.znaniesila.model.Question;
+import com.almadev.znaniesila.model.QuestionState;
 import com.almadev.znaniesila.model.Quiz;
 import com.almadev.znaniesila.model.QuizHolder;
 import com.almadev.znaniesila.ui.Timer;
 import com.almadev.znaniesila.ui.TwoTextButton;
 import com.almadev.znaniesila.utils.Constants;
-import com.almadev.znaniesila.utils.QuestionsParser;
 import com.almadev.znaniesila.videoplayer.MovieView;
 import com.chartboost.sdk.Chartboost;
 
 public class HAQuizScreen extends Activity implements OnClickListener, Callback,
 		OnBufferingUpdateListener, OnCompletionListener{
 
-	private static final String TAG           = "QuizActivity";
-	private static final int    RETRIEVE_DATA = 0;
-	private static final int    SET_NEXT_DATA = 1;
-	public static final  String ANIM_TYPE     = "anim_type";
-	private String         mCategoryId;
-	private Quiz           mQuiz;
-	private List<Question> mQuestions;
-	private Category       mCategory;
-	private ImageView      mSmallImage;
-	private TextView       mQuestion;
-	private TextView       mQuestionNumber;
-	private TextView       mCurrentPoints;
-	private TwoTextButton  mOption0;
-	private TwoTextButton  mOption1;
-	private TwoTextButton  mOption2;
-	private TwoTextButton  mOption3;
-	private Button         mLeftBtn;
-	private Button         mRightBtn;
-	private int            mCurrentQuestion;
-	private int            maxQuestions;
-	private int            mScore;
-	private MediaPlayer    mMediaPlayer;
-	private QuizHolder     mQuizHolder;
-	private String         mVideoPath;
-	private int            mVideoWidth;
-	private int            mVideoHeight;
-	private boolean mIsVideoSizeKnown       = false;
-	private boolean mIsVideoReadyToBePlayed = false;
-	private DisplayMetrics    mMetrics;
-	private HandlerThread     mThread;
-	private SharedPreferences mPrefsManager;
-	private boolean           isStarting;
-	private TextView          mNextQuest;
-	private Chartboost        cb;
-	private Boolean           adSupportEnabled;
-	private Boolean           adsDisabledAfterPurchase;
-    private Timer mTimer;
+    private static final String TAG           = "QuizActivity";
+    private static final int    RETRIEVE_DATA = 0;
+    private static final int    SET_NEXT_DATA = 1;
+    public static final  String ANIM_TYPE     = "anim_type";
+    private String         mCategoryId;
+    private Quiz           mQuiz;
+    private List<Question> mQuestions;
+    private Category       mCategory;
+    private ImageView      mSmallImage;
+    private TextView       mQuestion;
+    private TextView       mQuestionNumber;
+    private TextView       mCurrentPoints;
+    private TwoTextButton  mOption0;
+    private TwoTextButton  mOption1;
+    private TwoTextButton  mOption2;
+    private TwoTextButton  mOption3;
+    private Button         mLeftBtn;
+    private Button         mRightBtn;
+    private int            mCurrentQuestion;
+    private int            maxQuestions;
+    private int            mScore;
+    private MediaPlayer    mMediaPlayer;
+    private QuizHolder     mQuizHolder;
+    private String         mVideoPath;
+    private int            mVideoWidth;
+    private int            mVideoHeight;
+    private boolean mIsVideoSizeKnown       = false;
+    private boolean mIsVideoReadyToBePlayed = false;
+    private DisplayMetrics    mMetrics;
+    private HandlerThread     mThread;
+    private SharedPreferences mPrefsManager;
+    private boolean           isStarting;
+    private TextView          mNextQuest;
+    private Chartboost        cb;
+    private Boolean           adSupportEnabled;
+    private Boolean           adsDisabledAfterPurchase;
+    private Timer             mTimer;
+    private int maxPoints;
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		isStarting = true;
-		setContentView(R.layout.quiz_activity1);
-		mCategoryId = getIntent().getStringExtra(Constants.CATEGORY_ID);
-		mMetrics = getResources().getDisplayMetrics();
-		mPrefsManager = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-		mQuizHolder = QuizHolder.getInstance(this);
-		mCategory = mQuizHolder.getCategories().getCategoryById(mCategoryId);
-		//readQuestions();
-		mQuiz = mQuizHolder.getQuiz(mCategoryId);
-		mQuestions = mQuiz.getQuestions();
-		mCurrentQuestion = 0;
-		maxQuestions = mQuestions.size() < mCategory.getCategory_question_max_limit() ?
-				mQuestions.size() : mCategory.getCategory_question_max_limit();
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        isStarting = true;
+        setContentView(R.layout.quiz_activity1);
+        mCategoryId = getIntent().getStringExtra(Constants.CATEGORY_ID);
+        mMetrics = getResources().getDisplayMetrics();
+        mPrefsManager = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        mQuizHolder = QuizHolder.getInstance(this);
+        mCategory = mQuizHolder.getCategories().getCategoryById(mCategoryId);
+        //readQuestions();
+        mQuiz = mQuizHolder.getQuiz(mCategoryId);
+        mQuestions = mQuiz.getQuestions();
+        mCurrentQuestion = 0;
+        maxQuestions = mQuestions.size() < mCategory.getCategory_question_max_limit() ?
+                mQuestions.size() : mCategory.getCategory_question_max_limit();
 
         mTimer = (Timer) findViewById(R.id.timer);
-		mThread = new HandlerThread(TAG, android.os.Process.THREAD_PRIORITY_BACKGROUND);
-		mThread.start();
+        mThread = new HandlerThread(TAG, android.os.Process.THREAD_PRIORITY_BACKGROUND);
+        mThread.start();
 //		mServiceHandler = new ServiceHandler(mThread.getLooper());
 //		mServiceHandler.obtainMessage(RETRIEVE_DATA).sendToTarget();
 
-		setupViews();
-		adSupportEnabled = mPrefsManager.getBoolean(Constants.AD_SUPPORT_NEEDED, false);
-		adsDisabledAfterPurchase = mPrefsManager.getBoolean(Constants.ADS_DISABLED_AFTER_PURCHASE, false);
-		if (adSupportEnabled && !adsDisabledAfterPurchase) {
-			String appId = mPrefsManager.getString(Constants.CHARTBOOST_APPID, "");
-			String appSecret = mPrefsManager.getString(Constants.CHARTBOOST_APPSECRET, "");
-			if (appId.trim().equals("") || appSecret.trim().equals("")) {
-				Toast.makeText(this, getResources().getString(R.string.chartboost_error_msg), Toast.LENGTH_SHORT).show();
-			} else {
-				this.cb = Chartboost.sharedChartboost();
+        setupViews();
+        adSupportEnabled = mPrefsManager.getBoolean(Constants.AD_SUPPORT_NEEDED, false);
+        adsDisabledAfterPurchase = mPrefsManager.getBoolean(Constants.ADS_DISABLED_AFTER_PURCHASE, false);
+        if (adSupportEnabled && !adsDisabledAfterPurchase) {
+            String appId = mPrefsManager.getString(Constants.CHARTBOOST_APPID, "");
+            String appSecret = mPrefsManager.getString(Constants.CHARTBOOST_APPSECRET, "");
+            if (appId.trim().equals("") || appSecret.trim().equals("")) {
+                Toast.makeText(this, getResources().getString(R.string.chartboost_error_msg), Toast.LENGTH_SHORT).show();
+            } else {
+                this.cb = Chartboost.sharedChartboost();
 				this.cb.onCreate(this, appId, appSecret, null);
 			}
 		}
@@ -192,7 +181,9 @@ public class HAQuizScreen extends Activity implements OnClickListener, Callback,
 		mCurrentPoints = (TextView)findViewById(R.id.current_points);
 
 		mLeftBtn = (Button) findViewById(R.id.left_btn);
+		mLeftBtn.setOnClickListener(this);
 		mRightBtn = (Button) findViewById(R.id.right_btn);
+		mRightBtn.setOnClickListener(this);
 
 		mOption0 = (TwoTextButton)findViewById(R.id.option1);
 		mOption0.setAlternateText("1");
@@ -269,7 +260,10 @@ public class HAQuizScreen extends Activity implements OnClickListener, Callback,
     		return;
     	}
 		final Question question = mQuestions.get(mCurrentQuestion);
-		
+
+        maxPoints += question.getPoints();
+		question.setState(QuestionState.VIEWED);
+        
 		if(question.getQuestion_type() == 4) {
 //			mOption0.setTextSize(TypedValue.COMPLEX_UNIT_SP, 22);
 //			mOption1.setTextSize(TypedValue.COMPLEX_UNIT_SP, 22);
@@ -403,9 +397,10 @@ public class HAQuizScreen extends Activity implements OnClickListener, Callback,
 		startActivity(intent);
 		
 		intent = new Intent(this, HAFinalScreen.class);
-		intent.putExtra(Constants.CATGEORY, mCategory.getCategory_name());
+		intent.putExtra(Constants.CATEGORY, mCategory.getCategory_name());
 		intent.putExtra(Constants.LEADERBOARD_ID, mCategory.getLeaderboard_id());
 		intent.putExtra(Constants.POINTS, mScore);
+        intent.putExtra(Constants.MAX_POINTS, maxPoints);
 		startActivity(intent);
 		finish();
 	}
@@ -425,13 +420,12 @@ public class HAQuizScreen extends Activity implements OnClickListener, Callback,
 				playSoundForAnswer(false);
 			}
 		} else {
-			if(question.getAnswer() == 1 && option == 0) {
+			if(question.getAnswer() == option) {
+				question.setState(QuestionState.CORRECT);
 				mScore += question.getPoints();
 				playSoundForAnswer(true);
-			}else if(question.getAnswer() == 0 && option == 1){
-				mScore += question.getPoints();
-				playSoundForAnswer(true);
-			}else{
+			} else{
+				question.setState(QuestionState.WRONG);
 				mScore -= question.getNegative_points();
 				playSoundForAnswer(false);
 			}
@@ -530,10 +524,12 @@ public class HAQuizScreen extends Activity implements OnClickListener, Callback,
                 finish();
                 break;
 
+            case R.id.right_btn:
             case R.id.option1:
                 answerSelected(0);
                 break;
 
+            case R.id.left_btn:
             case R.id.option2:
                 answerSelected(1);
                 break;

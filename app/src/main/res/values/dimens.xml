@@ -6,4 +6,15 @@
     <dimen name="quiz_option_buttons_height">60dp</dimen>
     <dimen name="quiz_option_buttons_width">140dp</dimen>
     <dimen name="quiz_points_width">120dp</dimen>
+    <dimen name="category_item_height">100dp</dimen>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="knowledge_first_row_width">230dp</dimen>
+    <dimen name="knowledge_second_row_width">170dp</dimen>
+    <dimen name="knowledge_second_row_margin_top">-32dp</dimen>
+    <dimen name="knowledge_row_height">60dp</dimen>
+    <dimen name="knowledge_item_width">51dp</dimen>
+    <dimen name="knowledge_item_margin">8dp</dimen>
+    <dimen name="knowledge_overlap">-5dp</dimen>
 </resources>

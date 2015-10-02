@@ -17,7 +17,7 @@ public class Question implements Serializable {
     private int duration_in_seconds;
     private int question_type;
 
-    private QuestionState state;
+    private QuestionState state = QuestionState.UNDEF;
 
     public int getPoints() {
         return points;
@@ -51,7 +51,7 @@ public class Question implements Serializable {
         return question_type;
     }
 
-    public QuestionState isAnswered() {
+    public QuestionState getState() {
         return state;
     }
 

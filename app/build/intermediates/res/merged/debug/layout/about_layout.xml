@@ -1,42 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+                android:background="@drawable/quest_bg"
     android:layout_height="match_parent"
     android:orientation="vertical" >
-    
-    <RelativeLayout
-		    android:layout_width="fill_parent"
-		    android:layout_height="48dip"
-		    android:paddingLeft="10dip"
-		    android:background="@drawable/footer_normal">
-		    <TextView android:id="@+id/title"
-		        android:layout_width="wrap_content"
-		        android:layout_height="wrap_content"
-		        android:layout_centerInParent="true"
-		        android:textSize="28sp"
-		        android:textColor="#FFFFFF"
-		        android:text="@string/about" />
-		    
-		    <Button android:id="@+id/restore"  
-				    android:layout_height="35dp"
-				    android:layout_width="wrap_content"
-				    android:text="@string/restore"
-			    	android:background="@drawable/button_normal"
-			    	android:textColor="@android:color/white"
-			    	android:gravity="center"
-			    	android:textSize="17sp" 
-			    	android:layout_alignParentRight="true"
-			    	android:layout_centerVertical="true"
-			    	android:layout_marginRight="10dp"
-			    	android:visibility="gone"/>
-		    
-	</RelativeLayout>
-    
-    <TextView android:id="@+id/about_text"
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:textSize="17sp"/>
-    
 
-</LinearLayout>
+    <ImageView
+        android:layout_margin="20dp"
+        android:layout_width="40dp"
+        android:scaleType="centerInside"
+        android:background="@drawable/ic_home_normal"
+        android:layout_height="40dp"/>
+
+	<WebView
+		android:id="@+id/webView"
+		android:layout_marginTop="80dp"
+        android:background="@android:color/transparent"
+		android:layout_width="fill_parent"
+		android:layout_height="match_parent"/>
+
+</RelativeLayout>
 <!-- From: file:/D:/Android_Projects/QuizApp_Android%202.0/app/src/main/res/layout/about_layout.xml -->

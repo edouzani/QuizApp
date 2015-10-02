@@ -42,10 +42,14 @@ public class QuestionsAdapter {
         } else {
             CategoriesDownloader.downloadCategoriesList(list, QuizHolder.getInstance(mContext), new CategoriesDownloader.CategoriesDownloadCallback() {
                 @Override
-                public void downloadFinished(final CategoriesList list) {
-                    if (list == null) {
+                public void downloadFinished(final CategoriesList list, int code) {
+                    if (list == null && code != 304) {
                         Log.e("QUIZ_DOWNLOADER", "download failed");
                         return;
+                    }
+                    if (code == 304) {
+                        Log.e("QUIZ_DOWNLOADER", "bases are up-to-date");
+                        EventBus.getDefault().postSticky(new QuizesUpdateFinishedEvent());
                     }
                     if (callback != null) {
                         callback.getCategories(list);

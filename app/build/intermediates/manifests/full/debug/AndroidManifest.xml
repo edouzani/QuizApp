@@ -17,10 +17,13 @@
     <uses-permission android:name="ANDROID.PERMISSION.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="com.android.vending.BILLING" />
 
+    <android:uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <!-- android:theme="@android:style/Theme.Black.NoTitleBar"> -->
     <application
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@android:style/Theme.Black.NoTitleBar" >
+        android:theme="@style/Theme.TransparencyDemo" >
 
         <!-- Un-comment for leader board features -->
         <meta-data
@@ -60,6 +63,8 @@
         <activity
             android:name="com.almadev.znaniesila.AboutScreen"
             android:screenOrientation="portrait" />
+        <activity android:name="com.almadev.znaniesila.KnowledgeActivity" >
+        </activity>
     </application>
 
 </manifest>

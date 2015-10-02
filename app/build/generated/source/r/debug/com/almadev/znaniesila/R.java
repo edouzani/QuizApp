@@ -22,15 +22,53 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static final int circleColor=0x7f010000;
-        /** <p>Must be a string value, using '\\;' to escape characters such as '\\n' or '\\uxxxx' for a unicode character.
+        public static final int cardBackgroundColor=0x7f010000;
+        /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
 <p>This may also be a reference to a resource (in the form
 "<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static final int circleLabel=0x7f010001;
+        public static final int cardCornerRadius=0x7f010001;
+        /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int cardElevation=0x7f010002;
+        /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int cardMaxElevation=0x7f010003;
+        /** <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int cardPreventCornerOverlap=0x7f010005;
+        /** <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int cardUseCompatPadding=0x7f010004;
         /** <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
 "<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
 <p>This may also be a reference to a resource (in the form
@@ -39,121 +77,286 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static final int labelColor=0x7f010002;
+        public static final int circleColor=0x7f01000f;
+        /** <p>Must be a string value, using '\\;' to escape characters such as '\\n' or '\\uxxxx' for a unicode character.
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int circleLabel=0x7f010010;
+        /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int contentPadding=0x7f010006;
+        /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int contentPaddingBottom=0x7f01000a;
+        /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int contentPaddingLeft=0x7f010007;
+        /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int contentPaddingRight=0x7f010008;
+        /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int contentPaddingTop=0x7f010009;
+        /** <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int labelColor=0x7f010011;
+        /** <p>Must be a string value, using '\\;' to escape characters such as '\\n' or '\\uxxxx' for a unicode character.
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int layoutManager=0x7f01000b;
+        /** <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int reverseLayout=0x7f01000d;
+        /** <p>Must be an integer value, such as "<code>100</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int spanCount=0x7f01000c;
+        /** <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int stackFromEnd=0x7f01000e;
     }
     public static final class color {
-        public static final int dark=0x7f080000;
+        public static final int cardview_dark_background=0x7f090000;
+        public static final int cardview_light_background=0x7f090001;
+        public static final int cardview_shadow_end_color=0x7f090002;
+        public static final int cardview_shadow_start_color=0x7f090003;
+        public static final int dark=0x7f090004;
+        public static final int white=0x7f090005;
     }
     public static final class dimen {
+        public static final int activity_horizontal_margin=0x7f070004;
+        public static final int activity_vertical_margin=0x7f070005;
+        public static final int cardview_compat_inset_shadow=0x7f070006;
+        public static final int cardview_default_elevation=0x7f070007;
+        public static final int cardview_default_radius=0x7f070008;
+        public static final int category_item_height=0x7f070009;
+        public static final int item_touch_helper_max_drag_scroll_per_frame=0x7f07000a;
+        public static final int knowledge_first_row_width=0x7f07000b;
+        public static final int knowledge_item_margin=0x7f07000c;
+        public static final int knowledge_item_width=0x7f07000d;
+        public static final int knowledge_overlap=0x7f07000e;
+        public static final int knowledge_row_height=0x7f07000f;
+        public static final int knowledge_second_row_margin_top=0x7f070010;
+        public static final int knowledge_second_row_width=0x7f070011;
         public static final int left_offset1=0x7f070000;
         public static final int left_offset2=0x7f070001;
         public static final int progress_bar_max_height=0x7f070002;
-        public static final int quiz_option_buttons_height=0x7f070004;
-        public static final int quiz_option_buttons_margin_bottom=0x7f070005;
-        public static final int quiz_option_buttons_width=0x7f070006;
-        public static final int quiz_points_margin=0x7f070007;
-        public static final int quiz_points_top_margin=0x7f070008;
-        public static final int quiz_points_width=0x7f070009;
+        public static final int quiz_option_buttons_height=0x7f070012;
+        public static final int quiz_option_buttons_margin_bottom=0x7f070013;
+        public static final int quiz_option_buttons_width=0x7f070014;
+        public static final int quiz_points_margin=0x7f070015;
+        public static final int quiz_points_top_margin=0x7f070016;
+        public static final int quiz_points_width=0x7f070017;
         public static final int top_offset=0x7f070003;
     }
     public static final class drawable {
         public static final int arrow_right=0x7f020000;
         public static final int back_icon=0x7f020001;
         public static final int boolean_options_normal=0x7f020002;
-        public static final int btn_left=0x7f020003;
-        public static final int btn_left_false=0x7f020004;
-        public static final int btn_left_true=0x7f020005;
-        public static final int btn_right=0x7f020006;
-        public static final int btn_right_false=0x7f020007;
-        public static final int btn_right_true=0x7f020008;
-        public static final int button_bg=0x7f020009;
-        public static final int button_normal=0x7f02000a;
-        public static final int category_item_bg=0x7f02000b;
-        public static final int final_score_normal=0x7f02000c;
-        public static final int footer_normal=0x7f02000d;
-        public static final int highscore_box=0x7f02000e;
-        public static final int ic_home_normal=0x7f02000f;
-        public static final int ic_launcher=0x7f020010;
-        public static final int ic_next_normal=0x7f020011;
-        public static final int ic_prize_normal=0x7f020012;
-        public static final int ic_seekbar1=0x7f020013;
-        public static final int ic_seekbar2=0x7f020014;
-        public static final int ic_seekbar3=0x7f020015;
-        public static final int left_btn_selector=0x7f020016;
-        public static final int main_button_bg=0x7f020017;
-        public static final int options_button=0x7f020018;
-        public static final int options_button_correct=0x7f020019;
-        public static final int options_button_normal=0x7f02001a;
-        public static final int options_button_wrong=0x7f02001b;
-        public static final int points_bg_normal=0x7f02001c;
-        public static final int progressbar_bg=0x7f02001d;
-        public static final int quest_bg=0x7f02001e;
-        public static final int question_bg=0x7f02001f;
-        public static final int scorebox=0x7f020020;
-        public static final int share_button_normal=0x7f020021;
-        public static final int videooverlay=0x7f020022;
+        public static final int btn_game=0x7f020003;
+        public static final int btn_left=0x7f020004;
+        public static final int btn_left_false=0x7f020005;
+        public static final int btn_left_true=0x7f020006;
+        public static final int btn_rating=0x7f020007;
+        public static final int btn_right=0x7f020008;
+        public static final int btn_right_false=0x7f020009;
+        public static final int btn_right_true=0x7f02000a;
+        public static final int btn_wiki=0x7f02000b;
+        public static final int button_bg=0x7f02000c;
+        public static final int button_normal=0x7f02000d;
+        public static final int category_bg=0x7f02000e;
+        public static final int category_item_bg=0x7f02000f;
+        public static final int fb_logo=0x7f020010;
+        public static final int final_score_normal=0x7f020011;
+        public static final int footer_normal=0x7f020012;
+        public static final int hexagon=0x7f020013;
+        public static final int hexagon_locked=0x7f020014;
+        public static final int highscore_box=0x7f020015;
+        public static final int ic_home_normal=0x7f020016;
+        public static final int ic_launcher=0x7f020017;
+        public static final int ic_next_normal=0x7f020018;
+        public static final int ic_prize_normal=0x7f020019;
+        public static final int ic_seekbar1=0x7f02001a;
+        public static final int ic_seekbar2=0x7f02001b;
+        public static final int ic_seekbar3=0x7f02001c;
+        public static final int info_icon=0x7f02001d;
+        public static final int knowledge_bg=0x7f02001e;
+        public static final int left_btn_selector=0x7f02001f;
+        public static final int main=0x7f020020;
+        public static final int main_button_bg=0x7f020021;
+        public static final int ok_logo=0x7f020022;
+        public static final int options_button=0x7f020023;
+        public static final int options_button_correct=0x7f020024;
+        public static final int options_button_normal=0x7f020025;
+        public static final int options_button_wrong=0x7f020026;
+        public static final int points_bg_normal=0x7f020027;
+        public static final int progressbar_bg=0x7f020028;
+        public static final int quest_bg=0x7f020029;
+        public static final int question_bg=0x7f02002a;
+        public static final int rating_icon=0x7f02002b;
+        public static final int restart_icon=0x7f02002c;
+        public static final int result_bar=0x7f02002d;
+        public static final int scorebox=0x7f02002e;
+        public static final int settings_icon=0x7f02002f;
+        public static final int share_button_normal=0x7f020030;
+        public static final int share_divider=0x7f020031;
+        public static final int splash=0x7f020032;
+        public static final int videooverlay=0x7f020033;
+        public static final int vk_logo=0x7f020034;
     }
     public static final class id {
-        public static final int about=0x7f0b000e;
-        public static final int about_text=0x7f0b0002;
-        public static final int cat_name=0x7f0b0022;
-        public static final int category=0x7f0b000b;
-        public static final int category_item_layout=0x7f0b002a;
-        public static final int center=0x7f0b0026;
-        public static final int current_points=0x7f0b001c;
-        public static final int current_points_text=0x7f0b0025;
-        public static final int description=0x7f0b002d;
-        public static final int high_score=0x7f0b0006;
-        public static final int home=0x7f0b0004;
-        public static final int image=0x7f0b002b;
-        public static final int image_layout=0x7f0b0016;
-        public static final int left_btn=0x7f0b0027;
-        public static final int main_layout=0x7f0b000c;
-        public static final int more_apps=0x7f0b000a;
-        public static final int name=0x7f0b002c;
-        public static final int next_question=0x7f0b0021;
-        public static final int no_data_text=0x7f0b0029;
-        public static final int option1=0x7f0b001d;
-        public static final int option2=0x7f0b001e;
-        public static final int option3=0x7f0b001f;
-        public static final int option4=0x7f0b0020;
-        public static final int play_quiz=0x7f0b000d;
-        public static final int points_layout=0x7f0b0019;
-        public static final int prize=0x7f0b0007;
-        public static final int progress_indicator=0x7f0b0012;
-        public static final int question=0x7f0b0018;
-        public static final int question_number=0x7f0b001b;
-        public static final int question_number_text=0x7f0b0023;
-        public static final int remove_ads=0x7f0b000f;
-        public static final int restore=0x7f0b0001;
-        public static final int right_btn=0x7f0b0028;
-        public static final int root=0x7f0b0010;
-        public static final int root_layout=0x7f0b0013;
-        public static final int score=0x7f0b0008;
-        public static final int share=0x7f0b0005;
-        public static final int small_image=0x7f0b0017;
-        public static final int small_video=0x7f0b0015;
-        public static final int surface_view=0x7f0b0011;
-        public static final int time_out=0x7f0b0014;
-        public static final int timer=0x7f0b0024;
-        public static final int title=0x7f0b0000;
-        public static final int title_layout=0x7f0b0003;
-        public static final int total_points=0x7f0b001a;
-        public static final int world_score=0x7f0b0009;
+        public static final int about=0x7f0a0025;
+        public static final int answeredQuestions=0x7f0a0047;
+        public static final int cat_name=0x7f0a0039;
+        public static final int category=0x7f0a0012;
+        public static final int category_item_layout=0x7f0a0043;
+        public static final int catname=0x7f0a0003;
+        public static final int center=0x7f0a003d;
+        public static final int current_points=0x7f0a0033;
+        public static final int current_points_text=0x7f0a003c;
+        public static final int description=0x7f0a0046;
+        public static final int first_elem=0x7f0a0014;
+        public static final int first_elem_img=0x7f0a0015;
+        public static final int first_elem_text=0x7f0a0016;
+        public static final int forth_elem=0x7f0a001d;
+        public static final int forth_elem_img=0x7f0a001e;
+        public static final int forth_elem_text=0x7f0a001f;
+        public static final int home=0x7f0a0002;
+        public static final int image=0x7f0a0044;
+        public static final int image_layout=0x7f0a002e;
+        public static final int item_touch_helper_previous_elevation=0x7f0a0000;
+        public static final int knowledgeList=0x7f0a0004;
+        public static final int leaderboard=0x7f0a000c;
+        public static final int left_btn=0x7f0a003e;
+        public static final int line2=0x7f0a0020;
+        public static final int main_layout=0x7f0a0040;
+        public static final int more_apps=0x7f0a0042;
+        public static final int name=0x7f0a0045;
+        public static final int next_question=0x7f0a0038;
+        public static final int no_data_text=0x7f0a0041;
+        public static final int option1=0x7f0a0034;
+        public static final int option2=0x7f0a0035;
+        public static final int option3=0x7f0a0036;
+        public static final int option4=0x7f0a0037;
+        public static final int play_quiz=0x7f0a0021;
+        public static final int points=0x7f0a0008;
+        public static final int points_layout=0x7f0a0031;
+        public static final int prize=0x7f0a0006;
+        public static final int prize_img=0x7f0a0007;
+        public static final int progressText=0x7f0a0027;
+        public static final int progress_indicator=0x7f0a002a;
+        public static final int question=0x7f0a0030;
+        public static final int question_number=0x7f0a0032;
+        public static final int question_number_text=0x7f0a003a;
+        public static final int record=0x7f0a000b;
+        public static final int record_text=0x7f0a000a;
+        public static final int restart=0x7f0a000d;
+        public static final int right_btn=0x7f0a003f;
+        public static final int root=0x7f0a0028;
+        public static final int root_layout=0x7f0a002b;
+        public static final int score=0x7f0a0013;
+        public static final int second_elem=0x7f0a0017;
+        public static final int second_elem_img=0x7f0a0018;
+        public static final int second_elem_text=0x7f0a0019;
+        public static final int settings=0x7f0a0024;
+        public static final int share_fb=0x7f0a0010;
+        public static final int share_ok=0x7f0a0011;
+        public static final int share_text=0x7f0a000e;
+        public static final int share_vk=0x7f0a000f;
+        public static final int small_image=0x7f0a002f;
+        public static final int small_video=0x7f0a002d;
+        public static final int splash=0x7f0a0026;
+        public static final int surface_view=0x7f0a0029;
+        public static final int third_elem=0x7f0a001a;
+        public static final int third_elem_img=0x7f0a001b;
+        public static final int third_elem_text=0x7f0a001c;
+        public static final int time_out=0x7f0a002c;
+        public static final int timer=0x7f0a003b;
+        public static final int title=0x7f0a0005;
+        public static final int total_points=0x7f0a0009;
+        public static final int webView=0x7f0a0001;
+        public static final int wiki=0x7f0a0023;
+        public static final int world_score=0x7f0a0022;
     }
     public static final class integer {
-        public static final int google_play_services_version=0x7f090000;
+        public static final int google_play_services_version=0x7f0b0000;
     }
     public static final class layout {
         public static final int about_layout=0x7f040000;
-        public static final int final_screen=0x7f040001;
-        public static final int high_score_item=0x7f040002;
-        public static final int main=0x7f040003;
-        public static final int movie_view=0x7f040004;
-        public static final int quiz_activity=0x7f040005;
-        public static final int quiz_activity1=0x7f040006;
-        public static final int quiz_categories_layout=0x7f040007;
-        public static final int quiz_category_item=0x7f040008;
+        public static final int activity_knowledge=0x7f040001;
+        public static final int final_screen=0x7f040002;
+        public static final int high_score_item=0x7f040003;
+        public static final int knowledge_line1=0x7f040004;
+        public static final int knowledge_line2=0x7f040005;
+        public static final int main=0x7f040006;
+        public static final int movie_view=0x7f040007;
+        public static final int quiz_activity=0x7f040008;
+        public static final int quiz_activity1=0x7f040009;
+        public static final int quiz_categories_layout=0x7f04000a;
+        public static final int quiz_category_item=0x7f04000b;
     }
     public static final class mipmap {
         public static final int ic_launcher=0x7f030000;
@@ -164,32 +367,331 @@ containing a value of this type.
         public static final int wrong=0x7f060002;
     }
     public static final class string {
-        public static final int about=0x7f0a0000;
-        public static final int app_id=0x7f0a0001;
-        public static final int app_name=0x7f0a0002;
-        public static final int categories=0x7f0a0003;
-        public static final int chartboost_error_msg=0x7f0a0004;
-        public static final int final_score=0x7f0a0005;
-        public static final int gamehelper_app_misconfigured=0x7f0a0006;
-        public static final int gamehelper_license_failed=0x7f0a0007;
-        public static final int gamehelper_sign_in_failed=0x7f0a0008;
-        public static final int gamehelper_unknown_error=0x7f0a0009;
-        public static final int hello=0x7f0a000a;
-        public static final int high_scores=0x7f0a000b;
-        public static final int loading_video=0x7f0a000c;
-        public static final int more_apps=0x7f0a000d;
-        public static final int no_categories=0x7f0a000e;
-        public static final int play_quiz=0x7f0a000f;
-        public static final int quiz_skip_text=0x7f0a0010;
-        public static final int remove_ads=0x7f0a0011;
-        public static final int restore=0x7f0a0012;
-        public static final int share_points=0x7f0a0013;
-        public static final int tap_to_play=0x7f0a0014;
-        public static final int tap_to_zoom=0x7f0a0015;
-        public static final int top_scores_leaderboard=0x7f0a0016;
-        public static final int world_score=0x7f0a0017;
+        public static final int about=0x7f0c0000;
+        public static final int app_id=0x7f0c0001;
+        public static final int app_name=0x7f0c0002;
+        public static final int categories=0x7f0c0003;
+        public static final int chartboost_error_msg=0x7f0c0004;
+        public static final int final_score=0x7f0c0005;
+        public static final int gamehelper_app_misconfigured=0x7f0c0006;
+        public static final int gamehelper_license_failed=0x7f0c0007;
+        public static final int gamehelper_sign_in_failed=0x7f0c0008;
+        public static final int gamehelper_unknown_error=0x7f0c0009;
+        public static final int hello=0x7f0c000a;
+        public static final int high_scores=0x7f0c000b;
+        public static final int loading_video=0x7f0c000c;
+        public static final int more_apps=0x7f0c000d;
+        public static final int no_categories=0x7f0c000e;
+        public static final int play_quiz=0x7f0c000f;
+        public static final int points_record=0x7f0c0010;
+        public static final int quiz_skip_text=0x7f0c0011;
+        public static final int remove_ads=0x7f0c0012;
+        public static final int restore=0x7f0c0013;
+        public static final int share_points=0x7f0c0014;
+        public static final int tap_to_play=0x7f0c0015;
+        public static final int tap_to_zoom=0x7f0c0016;
+        public static final int top_scores_leaderboard=0x7f0c0017;
+        public static final int world_score=0x7f0c0018;
+    }
+    public static final class style {
+        public static final int CardView=0x7f080001;
+        public static final int CardView_Dark=0x7f080002;
+        public static final int CardView_Light=0x7f080003;
+        public static final int CatName_text=0x7f080004;
+        public static final int Theme_TransparencyDemo=0x7f080000;
+        public static final int knowledge_cell_text=0x7f080005;
     }
     public static final class styleable {
+        /** Attributes that can be used with a CardView.
+           <p>Includes the following attributes:</p>
+           <table>
+           <colgroup align="left" />
+           <colgroup align="left" />
+           <tr><th>Attribute</th><th>Description</th></tr>
+           <tr><td><code>{@link #CardView_cardBackgroundColor com.quizapp.android:cardBackgroundColor}</code></td><td></td></tr>
+           <tr><td><code>{@link #CardView_cardCornerRadius com.quizapp.android:cardCornerRadius}</code></td><td></td></tr>
+           <tr><td><code>{@link #CardView_cardElevation com.quizapp.android:cardElevation}</code></td><td></td></tr>
+           <tr><td><code>{@link #CardView_cardMaxElevation com.quizapp.android:cardMaxElevation}</code></td><td></td></tr>
+           <tr><td><code>{@link #CardView_cardPreventCornerOverlap com.quizapp.android:cardPreventCornerOverlap}</code></td><td></td></tr>
+           <tr><td><code>{@link #CardView_cardUseCompatPadding com.quizapp.android:cardUseCompatPadding}</code></td><td></td></tr>
+           <tr><td><code>{@link #CardView_contentPadding com.quizapp.android:contentPadding}</code></td><td></td></tr>
+           <tr><td><code>{@link #CardView_contentPaddingBottom com.quizapp.android:contentPaddingBottom}</code></td><td></td></tr>
+           <tr><td><code>{@link #CardView_contentPaddingLeft com.quizapp.android:contentPaddingLeft}</code></td><td></td></tr>
+           <tr><td><code>{@link #CardView_contentPaddingRight com.quizapp.android:contentPaddingRight}</code></td><td></td></tr>
+           <tr><td><code>{@link #CardView_contentPaddingTop com.quizapp.android:contentPaddingTop}</code></td><td></td></tr>
+           </table>
+           @see #CardView_cardBackgroundColor
+           @see #CardView_cardCornerRadius
+           @see #CardView_cardElevation
+           @see #CardView_cardMaxElevation
+           @see #CardView_cardPreventCornerOverlap
+           @see #CardView_cardUseCompatPadding
+           @see #CardView_contentPadding
+           @see #CardView_contentPaddingBottom
+           @see #CardView_contentPaddingLeft
+           @see #CardView_contentPaddingRight
+           @see #CardView_contentPaddingTop
+         */
+        public static final int[] CardView = {
+            0x7f010000, 0x7f010001, 0x7f010002, 0x7f010003,
+            0x7f010004, 0x7f010005, 0x7f010006, 0x7f010007,
+            0x7f010008, 0x7f010009, 0x7f01000a
+        };
+        /**
+          <p>This symbol is the offset where the {@link com.quizapp.android.R.attr#cardBackgroundColor}
+          attribute's value can be found in the {@link #CardView} array.
+
+
+          <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.quizapp.android:cardBackgroundColor
+        */
+        public static final int CardView_cardBackgroundColor = 0;
+        /**
+          <p>This symbol is the offset where the {@link com.quizapp.android.R.attr#cardCornerRadius}
+          attribute's value can be found in the {@link #CardView} array.
+
+
+          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.quizapp.android:cardCornerRadius
+        */
+        public static final int CardView_cardCornerRadius = 1;
+        /**
+          <p>This symbol is the offset where the {@link com.quizapp.android.R.attr#cardElevation}
+          attribute's value can be found in the {@link #CardView} array.
+
+
+          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.quizapp.android:cardElevation
+        */
+        public static final int CardView_cardElevation = 2;
+        /**
+          <p>This symbol is the offset where the {@link com.quizapp.android.R.attr#cardMaxElevation}
+          attribute's value can be found in the {@link #CardView} array.
+
+
+          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.quizapp.android:cardMaxElevation
+        */
+        public static final int CardView_cardMaxElevation = 3;
+        /**
+          <p>This symbol is the offset where the {@link com.quizapp.android.R.attr#cardPreventCornerOverlap}
+          attribute's value can be found in the {@link #CardView} array.
+
+
+          <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.quizapp.android:cardPreventCornerOverlap
+        */
+        public static final int CardView_cardPreventCornerOverlap = 5;
+        /**
+          <p>This symbol is the offset where the {@link com.quizapp.android.R.attr#cardUseCompatPadding}
+          attribute's value can be found in the {@link #CardView} array.
+
+
+          <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.quizapp.android:cardUseCompatPadding
+        */
+        public static final int CardView_cardUseCompatPadding = 4;
+        /**
+          <p>This symbol is the offset where the {@link com.quizapp.android.R.attr#contentPadding}
+          attribute's value can be found in the {@link #CardView} array.
+
+
+          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.quizapp.android:contentPadding
+        */
+        public static final int CardView_contentPadding = 6;
+        /**
+          <p>This symbol is the offset where the {@link com.quizapp.android.R.attr#contentPaddingBottom}
+          attribute's value can be found in the {@link #CardView} array.
+
+
+          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.quizapp.android:contentPaddingBottom
+        */
+        public static final int CardView_contentPaddingBottom = 10;
+        /**
+          <p>This symbol is the offset where the {@link com.quizapp.android.R.attr#contentPaddingLeft}
+          attribute's value can be found in the {@link #CardView} array.
+
+
+          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.quizapp.android:contentPaddingLeft
+        */
+        public static final int CardView_contentPaddingLeft = 7;
+        /**
+          <p>This symbol is the offset where the {@link com.quizapp.android.R.attr#contentPaddingRight}
+          attribute's value can be found in the {@link #CardView} array.
+
+
+          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.quizapp.android:contentPaddingRight
+        */
+        public static final int CardView_contentPaddingRight = 8;
+        /**
+          <p>This symbol is the offset where the {@link com.quizapp.android.R.attr#contentPaddingTop}
+          attribute's value can be found in the {@link #CardView} array.
+
+
+          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.quizapp.android:contentPaddingTop
+        */
+        public static final int CardView_contentPaddingTop = 9;
+        /** Attributes that can be used with a RecyclerView.
+           <p>Includes the following attributes:</p>
+           <table>
+           <colgroup align="left" />
+           <colgroup align="left" />
+           <tr><th>Attribute</th><th>Description</th></tr>
+           <tr><td><code>{@link #RecyclerView_android_orientation android:orientation}</code></td><td></td></tr>
+           <tr><td><code>{@link #RecyclerView_layoutManager com.quizapp.android:layoutManager}</code></td><td></td></tr>
+           <tr><td><code>{@link #RecyclerView_reverseLayout com.quizapp.android:reverseLayout}</code></td><td></td></tr>
+           <tr><td><code>{@link #RecyclerView_spanCount com.quizapp.android:spanCount}</code></td><td></td></tr>
+           <tr><td><code>{@link #RecyclerView_stackFromEnd com.quizapp.android:stackFromEnd}</code></td><td></td></tr>
+           </table>
+           @see #RecyclerView_android_orientation
+           @see #RecyclerView_layoutManager
+           @see #RecyclerView_reverseLayout
+           @see #RecyclerView_spanCount
+           @see #RecyclerView_stackFromEnd
+         */
+        public static final int[] RecyclerView = {
+            0x010100c4, 0x7f01000b, 0x7f01000c, 0x7f01000d,
+            0x7f01000e
+        };
+        /**
+          <p>This symbol is the offset where the {@link android.R.attr#orientation}
+          attribute's value can be found in the {@link #RecyclerView} array.
+          @attr name android:orientation
+        */
+        public static final int RecyclerView_android_orientation = 0;
+        /**
+          <p>This symbol is the offset where the {@link com.quizapp.android.R.attr#layoutManager}
+          attribute's value can be found in the {@link #RecyclerView} array.
+
+
+          <p>Must be a string value, using '\\;' to escape characters such as '\\n' or '\\uxxxx' for a unicode character.
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.quizapp.android:layoutManager
+        */
+        public static final int RecyclerView_layoutManager = 1;
+        /**
+          <p>This symbol is the offset where the {@link com.quizapp.android.R.attr#reverseLayout}
+          attribute's value can be found in the {@link #RecyclerView} array.
+
+
+          <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.quizapp.android:reverseLayout
+        */
+        public static final int RecyclerView_reverseLayout = 3;
+        /**
+          <p>This symbol is the offset where the {@link com.quizapp.android.R.attr#spanCount}
+          attribute's value can be found in the {@link #RecyclerView} array.
+
+
+          <p>Must be an integer value, such as "<code>100</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.quizapp.android:spanCount
+        */
+        public static final int RecyclerView_spanCount = 2;
+        /**
+          <p>This symbol is the offset where the {@link com.quizapp.android.R.attr#stackFromEnd}
+          attribute's value can be found in the {@link #RecyclerView} array.
+
+
+          <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.quizapp.android:stackFromEnd
+        */
+        public static final int RecyclerView_stackFromEnd = 4;
         /** Attributes that can be used with a Timer.
            <p>Includes the following attributes:</p>
            <table>
@@ -205,7 +707,7 @@ containing a value of this type.
            @see #Timer_labelColor
          */
         public static final int[] Timer = {
-            0x7f010000, 0x7f010001, 0x7f010002
+            0x7f01000f, 0x7f010010, 0x7f010011
         };
         /**
           <p>This symbol is the offset where the {@link com.quizapp.android.R.attr#circleColor}

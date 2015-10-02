@@ -13,9 +13,12 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.almadev.znaniesila.events.NeedUpdateQuizesEvent;
+import com.almadev.znaniesila.events.QuizDownloadedEvent;
 import com.almadev.znaniesila.events.QuizesUpdateFinishedEvent;
 import com.almadev.znaniesila.model.CategoriesList;
 import com.almadev.znaniesila.model.Question;
@@ -37,66 +40,59 @@ import de.greenrobot.event.EventBus;
 
 public class HAStartScreen extends BaseGameActivity implements OnClickListener{
     /** Called when the activity is first created. */
-	
-	private static final String TAG = "HAStartScreen";
-	private Button play_quiz;
-	private Button about;
-	private Button remove_ads;
-	private Chartboost cb;
-	private Boolean adSupportEnabled;
-	private Boolean adsDisabledAfterPurchase;
-	private Boolean gameServicesEnabled;
-	private Button moreAppsButton;
-	private Button restoreButton;
-	private Button worldScoreButton;
-	private SharedPreferences mPrefsmanager;
-	private IabHelper mHelper;
-	public static final int BILLING_RESPONSE_RESULT_ITEM_ALREADY_OWNED = 7;
-	private String SKU_REMOVE_ADS;
-	private GamesClient mGamesClient;
+
+    private static final String TAG = "HAStartScreen";
+    private Button            play_quiz;
+    private ImageView         about;
+    private Chartboost        cb;
+    private Boolean           adSupportEnabled;
+    private Boolean           adsDisabledAfterPurchase;
+    private Boolean           gameServicesEnabled;
+    private Button            worldScoreButton;
+    private SharedPreferences mPrefsmanager;
+    private IabHelper         mHelper;
+    public static final int BILLING_RESPONSE_RESULT_ITEM_ALREADY_OWNED = 7;
+    private String           SKU_REMOVE_ADS;
+    private GamesClient      mGamesClient;
     private QuestionsAdapter mQuestionsAdapter;
-	
+    private TextView         progressText;
+
+    private Object lock             = new Object();
+    private int    downloadedQuizes = 0;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         mPrefsmanager = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        play_quiz=(Button) findViewById(R.id.play_quiz);
+        play_quiz = (Button) findViewById(R.id.play_quiz);
         play_quiz.setOnClickListener(this);
-        about=(Button) findViewById(R.id.about);
+        about = (ImageView) findViewById(R.id.about);
         about.setOnClickListener(this);
-        remove_ads=(Button) findViewById(R.id.remove_ads);
-        remove_ads.setOnClickListener(this);
-        moreAppsButton = (Button) findViewById(R.id.more_apps);
-        restoreButton = (Button) findViewById(R.id.restore);
-        restoreButton.setOnClickListener(this);
         worldScoreButton = (Button) findViewById(R.id.world_score);
         worldScoreButton.setOnClickListener(this);
+		findViewById(R.id.wiki).setOnClickListener(this);
 
         parseConfig();
-        
-        gameServicesEnabled = mPrefsmanager.getBoolean(Constants.GAME_SERVICES_ENABLED,false);
-		adSupportEnabled = mPrefsmanager.getBoolean(Constants.AD_SUPPORT_NEEDED,false);
-		adsDisabledAfterPurchase = mPrefsmanager.getBoolean(Constants.ADS_DISABLED_AFTER_PURCHASE,false);
-		
-		if(!gameServicesEnabled){
-			worldScoreButton.setVisibility(View.GONE);
-		}else{
-			worldScoreButton.setVisibility(View.VISIBLE);
-		}
-		
-		if(adSupportEnabled && !adsDisabledAfterPurchase){
-			String appId = mPrefsmanager.getString(Constants.CHARTBOOST_APPID,"");
-			String appSecret = mPrefsmanager.getString(Constants.CHARTBOOST_APPSECRET,"");
-			if(appId.trim().equals("") || appSecret.trim().equals("")){
-				Toast.makeText(this, getResources().getString(R.string.chartboost_error_msg), 1000).show();
-				moreAppsButton.setVisibility(View.GONE);
-				remove_ads.setVisibility(View.GONE);
-			}else{
-				this.cb = Chartboost.sharedChartboost();
-				moreAppsButton.setVisibility(View.VISIBLE);
-				remove_ads.setVisibility(View.VISIBLE);
-				this.cb.onCreate(this, appId, appSecret, null);
+
+        gameServicesEnabled = mPrefsmanager.getBoolean(Constants.GAME_SERVICES_ENABLED, false);
+        adSupportEnabled = mPrefsmanager.getBoolean(Constants.AD_SUPPORT_NEEDED, false);
+        adsDisabledAfterPurchase = mPrefsmanager.getBoolean(Constants.ADS_DISABLED_AFTER_PURCHASE, false);
+
+        if (!gameServicesEnabled) {
+            worldScoreButton.setVisibility(View.GONE);
+        } else {
+            worldScoreButton.setVisibility(View.VISIBLE);
+        }
+
+        if (adSupportEnabled && !adsDisabledAfterPurchase) {
+            String appId = mPrefsmanager.getString(Constants.CHARTBOOST_APPID, "");
+            String appSecret = mPrefsmanager.getString(Constants.CHARTBOOST_APPSECRET, "");
+            if (appId.trim().equals("") || appSecret.trim().equals("")) {
+                Toast.makeText(this, getResources().getString(R.string.chartboost_error_msg), Toast.LENGTH_SHORT).show();
+            } else {
+                this.cb = Chartboost.sharedChartboost();
+                this.cb.onCreate(this, appId, appSecret, null);
 				
 				//Google Inapp billing code - initialization
 		        SKU_REMOVE_ADS = mPrefsmanager.getString(Constants.REMOVE_ADS_SKU,"");
@@ -115,12 +111,10 @@ public class HAStartScreen extends BaseGameActivity implements OnClickListener{
 			        });
 		        }catch(Exception e){
 		        	e.printStackTrace();
-		        	Toast.makeText(getApplicationContext(), "In-App billing error : Please note you cannot test inapp billing in emulator and check if you have signed the apk",1000).show();
+		        	Toast.makeText(getApplicationContext(), "In-App billing error : Please note you cannot test inapp billing in emulator and check if you have signed the apk",Toast.LENGTH_SHORT).show();
 		        }
 			}
 		}else{
-			moreAppsButton.setVisibility(View.GONE);
-			remove_ads.setVisibility(View.GONE);
 		}
 
         QuizHolder quizHolder = QuizHolder.getInstance(this);
@@ -137,14 +131,27 @@ public class HAStartScreen extends BaseGameActivity implements OnClickListener{
         }
     }
 
+    public void onEventMainThread(QuizDownloadedEvent e) {
+        synchronized (lock) {
+            downloadedQuizes++;
+            progressText.setText(downloadedQuizes + "/" + QuizHolder.getInstance(this).getCategories().getCategories().size());
+        }
+    }
+
     public void onEventMainThread(NeedUpdateQuizesEvent e) {
         //open splash
         Log.e("Update", "fetching started");
+        progressText = (TextView)findViewById(R.id.progressText);
+        progressText.setVisibility(View.VISIBLE);
+        progressText.setText("0/" + QuizHolder.getInstance(this).getCategories().getCategories().size());
+
 
         mQuestionsAdapter.fetchQuizes(this);
     }
 
     public void onEventMainThread(QuizesUpdateFinishedEvent e) {
+		findViewById(R.id.splash).setVisibility(View.GONE);
+        findViewById(R.id.progressText).setVisibility(View.GONE);
         Log.e("Update", "update finished");
     }
     
@@ -156,18 +163,20 @@ public class HAStartScreen extends BaseGameActivity implements OnClickListener{
 		    this.cb.startSession();
 		    this.cb.showInterstitial();
 		}
+//        EventBus.getDefault().register(this);
+        EventBus.getDefault().registerSticky(this);
 	}
 	
 	@Override
 	protected void onResume() {
 		super.onResume();
-        EventBus.getDefault().register(this);
+
 	}
 
     @Override
     protected void onPause() {
         super.onPause();
-        EventBus.getDefault().unregister(this);
+
     }
 
     @Override
@@ -176,6 +185,7 @@ public class HAStartScreen extends BaseGameActivity implements OnClickListener{
 		if(adSupportEnabled && this.cb!=null && !adsDisabledAfterPurchase){
 			this.cb.onStop(this);
 		}
+        EventBus.getDefault().unregister(this);
 	}
 	
 	@Override
@@ -220,42 +230,36 @@ public class HAStartScreen extends BaseGameActivity implements OnClickListener{
 			case R.id.play_quiz : startActivity(new Intent(this, HACategoriesScreen.class));
 	        					  break;
 	        
-			case R.id.restore :
-				try{
-
-					ArrayList<String> additionalSkuList = new ArrayList<String>();
-					additionalSkuList.add(SKU_REMOVE_ADS);
-					mHelper.queryInventoryAsync(true, additionalSkuList,
-					   mQueryFinishedListener);
-				}catch(Exception e){
-					e.printStackTrace();
-				}
-				break;
-			
-			case R.id.remove_ads :
-				try{
-					mHelper.launchPurchaseFlow(this, SKU_REMOVE_ADS, 10001,   
-							mPurchaseFinishedListener, "");
-				}catch(Exception e){
-					e.printStackTrace();
-				}
-				break;
+//			case R.id.restore :
+//				try{
+//
+//					ArrayList<String> additionalSkuList = new ArrayList<String>();
+//					additionalSkuList.add(SKU_REMOVE_ADS);
+//					mHelper.queryInventoryAsync(true, additionalSkuList,
+//					   mQueryFinishedListener);
+//				}catch(Exception e){
+//					e.printStackTrace();
+//				}
+//				break;
+//
+//			case R.id.remove_ads :
+//				try{
+//					mHelper.launchPurchaseFlow(this, SKU_REMOVE_ADS, 10001,
+//							mPurchaseFinishedListener, "");
+//				}catch(Exception e){
+//					e.printStackTrace();
+//				}
+//				break;
 				
 			case R.id.about :
-                try {
-                    new QuestionsAdapter(this).getQuiz("1", new QuestionsAdapter.QuizGetCallback() {
-                        @Override
-                        public void callback(final Quiz quiz) {
-                            Log.e("Q", quiz.getQuestions().get(0).getCorrect_ans_explanation());
-                        }
-                    });
-
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                //startActivity(new Intent(this, AboutScreen.class));
+                startActivity(new Intent(this, AboutScreen.class));
 				break;
-				
+
+			case R.id.wiki:
+                Intent wikiIntent = new Intent(this, HACategoriesScreen.class);
+                wikiIntent.putExtra(Constants.CATEGORY_FOR_KNOWLEDGE, true);
+				startActivity(wikiIntent);
+				break;
 			case R.id.world_score :
 				beginUserInitiatedSignIn();
 			    mGamesClient=this.getGamesClient();
@@ -289,7 +293,7 @@ public class HAStartScreen extends BaseGameActivity implements OnClickListener{
 	      }      
 	      else if (purchase.getSku().equals(SKU_REMOVE_ADS)) {
 	    	  Log.d(TAG, "Item purchase Done********************* " + result);
-	    	  Toast.makeText(HAStartScreen.this, "Ads Disabled as you have already made purchase", 10000).show();
+	    	  Toast.makeText(HAStartScreen.this, "Ads Disabled as you have already made purchase", Toast.LENGTH_LONG).show();
 	    	  disableAds();
 	      }
 	   }
@@ -317,8 +321,6 @@ public class HAStartScreen extends BaseGameActivity implements OnClickListener{
   	  	edit.putBoolean(Constants.ADS_DISABLED_AFTER_PURCHASE, true);
   	  	edit.commit();
   	  	this.cb=null;
-  	  	moreAppsButton.setVisibility(View.GONE);
-  	  	remove_ads.setVisibility(View.GONE);
 	}
 	
 	IabHelper.OnConsumeFinishedListener mConsumeFinishedListener =

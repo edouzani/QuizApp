@@ -28,7 +28,7 @@ public class CategoriesDownloader {
     }
 
     public interface CategoriesDownloadCallback {
-        void downloadFinished(CategoriesList list);
+        void downloadFinished(CategoriesList list, int code);
     }
 
     private CategoriesDownloader() {
@@ -63,12 +63,12 @@ public class CategoriesDownloader {
                 }
 
                 if (response == null) {
-                    callback.downloadFinished(null);
+                    callback.downloadFinished(null, -1);
                     return;
                 }
 
                 if (response.code() == 304) {
-                    callback.downloadFinished(null);
+                    callback.downloadFinished(null, 304);
                     return;
                 }
 
@@ -83,7 +83,7 @@ public class CategoriesDownloader {
                     e.printStackTrace();
                 }
 
-                callback.downloadFinished(list);
+                callback.downloadFinished(list, 200);
                 return;
             }
         }).start();

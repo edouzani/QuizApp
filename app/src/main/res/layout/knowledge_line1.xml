@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:style="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+    
+    <LinearLayout
+        android:id="@+id/first_row"
+        android:layout_width="@dimen/knowledge_first_row_width"
+        android:orientation="horizontal"
+        android:layout_centerHorizontal="true"
+        android:layout_height="@dimen/knowledge_row_height">
+        <FrameLayout
+            android:id="@+id/first_elem"
+            android:layout_width="@dimen/knowledge_item_width"
+            android:layout_marginRight="@dimen/knowledge_item_margin"
+            android:layout_height="@dimen/knowledge_row_height">
+        <ImageView
+            android:layout_width="@dimen/knowledge_item_width"
+            android:id="@+id/first_elem_img"
+            android:visibility="visible"
+            android:src="@drawable/hexagon"
+
+            android:layout_height="@dimen/knowledge_row_height"/>
+
+            <TextView
+                android:id="@+id/first_elem_text"
+                android:layout_width="@dimen/knowledge_item_width"
+                style="@style/knowledge_cell_text"
+                android:text="01"
+                android:layout_height="wrap_content"/>
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/second_elem"
+            android:layout_width="@dimen/knowledge_item_width"
+            android:layout_marginRight="@dimen/knowledge_item_margin"
+            android:layout_height="@dimen/knowledge_row_height">
+            <ImageView
+                android:layout_width="@dimen/knowledge_item_width"
+                android:id="@+id/second_elem_img"
+                android:visibility="visible"
+                android:src="@drawable/hexagon_locked"
+                android:layout_height="@dimen/knowledge_row_height"/>
+
+            <TextView
+                android:id="@+id/second_elem_text"
+                android:layout_width="@dimen/knowledge_item_width"
+                style="@style/knowledge_cell_text"
+                android:visibility="invisible"
+                android:text="01"
+                android:layout_height="wrap_content"/>
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/third_elem"
+            android:layout_width="@dimen/knowledge_item_width"
+            android:layout_marginRight="@dimen/knowledge_item_margin"
+            android:layout_height="@dimen/knowledge_row_height">
+            <ImageView
+                android:layout_width="@dimen/knowledge_item_width"
+                android:id="@+id/third_elem_img"
+                android:visibility="visible"
+                android:src="@drawable/hexagon_locked"
+                android:layout_height="@dimen/knowledge_row_height"/>
+
+            <TextView
+                android:id="@+id/third_elem_text"
+                android:layout_width="@dimen/knowledge_item_width"
+                style="@style/knowledge_cell_text"
+                android:visibility="invisible"
+                android:text="01"
+                android:layout_height="wrap_content"/>
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/forth_elem"
+            android:layout_width="@dimen/knowledge_item_width"
+            android:layout_marginRight="@dimen/knowledge_item_margin"
+            android:layout_height="@dimen/knowledge_row_height">
+            <ImageView
+                android:layout_width="@dimen/knowledge_item_width"
+                android:id="@+id/forth_elem_img"
+                android:visibility="visible"
+                android:src="@drawable/hexagon_locked"
+                android:layout_height="@dimen/knowledge_row_height"/>
+
+            <TextView
+                android:id="@+id/forth_elem_text"
+                android:layout_width="@dimen/knowledge_item_width"
+                style="@style/knowledge_cell_text"
+                android:visibility="invisible"
+                android:text="01"
+                android:layout_height="wrap_content"/>
+        </FrameLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_below="@id/first_row"
+        android:layout_marginTop="@dimen/knowledge_overlap"
+        android:layout_width="@dimen/knowledge_second_row_width"
+        android:orientation="horizontal"
+        android:layout_centerHorizontal="true"
+        android:layout_height="@dimen/knowledge_row_height">
+        <FrameLayout
+            android:id="@+id/fifth_elem"
+            android:layout_width="@dimen/knowledge_item_width"
+            android:layout_marginRight="@dimen/knowledge_item_margin"
+            android:layout_height="@dimen/knowledge_row_height">
+            <ImageView
+                android:layout_width="@dimen/knowledge_item_width"
+                android:id="@+id/fifth_elem_img"
+                android:visibility="visible"
+                android:src="@drawable/hexagon"
+
+                android:layout_height="@dimen/knowledge_row_height"/>
+
+            <TextView
+                android:id="@+id/fifth_elem_text"
+                android:layout_width="@dimen/knowledge_item_width"
+                style="@style/knowledge_cell_text"
+                android:text="05"
+                android:layout_height="wrap_content"/>
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/six_elem"
+            android:layout_width="@dimen/knowledge_item_width"
+            android:layout_marginRight="@dimen/knowledge_item_margin"
+            android:layout_height="@dimen/knowledge_row_height">
+            <ImageView
+                android:layout_width="@dimen/knowledge_item_width"
+                android:id="@+id/six_elem_img"
+                android:visibility="visible"
+                android:src="@drawable/hexagon_locked"
+                android:layout_height="@dimen/knowledge_row_height"/>
+
+            <TextView
+                android:id="@+id/six_elem_text"
+                android:layout_width="@dimen/knowledge_item_width"
+                style="@style/knowledge_cell_text"
+                android:visibility="invisible"
+                android:text="01"
+                android:layout_height="wrap_content"/>
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/seven_elem"
+            android:layout_width="@dimen/knowledge_item_width"
+            android:layout_marginRight="@dimen/knowledge_item_margin"
+            android:layout_height="@dimen/knowledge_row_height">
+            <ImageView
+                android:layout_width="@dimen/knowledge_item_width"
+                android:id="@+id/seven_elem_img"
+                android:visibility="visible"
+                android:src="@drawable/hexagon_locked"
+                android:layout_height="@dimen/knowledge_row_height"/>
+
+            <TextView
+                android:id="@+id/seven_elem_text"
+                android:layout_width="@dimen/knowledge_item_width"
+                style="@style/knowledge_cell_text"
+                android:visibility="invisible"
+                android:text="01"
+                android:layout_height="wrap_content"/>
+        </FrameLayout>
+    </LinearLayout>
+
+
+</RelativeLayout>
