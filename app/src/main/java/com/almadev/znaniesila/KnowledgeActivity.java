@@ -39,7 +39,7 @@ public class KnowledgeActivity extends Activity implements View.OnClickListener 
         mRecyclerView.setHasFixedSize(true);
         LinearLayoutManager llm = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(llm);
-        mAdapter = new KnowledgeAdapter();
+        mAdapter = new KnowledgeAdapter(QuizHolder.getInstance(this).getQuiz(mCategory.getCategory_id()).getQuestions());
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.addItemDecoration(new OverlapDecoration(this));
     }

@@ -1,5 +1,7 @@
 package com.almadev.znaniesila.network;
 
+import android.util.Log;
+
 import com.almadev.znaniesila.events.NeedUpdateQuizesEvent;
 import com.almadev.znaniesila.model.CategoriesList;
 import com.almadev.znaniesila.model.Question;
@@ -90,6 +92,8 @@ public class CategoriesDownloader {
     }
 
     public static Quiz downloadQuiz(final String quizId) {
+        Log.e("QUIZ_DOWNLOADER", "downloading quiz# " + quizId);
+
         Request request = new Request.Builder().url(Constants.API_CATEGORY + quizId + ".json")
                                                .addHeader(QZ_VERSION_HEADER, QuizHolder.getQuizVersion())
                                                .addHeader("Content-Type", "application/json").build();

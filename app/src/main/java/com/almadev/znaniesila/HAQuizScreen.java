@@ -210,9 +210,9 @@ public class HAQuizScreen extends Activity implements OnClickListener, Callback,
 	}
 	
 	private void setupData() {
-		Intent intent = new Intent(this, MovieView.class);
-		intent.putExtra("finish", true);
-		startActivity(intent);
+//		Intent intent = new Intent(this, MovieView.class);
+//		intent.putExtra("finish", true);
+//		startActivity(intent);
 		int animType = mPrefsManager.getInt(Constants.OPTIONS_ANIMATION, 1);
 
 		mNextQuest.setEnabled(false);
@@ -259,7 +259,7 @@ public class HAQuizScreen extends Activity implements OnClickListener, Callback,
 		if(mCurrentQuestion >= mQuestions.size()) {
     		return;
     	}
-		final Question question = mQuestions.get(mCurrentQuestion);
+		Question question = mQuestions.get(mCurrentQuestion);
 
         maxPoints += question.getPoints();
 		question.setState(QuestionState.VIEWED);

@@ -16,6 +16,8 @@ public class Question implements Serializable {
     private int negative_points;
     private int duration_in_seconds;
     private int question_type;
+    private String story_order_id;
+    private String story;
 
     private QuestionState state = QuestionState.UNDEF;
 
@@ -57,5 +59,13 @@ public class Question implements Serializable {
 
     public void setState(QuestionState pState) {
         state = pState;
+    }
+
+    public String getStory_order_id() {
+        return story_order_id;
+    }
+
+    public String getStory() {
+        return story;
     }
 }

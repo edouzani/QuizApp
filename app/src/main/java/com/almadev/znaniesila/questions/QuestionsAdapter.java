@@ -4,6 +4,7 @@ import android.content.Context;
 import android.util.Log;
 
 import com.almadev.znaniesila.events.QuizDownloadedEvent;
+import com.almadev.znaniesila.events.QuizesUpdateFailedEvent;
 import com.almadev.znaniesila.events.QuizesUpdateFinishedEvent;
 import com.almadev.znaniesila.model.CategoriesList;
 import com.almadev.znaniesila.model.Category;
@@ -66,7 +67,10 @@ public class QuestionsAdapter {
                 CategoriesList list = QuizHolder.getInstance(context).getCategories();
                 try {
                     for (Category c : list.getCategories()) {
-                        getQuiz("" + c.getCategory_id());
+                        if (getQuiz("" + c.getCategory_id()) == null) {
+                            EventBus.getDefault().post(new QuizesUpdateFailedEvent());
+                            return;
+                        }
                         EventBus.getDefault().post(new QuizDownloadedEvent("" + c.getCategory_id()));
                     }
 
@@ -90,6 +94,7 @@ public class QuestionsAdapter {
                     quiz = CategoriesDownloader.downloadQuiz(id);
                     if (quiz == null) {
                         Log.e("QUIZ_DOWNLOADER", "download failed");
+                        callback.callback(null);
                         return;
                     }
                     QuizHolder.getInstance(mContext).saveQuiz(quiz);

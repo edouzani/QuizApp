@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import com.almadev.znaniesila.events.NeedUpdateQuizesEvent;
 import com.almadev.znaniesila.events.QuizDownloadedEvent;
+import com.almadev.znaniesila.events.QuizesUpdateFailedEvent;
 import com.almadev.znaniesila.events.QuizesUpdateFinishedEvent;
 import com.almadev.znaniesila.model.CategoriesList;
 import com.almadev.znaniesila.model.Question;
@@ -154,7 +155,15 @@ public class HAStartScreen extends BaseGameActivity implements OnClickListener{
         findViewById(R.id.progressText).setVisibility(View.GONE);
         Log.e("Update", "update finished");
     }
-    
+
+
+    public void onEventMainThread(QuizesUpdateFailedEvent e) {
+//        findViewById(R.id.splash).setVisibility(View.GONE);
+//        findViewById(R.id.progressText).setVisibility(View.GONE);
+        Log.e("Update", "update failed");
+        Toast.makeText(this, "Ошибка загрузки. Попробуйте открыть приложение позднее", Toast.LENGTH_SHORT).show();
+    }
+
     @Override
 	protected void onStart() {
 		super.onStart();

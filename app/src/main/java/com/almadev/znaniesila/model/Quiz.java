@@ -43,4 +43,6 @@ public class Quiz implements Serializable {
     public void setAnsweredQuestions(int pAnsweredQuestions) {
         answeredQuestions = pAnsweredQuestions;
     }
+
+//    public void setStateForQuestion
 }

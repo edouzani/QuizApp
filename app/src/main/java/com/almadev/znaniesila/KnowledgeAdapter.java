@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.almadev.znaniesila.model.Question;
 import com.almadev.znaniesila.model.QuestionState;
@@ -45,7 +46,7 @@ public class KnowledgeAdapter extends android.support.v7.widget.RecyclerView.Ada
     public RecyclerView.ViewHolder onCreateViewHolder(final ViewGroup parent, final int viewType) {
         LayoutInflater inflater = getLayoutInflater(parent);
         View line = null;
-        line = inflater.inflate(R.layout.knowledge_line1, parent, false);
+        line = inflater.inflate(R.layout.knowledge_line2, parent, false);
 
         if (viewType == FIRST_LINE) {
             line.setTag(new Boolean(true));
@@ -56,10 +57,8 @@ public class KnowledgeAdapter extends android.support.v7.widget.RecyclerView.Ada
     @Override
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position) {
         KnowledgeViewHolder mKnowledgeViewHolder = (KnowledgeViewHolder) holder;
-        int itemType = getItemViewType(position);
-        if (itemType == FIRST_LINE ) {
-            mKnowledgeViewHolder.render(mQuestions.subList(position, position + 7 > mQuestions.size() ? mQuestions.size() : position + 7));
-        }
+//        int itemType = getItemViewType(position);
+        mKnowledgeViewHolder.render(mQuestions.subList(position, position + 7 > mQuestions.size() ? mQuestions.size() : position + 7));
     }
 
     @Override
@@ -86,6 +85,7 @@ public class KnowledgeAdapter extends android.support.v7.widget.RecyclerView.Ada
         private FrameLayout img6;
         private FrameLayout img7;
         private List<FrameLayout> imgs = new ArrayList<>();
+        private View mItem;
 
         public KnowledgeViewHolder(final View itemView) {
             super(itemView);
@@ -104,15 +104,27 @@ public class KnowledgeAdapter extends android.support.v7.widget.RecyclerView.Ada
             imgs.add(img5);
             imgs.add(img6);
             imgs.add(img7);
+
+            mItem = itemView;
         }
 
         public void render(List<Question> pQuestions) {
             int i = 0;
             for (i = 0; i < pQuestions.size(); i++) {
-//                imgs.get(i).setVisibility(View.VISIBLE);
                 if (pQuestions.get(i).getState() == QuestionState.CORRECT) {
-                    imgs.get(i).findViewById(R.id.im)
+                    ((ImageView)imgs.get(i).findViewById(R.id.img)).setImageDrawable(
+                            mItem.getContext().getResources().getDrawable(R.drawable.hexagon));
+                    ((TextView)imgs.get(i).findViewById(R.id.text)).setText(pQuestions.get(i).getStory_order_id());
+                    ((TextView)imgs.get(i).findViewById(R.id.text)).setVisibility(View.VISIBLE);
+                } else {
+                    ((ImageView)imgs.get(i).findViewById(R.id.img)).setImageDrawable(
+                            mItem.getContext().getResources().getDrawable(R.drawable.hexagon_locked));
+                    ((TextView)imgs.get(i).findViewById(R.id.text)).setVisibility(View.INVISIBLE);
                 }
+            }
+
+            for (int k = i; i < imgs.size(); k++) {
+                imgs.get(k).setVisibility(View.INVISIBLE);
             }
 //            switch (pQuestions.size()) {
 //                case 7:
