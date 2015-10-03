@@ -1,5 +1,7 @@
 package com.almadev.znaniesila;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import android.app.Activity;
@@ -43,8 +45,10 @@ import com.almadev.znaniesila.utils.Constants;
 import com.almadev.znaniesila.videoplayer.MovieView;
 import com.chartboost.sdk.Chartboost;
 
+import org.w3c.dom.Text;
+
 public class HAQuizScreen extends Activity implements OnClickListener, Callback,
-		OnBufferingUpdateListener, OnCompletionListener{
+                                                      OnBufferingUpdateListener, OnCompletionListener {
 
     private static final String TAG           = "QuizActivity";
     private static final int    RETRIEVE_DATA = 0;
@@ -83,7 +87,7 @@ public class HAQuizScreen extends Activity implements OnClickListener, Callback,
     private Boolean           adSupportEnabled;
     private Boolean           adsDisabledAfterPurchase;
     private Timer             mTimer;
-    private int maxPoints;
+    private int               maxPoints;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,9 +102,29 @@ public class HAQuizScreen extends Activity implements OnClickListener, Callback,
         //readQuestions();
         mQuiz = mQuizHolder.getQuiz(mCategoryId);
         mQuestions = mQuiz.getQuestions();
+
+        Collections.sort(mQuestions, new Comparator<Question>() {
+            @Override
+            public int compare(final Question pQuestion, final Question pT1) {
+                int lw = pQuestion.getState().getWeight() + pQuestion.getLocal_id();
+                int rw = pT1.getState().getWeight() + pT1.getLocal_id();
+                if (lw < rw) {
+                    return -1;
+                } else if (lw > rw) {
+                    return 1;
+                } else {
+                    return 0;
+                }
+            }
+        });
+
+
         mCurrentQuestion = 0;
         maxQuestions = mQuestions.size() < mCategory.getCategory_question_max_limit() ?
                 mQuestions.size() : mCategory.getCategory_question_max_limit();
+
+        mQuestions = mQuestions.subList(0, maxQuestions);
+        Collections.shuffle(mQuestions);
 
         mTimer = (Timer) findViewById(R.id.timer);
         mThread = new HandlerThread(TAG, android.os.Process.THREAD_PRIORITY_BACKGROUND);
@@ -118,153 +142,153 @@ public class HAQuizScreen extends Activity implements OnClickListener, Callback,
                 Toast.makeText(this, getResources().getString(R.string.chartboost_error_msg), Toast.LENGTH_SHORT).show();
             } else {
                 this.cb = Chartboost.sharedChartboost();
-				this.cb.onCreate(this, appId, appSecret, null);
-			}
-		}
-	}
+                this.cb.onCreate(this, appId, appSecret, null);
+            }
+        }
+    }
 
-	@Override
-	protected void onStart() {
-		super.onStart();
-		if (isStarting) {
-			setupData();
-			isStarting = false;
-		}
-		if (adSupportEnabled && this.cb != null && !adsDisabledAfterPurchase) {
-			this.cb.onStart(this);
-			this.cb.startSession();
-			this.cb.showInterstitial();
-		}
-	}
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if (isStarting) {
+            setupData();
+            isStarting = false;
+        }
+        if (adSupportEnabled && this.cb != null && !adsDisabledAfterPurchase) {
+            this.cb.onStart(this);
+            this.cb.startSession();
+            this.cb.showInterstitial();
+        }
+    }
 
-	@Override
-	protected void onStop() {
-		super.onStop();
-		if (adSupportEnabled && this.cb != null && !adsDisabledAfterPurchase) {
-			this.cb.onStop(this);
-		}
-	}
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if (adSupportEnabled && this.cb != null && !adsDisabledAfterPurchase) {
+            this.cb.onStop(this);
+        }
+    }
 
-	@Override
-	protected void onDestroy() {
-		super.onDestroy();
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
 
-		releaseMediaPlayer();
-		doCleanUp();
-		if (mThread != null) {
-			mThread.quit();
-		}
-		if (adSupportEnabled && this.cb != null && !adsDisabledAfterPurchase) {
-			this.cb.onStop(this);
-		}
-	}
+        releaseMediaPlayer();
+        doCleanUp();
+        if (mThread != null) {
+            mThread.quit();
+        }
+        if (adSupportEnabled && this.cb != null && !adsDisabledAfterPurchase) {
+            this.cb.onStop(this);
+        }
+    }
 
-	@Override
-	public void onBackPressed() {
-		if (this.cb != null && this.cb.onBackPressed())
-			return;
-		else
-			super.onBackPressed();
-	}
+    @Override
+    public void onBackPressed() {
+        if (this.cb != null && this.cb.onBackPressed())
+            return;
+        else
+            super.onBackPressed();
+    }
 
-	@Override
-	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		super.onActivityResult(requestCode, resultCode, data);
-		Log.d(TAG, "!inside onActivityResult, request code: " + requestCode + ", result code: " +  resultCode);
-	}
-	
-	private void setupViews() {
-		mSmallImage = (ImageView)findViewById(R.id.small_image);
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        Log.d(TAG, "!inside onActivityResult, request code: " + requestCode + ", result code: " + resultCode);
+    }
 
-		mQuestion = (TextView)findViewById(R.id.question);
-		mQuestionNumber = (TextView)findViewById(R.id.question_number);
-		mCurrentPoints = (TextView)findViewById(R.id.current_points);
+    private void setupViews() {
+        mSmallImage = (ImageView) findViewById(R.id.small_image);
 
-		mLeftBtn = (Button) findViewById(R.id.left_btn);
-		mLeftBtn.setOnClickListener(this);
-		mRightBtn = (Button) findViewById(R.id.right_btn);
-		mRightBtn.setOnClickListener(this);
+        mQuestion = (TextView) findViewById(R.id.question);
+        mQuestionNumber = (TextView) findViewById(R.id.question_number);
+        mCurrentPoints = (TextView) findViewById(R.id.current_points);
 
-		mOption0 = (TwoTextButton)findViewById(R.id.option1);
-		mOption0.setAlternateText("1");
-		mOption0.setOnClickListener(this);
-		
-		mOption1 = (TwoTextButton)findViewById(R.id.option2);
-		mOption1.setAlternateText("2");
-		mOption1.setOnClickListener(this);
-		
-		mOption2 = (TwoTextButton)findViewById(R.id.option3);
-		mOption2.setAlternateText("3");
-		mOption2.setOnClickListener(this);
-		
-		mOption3 = (TwoTextButton)findViewById(R.id.option4);
-		mOption3.setAlternateText("4");
-		mOption3.setOnClickListener(this);
-		
-		findViewById(R.id.home).setOnClickListener(this);
-		mNextQuest = (TextView)findViewById(R.id.next_question);
-		mNextQuest.setOnClickListener(this);
+        mLeftBtn = (Button) findViewById(R.id.left_btn);
+        mLeftBtn.setOnClickListener(this);
+        mRightBtn = (Button) findViewById(R.id.right_btn);
+        mRightBtn.setOnClickListener(this);
+
+        mOption0 = (TwoTextButton) findViewById(R.id.option1);
+        mOption0.setAlternateText("1");
+        mOption0.setOnClickListener(this);
+
+        mOption1 = (TwoTextButton) findViewById(R.id.option2);
+        mOption1.setAlternateText("2");
+        mOption1.setOnClickListener(this);
+
+        mOption2 = (TwoTextButton) findViewById(R.id.option3);
+        mOption2.setAlternateText("3");
+        mOption2.setOnClickListener(this);
+
+        mOption3 = (TwoTextButton) findViewById(R.id.option4);
+        mOption3.setAlternateText("4");
+        mOption3.setOnClickListener(this);
+
+        findViewById(R.id.home).setOnClickListener(this);
+        mNextQuest = (TextView) findViewById(R.id.next_question);
+        mNextQuest.setOnClickListener(this);
 
         TextView catname = (TextView) findViewById(R.id.cat_name);
         catname.setText(mCategory.getCategory_name());
-	}
-	
-	private void setupData() {
+    }
+
+    private void setupData() {
 //		Intent intent = new Intent(this, MovieView.class);
 //		intent.putExtra("finish", true);
 //		startActivity(intent);
-		int animType = mPrefsManager.getInt(Constants.OPTIONS_ANIMATION, 1);
+        int animType = mPrefsManager.getInt(Constants.OPTIONS_ANIMATION, 1);
 
-		mNextQuest.setEnabled(false);
-		
-		mOption0.setBackgroundResource(R.drawable.options_button);
-		mOption1.setBackgroundResource(R.drawable.options_button);
-		mOption2.setBackgroundResource(R.drawable.options_button);
-		mOption3.setBackgroundResource(R.drawable.options_button);
-		
-		mOption0.setVisibility(View.GONE);
-		mOption1.setVisibility(View.GONE);
-		mOption2.setVisibility(View.GONE);
-		mOption3.setVisibility(View.GONE);
+        mNextQuest.setEnabled(false);
 
-		mOption0.setAlternateText("1");
-		mOption1.setAlternateText("2");
-		mOption2.setAlternateText("3");
-		mOption3.setAlternateText("4");
-		
-		mOption0.setGravity(Gravity.LEFT|Gravity.CENTER_VERTICAL);
-		mOption1.setGravity(Gravity.LEFT|Gravity.CENTER_VERTICAL);
-		mOption2.setGravity(Gravity.LEFT|Gravity.CENTER_VERTICAL);
-		mOption3.setGravity(Gravity.LEFT|Gravity.CENTER_VERTICAL);
-		
-		mOption0.setTextColor(Color.WHITE);
-		mOption1.setTextColor(Color.WHITE);
-		mOption2.setTextColor(Color.WHITE);
-		mOption3.setTextColor(Color.WHITE);
-		
-		((LevelListDrawable)mOption0.getBackground()).setLevel(2);
-		((LevelListDrawable)mOption1.getBackground()).setLevel(2);
-		((LevelListDrawable)mOption2.getBackground()).setLevel(2);
-		((LevelListDrawable)mOption3.getBackground()).setLevel(2);
-		
-		int padding = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 50, mMetrics);
-		mOption0.setPadding(padding, 0, 0, 0);
-		mOption1.setPadding(padding, 0, 0, 0);
-		mOption2.setPadding(padding, 0, 0, 0);
-		mOption3.setPadding(padding, 0, 0, 0);
+        mOption0.setBackgroundResource(R.drawable.options_button);
+        mOption1.setBackgroundResource(R.drawable.options_button);
+        mOption2.setBackgroundResource(R.drawable.options_button);
+        mOption3.setBackgroundResource(R.drawable.options_button);
+
+        mOption0.setVisibility(View.GONE);
+        mOption1.setVisibility(View.GONE);
+        mOption2.setVisibility(View.GONE);
+        mOption3.setVisibility(View.GONE);
+
+        mOption0.setAlternateText("1");
+        mOption1.setAlternateText("2");
+        mOption2.setAlternateText("3");
+        mOption3.setAlternateText("4");
+
+        mOption0.setGravity(Gravity.LEFT | Gravity.CENTER_VERTICAL);
+        mOption1.setGravity(Gravity.LEFT | Gravity.CENTER_VERTICAL);
+        mOption2.setGravity(Gravity.LEFT | Gravity.CENTER_VERTICAL);
+        mOption3.setGravity(Gravity.LEFT | Gravity.CENTER_VERTICAL);
+
+        mOption0.setTextColor(Color.WHITE);
+        mOption1.setTextColor(Color.WHITE);
+        mOption2.setTextColor(Color.WHITE);
+        mOption3.setTextColor(Color.WHITE);
+
+        ((LevelListDrawable) mOption0.getBackground()).setLevel(2);
+        ((LevelListDrawable) mOption1.getBackground()).setLevel(2);
+        ((LevelListDrawable) mOption2.getBackground()).setLevel(2);
+        ((LevelListDrawable) mOption3.getBackground()).setLevel(2);
+
+        int padding = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 50, mMetrics);
+        mOption0.setPadding(padding, 0, 0, 0);
+        mOption1.setPadding(padding, 0, 0, 0);
+        mOption2.setPadding(padding, 0, 0, 0);
+        mOption3.setPadding(padding, 0, 0, 0);
 
 //		if(mTimer != null) {
 //			mTimer.cancel();
 //		}
-		if(mCurrentQuestion >= mQuestions.size()) {
-    		return;
-    	}
-		Question question = mQuestions.get(mCurrentQuestion);
+        if (mCurrentQuestion >= mQuestions.size()) {
+            return;
+        }
+        Question question = mQuestions.get(mCurrentQuestion);
 
         maxPoints += question.getPoints();
-		question.setState(QuestionState.VIEWED);
-        
-		if(question.getQuestion_type() == 4) {
+        question.setState(QuestionState.VIEWED);
+
+        if (question.getQuestion_type() == 4) {
 //			mOption0.setTextSize(TypedValue.COMPLEX_UNIT_SP, 22);
 //			mOption1.setTextSize(TypedValue.COMPLEX_UNIT_SP, 22);
 //
@@ -276,42 +300,42 @@ public class HAQuizScreen extends Activity implements OnClickListener, Callback,
 //
 //			lp = (LinearLayout.LayoutParams) mOption1.getLayoutParams();
 //			lp.bottomMargin = (int) margin;
-		} else {
-			mOption0.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
-			mOption1.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
-			mOption2.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
-			mOption3.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
-			
-			float margin = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 8, mMetrics);
-			
-			LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) mOption0.getLayoutParams();
-			lp.topMargin = (int) margin;
-			lp.bottomMargin = (int) margin;
-			
-			lp = (LinearLayout.LayoutParams) mOption1.getLayoutParams();
-			lp.bottomMargin = (int) margin;
-			
-			lp = (LinearLayout.LayoutParams) mOption2.getLayoutParams();
-			lp.bottomMargin = (int) margin;
-			
-			lp = (LinearLayout.LayoutParams) mOption3.getLayoutParams();
-			lp.bottomMargin = (int) margin;
-		}
-		
+        } else {
+            mOption0.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+            mOption1.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+            mOption2.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+            mOption3.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+
+            float margin = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 8, mMetrics);
+
+            LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) mOption0.getLayoutParams();
+            lp.topMargin = (int) margin;
+            lp.bottomMargin = (int) margin;
+
+            lp = (LinearLayout.LayoutParams) mOption1.getLayoutParams();
+            lp.bottomMargin = (int) margin;
+
+            lp = (LinearLayout.LayoutParams) mOption2.getLayoutParams();
+            lp.bottomMargin = (int) margin;
+
+            lp = (LinearLayout.LayoutParams) mOption3.getLayoutParams();
+            lp.bottomMargin = (int) margin;
+        }
+
 //		mTimeout.setMax((question.duration + 4)*1000);
-		
-		mQuestion.setText(question.getQuestion());
-		mQuestionNumber.setText((mCurrentQuestion + 1) + "/" + maxQuestions);
-		mCurrentPoints.setText(question.getPoints() + "");
-		
-		String text = mScore + "";
-		if(mScore > 0) {
-			text = "+" + mScore;
-		}
-		
-		if(mSmallImage.getDrawable() != null) {
-			mSmallImage.getDrawable().setCallback(null);
-		}
+
+        mQuestion.setText(question.getQuestion());
+        mQuestionNumber.setText((mCurrentQuestion + 1) + "/" + maxQuestions);
+        mCurrentPoints.setText(question.getPoints() + "");
+
+        String text = mScore + "";
+        if (mScore > 0) {
+            text = "+" + mScore;
+        }
+
+        if (mSmallImage.getDrawable() != null) {
+            mSmallImage.getDrawable().setCallback(null);
+        }
 //		if(question.questionType == 1) {
 ////			mSmallLayout.setVisibility(View.GONE);
 ////			mLargeVideo.setVisibility(View.GONE);
@@ -338,177 +362,201 @@ public class HAQuizScreen extends Activity implements OnClickListener, Callback,
 //				mSmallImage.setImageResource(R.drawable.videooverlay);
 //			}
 //		} else
-            if(question.getQuestion_type() == 4) {
+        if (question.getQuestion_type() == 4) {
 //			mSmallLayout.setVisibility(View.GONE);
 //			mLargeVideo.setVisibility(View.GONE);
-			mOption0.setBackgroundResource(R.drawable.boolean_options_normal);
-			mOption0.setText("True");
-			
-			if(animType == 1) {
+            mOption0.setBackgroundResource(R.drawable.boolean_options_normal);
+            mOption0.setText("True");
+
+            if (animType == 1) {
 //				mOption0.setVisibility(View.VISIBLE);
-				OptionsSlideAnimation anim = new OptionsSlideAnimation(mMetrics.widthPixels, 0, 0, 0, 1);
-				anim.setDuration(400);
-				mLeftBtn.startAnimation(anim);
+                OptionsSlideAnimation anim = new OptionsSlideAnimation(mMetrics.widthPixels, 0, 0, 0, 1);
+                anim.setDuration(400);
+                mLeftBtn.startAnimation(anim);
 
 //				mOption1.setVisibility(View.VISIBLE);
-				anim = new OptionsSlideAnimation(mMetrics.widthPixels, 0, 0, 0, 2);
-				anim.setDuration(600);
-				mRightBtn.startAnimation(anim);
+                anim = new OptionsSlideAnimation(mMetrics.widthPixels, 0, 0, 0, 2);
+                anim.setDuration(600);
+                mRightBtn.startAnimation(anim);
 
                 mTimer.startAnim();
-			}
-			
-			mOption0.setAlternateText("");
-			mOption0.setGravity(Gravity.CENTER);
-			mOption0.setPadding(0, 0, 0, 0);
-			
-			mOption1.setText("False");
-			mOption1.setBackgroundResource(R.drawable.boolean_options_normal);
-			mOption1.setAlternateText("");
-			mOption1.setGravity(Gravity.CENTER);
-			mOption1.setPadding(0, 0, 0, 0);
-		}
+            }
 
-		if(animType == 2) {
-			startOptionsFadeAnimation();
-		}
-	}
-	
-	private Handler mUiHandler = new Handler() {
-		@Override
-		public void handleMessage(Message msg) {
-			super.handleMessage(msg);
-			switch(msg.what) {
-			case SET_NEXT_DATA :
-				mCurrentQuestion++;
-				if(mCurrentQuestion < maxQuestions) {
-					setupData();
-				} else {
-					showFinalScreen();
-				}
-				break;
-			}
-		}
-	};
+            mOption0.setAlternateText("");
+            mOption0.setGravity(Gravity.CENTER);
+            mOption0.setPadding(0, 0, 0, 0);
 
-	private void showFinalScreen() {
-		Intent intent = new Intent(this, MovieView.class);
-		intent.putExtra("finish", true);
-		startActivity(intent);
-		
-		intent = new Intent(this, HAFinalScreen.class);
-		intent.putExtra(Constants.CATEGORY, mCategory.getCategory_name());
-		intent.putExtra(Constants.LEADERBOARD_ID, mCategory.getLeaderboard_id());
-		intent.putExtra(Constants.POINTS, mScore);
+            mOption1.setText("False");
+            mOption1.setBackgroundResource(R.drawable.boolean_options_normal);
+            mOption1.setAlternateText("");
+            mOption1.setGravity(Gravity.CENTER);
+            mOption1.setPadding(0, 0, 0, 0);
+        }
+
+        if (animType == 2) {
+            startOptionsFadeAnimation();
+        }
+    }
+
+    private Handler mUiHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case SET_NEXT_DATA:
+                    mCurrentQuestion++;
+                    if (mCurrentQuestion < maxQuestions) {
+                        setupData();
+                    } else {
+                        showFinalScreen();
+                    }
+                    break;
+            }
+        }
+    };
+
+    private void showFinalScreen() {
+        mQuizHolder.saveQuiz(mQuiz);
+        Intent intent = null;
+        intent = new Intent(this, HAFinalScreen.class);
+        intent.putExtra(Constants.CATEGORY, mCategory);
+        intent.putExtra(Constants.LEADERBOARD_ID, mCategory.getLeaderboard_id());
+        intent.putExtra(Constants.POINTS, mScore);
         intent.putExtra(Constants.MAX_POINTS, maxPoints);
-		startActivity(intent);
-		finish();
-	}
-	
-	private void answerSelected(int option) {
-		if(mCurrentQuestion >= mQuestions.size()) {
-    		return;
-    	}
+        startActivity(intent);
+        finish();
+    }
+
+    private void answerSelected(int option) {
+        if (mCurrentQuestion >= mQuestions.size()) {
+            return;
+        }
+        boolean isCorrect = false;
+
         mTimer.stopAnim();
-		Question question = mQuestions.get(mCurrentQuestion);
-		if(question.getQuestion_type() != 4) {
-			if(question.getAnswer() == option) {
-				mScore += question.getPoints();
-				playSoundForAnswer(true);
-			} else {
-				mScore -= question.getNegative_points();
-				playSoundForAnswer(false);
-			}
-		} else {
-			if(question.getAnswer() == option) {
-				question.setState(QuestionState.CORRECT);
-				mScore += question.getPoints();
-				playSoundForAnswer(true);
-			} else{
-				question.setState(QuestionState.WRONG);
-				mScore -= question.getNegative_points();
-				playSoundForAnswer(false);
-			}
-		}
-		
-		mOption0.setEnabled(false);
-		mOption1.setEnabled(false);
-		mOption2.setEnabled(false);
-		mOption3.setEnabled(false);
+        Question question = mQuestions.get(mCurrentQuestion);
+        if (question.getQuestion_type() != 4) {
+            if (question.getAnswer() == option) {
+                mScore += question.getPoints();
+                playSoundForAnswer(true);
+                isCorrect = true;
+            } else {
+                mScore -= question.getNegative_points();
+                playSoundForAnswer(false);
+                isCorrect = false;
+            }
+        } else {
+            if (question.getAnswer() == option) {
+                question.setState(QuestionState.CORRECT);
+                mScore += question.getPoints();
+                playSoundForAnswer(true);
+                isCorrect = true;
+            } else {
+                question.setState(QuestionState.WRONG);
+                mScore -= question.getNegative_points();
+                playSoundForAnswer(false);
+                isCorrect = false;
+            }
+        }
 
-		boolean changeState = mPrefsManager.getBoolean(Constants.HIGHLIGHT_OPTIONS, false);
-		if(changeState) {
-			changeDrawableState(option);
-		} else {
-			mCurrentQuestion++;
-			if(mCurrentQuestion < maxQuestions) {
-				setupData();
-			} else {
-				showFinalScreen();
-			}
-		}
-	}
-	
-	private void changeDrawableState(int selectedOption) {
-		if(mCurrentQuestion >= mQuestions.size()) {
-    		return;
-    	}
-		Question question = mQuestions.get(mCurrentQuestion);
-		if(question.getQuestion_type() != 4) {
-			try {
-				TwoTextButton clicked = (TwoTextButton) HAQuizScreen.class.getDeclaredField(
-											"mOption" + selectedOption).get(this);
-				TwoTextButton correct = (TwoTextButton) HAQuizScreen.class.getDeclaredField(
-											"mOption" + question.getAnswer()).get(this);
-				
-				((LevelListDrawable)correct.getBackground()).setLevel(1);
-				if(clicked != correct) {
-					((LevelListDrawable)clicked.getBackground()).setLevel(0);
-				}
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		} else {
-			if(question.getAnswer() == 1 && selectedOption == 0) { //true, true
-				mOption0.setTextColor(Color.GREEN);
-			} else if(question.getAnswer() == 1 && selectedOption == 1) { //true, false
-				mOption0.setTextColor(Color.GREEN);
-				mOption1.setTextColor(Color.RED);
-			} else if(question.getAnswer() == 0 && selectedOption == 0) { //false, true
-				mOption0.setTextColor(Color.RED);
-				mOption1.setTextColor(Color.GREEN);
-			} else if(question.getAnswer() == 0 && selectedOption == 1) { //false, false
-				mOption1.setTextColor(Color.GREEN);
-			}
-		}
-		mUiHandler.sendEmptyMessageDelayed(SET_NEXT_DATA, 777);
-	}
-	
-	private void playSoundForAnswer(boolean isCorrect) //send YES if answer is correct No if wrong. Also call this method for True false questions too.
-	{
-		boolean playSound = mPrefsManager.getBoolean(Constants.PLAY_SOUND_ON_ANSWERING, false);
+        mOption0.setEnabled(false);
+        mOption1.setEnabled(false);
+        mOption2.setEnabled(false);
+        mOption3.setEnabled(false);
+        mLeftBtn.setEnabled(false);
+        mRightBtn.setEnabled(false);
 
-		if(playSound)
-		{
-			MediaPlayer player;
+        showAnswerDescription(isCorrect, question);
 
-			if(isCorrect)
-			{
-				player= MediaPlayer.create(this, R.raw.right);
-			}
-			else
-			{
-				player= MediaPlayer.create(this, R.raw.wrong);
-			}
-			player.start();
+    }
 
-		}
-		
-	}
+    private void showAnswerDescription(boolean correct, Question question) {
+        if (correct) {
+            ((TextView) findViewById(R.id.correct_text)).setText("ПРАВИЛЬНО!");
+            ((TextView) findViewById(R.id.correct_text)).setTextColor(
+                    getResources().getColor(R.color.correct_green)
+            );
+            ((TextView)findViewById(R.id.answer_description)).setText(question.getCorrect_ans_explanation());
+        } else {
+            ((TextView) findViewById(R.id.correct_text)).setText("НЕПРАВИЛЬНО!");
+            ((TextView) findViewById(R.id.correct_text)).setTextColor(
+                    getResources().getColor(R.color.wrong_red)
+            );
+            ((TextView)findViewById(R.id.answer_description)).setText(question.getWrong_ans_explanation());
+        }
 
-	@Override
-	public void onClick(View v) {
-		switch(v.getId()) {
+        findViewById(R.id.answer_result_layout).setVisibility(View.VISIBLE);
+        findViewById(R.id.answer_result_layout).setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(final View pView) {
+                findViewById(R.id.answer_result_layout).setVisibility(View.GONE);
+
+                mCurrentQuestion++;
+                if (mCurrentQuestion < maxQuestions) {
+                    setupData();
+                } else {
+                    showFinalScreen();
+                }
+            }
+        });
+    }
+
+    private void changeDrawableState(int selectedOption) {
+        if (mCurrentQuestion >= mQuestions.size()) {
+            return;
+        }
+        Question question = mQuestions.get(mCurrentQuestion);
+        if (question.getQuestion_type() != 4) {
+            try {
+                TwoTextButton clicked = (TwoTextButton) HAQuizScreen.class.getDeclaredField(
+                        "mOption" + selectedOption).get(this);
+                TwoTextButton correct = (TwoTextButton) HAQuizScreen.class.getDeclaredField(
+                        "mOption" + question.getAnswer()).get(this);
+
+                ((LevelListDrawable) correct.getBackground()).setLevel(1);
+                if (clicked != correct) {
+                    ((LevelListDrawable) clicked.getBackground()).setLevel(0);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else {
+            if (question.getAnswer() == 1 && selectedOption == 0) { //true, true
+                mOption0.setTextColor(Color.GREEN);
+            } else if (question.getAnswer() == 1 && selectedOption == 1) { //true, false
+                mOption0.setTextColor(Color.GREEN);
+                mOption1.setTextColor(Color.RED);
+            } else if (question.getAnswer() == 0 && selectedOption == 0) { //false, true
+                mOption0.setTextColor(Color.RED);
+                mOption1.setTextColor(Color.GREEN);
+            } else if (question.getAnswer() == 0 && selectedOption == 1) { //false, false
+                mOption1.setTextColor(Color.GREEN);
+            }
+        }
+        mUiHandler.sendEmptyMessageDelayed(SET_NEXT_DATA, 777);
+    }
+
+    private void playSoundForAnswer(boolean isCorrect) //send YES if answer is correct No if wrong. Also call this method for True false questions too.
+    {
+        boolean playSound = mPrefsManager.getBoolean(Constants.PLAY_SOUND_ON_ANSWERING, false);
+
+        if (playSound) {
+            MediaPlayer player;
+
+            if (isCorrect) {
+                player = MediaPlayer.create(this, R.raw.yes);
+            } else {
+                player = MediaPlayer.create(this, R.raw.no);
+            }
+            player.start();
+
+        }
+
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
             case R.id.next_question:
                 mCurrentQuestion++;
                 mTimer.stopAnim();
@@ -543,9 +591,9 @@ public class HAQuizScreen extends Activity implements OnClickListener, Callback,
                 break;
         }
 
-	}
+    }
 
-	public void onBufferingUpdate(MediaPlayer arg0, int percent) {
+    public void onBufferingUpdate(MediaPlayer arg0, int percent) {
         Log.d(TAG, "onBufferingUpdate percent:" + percent);
 
     }
@@ -591,69 +639,71 @@ public class HAQuizScreen extends Activity implements OnClickListener, Callback,
 
     private class OptionsSlideAnimation extends TranslateAnimation {
 
-		private int mOption;
+        private int mOption;
 
-		public OptionsSlideAnimation(float fromXDelta, float toXDelta,
-				float fromYDelta, float toYDelta, int option) {
-			super(fromXDelta, toXDelta, fromYDelta, toYDelta);
-			mOption = option;
+        public OptionsSlideAnimation(float fromXDelta, float toXDelta,
+                                     float fromYDelta, float toYDelta, int option) {
+            super(fromXDelta, toXDelta, fromYDelta, toYDelta);
+            mOption = option;
 //			setDuration(222);
-	    	setInterpolator(getBaseContext(), android.R.anim.accelerate_decelerate_interpolator);
-		}
-    	
-		@Override
-		protected void applyTransformation(float interpolatedTime,
-				Transformation t) {
-			super.applyTransformation(interpolatedTime, t);
-			if(mCurrentQuestion >= mQuestions.size()) {
-				return;
-			}
-			Question question = mQuestions.get(mCurrentQuestion);
-			
-			if((question.getQuestion_type() == 4 && mOption == 2 && interpolatedTime > 0.95) ||
-					(question.getQuestion_type() != 4 && mOption == 4 && interpolatedTime > 0.95)) {
-				mOption0.setEnabled(true);
-				mOption1.setEnabled(true);
-				mOption2.setEnabled(true);
-				mOption3.setEnabled(true);
-				
-				mNextQuest.setEnabled(true);
-			}
-		}
+            setInterpolator(getBaseContext(), android.R.anim.accelerate_decelerate_interpolator);
+        }
+
+        @Override
+        protected void applyTransformation(float interpolatedTime,
+                                           Transformation t) {
+            super.applyTransformation(interpolatedTime, t);
+            if (mCurrentQuestion >= mQuestions.size()) {
+                return;
+            }
+            Question question = mQuestions.get(mCurrentQuestion);
+
+            if ((question.getQuestion_type() == 4 && mOption == 2 && interpolatedTime > 0.95) ||
+                    (question.getQuestion_type() != 4 && mOption == 4 && interpolatedTime > 0.95)) {
+                mOption0.setEnabled(true);
+                mOption1.setEnabled(true);
+                mOption2.setEnabled(true);
+                mOption3.setEnabled(true);
+
+                mLeftBtn.setEnabled(true);
+                mRightBtn.setEnabled(true);
+                mNextQuest.setEnabled(true);
+            }
+        }
     }
-    
+
     private void startOptionsFadeAnimation() {
-    	AlphaAnimation anim = new AlphaAnimation(0, 1);
-    	anim.setDuration(777);
-    	mOption0.setVisibility(View.VISIBLE);
-    	mOption0.startAnimation(anim);
-    	
-    	anim = new AlphaAnimation(0, 1);
-    	anim.setDuration(777);
-    	mOption1.setVisibility(View.VISIBLE);
-    	mOption1.startAnimation(anim);
+        AlphaAnimation anim = new AlphaAnimation(0, 1);
+        anim.setDuration(777);
+        mOption0.setVisibility(View.VISIBLE);
+        mOption0.startAnimation(anim);
 
-    	if(mCurrentQuestion >= mQuestions.size()) {
-    		return;
-    	}
-		Question question = mQuestions.get(mCurrentQuestion);
-		if(question.getQuestion_type()!= 4) {
-	    	anim = new AlphaAnimation(0, 1);
-	    	anim.setDuration(777);
-	    	mOption2.setVisibility(View.VISIBLE);
-	    	mOption2.startAnimation(anim);
-	    	
-	    	anim = new AlphaAnimation(0, 1);
-	    	anim.setDuration(777);
-	    	mOption3.setVisibility(View.VISIBLE);
-	    	mOption3.startAnimation(anim);
-		}
+        anim = new AlphaAnimation(0, 1);
+        anim.setDuration(777);
+        mOption1.setVisibility(View.VISIBLE);
+        mOption1.startAnimation(anim);
 
-		mOption0.setEnabled(true);
-		mOption1.setEnabled(true);
-		mOption2.setEnabled(true);
-		mOption3.setEnabled(true);
+        if (mCurrentQuestion >= mQuestions.size()) {
+            return;
+        }
+        Question question = mQuestions.get(mCurrentQuestion);
+        if (question.getQuestion_type() != 4) {
+            anim = new AlphaAnimation(0, 1);
+            anim.setDuration(777);
+            mOption2.setVisibility(View.VISIBLE);
+            mOption2.startAnimation(anim);
 
-		mNextQuest.setEnabled(true);
+            anim = new AlphaAnimation(0, 1);
+            anim.setDuration(777);
+            mOption3.setVisibility(View.VISIBLE);
+            mOption3.startAnimation(anim);
+        }
+
+        mOption0.setEnabled(true);
+        mOption1.setEnabled(true);
+        mOption2.setEnabled(true);
+        mOption3.setEnabled(true);
+
+        mNextQuest.setEnabled(true);
     }
 }

@@ -96,6 +96,7 @@ public class CategoriesDownloader {
 
         Request request = new Request.Builder().url(Constants.API_CATEGORY + quizId + ".json")
                                                .addHeader(QZ_VERSION_HEADER, QuizHolder.getQuizVersion())
+//                                               .addHeader(QZ_VERSION_HEADER, "34")
                                                .addHeader("Content-Type", "application/json").build();
 
         Response response = null;

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/hexagon"
+        android:visibility="gone"
+        android:layout_width="60dp"
+        android:src="@drawable/knowledge_one"
+        android:scaleType="centerInside"
+        android:layout_height="60dp"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:id="@+id/psts_tab_title"
+        android:layout_gravity="center"
+        android:text="01"
+        android:textSize="20sp"
+        android:gravity="center"
+        android:singleLine="true"
+        android:textColor="@color/correct_green"
+        android:layout_height="match_parent"/>
+</FrameLayout>

@@ -69,7 +69,9 @@ public class QuizHolder {
 
     public void saveQuiz(Quiz quiz) {
         final File quizFile = new File(questionsDir.getAbsolutePath(), quiz.getId() + ".qz");
-        final Gson gson = new Gson();
+        for (int i = 0; i < quiz.getQuestions().size(); i++) {
+            quiz.getQuestions().get(i).setLocal_id(i);
+        }
 
         if (!questionsDir.exists()) {
             questionsDir.mkdirs();
@@ -88,6 +90,14 @@ public class QuizHolder {
         }
 
         quizes.put(quiz.getId(), quiz);
+    }
+
+    public void clear() {
+        deleteAllQuizes();
+        final File categoriesListFile = new File(questionsDir.getAbsolutePath(), CATEGORIES_LIST_FILE);
+        if (categoriesListFile.exists()) {
+            categoriesListFile.delete();
+        }
     }
 
     public void deleteAllQuizes() {
@@ -130,6 +140,7 @@ public class QuizHolder {
             e.printStackTrace();
         }
 
+        quizes.put(id, quiz);
         return quiz;
     }
 
@@ -193,6 +204,7 @@ public class QuizHolder {
             e.printStackTrace();
         }
 
+        mCategoriesList = list;
         return list;
     }
 }

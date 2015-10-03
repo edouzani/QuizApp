@@ -8,9 +8,20 @@
     <color name="cardview_shadow_start_color">#37000000</color>
     <!-- From: file:/D:/Android_Projects/QuizApp_Android%202.0/app/src/main/res/values/colors.xml -->
     <eat-comment/>
+    <color name="correct_green">#34d614</color>
     <color name="dark">#7a000000</color>
+    <color name="knowledge_transparent_bg">#af11244f</color>
+    <color name="placeholder">#e38a98c4</color>
+    <!-- From: file:/D:/Android_Projects/QuizApp_Android%202.0/app/build/intermediates/exploded-aar/com.jpardogo.materialtabstrip/library/1.1.0/res/values/values.xml -->
+    <eat-comment/>
+    <color name="psts_background_tab_pressed">#1AFFFFFF</color>
+    <color name="psts_background_tab_pressed_ripple">#AAFFFFFF</color>
+    <!-- From: file:/D:/Android_Projects/QuizApp_Android%202.0/app/src/main/res/values/colors.xml -->
+    <eat-comment/>
     <color name="white">#ffffff</color>
+    <color name="wrong_red">#d61424</color>
     <declare-styleable name="CardView"><attr format="color" name="cardBackgroundColor"/><attr format="dimension" name="cardCornerRadius"/><attr format="dimension" name="cardElevation"/><attr format="dimension" name="cardMaxElevation"/><attr format="boolean" name="cardUseCompatPadding"/><attr format="boolean" name="cardPreventCornerOverlap"/><attr format="dimension" name="contentPadding"/><attr format="dimension" name="contentPaddingLeft"/><attr format="dimension" name="contentPaddingRight"/><attr format="dimension" name="contentPaddingTop"/><attr format="dimension" name="contentPaddingBottom"/></declare-styleable>
+    <declare-styleable name="PagerSlidingTabStrip"><attr format="color" name="pstsIndicatorColor"/><attr format="dimension" name="pstsIndicatorHeight"/><attr format="color" name="pstsUnderlineColor"/><attr format="dimension" name="pstsUnderlineHeight"/><attr format="color" name="pstsDividerColor"/><attr format="dimension" name="pstsDividerWidth"/><attr format="dimension" name="pstsDividerPadding"/><attr format="dimension" name="pstsScrollOffset"/><attr format="boolean" name="pstsShouldExpand"/><attr format="boolean" name="pstsPaddingMiddle"/><attr format="dimension" name="pstsTabPaddingLeftRight"/><attr format="reference" name="pstsTabBackground"/><attr format="dimension" name="pstsTabTextSize"/><attr format="reference" name="pstsTabTextColor"/><attr format="reference" name="pstsTabTextStyle"><flag name="normal" value="0x0"/><flag name="bold" value="0x1"/><flag name="italic" value="0x2"/></attr><attr format="boolean" name="pstsTabTextAllCaps"/><attr format="integer" name="pstsTabTextAlpha"/><attr format="string" name="pstsTabTextFontFamily"/></declare-styleable>
     <declare-styleable name="RecyclerView"><attr format="string" name="layoutManager"/><attr name="android:orientation"/><attr format="integer" name="spanCount"/><attr format="boolean" name="reverseLayout"/><attr format="boolean" name="stackFromEnd"/></declare-styleable>
     <declare-styleable name="Timer"><attr format="color" name="circleColor"/><attr format="string" name="circleLabel"/><attr format="color" name="labelColor"/></declare-styleable>
     <!-- From: file:/D:/Android_Projects/QuizApp_Android%202.0/app/src/main/res/values/dimens.xml -->
@@ -52,7 +63,8 @@
     <!-- From: file:/D:/Android_Projects/QuizApp_Android%202.0/app/src/main/res/values/strings.xml -->
     <eat-comment/>
     <string name="about">About</string>
-    <string name="app_id">286312204670</string>
+    <string name="action_settings">Settings</string>
+    <string name="app_id">543395344679</string>
     <string name="app_name">Знание - сила</string>
     <string name="categories">Categories</string>
     <string name="chartboost_error_msg">Either Chartboost AppID or AppSecret is not configured</string>
@@ -62,6 +74,7 @@
     <string name="gamehelper_sign_in_failed">Failed to sign in. Please check your network connection and try again.</string>
     <string name="gamehelper_unknown_error">Unknown error.</string>
     <string name="hello">Hello World, QuizAppActivity!</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="high_scores">High Scores</string>
     <string name="loading_video">Loading Video, please wait...</string>
     <string name="more_apps">More Apps</string>
@@ -71,9 +84,11 @@
     <string name="quiz_skip_text">ПРОПУСТИТЬ</string>
     <string name="remove_ads">Remove Ads</string>
     <string name="restore">Restore</string>
+    <string name="section_format">Hello World from section: %1$d</string>
     <string name="share_points">I just scored %d points on Quiz</string>
     <string name="tap_to_play">Tap to play</string>
     <string name="tap_to_zoom">Tap to zoom</string>
+    <string name="title_activity_knwoledge_description">KnwoledgeDescription</string>
     <!-- From: file:/D:/Android_Projects/QuizApp_Android%202.0/app/src/main/res/values/ids.xml -->
     <eat-comment/>
     <string name="top_scores_leaderboard">CgkIp-KLp-gPEAIQAQ</string>
@@ -103,6 +118,12 @@
     <item name="android:textColor">@color/white</item>
     <item name="android:layout_centerHorizontal">true</item>
     <item name="android:layout_alignParentTop">true</item>
+    </style>
+    <style name="Correct_text">
+        <item name="android:textSize">30sp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:layout_centerHorizontal">true</item>
+        <item name="android:layout_alignParentTop">true</item>
     </style>
     <style name="knowledge_cell_text">
     <item name="android:textColor">@color/white</item>

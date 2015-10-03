@@ -77,7 +77,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static final int circleColor=0x7f01000f;
+        public static final int circleColor=0x7f010021;
         /** <p>Must be a string value, using '\\;' to escape characters such as '\\n' or '\\uxxxx' for a unicode character.
 <p>This may also be a reference to a resource (in the form
 "<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
@@ -85,7 +85,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static final int circleLabel=0x7f010010;
+        public static final int circleLabel=0x7f010022;
         /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
 Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
 in (inches), mm (millimeters).
@@ -144,7 +144,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static final int labelColor=0x7f010011;
+        public static final int labelColor=0x7f010023;
         /** <p>Must be a string value, using '\\;' to escape characters such as '\\n' or '\\uxxxx' for a unicode character.
 <p>This may also be a reference to a resource (in the form
 "<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
@@ -152,7 +152,55 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static final int layoutManager=0x7f01000b;
+        public static final int layoutManager=0x7f01001d;
+        /** <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int pstsDividerColor=0x7f01000f;
+        /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int pstsDividerPadding=0x7f010011;
+        /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int pstsDividerWidth=0x7f010010;
+        /** <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int pstsIndicatorColor=0x7f01000b;
+        /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int pstsIndicatorHeight=0x7f01000c;
         /** <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
 <p>This may also be a reference to a resource (in the form
 "<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
@@ -160,7 +208,47 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static final int reverseLayout=0x7f01000d;
+        public static final int pstsPaddingMiddle=0x7f010014;
+        /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int pstsScrollOffset=0x7f010012;
+        /** <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int pstsShouldExpand=0x7f010013;
+        /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+         */
+        public static final int pstsTabBackground=0x7f010016;
+        /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int pstsTabPaddingLeftRight=0x7f010015;
+        /** <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int pstsTabTextAllCaps=0x7f01001a;
         /** <p>Must be an integer value, such as "<code>100</code>".
 <p>This may also be a reference to a resource (in the form
 "<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
@@ -168,7 +256,62 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static final int spanCount=0x7f01000c;
+        public static final int pstsTabTextAlpha=0x7f01001b;
+        /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+         */
+        public static final int pstsTabTextColor=0x7f010018;
+        /** <p>Must be a string value, using '\\;' to escape characters such as '\\n' or '\\uxxxx' for a unicode character.
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int pstsTabTextFontFamily=0x7f01001c;
+        /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int pstsTabTextSize=0x7f010017;
+        /** <p>May be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+<p>May be one or more (separated by '|') of the following constant values.</p>
+<table>
+<colgroup align="left" />
+<colgroup align="left" />
+<colgroup align="left" />
+<tr><th>Constant</th><th>Value</th><th>Description</th></tr>
+<tr><td><code>normal</code></td><td>0x0</td><td></td></tr>
+<tr><td><code>bold</code></td><td>0x1</td><td></td></tr>
+<tr><td><code>italic</code></td><td>0x2</td><td></td></tr>
+</table>
+         */
+        public static final int pstsTabTextStyle=0x7f010019;
+        /** <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int pstsUnderlineColor=0x7f01000d;
+        /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int pstsUnderlineHeight=0x7f01000e;
         /** <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
 <p>This may also be a reference to a resource (in the form
 "<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
@@ -176,15 +319,37 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static final int stackFromEnd=0x7f01000e;
+        public static final int reverseLayout=0x7f01001f;
+        /** <p>Must be an integer value, such as "<code>100</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int spanCount=0x7f01001e;
+        /** <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int stackFromEnd=0x7f010020;
     }
     public static final class color {
         public static final int cardview_dark_background=0x7f090000;
         public static final int cardview_light_background=0x7f090001;
         public static final int cardview_shadow_end_color=0x7f090002;
         public static final int cardview_shadow_start_color=0x7f090003;
-        public static final int dark=0x7f090004;
-        public static final int white=0x7f090005;
+        public static final int correct_green=0x7f090004;
+        public static final int dark=0x7f090005;
+        public static final int knowledge_transparent_bg=0x7f090006;
+        public static final int placeholder=0x7f090007;
+        public static final int psts_background_tab_pressed=0x7f090008;
+        public static final int psts_background_tab_pressed_ripple=0x7f090009;
+        public static final int white=0x7f09000a;
+        public static final int wrong_red=0x7f09000b;
     }
     public static final class dimen {
         public static final int activity_horizontal_margin=0x7f070004;
@@ -244,114 +409,137 @@ containing a value of this type.
         public static final int ic_seekbar3=0x7f02001c;
         public static final int info_icon=0x7f02001d;
         public static final int knowledge_bg=0x7f02001e;
-        public static final int left_btn_selector=0x7f02001f;
-        public static final int main=0x7f020020;
-        public static final int main_button_bg=0x7f020021;
-        public static final int ok_logo=0x7f020022;
-        public static final int options_button=0x7f020023;
-        public static final int options_button_correct=0x7f020024;
-        public static final int options_button_normal=0x7f020025;
-        public static final int options_button_wrong=0x7f020026;
-        public static final int points_bg_normal=0x7f020027;
-        public static final int progressbar_bg=0x7f020028;
-        public static final int quest_bg=0x7f020029;
-        public static final int question_bg=0x7f02002a;
-        public static final int rating_icon=0x7f02002b;
-        public static final int restart_icon=0x7f02002c;
-        public static final int result_bar=0x7f02002d;
-        public static final int scorebox=0x7f02002e;
-        public static final int settings_icon=0x7f02002f;
-        public static final int share_button_normal=0x7f020030;
-        public static final int share_divider=0x7f020031;
-        public static final int splash=0x7f020032;
-        public static final int videooverlay=0x7f020033;
-        public static final int vk_logo=0x7f020034;
+        public static final int knowledge_one=0x7f02001f;
+        public static final int left_btn_selector=0x7f020020;
+        public static final int main=0x7f020021;
+        public static final int main_button_bg=0x7f020022;
+        public static final int ok_logo=0x7f020023;
+        public static final int options_button=0x7f020024;
+        public static final int options_button_correct=0x7f020025;
+        public static final int options_button_normal=0x7f020026;
+        public static final int options_button_wrong=0x7f020027;
+        public static final int plate_txt=0x7f020028;
+        public static final int points_bg_normal=0x7f020029;
+        public static final int progressbar_bg=0x7f02002a;
+        public static final int psts_background_tab=0x7f02002b;
+        public static final int psts_item=0x7f02002c;
+        public static final int quest_bg=0x7f02002d;
+        public static final int question_bg=0x7f02002e;
+        public static final int rating_icon=0x7f02002f;
+        public static final int restart_icon=0x7f020030;
+        public static final int result_bar=0x7f020031;
+        public static final int scorebox=0x7f020032;
+        public static final int settings_icon=0x7f020033;
+        public static final int share_button_normal=0x7f020034;
+        public static final int share_divider=0x7f020035;
+        public static final int splash=0x7f020036;
+        public static final int videooverlay=0x7f020037;
+        public static final int vk_logo=0x7f020038;
     }
     public static final class id {
-        public static final int about=0x7f0a0031;
-        public static final int answeredQuestions=0x7f0a0053;
-        public static final int cat_name=0x7f0a0045;
-        public static final int category=0x7f0a0012;
-        public static final int category_item_layout=0x7f0a004f;
-        public static final int catname=0x7f0a0003;
-        public static final int cell=0x7f0a0014;
-        public static final int center=0x7f0a0049;
-        public static final int current_points=0x7f0a003f;
-        public static final int current_points_text=0x7f0a0048;
-        public static final int description=0x7f0a0052;
-        public static final int fifth_elem=0x7f0a0024;
-        public static final int fifth_elem_img=0x7f0a0025;
-        public static final int fifth_elem_text=0x7f0a0026;
-        public static final int first_elem=0x7f0a0018;
-        public static final int first_elem_img=0x7f0a0019;
-        public static final int first_elem_text=0x7f0a001a;
-        public static final int first_row=0x7f0a0017;
-        public static final int forth_elem=0x7f0a0021;
-        public static final int forth_elem_img=0x7f0a0022;
-        public static final int forth_elem_text=0x7f0a0023;
-        public static final int home=0x7f0a0002;
-        public static final int image=0x7f0a0050;
-        public static final int image_layout=0x7f0a003a;
-        public static final int img=0x7f0a0015;
+        public static final int about=0x7f0a003e;
+        public static final int action_settings=0x7f0a0066;
+        public static final int answer_description=0x7f0a005c;
+        public static final int answer_result_layout=0x7f0a0059;
+        public static final int answeredQuestions=0x7f0a0065;
+        public static final int bold=0x7f0a0001;
+        public static final int cat_name=0x7f0a0052;
+        public static final int category=0x7f0a001d;
+        public static final int category_item_layout=0x7f0a0060;
+        public static final int catname=0x7f0a0006;
+        public static final int cell=0x7f0a001f;
+        public static final int center=0x7f0a0056;
+        public static final int container=0x7f0a000c;
+        public static final int containerPager=0x7f0a000b;
+        public static final int correct_text=0x7f0a005b;
+        public static final int current_points=0x7f0a004c;
+        public static final int current_points_text=0x7f0a0055;
+        public static final int description=0x7f0a0063;
+        public static final int description_fragment=0x7f0a0008;
+        public static final int fifth_elem=0x7f0a002f;
+        public static final int fifth_elem_img=0x7f0a0030;
+        public static final int fifth_elem_text=0x7f0a0031;
+        public static final int first_elem=0x7f0a0023;
+        public static final int first_elem_img=0x7f0a0024;
+        public static final int first_elem_text=0x7f0a0025;
+        public static final int first_row=0x7f0a0022;
+        public static final int forth_elem=0x7f0a002c;
+        public static final int forth_elem_img=0x7f0a002d;
+        public static final int forth_elem_text=0x7f0a002e;
+        public static final int hexagon=0x7f0a0038;
+        public static final int home=0x7f0a0005;
+        public static final int home_fragment=0x7f0a0009;
+        public static final int image=0x7f0a0061;
+        public static final int image_layout=0x7f0a0047;
+        public static final int img=0x7f0a0020;
+        public static final int italic=0x7f0a0002;
         public static final int item_touch_helper_previous_elevation=0x7f0a0000;
-        public static final int knowledgeList=0x7f0a0004;
-        public static final int leaderboard=0x7f0a000c;
-        public static final int left_btn=0x7f0a004a;
-        public static final int main_layout=0x7f0a004c;
-        public static final int more_apps=0x7f0a004e;
-        public static final int name=0x7f0a0051;
-        public static final int next_question=0x7f0a0044;
-        public static final int no_data_text=0x7f0a004d;
-        public static final int option1=0x7f0a0040;
-        public static final int option2=0x7f0a0041;
-        public static final int option3=0x7f0a0042;
-        public static final int option4=0x7f0a0043;
-        public static final int play_quiz=0x7f0a002d;
-        public static final int points=0x7f0a0008;
-        public static final int points_layout=0x7f0a003d;
-        public static final int prize=0x7f0a0006;
-        public static final int prize_img=0x7f0a0007;
-        public static final int progressText=0x7f0a0033;
-        public static final int progress_indicator=0x7f0a0036;
-        public static final int question=0x7f0a003c;
-        public static final int question_number=0x7f0a003e;
-        public static final int question_number_text=0x7f0a0046;
-        public static final int record=0x7f0a000b;
-        public static final int record_text=0x7f0a000a;
-        public static final int restart=0x7f0a000d;
-        public static final int right_btn=0x7f0a004b;
-        public static final int root=0x7f0a0034;
-        public static final int root_layout=0x7f0a0037;
-        public static final int score=0x7f0a0013;
-        public static final int second_elem=0x7f0a001b;
-        public static final int second_elem_img=0x7f0a001c;
-        public static final int second_elem_text=0x7f0a001d;
-        public static final int settings=0x7f0a0030;
-        public static final int seven_elem=0x7f0a002a;
-        public static final int seven_elem_img=0x7f0a002b;
-        public static final int seven_elem_text=0x7f0a002c;
-        public static final int share_fb=0x7f0a0010;
-        public static final int share_ok=0x7f0a0011;
-        public static final int share_text=0x7f0a000e;
-        public static final int share_vk=0x7f0a000f;
-        public static final int six_elem=0x7f0a0027;
-        public static final int six_elem_img=0x7f0a0028;
-        public static final int six_elem_text=0x7f0a0029;
-        public static final int small_image=0x7f0a003b;
-        public static final int small_video=0x7f0a0039;
-        public static final int splash=0x7f0a0032;
-        public static final int surface_view=0x7f0a0035;
-        public static final int text=0x7f0a0016;
-        public static final int third_elem=0x7f0a001e;
-        public static final int third_elem_img=0x7f0a001f;
-        public static final int third_elem_text=0x7f0a0020;
-        public static final int time_out=0x7f0a0038;
-        public static final int timer=0x7f0a0047;
-        public static final int title=0x7f0a0005;
-        public static final int total_points=0x7f0a0009;
-        public static final int webView=0x7f0a0001;
-        public static final int wiki=0x7f0a002f;
-        public static final int world_score=0x7f0a002e;
+        public static final int knowledgeList=0x7f0a0007;
+        public static final int leaderboard=0x7f0a0014;
+        public static final int left_btn=0x7f0a0057;
+        public static final int main_layout=0x7f0a005d;
+        public static final int name=0x7f0a0062;
+        public static final int next_question=0x7f0a0051;
+        public static final int no_data_text=0x7f0a005f;
+        public static final int normal=0x7f0a0003;
+        public static final int option1=0x7f0a004d;
+        public static final int option2=0x7f0a004e;
+        public static final int option3=0x7f0a004f;
+        public static final int option4=0x7f0a0050;
+        public static final int placeholder=0x7f0a005a;
+        public static final int play_quiz=0x7f0a003a;
+        public static final int points=0x7f0a0010;
+        public static final int points_layout=0x7f0a004a;
+        public static final int prize=0x7f0a000e;
+        public static final int prize_img=0x7f0a000f;
+        public static final int progressText=0x7f0a0040;
+        public static final int progress_indicator=0x7f0a0043;
+        public static final int psts_tab_title=0x7f0a0039;
+        public static final int question=0x7f0a0049;
+        public static final int question_number=0x7f0a004b;
+        public static final int question_number_text=0x7f0a0053;
+        public static final int record=0x7f0a0013;
+        public static final int record_text=0x7f0a0012;
+        public static final int record_value=0x7f0a0064;
+        public static final int restart=0x7f0a0015;
+        public static final int right_btn=0x7f0a0058;
+        public static final int root=0x7f0a0041;
+        public static final int root_layout=0x7f0a0044;
+        public static final int score=0x7f0a001e;
+        public static final int second_elem=0x7f0a0026;
+        public static final int second_elem_img=0x7f0a0027;
+        public static final int second_elem_text=0x7f0a0028;
+        public static final int section_label=0x7f0a001c;
+        public static final int settings=0x7f0a003d;
+        public static final int seven_elem=0x7f0a0035;
+        public static final int seven_elem_img=0x7f0a0036;
+        public static final int seven_elem_text=0x7f0a0037;
+        public static final int share_fb=0x7f0a0018;
+        public static final int share_ok=0x7f0a0019;
+        public static final int share_text=0x7f0a0016;
+        public static final int share_vk=0x7f0a0017;
+        public static final int six_elem=0x7f0a0032;
+        public static final int six_elem_img=0x7f0a0033;
+        public static final int six_elem_text=0x7f0a0034;
+        public static final int small_image=0x7f0a0048;
+        public static final int small_video=0x7f0a0046;
+        public static final int splash=0x7f0a003f;
+        public static final int story_img=0x7f0a001b;
+        public static final int story_text=0x7f0a001a;
+        public static final int surface_view=0x7f0a0042;
+        public static final int tabs=0x7f0a000a;
+        public static final int text=0x7f0a0021;
+        public static final int third_elem=0x7f0a0029;
+        public static final int third_elem_img=0x7f0a002a;
+        public static final int third_elem_text=0x7f0a002b;
+        public static final int time_out=0x7f0a0045;
+        public static final int timer=0x7f0a0054;
+        public static final int title=0x7f0a000d;
+        public static final int top_bar=0x7f0a005e;
+        public static final int total_points=0x7f0a0011;
+        public static final int webView=0x7f0a0004;
+        public static final int wiki=0x7f0a003c;
+        public static final int world_score=0x7f0a003b;
     }
     public static final class integer {
         public static final int google_play_services_version=0x7f0b0000;
@@ -359,17 +547,26 @@ containing a value of this type.
     public static final class layout {
         public static final int about_layout=0x7f040000;
         public static final int activity_knowledge=0x7f040001;
-        public static final int final_screen=0x7f040002;
-        public static final int high_score_item=0x7f040003;
-        public static final int knowledge_cell=0x7f040004;
-        public static final int knowledge_line1=0x7f040005;
-        public static final int knowledge_line2=0x7f040006;
-        public static final int main=0x7f040007;
-        public static final int movie_view=0x7f040008;
-        public static final int quiz_activity=0x7f040009;
-        public static final int quiz_activity1=0x7f04000a;
-        public static final int quiz_categories_layout=0x7f04000b;
-        public static final int quiz_category_item=0x7f04000c;
+        public static final int activity_knwoledge_description=0x7f040002;
+        public static final int final_screen=0x7f040003;
+        public static final int fragment_knowledge=0x7f040004;
+        public static final int fragment_knwoledge_description=0x7f040005;
+        public static final int high_score_item=0x7f040006;
+        public static final int knowledge_cell=0x7f040007;
+        public static final int knowledge_line1=0x7f040008;
+        public static final int knowledge_line2=0x7f040009;
+        public static final int knowledge_tab=0x7f04000a;
+        public static final int knowledge_tab2=0x7f04000b;
+        public static final int main=0x7f04000c;
+        public static final int movie_view=0x7f04000d;
+        public static final int psts_tab=0x7f04000e;
+        public static final int quiz_activity=0x7f04000f;
+        public static final int quiz_activity1=0x7f040010;
+        public static final int quiz_categories_layout=0x7f040011;
+        public static final int quiz_category_item=0x7f040012;
+    }
+    public static final class menu {
+        public static final int menu_knwoledge_description=0x7f0d0000;
     }
     public static final class mipmap {
         public static final int ic_launcher=0x7f030000;
@@ -381,38 +578,43 @@ containing a value of this type.
     }
     public static final class string {
         public static final int about=0x7f0c0000;
-        public static final int app_id=0x7f0c0001;
-        public static final int app_name=0x7f0c0002;
-        public static final int categories=0x7f0c0003;
-        public static final int chartboost_error_msg=0x7f0c0004;
-        public static final int final_score=0x7f0c0005;
-        public static final int gamehelper_app_misconfigured=0x7f0c0006;
-        public static final int gamehelper_license_failed=0x7f0c0007;
-        public static final int gamehelper_sign_in_failed=0x7f0c0008;
-        public static final int gamehelper_unknown_error=0x7f0c0009;
-        public static final int hello=0x7f0c000a;
-        public static final int high_scores=0x7f0c000b;
-        public static final int loading_video=0x7f0c000c;
-        public static final int more_apps=0x7f0c000d;
-        public static final int no_categories=0x7f0c000e;
-        public static final int play_quiz=0x7f0c000f;
-        public static final int points_record=0x7f0c0010;
-        public static final int quiz_skip_text=0x7f0c0011;
-        public static final int remove_ads=0x7f0c0012;
-        public static final int restore=0x7f0c0013;
-        public static final int share_points=0x7f0c0014;
-        public static final int tap_to_play=0x7f0c0015;
-        public static final int tap_to_zoom=0x7f0c0016;
-        public static final int top_scores_leaderboard=0x7f0c0017;
-        public static final int world_score=0x7f0c0018;
+        public static final int action_settings=0x7f0c0001;
+        public static final int app_id=0x7f0c0002;
+        public static final int app_name=0x7f0c0003;
+        public static final int categories=0x7f0c0004;
+        public static final int chartboost_error_msg=0x7f0c0005;
+        public static final int final_score=0x7f0c0006;
+        public static final int gamehelper_app_misconfigured=0x7f0c0007;
+        public static final int gamehelper_license_failed=0x7f0c0008;
+        public static final int gamehelper_sign_in_failed=0x7f0c0009;
+        public static final int gamehelper_unknown_error=0x7f0c000a;
+        public static final int hello=0x7f0c000b;
+        public static final int hello_blank_fragment=0x7f0c000c;
+        public static final int high_scores=0x7f0c000d;
+        public static final int loading_video=0x7f0c000e;
+        public static final int more_apps=0x7f0c000f;
+        public static final int no_categories=0x7f0c0010;
+        public static final int play_quiz=0x7f0c0011;
+        public static final int points_record=0x7f0c0012;
+        public static final int quiz_skip_text=0x7f0c0013;
+        public static final int remove_ads=0x7f0c0014;
+        public static final int restore=0x7f0c0015;
+        public static final int section_format=0x7f0c0016;
+        public static final int share_points=0x7f0c0017;
+        public static final int tap_to_play=0x7f0c0018;
+        public static final int tap_to_zoom=0x7f0c0019;
+        public static final int title_activity_knwoledge_description=0x7f0c001a;
+        public static final int top_scores_leaderboard=0x7f0c001b;
+        public static final int world_score=0x7f0c001c;
     }
     public static final class style {
         public static final int CardView=0x7f080001;
         public static final int CardView_Dark=0x7f080002;
         public static final int CardView_Light=0x7f080003;
         public static final int CatName_text=0x7f080004;
+        public static final int Correct_text=0x7f080005;
         public static final int Theme_TransparencyDemo=0x7f080000;
-        public static final int knowledge_cell_text=0x7f080005;
+        public static final int knowledge_cell_text=0x7f080006;
     }
     public static final class styleable {
         /** Attributes that can be used with a CardView.
@@ -421,17 +623,17 @@ containing a value of this type.
            <colgroup align="left" />
            <colgroup align="left" />
            <tr><th>Attribute</th><th>Description</th></tr>
-           <tr><td><code>{@link #CardView_cardBackgroundColor com.quizapp.android:cardBackgroundColor}</code></td><td></td></tr>
-           <tr><td><code>{@link #CardView_cardCornerRadius com.quizapp.android:cardCornerRadius}</code></td><td></td></tr>
-           <tr><td><code>{@link #CardView_cardElevation com.quizapp.android:cardElevation}</code></td><td></td></tr>
-           <tr><td><code>{@link #CardView_cardMaxElevation com.quizapp.android:cardMaxElevation}</code></td><td></td></tr>
-           <tr><td><code>{@link #CardView_cardPreventCornerOverlap com.quizapp.android:cardPreventCornerOverlap}</code></td><td></td></tr>
-           <tr><td><code>{@link #CardView_cardUseCompatPadding com.quizapp.android:cardUseCompatPadding}</code></td><td></td></tr>
-           <tr><td><code>{@link #CardView_contentPadding com.quizapp.android:contentPadding}</code></td><td></td></tr>
-           <tr><td><code>{@link #CardView_contentPaddingBottom com.quizapp.android:contentPaddingBottom}</code></td><td></td></tr>
-           <tr><td><code>{@link #CardView_contentPaddingLeft com.quizapp.android:contentPaddingLeft}</code></td><td></td></tr>
-           <tr><td><code>{@link #CardView_contentPaddingRight com.quizapp.android:contentPaddingRight}</code></td><td></td></tr>
-           <tr><td><code>{@link #CardView_contentPaddingTop com.quizapp.android:contentPaddingTop}</code></td><td></td></tr>
+           <tr><td><code>{@link #CardView_cardBackgroundColor com.almadev.znaniesila:cardBackgroundColor}</code></td><td></td></tr>
+           <tr><td><code>{@link #CardView_cardCornerRadius com.almadev.znaniesila:cardCornerRadius}</code></td><td></td></tr>
+           <tr><td><code>{@link #CardView_cardElevation com.almadev.znaniesila:cardElevation}</code></td><td></td></tr>
+           <tr><td><code>{@link #CardView_cardMaxElevation com.almadev.znaniesila:cardMaxElevation}</code></td><td></td></tr>
+           <tr><td><code>{@link #CardView_cardPreventCornerOverlap com.almadev.znaniesila:cardPreventCornerOverlap}</code></td><td></td></tr>
+           <tr><td><code>{@link #CardView_cardUseCompatPadding com.almadev.znaniesila:cardUseCompatPadding}</code></td><td></td></tr>
+           <tr><td><code>{@link #CardView_contentPadding com.almadev.znaniesila:contentPadding}</code></td><td></td></tr>
+           <tr><td><code>{@link #CardView_contentPaddingBottom com.almadev.znaniesila:contentPaddingBottom}</code></td><td></td></tr>
+           <tr><td><code>{@link #CardView_contentPaddingLeft com.almadev.znaniesila:contentPaddingLeft}</code></td><td></td></tr>
+           <tr><td><code>{@link #CardView_contentPaddingRight com.almadev.znaniesila:contentPaddingRight}</code></td><td></td></tr>
+           <tr><td><code>{@link #CardView_contentPaddingTop com.almadev.znaniesila:contentPaddingTop}</code></td><td></td></tr>
            </table>
            @see #CardView_cardBackgroundColor
            @see #CardView_cardCornerRadius
@@ -451,7 +653,7 @@ containing a value of this type.
             0x7f010008, 0x7f010009, 0x7f01000a
         };
         /**
-          <p>This symbol is the offset where the {@link com.quizapp.android.R.attr#cardBackgroundColor}
+          <p>This symbol is the offset where the {@link com.almadev.znaniesila.R.attr#cardBackgroundColor}
           attribute's value can be found in the {@link #CardView} array.
 
 
@@ -462,11 +664,11 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.quizapp.android:cardBackgroundColor
+          @attr name com.almadev.znaniesila:cardBackgroundColor
         */
         public static final int CardView_cardBackgroundColor = 0;
         /**
-          <p>This symbol is the offset where the {@link com.quizapp.android.R.attr#cardCornerRadius}
+          <p>This symbol is the offset where the {@link com.almadev.znaniesila.R.attr#cardCornerRadius}
           attribute's value can be found in the {@link #CardView} array.
 
 
@@ -478,11 +680,11 @@ in (inches), mm (millimeters).
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.quizapp.android:cardCornerRadius
+          @attr name com.almadev.znaniesila:cardCornerRadius
         */
         public static final int CardView_cardCornerRadius = 1;
         /**
-          <p>This symbol is the offset where the {@link com.quizapp.android.R.attr#cardElevation}
+          <p>This symbol is the offset where the {@link com.almadev.znaniesila.R.attr#cardElevation}
           attribute's value can be found in the {@link #CardView} array.
 
 
@@ -494,11 +696,11 @@ in (inches), mm (millimeters).
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.quizapp.android:cardElevation
+          @attr name com.almadev.znaniesila:cardElevation
         */
         public static final int CardView_cardElevation = 2;
         /**
-          <p>This symbol is the offset where the {@link com.quizapp.android.R.attr#cardMaxElevation}
+          <p>This symbol is the offset where the {@link com.almadev.znaniesila.R.attr#cardMaxElevation}
           attribute's value can be found in the {@link #CardView} array.
 
 
@@ -510,11 +712,11 @@ in (inches), mm (millimeters).
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.quizapp.android:cardMaxElevation
+          @attr name com.almadev.znaniesila:cardMaxElevation
         */
         public static final int CardView_cardMaxElevation = 3;
         /**
-          <p>This symbol is the offset where the {@link com.quizapp.android.R.attr#cardPreventCornerOverlap}
+          <p>This symbol is the offset where the {@link com.almadev.znaniesila.R.attr#cardPreventCornerOverlap}
           attribute's value can be found in the {@link #CardView} array.
 
 
@@ -524,11 +726,11 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.quizapp.android:cardPreventCornerOverlap
+          @attr name com.almadev.znaniesila:cardPreventCornerOverlap
         */
         public static final int CardView_cardPreventCornerOverlap = 5;
         /**
-          <p>This symbol is the offset where the {@link com.quizapp.android.R.attr#cardUseCompatPadding}
+          <p>This symbol is the offset where the {@link com.almadev.znaniesila.R.attr#cardUseCompatPadding}
           attribute's value can be found in the {@link #CardView} array.
 
 
@@ -538,11 +740,11 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.quizapp.android:cardUseCompatPadding
+          @attr name com.almadev.znaniesila:cardUseCompatPadding
         */
         public static final int CardView_cardUseCompatPadding = 4;
         /**
-          <p>This symbol is the offset where the {@link com.quizapp.android.R.attr#contentPadding}
+          <p>This symbol is the offset where the {@link com.almadev.znaniesila.R.attr#contentPadding}
           attribute's value can be found in the {@link #CardView} array.
 
 
@@ -554,11 +756,11 @@ in (inches), mm (millimeters).
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.quizapp.android:contentPadding
+          @attr name com.almadev.znaniesila:contentPadding
         */
         public static final int CardView_contentPadding = 6;
         /**
-          <p>This symbol is the offset where the {@link com.quizapp.android.R.attr#contentPaddingBottom}
+          <p>This symbol is the offset where the {@link com.almadev.znaniesila.R.attr#contentPaddingBottom}
           attribute's value can be found in the {@link #CardView} array.
 
 
@@ -570,11 +772,11 @@ in (inches), mm (millimeters).
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.quizapp.android:contentPaddingBottom
+          @attr name com.almadev.znaniesila:contentPaddingBottom
         */
         public static final int CardView_contentPaddingBottom = 10;
         /**
-          <p>This symbol is the offset where the {@link com.quizapp.android.R.attr#contentPaddingLeft}
+          <p>This symbol is the offset where the {@link com.almadev.znaniesila.R.attr#contentPaddingLeft}
           attribute's value can be found in the {@link #CardView} array.
 
 
@@ -586,11 +788,11 @@ in (inches), mm (millimeters).
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.quizapp.android:contentPaddingLeft
+          @attr name com.almadev.znaniesila:contentPaddingLeft
         */
         public static final int CardView_contentPaddingLeft = 7;
         /**
-          <p>This symbol is the offset where the {@link com.quizapp.android.R.attr#contentPaddingRight}
+          <p>This symbol is the offset where the {@link com.almadev.znaniesila.R.attr#contentPaddingRight}
           attribute's value can be found in the {@link #CardView} array.
 
 
@@ -602,11 +804,11 @@ in (inches), mm (millimeters).
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.quizapp.android:contentPaddingRight
+          @attr name com.almadev.znaniesila:contentPaddingRight
         */
         public static final int CardView_contentPaddingRight = 8;
         /**
-          <p>This symbol is the offset where the {@link com.quizapp.android.R.attr#contentPaddingTop}
+          <p>This symbol is the offset where the {@link com.almadev.znaniesila.R.attr#contentPaddingTop}
           attribute's value can be found in the {@link #CardView} array.
 
 
@@ -618,9 +820,327 @@ in (inches), mm (millimeters).
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.quizapp.android:contentPaddingTop
+          @attr name com.almadev.znaniesila:contentPaddingTop
         */
         public static final int CardView_contentPaddingTop = 9;
+        /** Attributes that can be used with a PagerSlidingTabStrip.
+           <p>Includes the following attributes:</p>
+           <table>
+           <colgroup align="left" />
+           <colgroup align="left" />
+           <tr><th>Attribute</th><th>Description</th></tr>
+           <tr><td><code>{@link #PagerSlidingTabStrip_pstsDividerColor com.almadev.znaniesila:pstsDividerColor}</code></td><td></td></tr>
+           <tr><td><code>{@link #PagerSlidingTabStrip_pstsDividerPadding com.almadev.znaniesila:pstsDividerPadding}</code></td><td></td></tr>
+           <tr><td><code>{@link #PagerSlidingTabStrip_pstsDividerWidth com.almadev.znaniesila:pstsDividerWidth}</code></td><td></td></tr>
+           <tr><td><code>{@link #PagerSlidingTabStrip_pstsIndicatorColor com.almadev.znaniesila:pstsIndicatorColor}</code></td><td></td></tr>
+           <tr><td><code>{@link #PagerSlidingTabStrip_pstsIndicatorHeight com.almadev.znaniesila:pstsIndicatorHeight}</code></td><td></td></tr>
+           <tr><td><code>{@link #PagerSlidingTabStrip_pstsPaddingMiddle com.almadev.znaniesila:pstsPaddingMiddle}</code></td><td></td></tr>
+           <tr><td><code>{@link #PagerSlidingTabStrip_pstsScrollOffset com.almadev.znaniesila:pstsScrollOffset}</code></td><td></td></tr>
+           <tr><td><code>{@link #PagerSlidingTabStrip_pstsShouldExpand com.almadev.znaniesila:pstsShouldExpand}</code></td><td></td></tr>
+           <tr><td><code>{@link #PagerSlidingTabStrip_pstsTabBackground com.almadev.znaniesila:pstsTabBackground}</code></td><td></td></tr>
+           <tr><td><code>{@link #PagerSlidingTabStrip_pstsTabPaddingLeftRight com.almadev.znaniesila:pstsTabPaddingLeftRight}</code></td><td></td></tr>
+           <tr><td><code>{@link #PagerSlidingTabStrip_pstsTabTextAllCaps com.almadev.znaniesila:pstsTabTextAllCaps}</code></td><td></td></tr>
+           <tr><td><code>{@link #PagerSlidingTabStrip_pstsTabTextAlpha com.almadev.znaniesila:pstsTabTextAlpha}</code></td><td></td></tr>
+           <tr><td><code>{@link #PagerSlidingTabStrip_pstsTabTextColor com.almadev.znaniesila:pstsTabTextColor}</code></td><td></td></tr>
+           <tr><td><code>{@link #PagerSlidingTabStrip_pstsTabTextFontFamily com.almadev.znaniesila:pstsTabTextFontFamily}</code></td><td></td></tr>
+           <tr><td><code>{@link #PagerSlidingTabStrip_pstsTabTextSize com.almadev.znaniesila:pstsTabTextSize}</code></td><td></td></tr>
+           <tr><td><code>{@link #PagerSlidingTabStrip_pstsTabTextStyle com.almadev.znaniesila:pstsTabTextStyle}</code></td><td></td></tr>
+           <tr><td><code>{@link #PagerSlidingTabStrip_pstsUnderlineColor com.almadev.znaniesila:pstsUnderlineColor}</code></td><td></td></tr>
+           <tr><td><code>{@link #PagerSlidingTabStrip_pstsUnderlineHeight com.almadev.znaniesila:pstsUnderlineHeight}</code></td><td></td></tr>
+           </table>
+           @see #PagerSlidingTabStrip_pstsDividerColor
+           @see #PagerSlidingTabStrip_pstsDividerPadding
+           @see #PagerSlidingTabStrip_pstsDividerWidth
+           @see #PagerSlidingTabStrip_pstsIndicatorColor
+           @see #PagerSlidingTabStrip_pstsIndicatorHeight
+           @see #PagerSlidingTabStrip_pstsPaddingMiddle
+           @see #PagerSlidingTabStrip_pstsScrollOffset
+           @see #PagerSlidingTabStrip_pstsShouldExpand
+           @see #PagerSlidingTabStrip_pstsTabBackground
+           @see #PagerSlidingTabStrip_pstsTabPaddingLeftRight
+           @see #PagerSlidingTabStrip_pstsTabTextAllCaps
+           @see #PagerSlidingTabStrip_pstsTabTextAlpha
+           @see #PagerSlidingTabStrip_pstsTabTextColor
+           @see #PagerSlidingTabStrip_pstsTabTextFontFamily
+           @see #PagerSlidingTabStrip_pstsTabTextSize
+           @see #PagerSlidingTabStrip_pstsTabTextStyle
+           @see #PagerSlidingTabStrip_pstsUnderlineColor
+           @see #PagerSlidingTabStrip_pstsUnderlineHeight
+         */
+        public static final int[] PagerSlidingTabStrip = {
+            0x7f01000b, 0x7f01000c, 0x7f01000d, 0x7f01000e,
+            0x7f01000f, 0x7f010010, 0x7f010011, 0x7f010012,
+            0x7f010013, 0x7f010014, 0x7f010015, 0x7f010016,
+            0x7f010017, 0x7f010018, 0x7f010019, 0x7f01001a,
+            0x7f01001b, 0x7f01001c
+        };
+        /**
+          <p>This symbol is the offset where the {@link com.almadev.znaniesila.R.attr#pstsDividerColor}
+          attribute's value can be found in the {@link #PagerSlidingTabStrip} array.
+
+
+          <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.almadev.znaniesila:pstsDividerColor
+        */
+        public static final int PagerSlidingTabStrip_pstsDividerColor = 4;
+        /**
+          <p>This symbol is the offset where the {@link com.almadev.znaniesila.R.attr#pstsDividerPadding}
+          attribute's value can be found in the {@link #PagerSlidingTabStrip} array.
+
+
+          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.almadev.znaniesila:pstsDividerPadding
+        */
+        public static final int PagerSlidingTabStrip_pstsDividerPadding = 6;
+        /**
+          <p>This symbol is the offset where the {@link com.almadev.znaniesila.R.attr#pstsDividerWidth}
+          attribute's value can be found in the {@link #PagerSlidingTabStrip} array.
+
+
+          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.almadev.znaniesila:pstsDividerWidth
+        */
+        public static final int PagerSlidingTabStrip_pstsDividerWidth = 5;
+        /**
+          <p>This symbol is the offset where the {@link com.almadev.znaniesila.R.attr#pstsIndicatorColor}
+          attribute's value can be found in the {@link #PagerSlidingTabStrip} array.
+
+
+          <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.almadev.znaniesila:pstsIndicatorColor
+        */
+        public static final int PagerSlidingTabStrip_pstsIndicatorColor = 0;
+        /**
+          <p>This symbol is the offset where the {@link com.almadev.znaniesila.R.attr#pstsIndicatorHeight}
+          attribute's value can be found in the {@link #PagerSlidingTabStrip} array.
+
+
+          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.almadev.znaniesila:pstsIndicatorHeight
+        */
+        public static final int PagerSlidingTabStrip_pstsIndicatorHeight = 1;
+        /**
+          <p>This symbol is the offset where the {@link com.almadev.znaniesila.R.attr#pstsPaddingMiddle}
+          attribute's value can be found in the {@link #PagerSlidingTabStrip} array.
+
+
+          <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.almadev.znaniesila:pstsPaddingMiddle
+        */
+        public static final int PagerSlidingTabStrip_pstsPaddingMiddle = 9;
+        /**
+          <p>This symbol is the offset where the {@link com.almadev.znaniesila.R.attr#pstsScrollOffset}
+          attribute's value can be found in the {@link #PagerSlidingTabStrip} array.
+
+
+          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.almadev.znaniesila:pstsScrollOffset
+        */
+        public static final int PagerSlidingTabStrip_pstsScrollOffset = 7;
+        /**
+          <p>This symbol is the offset where the {@link com.almadev.znaniesila.R.attr#pstsShouldExpand}
+          attribute's value can be found in the {@link #PagerSlidingTabStrip} array.
+
+
+          <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.almadev.znaniesila:pstsShouldExpand
+        */
+        public static final int PagerSlidingTabStrip_pstsShouldExpand = 8;
+        /**
+          <p>This symbol is the offset where the {@link com.almadev.znaniesila.R.attr#pstsTabBackground}
+          attribute's value can be found in the {@link #PagerSlidingTabStrip} array.
+
+
+          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+          @attr name com.almadev.znaniesila:pstsTabBackground
+        */
+        public static final int PagerSlidingTabStrip_pstsTabBackground = 11;
+        /**
+          <p>This symbol is the offset where the {@link com.almadev.znaniesila.R.attr#pstsTabPaddingLeftRight}
+          attribute's value can be found in the {@link #PagerSlidingTabStrip} array.
+
+
+          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.almadev.znaniesila:pstsTabPaddingLeftRight
+        */
+        public static final int PagerSlidingTabStrip_pstsTabPaddingLeftRight = 10;
+        /**
+          <p>This symbol is the offset where the {@link com.almadev.znaniesila.R.attr#pstsTabTextAllCaps}
+          attribute's value can be found in the {@link #PagerSlidingTabStrip} array.
+
+
+          <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.almadev.znaniesila:pstsTabTextAllCaps
+        */
+        public static final int PagerSlidingTabStrip_pstsTabTextAllCaps = 15;
+        /**
+          <p>This symbol is the offset where the {@link com.almadev.znaniesila.R.attr#pstsTabTextAlpha}
+          attribute's value can be found in the {@link #PagerSlidingTabStrip} array.
+
+
+          <p>Must be an integer value, such as "<code>100</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.almadev.znaniesila:pstsTabTextAlpha
+        */
+        public static final int PagerSlidingTabStrip_pstsTabTextAlpha = 16;
+        /**
+          <p>This symbol is the offset where the {@link com.almadev.znaniesila.R.attr#pstsTabTextColor}
+          attribute's value can be found in the {@link #PagerSlidingTabStrip} array.
+
+
+          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+          @attr name com.almadev.znaniesila:pstsTabTextColor
+        */
+        public static final int PagerSlidingTabStrip_pstsTabTextColor = 13;
+        /**
+          <p>This symbol is the offset where the {@link com.almadev.znaniesila.R.attr#pstsTabTextFontFamily}
+          attribute's value can be found in the {@link #PagerSlidingTabStrip} array.
+
+
+          <p>Must be a string value, using '\\;' to escape characters such as '\\n' or '\\uxxxx' for a unicode character.
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.almadev.znaniesila:pstsTabTextFontFamily
+        */
+        public static final int PagerSlidingTabStrip_pstsTabTextFontFamily = 17;
+        /**
+          <p>This symbol is the offset where the {@link com.almadev.znaniesila.R.attr#pstsTabTextSize}
+          attribute's value can be found in the {@link #PagerSlidingTabStrip} array.
+
+
+          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.almadev.znaniesila:pstsTabTextSize
+        */
+        public static final int PagerSlidingTabStrip_pstsTabTextSize = 12;
+        /**
+          <p>This symbol is the offset where the {@link com.almadev.znaniesila.R.attr#pstsTabTextStyle}
+          attribute's value can be found in the {@link #PagerSlidingTabStrip} array.
+
+
+          <p>May be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+<p>May be one or more (separated by '|') of the following constant values.</p>
+<table>
+<colgroup align="left" />
+<colgroup align="left" />
+<colgroup align="left" />
+<tr><th>Constant</th><th>Value</th><th>Description</th></tr>
+<tr><td><code>normal</code></td><td>0x0</td><td></td></tr>
+<tr><td><code>bold</code></td><td>0x1</td><td></td></tr>
+<tr><td><code>italic</code></td><td>0x2</td><td></td></tr>
+</table>
+          @attr name com.almadev.znaniesila:pstsTabTextStyle
+        */
+        public static final int PagerSlidingTabStrip_pstsTabTextStyle = 14;
+        /**
+          <p>This symbol is the offset where the {@link com.almadev.znaniesila.R.attr#pstsUnderlineColor}
+          attribute's value can be found in the {@link #PagerSlidingTabStrip} array.
+
+
+          <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.almadev.znaniesila:pstsUnderlineColor
+        */
+        public static final int PagerSlidingTabStrip_pstsUnderlineColor = 2;
+        /**
+          <p>This symbol is the offset where the {@link com.almadev.znaniesila.R.attr#pstsUnderlineHeight}
+          attribute's value can be found in the {@link #PagerSlidingTabStrip} array.
+
+
+          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.almadev.znaniesila:pstsUnderlineHeight
+        */
+        public static final int PagerSlidingTabStrip_pstsUnderlineHeight = 3;
         /** Attributes that can be used with a RecyclerView.
            <p>Includes the following attributes:</p>
            <table>
@@ -628,10 +1148,10 @@ containing a value of this type.
            <colgroup align="left" />
            <tr><th>Attribute</th><th>Description</th></tr>
            <tr><td><code>{@link #RecyclerView_android_orientation android:orientation}</code></td><td></td></tr>
-           <tr><td><code>{@link #RecyclerView_layoutManager com.quizapp.android:layoutManager}</code></td><td></td></tr>
-           <tr><td><code>{@link #RecyclerView_reverseLayout com.quizapp.android:reverseLayout}</code></td><td></td></tr>
-           <tr><td><code>{@link #RecyclerView_spanCount com.quizapp.android:spanCount}</code></td><td></td></tr>
-           <tr><td><code>{@link #RecyclerView_stackFromEnd com.quizapp.android:stackFromEnd}</code></td><td></td></tr>
+           <tr><td><code>{@link #RecyclerView_layoutManager com.almadev.znaniesila:layoutManager}</code></td><td></td></tr>
+           <tr><td><code>{@link #RecyclerView_reverseLayout com.almadev.znaniesila:reverseLayout}</code></td><td></td></tr>
+           <tr><td><code>{@link #RecyclerView_spanCount com.almadev.znaniesila:spanCount}</code></td><td></td></tr>
+           <tr><td><code>{@link #RecyclerView_stackFromEnd com.almadev.znaniesila:stackFromEnd}</code></td><td></td></tr>
            </table>
            @see #RecyclerView_android_orientation
            @see #RecyclerView_layoutManager
@@ -640,8 +1160,8 @@ containing a value of this type.
            @see #RecyclerView_stackFromEnd
          */
         public static final int[] RecyclerView = {
-            0x010100c4, 0x7f01000b, 0x7f01000c, 0x7f01000d,
-            0x7f01000e
+            0x010100c4, 0x7f01001d, 0x7f01001e, 0x7f01001f,
+            0x7f010020
         };
         /**
           <p>This symbol is the offset where the {@link android.R.attr#orientation}
@@ -650,7 +1170,7 @@ containing a value of this type.
         */
         public static final int RecyclerView_android_orientation = 0;
         /**
-          <p>This symbol is the offset where the {@link com.quizapp.android.R.attr#layoutManager}
+          <p>This symbol is the offset where the {@link com.almadev.znaniesila.R.attr#layoutManager}
           attribute's value can be found in the {@link #RecyclerView} array.
 
 
@@ -660,11 +1180,11 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.quizapp.android:layoutManager
+          @attr name com.almadev.znaniesila:layoutManager
         */
         public static final int RecyclerView_layoutManager = 1;
         /**
-          <p>This symbol is the offset where the {@link com.quizapp.android.R.attr#reverseLayout}
+          <p>This symbol is the offset where the {@link com.almadev.znaniesila.R.attr#reverseLayout}
           attribute's value can be found in the {@link #RecyclerView} array.
 
 
@@ -674,11 +1194,11 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.quizapp.android:reverseLayout
+          @attr name com.almadev.znaniesila:reverseLayout
         */
         public static final int RecyclerView_reverseLayout = 3;
         /**
-          <p>This symbol is the offset where the {@link com.quizapp.android.R.attr#spanCount}
+          <p>This symbol is the offset where the {@link com.almadev.znaniesila.R.attr#spanCount}
           attribute's value can be found in the {@link #RecyclerView} array.
 
 
@@ -688,11 +1208,11 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.quizapp.android:spanCount
+          @attr name com.almadev.znaniesila:spanCount
         */
         public static final int RecyclerView_spanCount = 2;
         /**
-          <p>This symbol is the offset where the {@link com.quizapp.android.R.attr#stackFromEnd}
+          <p>This symbol is the offset where the {@link com.almadev.znaniesila.R.attr#stackFromEnd}
           attribute's value can be found in the {@link #RecyclerView} array.
 
 
@@ -702,7 +1222,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.quizapp.android:stackFromEnd
+          @attr name com.almadev.znaniesila:stackFromEnd
         */
         public static final int RecyclerView_stackFromEnd = 4;
         /** Attributes that can be used with a Timer.
@@ -711,19 +1231,19 @@ containing a value of this type.
            <colgroup align="left" />
            <colgroup align="left" />
            <tr><th>Attribute</th><th>Description</th></tr>
-           <tr><td><code>{@link #Timer_circleColor com.quizapp.android:circleColor}</code></td><td></td></tr>
-           <tr><td><code>{@link #Timer_circleLabel com.quizapp.android:circleLabel}</code></td><td></td></tr>
-           <tr><td><code>{@link #Timer_labelColor com.quizapp.android:labelColor}</code></td><td></td></tr>
+           <tr><td><code>{@link #Timer_circleColor com.almadev.znaniesila:circleColor}</code></td><td></td></tr>
+           <tr><td><code>{@link #Timer_circleLabel com.almadev.znaniesila:circleLabel}</code></td><td></td></tr>
+           <tr><td><code>{@link #Timer_labelColor com.almadev.znaniesila:labelColor}</code></td><td></td></tr>
            </table>
            @see #Timer_circleColor
            @see #Timer_circleLabel
            @see #Timer_labelColor
          */
         public static final int[] Timer = {
-            0x7f01000f, 0x7f010010, 0x7f010011
+            0x7f010021, 0x7f010022, 0x7f010023
         };
         /**
-          <p>This symbol is the offset where the {@link com.quizapp.android.R.attr#circleColor}
+          <p>This symbol is the offset where the {@link com.almadev.znaniesila.R.attr#circleColor}
           attribute's value can be found in the {@link #Timer} array.
 
 
@@ -734,11 +1254,11 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.quizapp.android:circleColor
+          @attr name com.almadev.znaniesila:circleColor
         */
         public static final int Timer_circleColor = 0;
         /**
-          <p>This symbol is the offset where the {@link com.quizapp.android.R.attr#circleLabel}
+          <p>This symbol is the offset where the {@link com.almadev.znaniesila.R.attr#circleLabel}
           attribute's value can be found in the {@link #Timer} array.
 
 
@@ -748,11 +1268,11 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.quizapp.android:circleLabel
+          @attr name com.almadev.znaniesila:circleLabel
         */
         public static final int Timer_circleLabel = 1;
         /**
-          <p>This symbol is the offset where the {@link com.quizapp.android.R.attr#labelColor}
+          <p>This symbol is the offset where the {@link com.almadev.znaniesila.R.attr#labelColor}
           attribute's value can be found in the {@link #Timer} array.
 
 
@@ -763,7 +1283,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.quizapp.android:labelColor
+          @attr name com.almadev.znaniesila:labelColor
         */
         public static final int Timer_labelColor = 2;
     };

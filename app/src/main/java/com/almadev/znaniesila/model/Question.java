@@ -8,6 +8,8 @@ import java.io.Serializable;
 public class Question implements Serializable {
     private static final long serialVersionUID = 1L;
 
+    private int local_id;
+
     private int points;
     private int Answer;
     private String correct_ans_explanation;
@@ -67,5 +69,13 @@ public class Question implements Serializable {
 
     public String getStory() {
         return story;
+    }
+
+    public int getLocal_id() {
+        return local_id;
+    }
+
+    public void setLocal_id(int id) {
+        local_id = id;
     }
 }

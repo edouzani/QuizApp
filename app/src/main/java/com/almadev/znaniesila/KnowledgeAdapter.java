@@ -24,20 +24,22 @@ public class KnowledgeAdapter extends android.support.v7.widget.RecyclerView.Ada
     private static final int EVEN_LINE  = 3;
 
     private List<Question> mQuestions;
+    private KnowledgeActivity mActivity;
 
     private LayoutInflater getLayoutInflater(ViewGroup parent) {
         return LayoutInflater.from(parent.getContext());
     }
 
-    public KnowledgeAdapter(List<Question> questions) {
+    public KnowledgeAdapter(List<Question> questions, KnowledgeActivity activity) {
         mQuestions = questions;
+        mActivity = activity;
     }
 
     @Override
     public int getItemViewType(final int position) {
 //        return position % 7 > 3 ? EVEN_LINE : ODD_LINE;
         if (position == 0) {
-            return  FIRST_LINE;
+            return FIRST_LINE;
         }
         return position % 2 == 1 ? EVEN_LINE : ODD_LINE;
     }
@@ -58,7 +60,7 @@ public class KnowledgeAdapter extends android.support.v7.widget.RecyclerView.Ada
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position) {
         KnowledgeViewHolder mKnowledgeViewHolder = (KnowledgeViewHolder) holder;
 //        int itemType = getItemViewType(position);
-        mKnowledgeViewHolder.render(mQuestions.subList(position, position + 7 > mQuestions.size() ? mQuestions.size() : position + 7));
+        mKnowledgeViewHolder.render(mQuestions.subList(position * 7, (position * 7) + 7 > mQuestions.size() ? mQuestions.size() : (position * 7 )+ 7));
     }
 
     @Override
@@ -74,6 +76,19 @@ public class KnowledgeAdapter extends android.support.v7.widget.RecyclerView.Ada
 //            return  fullGroups * 2 + 1;
 //        }
         return mQuestions.size() % 7 > 0 ? fullGroups + 1 : fullGroups;
+    }
+
+    class CellClickListener implements View.OnClickListener {
+        private Question mQuestion;
+
+        public CellClickListener(Question pQuestion) {
+            mQuestion = pQuestion;
+        }
+
+        @Override
+        public void onClick(final View pView) {
+            mActivity.openCellInfo(mQuestion);
+        }
     }
 
     class KnowledgeViewHolder extends RecyclerView.ViewHolder {
@@ -108,61 +123,28 @@ public class KnowledgeAdapter extends android.support.v7.widget.RecyclerView.Ada
             mItem = itemView;
         }
 
-        public void render(List<Question> pQuestions) {
+        public void render(final List<Question> pQuestions) {
             int i = 0;
             for (i = 0; i < pQuestions.size(); i++) {
+                imgs.get(i).setVisibility(View.VISIBLE);
+
                 if (pQuestions.get(i).getState() == QuestionState.CORRECT) {
-                    ((ImageView)imgs.get(i).findViewById(R.id.img)).setImageDrawable(
+                    ((ImageView) imgs.get(i).findViewById(R.id.img)).setImageDrawable(
                             mItem.getContext().getResources().getDrawable(R.drawable.hexagon));
-                    ((TextView)imgs.get(i).findViewById(R.id.text)).setText(pQuestions.get(i).getStory_order_id());
-                    ((TextView)imgs.get(i).findViewById(R.id.text)).setVisibility(View.VISIBLE);
+                    ((TextView) imgs.get(i).findViewById(R.id.text)).setText("" + (pQuestions.get(i).getLocal_id() + 1));
+                    ((TextView) imgs.get(i).findViewById(R.id.text)).setVisibility(View.VISIBLE);
+                    imgs.get(i).setOnClickListener(new CellClickListener(pQuestions.get(i)));
                 } else {
-                    ((ImageView)imgs.get(i).findViewById(R.id.img)).setImageDrawable(
+                    ((ImageView) imgs.get(i).findViewById(R.id.img)).setImageDrawable(
                             mItem.getContext().getResources().getDrawable(R.drawable.hexagon_locked));
-                    ((TextView)imgs.get(i).findViewById(R.id.text)).setVisibility(View.INVISIBLE);
+                    ((TextView) imgs.get(i).findViewById(R.id.text)).setVisibility(View.INVISIBLE);
+                    imgs.get(i).setOnClickListener(null);
                 }
             }
 
-            for (int k = i; i < imgs.size(); k++) {
+            for (int k = i; k < imgs.size(); k++) {
                 imgs.get(k).setVisibility(View.INVISIBLE);
             }
-//            switch (pQuestions.size()) {
-//                case 7:
-//                    break;
-//                case 6:
-//                    img7.setVisibility(View.INVISIBLE);
-//                    break;
-//                case 5:
-//                    img6.setVisibility(View.INVISIBLE);
-//                    img7.setVisibility(View.INVISIBLE);
-//                    break;
-//                case 4:
-//                    img5.setVisibility(View.INVISIBLE);
-//                    img6.setVisibility(View.INVISIBLE);
-//                    img7.setVisibility(View.INVISIBLE);
-//                    break;
-//                case 3:
-//                    img5.setVisibility(View.INVISIBLE);
-//                    img4.setVisibility(View.INVISIBLE);
-//                    img3.setVisibility(View.INVISIBLE);
-//                    img2.setVisibility(View.INVISIBLE);
-//                    break;
-//                case 2:
-//                    img7.setVisibility(View.INVISIBLE);
-//                    img6.setVisibility(View.INVISIBLE);
-//                    img5.setVisibility(View.INVISIBLE);
-//                    img4.setVisibility(View.INVISIBLE);
-//                    img3.setVisibility(View.INVISIBLE);
-//                    break;
-//                case 1:
-//                    img7.setVisibility(View.INVISIBLE);
-//                    img6.setVisibility(View.INVISIBLE);
-//                    img5.setVisibility(View.INVISIBLE);
-//                    img4.setVisibility(View.INVISIBLE);
-//                    img3.setVisibility(View.INVISIBLE);
-//                    img2.setVisibility(View.INVISIBLE);
-//                    break;
-//            }
         }
     }
 }

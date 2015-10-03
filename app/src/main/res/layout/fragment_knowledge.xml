@@ -1,0 +1,90 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             tools:context="com.almadev.znaniesila.fragments.KnowledgeFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:scrollbars="none"
+        android:layout_height="fill_parent"
+        android:background="@color/knowledge_transparent_bg">
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+            <ImageView
+                android:layout_alignParentTop="true"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/plate_txt"/>
+
+            <TextView
+                android:id="@+id/story_text"
+                android:layout_alignParentTop="true"
+                android:layout_width="match_parent"
+                android:layout_height="220dp"
+                android:layout_marginTop="40dp"
+                android:gravity="center"
+                android:text="@string/hello_blank_fragment"
+                android:textColor="@color/white"
+                android:textSize="16sp"/>
+
+            <ImageView
+                android:id="@+id/story_img"
+                android:layout_below="@id/story_text"
+                android:layout_width="wrap_content"
+                android:layout_height="220dp"
+                android:layout_marginTop="0dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="0dp"
+                android:layout_alignParentBottom="true"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/share_vk"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_marginRight="25dp"
+                    android:src="@drawable/vk_logo"/>
+
+                <ImageView
+                    android:layout_width="1dp"
+                    android:layout_height="60dp"
+                    android:layout_marginRight="25dp"
+                    android:src="@drawable/share_divider"/>
+
+                <ImageView
+                    android:id="@+id/share_fb"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_marginRight="25dp"
+                    android:src="@drawable/fb_logo"/>
+
+                <ImageView
+                    android:layout_width="1dp"
+                    android:layout_height="60dp"
+                    android:layout_marginRight="25dp"
+                    android:src="@drawable/share_divider"/>
+
+                <ImageView
+                    android:id="@+id/share_ok"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_marginRight="25dp"
+                    android:src="@drawable/ok_logo"/>
+
+            </LinearLayout>
+        </RelativeLayout>
+    </ScrollView>
+</FrameLayout>

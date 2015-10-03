@@ -13,4 +13,11 @@
     <item name="android:layout_centerHorizontal">true</item>
     <item name="android:layout_alignParentTop">true</item>
     </style>
+
+    <style name="Correct_text">
+        <item name="android:textSize">30sp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:layout_centerHorizontal">true</item>
+        <item name="android:layout_alignParentTop">true</item>
+    </style>
 </resources>

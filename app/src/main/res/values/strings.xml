@@ -3,7 +3,8 @@
 
     <string name="hello">Hello World, QuizAppActivity!</string>
     <string name="app_name">Знание - сила</string>
-    <string name="app_id">286312204670</string>
+    <!--<string name="app_id">286312204670</string>-->
+    <string name="app_id">543395344679</string>
 	<string name="no_categories">Please add Quiz Categories</string>
 	<string name="categories">Categories</string>
 	<string name="final_score">You have scored %d points</string>
@@ -25,4 +26,10 @@
     <string name="restore">Restore</string>
     <string name="quiz_skip_text">ПРОПУСТИТЬ</string>
     <string name="points_record">БАЛЛОВ НАБРАНО ВАМИ ИЗ %d</string>
+    <string name="title_activity_knwoledge_description">KnwoledgeDescription</string>
+    <string name="action_settings">Settings</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

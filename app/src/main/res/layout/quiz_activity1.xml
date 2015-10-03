@@ -171,4 +171,42 @@
         android:text="@string/quiz_skip_text"/>
 
 
+    <RelativeLayout
+        android:id="@+id/answer_result_layout"
+        android:layout_width="fill_parent"
+        android:visibility="gone"
+        android:layout_height="fill_parent">
+    <View
+        android:layout_width="fill_parent"
+        android:id="@+id/placeholder"
+        android:background="@color/placeholder"
+        android:layout_height="fill_parent"/>
+    
+    <TextView
+        android:id="@+id/correct_text"
+        android:layout_width="match_parent"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="150dp"
+        android:text="ПРАВИЛЬНО!"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:textColor="@color/correct_green"
+        android:textSize="30sp"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/answer_description"
+        android:layout_width="match_parent"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:text="Душа моя озарена бла бла бла бла бла бла бла бла бла бла бл абл абла бл а"
+        android:textStyle="normal"
+        android:gravity="center"
+        android:layout_below="@id/correct_text"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        android:layout_height="wrap_content"/>
+    </RelativeLayout>
 </RelativeLayout>

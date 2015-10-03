@@ -17,13 +17,14 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.almadev.znaniesila.model.Category;
 import com.almadev.znaniesila.utils.Constants;
 import com.chartboost.sdk.Chartboost;
 import com.google.android.gms.games.GamesClient;
 
 public class HAFinalScreen extends BaseGameActivity implements OnClickListener {
 
-    private String            mCategory;
+    private Category            mCategory;
     private int               mPoints;
     private SharedPreferences mPrefsmanager;
     public static final String HIGH_SCORES = "high_scores";
@@ -41,7 +42,7 @@ public class HAFinalScreen extends BaseGameActivity implements OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.final_screen);
-        mCategory = getIntent().getStringExtra(Constants.CATEGORY);
+        mCategory = (Category)getIntent().getSerializableExtra(Constants.CATEGORY);
         mPoints = getIntent().getIntExtra(Constants.POINTS, 0);
         mMaxPoints = getIntent().getIntExtra(Constants.MAX_POINTS, 0);
         mPrefsmanager = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
@@ -50,10 +51,10 @@ public class HAFinalScreen extends BaseGameActivity implements OnClickListener {
         rating = findViewById(R.id.leaderboard);
 
         SharedPreferences preferences = getSharedPreferences(HIGH_SCORES, MODE_PRIVATE);
-        int totalScore = preferences.getInt(mCategory, 0);
+        int totalScore = preferences.getInt(mCategory.getCategory_id(), 0);
 		if (totalScore < mPoints) {
 			Editor edit = preferences.edit();
-			edit.putInt(mCategory, mPoints);
+			edit.putInt(mCategory.getCategory_id(), mPoints);
 			edit.commit();
 		}
 
@@ -70,17 +71,18 @@ public class HAFinalScreen extends BaseGameActivity implements OnClickListener {
 		record_text = (TextView) findViewById(R.id.record);
 		HashMap<String, Integer> highScores = (HashMap<String, Integer>) preferences.getAll();
         int max = 0;
-		if (highScores != null && highScores.size() > 0) {
-			for (Integer score : highScores.values()) {
-                if (score > max) {
-                    max = score;
-                }
-            }
-		}
+//		if (highScores != null && highScores.size() > 0) {
+//			for (Integer score : highScores.values()) {
+//                if (score > max) {
+//                    max = score;
+//                }
+//            }
+//		}
+		max = highScores.get(mCategory.getCategory_id());
         record_text.setText(max + " БАЛЛОВ");
 		
 		TextView title = (TextView)findViewById(R.id.catname);
-		title.setText(mCategory);
+		title.setText(mCategory.getCategory_name());
 
 		TextView result = (TextView)findViewById(R.id.points);
 		result.setText("" + mPoints);
