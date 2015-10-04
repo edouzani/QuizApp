@@ -64,7 +64,7 @@ public class CategoriesDownloader {
                     e.printStackTrace();
                 }
 
-                if (response == null) {
+                if (response == null || (response.code() != 200 && response.code() != 304)) {
                     callback.downloadFinished(null, -1);
                     return;
                 }

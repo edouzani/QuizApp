@@ -7,7 +7,7 @@
     android:focusable="false"
     android:focusableInTouchMode="false"
     android:orientation="horizontal"
-    android:paddingLeft="8dip"
+    android:paddingLeft="@dimen/category_item_padding_side"
     android:paddingRight="8dip">
 
     <View
@@ -21,16 +21,16 @@
 
         <ImageView
             android:id="@+id/image"
-            android:layout_width="80dp"
-            android:layout_height="70dp"
+            android:layout_width="@dimen/category_item_img_width"
+            android:layout_height="@dimen/category_item_img_height"
             android:layout_alignParentLeft="true"
-            android:layout_margin="10dp"
+            android:layout_margin="@dimen/category_item_img_margin"
             android:scaleType="centerCrop"
             />
 
         <TextView
             android:id="@+id/name"
-            android:layout_width="175dp"
+            android:layout_width="@dimen/category_item_text_width"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_toRightOf="@id/image"
@@ -42,7 +42,7 @@
 
         <TextView
             android:id="@+id/description"
-            android:layout_width="175dp"
+            android:layout_width="@dimen/category_item_text_width"
             android:layout_height="wrap_content"
             android:layout_below="@id/name"
             android:layout_toRightOf="@id/image"
@@ -57,17 +57,19 @@
         android:layout_height="@dimen/category_item_height"
         android:layout_gravity="right">
 
-        <LinearLayout
-            android:layout_width="70dp"
+        <RelativeLayout
+            android:layout_width="@dimen/category_item_img_height"
             android:layout_height="match_parent"
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/record_text_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:layout_marginTop="10dp"
                 android:text="Рекорд"
+                android:layout_alignParentTop="true"
                 android:textColor="@color/white"
                 android:textSize="14sp"/>
 
@@ -75,23 +77,26 @@
                 android:id="@+id/record_value"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_below="@id/record_text_view"
                 android:gravity="center"
                 android:textColor="@color/white"
                 android:text="0"
                 android:textSize="30sp"/>
 
 
+            <!--android:layout_marginTop="@dimen/category_item_answered_question_margin_top"-->
             <TextView
                 android:id="@+id/answeredQuestions"
-                android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="0/100"
                 android:gravity="center"
+                android:layout_alignParentBottom="true"
                 android:textColor="@color/white"
+                android:layout_marginBottom="5dp"
                 android:textSize="20sp"
                 />
 
-        </LinearLayout>
+        </RelativeLayout>
     </RelativeLayout>
 </FrameLayout><!-- From: file:/D:/Android_Projects/QuizApp_Android%202.0/app/src/main/res/layout/quiz_category_item.xml -->

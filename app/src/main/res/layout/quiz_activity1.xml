@@ -5,21 +5,24 @@
                 android:layout_height="fill_parent"
                 android:background="@drawable/quest_bg">
 
-    <ImageView android:id="@+id/home"
-               android:layout_marginLeft="30dp"
-               android:layout_marginTop="30dp"
-               android:layout_width="36dp"
-               android:layout_height="36dp"
-               android:src="@drawable/back_icon"
-               android:layout_alignParentLeft="true" />
+    <ImageView
+        android:id="@+id/home"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="30dp"
+        android:src="@drawable/back_icon"/>
 
     <TextView
         android:id="@+id/cat_name"
+        style="@style/CatName_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
+        android:layout_marginLeft="10dp"
+        android:layout_toRightOf="@id/home"
         android:text="КОСМОС"
-        style="@style/CatName_text"
         />
 
     <TextView
@@ -29,50 +32,52 @@
         android:layout_marginLeft="@dimen/quiz_points_margin"
         android:layout_marginTop="@dimen/quiz_points_top_margin"
         android:gravity="center_horizontal"
-        android:textColor="#FFFFFF"
         android:text="2/5"
-        android:textStyle="bold"
-        android:textSize="40sp"/>
+        android:textColor="#FFFFFF"
+        android:textSize="40sp"
+        android:textStyle="bold"/>
+
     <TextView
         android:id="@+id/question_number_text"
         android:layout_width="@dimen/quiz_points_width"
-        android:gravity="center"
         android:layout_height="wrap_content"
-        android:layout_below="@id/question_number"
         android:layout_alignLeft="@id/question_number"
-        android:textColor="#FFFFFF"
+        android:layout_below="@id/question_number"
+        android:gravity="center"
         android:text="вопросов"
+        android:textColor="#FFFFFF"
         android:textSize="16sp"/>
 
     <com.almadev.znaniesila.ui.Timer
         android:id="@+id/timer"
-        android:layout_marginTop="@dimen/quiz_points_top_margin"
-        android:layout_centerHorizontal="true"
         android:layout_width="@dimen/quiz_points_width"
-        custom:circleColor="@color/dark"
-        android:layout_height="70dp"/>
+        android:layout_height="70dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/quiz_points_top_margin"
+        custom:circleColor="@color/dark"/>
 
     <TextView
         android:id="@+id/current_points"
         android:layout_width="@dimen/quiz_points_width"
         android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
         android:layout_marginRight="@dimen/quiz_points_margin"
         android:layout_marginTop="@dimen/quiz_points_top_margin"
-        android:layout_alignParentRight="true"
         android:gravity="center_horizontal"
-        android:textColor="#FFFFFF"
         android:text="5"
-        android:textStyle="bold"
-        android:textSize="40sp"/>
+        android:textColor="#FFFFFF"
+        android:textSize="40sp"
+        android:textStyle="bold"/>
+
     <TextView
         android:id="@+id/current_points_text"
         android:layout_width="@dimen/quiz_points_width"
         android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/current_points"
         android:layout_below="@id/current_points"
         android:gravity="center"
-        android:layout_alignLeft="@id/current_points"
-        android:textColor="#FFFFFF"
         android:text="баллов"
+        android:textColor="#FFFFFF"
         android:textSize="16sp"/>
 
 
@@ -85,35 +90,36 @@
     <View
         android:id="@+id/center"
         android:layout_width="0dp"
-        android:layout_centerInParent="true"
-        android:layout_height="0dp"/>
+        android:layout_height="0dp"
+        android:layout_centerInParent="true"/>
+
     <TextView
         android:id="@+id/question"
-        android:layout_below="@id/center"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:textColor="#FFFFFF"
-        android:text="Asdfsdfsdfsdfsdfsdfsdfsdfsd\nsdfsdfdfsdf\nsdfsdfsdfsdfsdf\nsdfsdfsdfsdf\nasdasdasd"
+        android:layout_below="@id/center"
         android:gravity="center"
+        android:text="Asdfsdfsdfsdfsdfsdfsdfsdfsd\nsdfsdfdfsdf\nsdfsdfsdfsdfsdf\nsdfsdfsdfsdf\nasdasdasd"
+        android:textColor="#FFFFFF"
         android:textSize="17sp"/>
 
     <Button
-        android:layout_width="@dimen/quiz_option_buttons_width"
         android:id="@+id/left_btn"
-        android:background="@drawable/btn_left"
+        android:layout_width="@dimen/quiz_option_buttons_width"
+        android:layout_height="@dimen/quiz_option_buttons_height"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_marginBottom="@dimen/quiz_option_buttons_margin_bottom"
-        android:layout_height="@dimen/quiz_option_buttons_height"/>
+        android:background="@drawable/btn_left"/>
 
     <Button
-        android:layout_width="@dimen/quiz_option_buttons_width"
         android:id="@+id/right_btn"
-        android:background="@drawable/btn_right"
+        android:layout_width="@dimen/quiz_option_buttons_width"
+        android:layout_height="@dimen/quiz_option_buttons_height"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_marginBottom="@dimen/quiz_option_buttons_margin_bottom"
-        android:layout_height="@dimen/quiz_option_buttons_height"/>
+        android:background="@drawable/btn_right"/>
 
 
     <com.almadev.znaniesila.ui.TwoTextButton
@@ -160,53 +166,59 @@
         android:textColor="#FFFFFF"
         android:visibility="gone"/>
 
-    <TextView
+    <FrameLayout
         android:id="@+id/next_question"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:textStyle="bold"
-        android:layout_marginBottom="50dp"
         android:layout_centerHorizontal="true"
-        android:text="@string/quiz_skip_text"/>
+        android:layout_marginBottom="50dp">
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/quiz_skip_text"
+            android:textStyle="bold"/>
+    </FrameLayout>
 
     <RelativeLayout
+        android:layout_width="fill_parent"
         android:id="@+id/answer_result_layout"
-        android:layout_width="fill_parent"
         android:visibility="gone"
-        android:layout_height="fill_parent">
-    <View
-        android:layout_width="fill_parent"
-        android:id="@+id/placeholder"
-        android:background="@color/placeholder"
-        android:layout_height="fill_parent"/>
-    
-    <TextView
-        android:id="@+id/correct_text"
-        android:layout_width="match_parent"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="150dp"
-        android:text="ПРАВИЛЬНО!"
-        android:textStyle="bold"
-        android:gravity="center"
-        android:textColor="@color/correct_green"
-        android:textSize="30sp"
-        android:layout_height="wrap_content"/>
+        android:layout_height="fill_parent"
+        >
 
-    <TextView
-        android:id="@+id/answer_description"
-        android:layout_width="match_parent"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
-        android:text="Душа моя озарена бла бла бла бла бла бла бла бла бла бла бл абл абла бл а"
-        android:textStyle="normal"
-        android:gravity="center"
-        android:layout_below="@id/correct_text"
-        android:textColor="@color/white"
-        android:textSize="24sp"
-        android:layout_height="wrap_content"/>
+        <View
+            android:id="@+id/placeholder"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="@color/placeholder"/>
+
+        <TextView
+            android:id="@+id/correct_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="100dp"
+            android:gravity="center"
+            android:text="ПРАВИЛЬНО!"
+            android:textColor="@color/correct_green"
+            android:textSize="30sp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/answer_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/correct_text"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="30dp"
+            android:gravity="center"
+            android:text="Душа моя озарена бла бла бла бла бла бла бла бла бла бла бл абл абла бл а"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="normal"/>
     </RelativeLayout>
 </RelativeLayout>

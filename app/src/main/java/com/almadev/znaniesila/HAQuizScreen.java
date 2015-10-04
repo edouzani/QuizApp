@@ -76,16 +76,16 @@ public class HAQuizScreen extends Activity implements OnClickListener, Callback,
     private int            mVideoHeight;
     private boolean mIsVideoSizeKnown       = false;
     private boolean mIsVideoReadyToBePlayed = false;
-    private DisplayMetrics    mMetrics;
-    private HandlerThread     mThread;
-    private SharedPreferences mPrefsManager;
-    private boolean           isStarting;
-    private TextView          mNextQuest;
-    private Chartboost        cb;
-    private Boolean           adSupportEnabled;
-    private Boolean           adsDisabledAfterPurchase;
-    private Timer             mTimer;
-    private int               maxPoints;
+    private DisplayMetrics      mMetrics;
+    private HandlerThread       mThread;
+    private SharedPreferences   mPrefsManager;
+    private boolean             isStarting;
+    private View                mNextQuest;
+    private Chartboost          cb;
+    private Boolean             adSupportEnabled;
+    private Boolean             adsDisabledAfterPurchase;
+    private Timer               mTimer;
+    private int                 maxPoints;
     private Timer.TimerCallback mTimerCallback;
 
     @Override
@@ -234,7 +234,7 @@ public class HAQuizScreen extends Activity implements OnClickListener, Callback,
         mOption3.setOnClickListener(this);
 
         findViewById(R.id.home).setOnClickListener(this);
-        mNextQuest = (TextView) findViewById(R.id.next_question);
+        mNextQuest = findViewById(R.id.next_question);
         mNextQuest.setOnClickListener(this);
 
         TextView catname = (TextView) findViewById(R.id.cat_name);
@@ -242,52 +242,11 @@ public class HAQuizScreen extends Activity implements OnClickListener, Callback,
     }
 
     private void setupData() {
-//		Intent intent = new Intent(this, MovieView.class);
-//		intent.putExtra("finish", true);
-//		startActivity(intent);
+        mTimer.stop();
         int animType = mPrefsManager.getInt(Constants.OPTIONS_ANIMATION, 1);
 
         mNextQuest.setEnabled(false);
 
-        mOption0.setBackgroundResource(R.drawable.options_button);
-        mOption1.setBackgroundResource(R.drawable.options_button);
-        mOption2.setBackgroundResource(R.drawable.options_button);
-        mOption3.setBackgroundResource(R.drawable.options_button);
-
-        mOption0.setVisibility(View.GONE);
-        mOption1.setVisibility(View.GONE);
-        mOption2.setVisibility(View.GONE);
-        mOption3.setVisibility(View.GONE);
-
-        mOption0.setAlternateText("1");
-        mOption1.setAlternateText("2");
-        mOption2.setAlternateText("3");
-        mOption3.setAlternateText("4");
-
-        mOption0.setGravity(Gravity.LEFT | Gravity.CENTER_VERTICAL);
-        mOption1.setGravity(Gravity.LEFT | Gravity.CENTER_VERTICAL);
-        mOption2.setGravity(Gravity.LEFT | Gravity.CENTER_VERTICAL);
-        mOption3.setGravity(Gravity.LEFT | Gravity.CENTER_VERTICAL);
-
-        mOption0.setTextColor(Color.WHITE);
-        mOption1.setTextColor(Color.WHITE);
-        mOption2.setTextColor(Color.WHITE);
-        mOption3.setTextColor(Color.WHITE);
-
-        ((LevelListDrawable) mOption0.getBackground()).setLevel(2);
-        ((LevelListDrawable) mOption1.getBackground()).setLevel(2);
-        ((LevelListDrawable) mOption2.getBackground()).setLevel(2);
-        ((LevelListDrawable) mOption3.getBackground()).setLevel(2);
-
-        int padding = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 50, mMetrics);
-        mOption0.setPadding(padding, 0, 0, 0);
-        mOption1.setPadding(padding, 0, 0, 0);
-        mOption2.setPadding(padding, 0, 0, 0);
-        mOption3.setPadding(padding, 0, 0, 0);
-
-//		if(mTimer != null) {
-//			mTimer.cancel();
-//		}
         if (mCurrentQuestion >= mQuestions.size()) {
             return;
         }
@@ -297,17 +256,7 @@ public class HAQuizScreen extends Activity implements OnClickListener, Callback,
         question.setState(QuestionState.VIEWED);
 
         if (question.getQuestion_type() == 4) {
-//			mOption0.setTextSize(TypedValue.COMPLEX_UNIT_SP, 22);
-//			mOption1.setTextSize(TypedValue.COMPLEX_UNIT_SP, 22);
-//
-//			float margin = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 20, mMetrics);
-//
-//			LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) mOption0.getLayoutParams();
-//			lp.topMargin = (int) margin;
-//			lp.bottomMargin = (int) margin;
-//
-//			lp = (LinearLayout.LayoutParams) mOption1.getLayoutParams();
-//			lp.bottomMargin = (int) margin;
+            //
         } else {
             mOption0.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
             mOption1.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
@@ -344,32 +293,7 @@ public class HAQuizScreen extends Activity implements OnClickListener, Callback,
         if (mSmallImage.getDrawable() != null) {
             mSmallImage.getDrawable().setCallback(null);
         }
-//		if(question.questionType == 1) {
-////			mSmallLayout.setVisibility(View.GONE);
-////			mLargeVideo.setVisibility(View.GONE);
-//		} else if(question.questionType == 2) {
-//			mSmallLayout.setVisibility(View.VISIBLE);
-//			mTapText.setText(R.string.tap_to_zoom);
-//			try {
-//				mSmallImage.setImageDrawable(Drawable.createFromStream(getAssets().open(
-//										"Quiz Data/Pictures_Or_Videos/Quiz_Category_" +
-//										mCategoryId + "/" + question.mediaName), null));
-//			} catch(Exception e) {
-//				e.printStackTrace();
-//			}
-//			if(mSmallImage.getDrawable() == null) {
-//				mSmallLayout.setVisibility(View.GONE);
-//			}
-//		} else if(question.questionType == 3) {
-//			mSmallLayout.setVisibility(View.VISIBLE);
-//			mTapText.setText(R.string.tap_to_play);
-//			File file = new File(getExternalCacheDir() + "/delete" + mCurrentQuestion);
-//			if(!file.exists()) {
-//				mSmallImage.setImageURI(Uri.fromFile(file));
-//			} else {
-//				mSmallImage.setImageResource(R.drawable.videooverlay);
-//			}
-//		} else
+
         if (question.getQuestion_type() == 4) {
 //			mSmallLayout.setVisibility(View.GONE);
 //			mLargeVideo.setVisibility(View.GONE);
@@ -424,6 +348,7 @@ public class HAQuizScreen extends Activity implements OnClickListener, Callback,
     };
 
     private void showFinalScreen() {
+        mTimer.stop();
         mQuizHolder.saveQuiz(mQuiz);
         Intent intent = null;
         intent = new Intent(this, HAFinalScreen.class);
@@ -445,7 +370,7 @@ public class HAQuizScreen extends Activity implements OnClickListener, Callback,
         Question question = mQuestions.get(mCurrentQuestion);
         if (question.getQuestion_type() != 4) {
             if (question.getAnswer() == option) {
-                mScore += question.getPoints();
+                mScore += mTimer.interpolatePoints(question.getPoints());
                 playSoundForAnswer(true);
                 isCorrect = true;
             } else {

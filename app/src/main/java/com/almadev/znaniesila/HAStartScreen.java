@@ -1,5 +1,7 @@
 package com.almadev.znaniesila;
 
+import com.crashlytics.android.Crashlytics;
+import io.fabric.sdk.android.Fabric;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -66,6 +68,7 @@ public class HAStartScreen extends BaseGameActivity implements OnClickListener{
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Fabric.with(this, new Crashlytics());
         setContentView(R.layout.main);
         mPrefsmanager = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         play_quiz = (Button) findViewById(R.id.play_quiz);
@@ -146,7 +149,7 @@ public class HAStartScreen extends BaseGameActivity implements OnClickListener{
         Log.e("Update", "fetching started");
         progressText = (TextView)findViewById(R.id.progressText);
         progressText.setVisibility(View.VISIBLE);
-        progressText.setText("0/" + QuizHolder.getInstance(this).getCategories().getCategories().size());
+        progressText.setText("Идет обновление викторин: 0/" + QuizHolder.getInstance(this).getCategories().getCategories().size());
 
 
         mQuestionsAdapter.fetchQuizes(this);

@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.almadev.znaniesila"
     android:versionCode="1"
+  android:installLocation="preferExternal"
     android:versionName="1.0" >
 
     <uses-sdk android:minSdkVersion="9" />
@@ -67,6 +68,9 @@
             android:screenOrientation="portrait"
             android:label="@string/title_activity_knwoledge_description" >
         </activity>
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="8c55be5eb3d4573c25f8350239df3642763a9d32" />
     </application>
 
 </manifest>

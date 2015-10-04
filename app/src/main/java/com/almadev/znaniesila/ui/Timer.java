@@ -94,7 +94,7 @@ public class Timer extends View {
 //        canvas.drawArc(oval, -90, time / 30 * 360, false, arcPaint);
 
         String timeStr = "" + (time / 1000 < 10 ? "0" + time / 1000 : time / 1000);
-        canvas.drawText( timeStr, viewWidthHalf - 30, viewHeightHalf + 20, fontPaint);
+        canvas.drawText( timeStr, viewWidthHalf - 35, viewHeightHalf + 20, fontPaint);
     }
 
     private void drawArc(Canvas canvas, float centerX, float centerY, float radius) {
@@ -139,6 +139,7 @@ public class Timer extends View {
     }
 
     private TimerCallback callback;
+    private int originalTime = 0;
     private       int time = 30;
     private final int spf  = 20;
 
@@ -155,10 +156,14 @@ public class Timer extends View {
         }
     };
 
+    public int interpolatePoints(int points) {
+        return Math.round(time / originalTime * points);
+    }
 
     void startAnimation(int seconds) {
 //        mAnimStartTime = SystemClock.uptimeMillis();
         time = seconds * 1000;
+        originalTime = seconds * 1000;
         mHandler.removeCallbacks(mTick);
         mHandler.post(mTick);
     }

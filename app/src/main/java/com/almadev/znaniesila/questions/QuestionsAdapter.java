@@ -46,6 +46,7 @@ public class QuestionsAdapter {
                 public void downloadFinished(final CategoriesList list, int code) {
                     if (list == null && code != 304) {
                         Log.e("QUIZ_DOWNLOADER", "download failed");
+                        EventBus.getDefault().postSticky(new QuizesUpdateFinishedEvent());
                         return;
                     }
                     if (code == 304) {
