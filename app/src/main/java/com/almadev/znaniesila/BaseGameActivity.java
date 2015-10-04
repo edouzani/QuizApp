@@ -99,6 +99,8 @@ public abstract class BaseGameActivity extends FragmentActivity implements
     protected void onCreate(Bundle b) {
         super.onCreate(b);
         mHelper = new GameHelper(this);
+        mDebugLog = true;
+        mDebugTag = "GameHelperMe";
         if (mDebugLog) {
             mHelper.enableDebugLog(mDebugLog, mDebugTag);
         }

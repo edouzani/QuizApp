@@ -13,6 +13,7 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.view.View;
 import android.webkit.WebView;
 import android.widget.TextView;
 
@@ -29,8 +30,16 @@ public class AboutScreen extends Activity{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.about_layout);
 
+        findViewById(R.id.home).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(final View pView) {
+                finish();
+            }
+        });
+
         webView = (WebView) findViewById(R.id.webView);
         webView.setBackgroundColor(Color.TRANSPARENT);
+        webView.getSettings().setJavaScriptEnabled(true);
 //        webView.set
         new Thread(new Runnable() {
             @Override
@@ -55,10 +64,16 @@ public class AboutScreen extends Activity{
 	}
 
     private void callback(final String html) {
-        this.runOnUiThread(new Runnable() {
+        this.runOnUiThread( new Runnable() {
             @Override
             public void run() {
-                webView.loadData(html, "text/html", "UTF-8");
+                String text = "<html><head>"
+                        + "<style type=\"text/css\">body{color: #fff;}"
+                        + "</style></head>"
+                        + "<body>"
+                        + html
+                        + "</body></html>";
+                webView.loadData(text, "text/html; charset=UTF-8", null);
             }
         });
     }

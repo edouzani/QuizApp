@@ -4,6 +4,7 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
@@ -37,7 +38,7 @@ import com.almadev.znaniesila.utils.RunningState;
 import com.almadev.znaniesila.utils.RunningState.QuizCategory;
 import com.chartboost.sdk.Chartboost;
 
-public class HACategoriesScreen extends ListActivity {
+public class HACategoriesScreen extends ListActivity implements View.OnClickListener {
 
 	private CategoryAdapter mAdapter;
 	private SharedPreferences mPrefsmanager;
@@ -57,13 +58,20 @@ public class HACategoriesScreen extends ListActivity {
 		setContentView(R.layout.quiz_categories_layout);
 		mPrefsmanager = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
-		List<Category> listItems = QuizHolder.getInstance(this).getCategories().getCategories();
+		List<Category> listItems = new LinkedList<>();
+        for (Category c : QuizHolder.getInstance(this).getCategories().getCategories()) {
+            if (c.getProductIdentifier() == null || c.getProductIdentifier().isEmpty()) {
+                listItems.add(c);
+            }
+        }
 		Collections.sort(listItems,new CategoryComparator());
 		mAdapter = new CategoryAdapter(new WeakReference<Context>(this), listItems);
 		setListAdapter(mAdapter);
 		
 		adSupportEnabled = mPrefsmanager.getBoolean(Constants.AD_SUPPORT_NEEDED,false);
 		adsDisabledAfterPurchase = mPrefsmanager.getBoolean(Constants.ADS_DISABLED_AFTER_PURCHASE,false);
+
+		findViewById(R.id.home).setOnClickListener(this);
 	}
 	
 	@Override
@@ -125,7 +133,16 @@ public class HACategoriesScreen extends ListActivity {
 		startActivity(intent);
 		finish();
 	}
-	
+
+	@Override
+	public void onClick(final View pView) {
+		switch (pView.getId()) {
+            case R.id.home:
+                finish();
+                break;
+        }
+	}
+
 	private static class CategoryAdapter extends BaseAdapter {
 
 		private List<Category> mData;

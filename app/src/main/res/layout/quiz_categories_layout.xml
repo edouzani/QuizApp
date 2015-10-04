@@ -21,21 +21,22 @@
 
             <ImageView
                 android:id="@+id/home"
-                android:layout_margin="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="20dp"
                 android:layout_width="40dp"
                 android:scaleType="centerInside"
-                android:background="@drawable/ic_home_normal"
+                android:src="@drawable/icon_home"
                 android:layout_height="40dp"/>
 
             <TextView
                 android:textColor="@color/white"
                 android:textSize="20sp"
+                android:layout_alignBottom="@id/home"
                 android:text="ВЫБЕРИТЕ КАТЕГОРИЮ"
                 android:id="@+id/title"
-                android:layout_centerVertical="true"
                 android:layout_width="match_parent"
                 android:gravity="center"
-                android:layout_height="match_parent"/>
+                android:layout_height="40dp"/>
         </RelativeLayout>
 
         <ListView
@@ -68,4 +69,5 @@
                 android:textSize="16sp"/>
         </LinearLayout>
     </LinearLayout>
+
 </FrameLayout>

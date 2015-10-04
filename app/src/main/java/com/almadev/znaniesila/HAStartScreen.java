@@ -379,7 +379,7 @@ public class HAStartScreen extends BaseGameActivity implements OnClickListener{
 		Log.d("Google Play Game Services", "Sign In Successful. Submitting scores");
 		if(mGamesClient!=null){
 			 try{
-				 startActivityForResult(mGamesClient.getAllLeaderboardsIntent(), 1);
+//				 startActivityForResult(mGamesClient.getAllLeaderboardsIntent(), 1);
 			 }catch(Exception e){
 				 Log.d("Google Play Game Services", "Problem connecting to playservices");
 				 e.printStackTrace();

@@ -6,10 +6,21 @@
     android:orientation="vertical" >
 
     <ImageView
-        android:layout_margin="20dp"
+        android:layout_margin="30dp"
         android:layout_width="40dp"
         android:scaleType="centerInside"
-        android:background="@drawable/ic_home_normal"
+        android:src="@drawable/icon_home"
+        android:id="@+id/home"
+        android:layout_height="40dp"/>
+
+    <TextView
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:layout_alignBottom="@id/home"
+        android:text="О ПРОГРАММЕ"
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:gravity="center"
         android:layout_height="40dp"/>
 
 	<WebView

@@ -42,10 +42,8 @@ import com.almadev.znaniesila.model.QuizHolder;
 import com.almadev.znaniesila.ui.Timer;
 import com.almadev.znaniesila.ui.TwoTextButton;
 import com.almadev.znaniesila.utils.Constants;
-import com.almadev.znaniesila.videoplayer.MovieView;
+import com.almadev.znaniesila.utils.LeaderboardConverter;
 import com.chartboost.sdk.Chartboost;
-
-import org.w3c.dom.Text;
 
 public class HAQuizScreen extends Activity implements OnClickListener, Callback,
                                                       OnBufferingUpdateListener, OnCompletionListener {
@@ -88,6 +86,7 @@ public class HAQuizScreen extends Activity implements OnClickListener, Callback,
     private Boolean           adsDisabledAfterPurchase;
     private Timer             mTimer;
     private int               maxPoints;
+    private Timer.TimerCallback mTimerCallback;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -145,6 +144,7 @@ public class HAQuizScreen extends Activity implements OnClickListener, Callback,
                 this.cb.onCreate(this, appId, appSecret, null);
             }
         }
+        mTimerCallback = new TimerCallbackImpl();
     }
 
     @Override
@@ -195,6 +195,14 @@ public class HAQuizScreen extends Activity implements OnClickListener, Callback,
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         Log.d(TAG, "!inside onActivityResult, request code: " + requestCode + ", result code: " + resultCode);
+    }
+
+    class TimerCallbackImpl implements Timer.TimerCallback {
+
+        @Override
+        public void onTimer() {
+            findViewById(R.id.next_question).callOnClick();
+        }
     }
 
     private void setupViews() {
@@ -379,7 +387,7 @@ public class HAQuizScreen extends Activity implements OnClickListener, Callback,
                 anim.setDuration(600);
                 mRightBtn.startAnimation(anim);
 
-                mTimer.startAnim();
+                mTimer.start(question.getDuration_in_seconds(), mTimerCallback);
             }
 
             mOption0.setAlternateText("");
@@ -420,7 +428,7 @@ public class HAQuizScreen extends Activity implements OnClickListener, Callback,
         Intent intent = null;
         intent = new Intent(this, HAFinalScreen.class);
         intent.putExtra(Constants.CATEGORY, mCategory);
-        intent.putExtra(Constants.LEADERBOARD_ID, mCategory.getLeaderboard_id());
+        intent.putExtra(Constants.LEADERBOARD_ID, LeaderboardConverter.getLeaderboard(this, mCategory.getLeaderboard_id()));
         intent.putExtra(Constants.POINTS, mScore);
         intent.putExtra(Constants.MAX_POINTS, maxPoints);
         startActivity(intent);
@@ -433,7 +441,7 @@ public class HAQuizScreen extends Activity implements OnClickListener, Callback,
         }
         boolean isCorrect = false;
 
-        mTimer.stopAnim();
+        mTimer.stop();
         Question question = mQuestions.get(mCurrentQuestion);
         if (question.getQuestion_type() != 4) {
             if (question.getAnswer() == option) {
@@ -559,7 +567,7 @@ public class HAQuizScreen extends Activity implements OnClickListener, Callback,
         switch (v.getId()) {
             case R.id.next_question:
                 mCurrentQuestion++;
-                mTimer.stopAnim();
+                mTimer.stop();
                 if (mCurrentQuestion < maxQuestions) {
                     setupData();
                 } else {

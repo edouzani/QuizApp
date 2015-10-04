@@ -1,6 +1,8 @@
 package com.almadev.znaniesila.fragments;
 
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
@@ -15,7 +17,7 @@ import com.almadev.znaniesila.R;
  * Use the {@link KnowledgeFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class KnowledgeFragment extends Fragment {
+public class KnowledgeFragment extends Fragment implements View.OnClickListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_STORY = "param1";
@@ -63,8 +65,35 @@ public class KnowledgeFragment extends Fragment {
         // Inflate the layout for this fragment
         View root = inflater.inflate(R.layout.fragment_knowledge, container, false);
         ((TextView)root.findViewById(R.id.story_text)).setText(mStory);
+
+        root.findViewById(R.id.share_fb).setOnClickListener(this);
+        root.findViewById(R.id.share_vk).setOnClickListener(this);
+        root.findViewById(R.id.share_ok).setOnClickListener(this);
         return root;
     }
 
 
+    @Override
+    public void onClick(final View pView) {
+        String comments = mStory;
+        switch(pView.getId()) {
+            case R.id.share_fb:
+                Intent shareIntentFb = new Intent(Intent.ACTION_VIEW,
+                                                  Uri.parse("https://www.facebook.com/sharer/sharer.php?u=http://www.znanie.tv"));
+                startActivity(shareIntentFb);
+                break;
+            case R.id.share_vk:
+                Intent shareIntentVk = new Intent(Intent.ACTION_VIEW,
+                                                  Uri.parse("http://vk.com/share.php?url=http://www.znanie.tv/&title=Знание-сила!" +
+                                                                    "&description=" + comments + "&image=http://www.znanie.tv/zshare.jpg&noparse=true"));
+                startActivity(shareIntentVk);
+                break;
+            case R.id.share_ok:
+                Intent shareIntentOk = new Intent(Intent.ACTION_VIEW,
+                                                  Uri.parse("http://www.odnoklassniki.ru/dk?st.cmd=addShare&st.s=1&"
+                                                                    + "st.comments=" + comments + "&st._surl=http://www.znanie.tv/"));
+                startActivity(shareIntentOk);
+                break;
+        }
+    }
 }

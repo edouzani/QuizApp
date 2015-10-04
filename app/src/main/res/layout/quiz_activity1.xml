@@ -166,7 +166,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:textStyle="bold"
-        android:layout_marginBottom="30dp"
+        android:layout_marginBottom="50dp"
         android:layout_centerHorizontal="true"
         android:text="@string/quiz_skip_text"/>
 

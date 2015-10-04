@@ -24,9 +24,14 @@ public class Timer extends View {
     private Paint paint;
     private Paint arcPaint;
     private Paint wedgePaint;
+    private Paint fontPaint;
 
     //circle and text colors
     private int circleCol, labelCol;
+
+    public interface TimerCallback {
+        void onTimer();
+    }
 
     public Timer(final Context context, final AttributeSet attrs) {
         super(context, attrs);
@@ -35,6 +40,11 @@ public class Timer extends View {
 
         arcPaint = new Paint();
         wedgePaint = new Paint();
+        fontPaint = new Paint();
+        fontPaint.setTextSize(60);
+        fontPaint.setStyle(Paint.Style.FILL);
+        fontPaint.setColor(Color.WHITE);
+
 //        Shader gradient = new SweepGradient(0, getMeasuredHeight() / 2, Color.RED, Color.WHITE);
 //        arcPaint.setShader(new LinearGradient(0, 0, 0, getHeight(), Color.GREEN, Color.BLACK, Shader.TileMode.MIRROR));
 //        arcPaint.setShader(gradient);
@@ -59,28 +69,16 @@ public class Timer extends View {
     protected void onDraw(final Canvas canvas) {
 //        super.onDraw(canvas);
         //get half of the width and height as we are working with a circle
-        int viewWidthHalf = this.getMeasuredWidth()/2;
-        int viewHeightHalf = this.getMeasuredHeight()/2;
+        int viewWidthHalf = this.getMeasuredWidth() / 2;
+        int viewHeightHalf = this.getMeasuredHeight() / 2;
 
         //get the radius as half of the width or height, whichever is smaller
         //subtract ten so that it has some space around it
         int radius = 0;
-        if(viewWidthHalf>viewHeightHalf)
-            radius=viewHeightHalf-10;
+        if (viewWidthHalf > viewHeightHalf)
+            radius = viewHeightHalf - 10;
         else
-            radius=viewWidthHalf-10;
-
-        arcPaint.setShader(new RadialGradient(viewWidthHalf, viewHeightHalf, radius,
-                                              new int[]{Color.BLACK, Color.GREEN}, null,
-                                              Shader.TileMode.MIRROR));
-        arcPaint.setStyle(Paint.Style.STROKE);
-        arcPaint.setStrokeWidth(6);
-
-        wedgePaint.setShader(new RadialGradient(viewWidthHalf, viewHeightHalf, radius,
-                                              new int[]{Color.GREEN, Color.BLACK}, null,
-                                              Shader.TileMode.MIRROR));
-        wedgePaint.setStyle(Paint.Style.FILL);
-        wedgePaint.setStrokeWidth(0);
+            radius = viewWidthHalf - 10;
 
         paint.setStrokeWidth(6);
         paint.setStyle(Paint.Style.STROKE);
@@ -91,44 +89,76 @@ public class Timer extends View {
 
         canvas.drawCircle(viewWidthHalf, viewHeightHalf, radius, paint);
 
-        RectF oval = new RectF(viewWidthHalf - radius ,
-                               viewHeightHalf - radius,
-                               viewWidthHalf + radius ,
-                               viewHeightHalf + radius
-                               );
 
-        RectF smallOval = new RectF(viewWidthHalf - radius - 3,
-                               viewHeightHalf - radius - 3,
-                               viewWidthHalf + radius - 3 ,
-                               viewHeightHalf + radius - 3
+//        canvas.drawArc(oval, -90, time / 30 * 360, true, wedgePaint);
+//        canvas.drawArc(oval, -90, time / 30 * 360, false, arcPaint);
+
+        String timeStr = "" + (time / 1000 < 10 ? "0" + time / 1000 : time / 1000);
+        canvas.drawText( timeStr, viewWidthHalf - 30, viewHeightHalf + 20, fontPaint);
+    }
+
+    private void drawArc(Canvas canvas, float centerX, float centerY, float radius) {
+        arcPaint.setShader(new RadialGradient(centerX, centerY, radius,
+                                              new int[]{Color.BLACK, Color.GREEN}, null,
+                                              Shader.TileMode.MIRROR));
+        arcPaint.setStyle(Paint.Style.STROKE);
+        arcPaint.setStrokeWidth(6);
+
+        RectF oval = new RectF(centerX - radius,
+                               centerY - radius,
+                               centerX + radius,
+                               centerY + radius
         );
 
-        canvas.drawArc(oval, -90, time / 30 * 360, true, wedgePaint);
         canvas.drawArc(oval, -90, time / 30 * 360, false, arcPaint);
-
     }
 
-    public void startAnim() {
-        startAnimation();
+    private void drawWedge(Canvas canvas, float centerX, float centerY, float radius) {
+        wedgePaint.setShader(new RadialGradient(centerX, centerY, radius,
+                                                new int[]{Color.GREEN, Color.BLACK}, null,
+                                                Shader.TileMode.MIRROR));
+        wedgePaint.setStyle(Paint.Style.FILL);
+        wedgePaint.setStrokeWidth(0);
+
+        RectF oval = new RectF(centerX - radius,
+                               centerY - radius,
+                               centerX + radius,
+                               centerY + radius
+        );
+
+        canvas.drawArc(oval, -90, time / 30 * 360, false, wedgePaint);
     }
 
-    public void stopAnim() {
+    public void start(int seconds, TimerCallback pCallback) {
+        this.callback = pCallback;
+        startAnimation(seconds);
+    }
+
+    public void stop() {
         stopAnimation();
     }
 
-    private int time = 30;
+    private TimerCallback callback;
+    private       int time = 30;
+    private final int spf  = 20;
+
     Handler  mHandler = new Handler();
     Runnable mTick    = new Runnable() {
         public void run() {
-            time--;
+            time -= spf;
             invalidate();
-            mHandler.postDelayed(this, 20); // 20ms == 60fps
+            if (time <= 0) {
+                callback.onTimer();
+            } else {
+                mHandler.postDelayed(this, spf); // 20ms == 60fps
+            }
         }
     };
 
 
-    void startAnimation() {
+    void startAnimation(int seconds) {
 //        mAnimStartTime = SystemClock.uptimeMillis();
+        time = seconds * 1000;
         mHandler.removeCallbacks(mTick);
         mHandler.post(mTick);
     }

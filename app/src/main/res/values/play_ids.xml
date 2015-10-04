@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Google Play game services IDs.
+Save this file as res/values/games-ids.xml in your project.
+-->
+<resources>
+    <string name="achievement_10">CgkIp-KLp-gPEAIQAg</string>
+    <string name="achievement_5inarow">CgkIp-KLp-gPEAIQAw</string>
+    <string name="achievement_fullcat">CgkIp-KLp-gPEAIQBA</string>
+    <string name="achievement_fullquiz">CgkIp-KLp-gPEAIQBQ</string>
+    <string name="achievement_3cat">CgkIp-KLp-gPEAIQBg</string>
+    <string name="leaderboard_kosmos">CgkIp-KLp-gPEAIQCQ</string>
+    <string name="leaderboard_izobretenie">CgkIp-KLp-gPEAIQCg</string>
+    <string name="leaderboard_body">CgkIp-KLp-gPEAIQCw</string>
+    <string name="leaderboard_su_mults">CgkIp-KLp-gPEAIQDA</string>
+    <string name="leaderboard_rus_show">CgkIp-KLp-gPEAIQDQ</string>
+    <string name="leaderboard_rus_movie">CgkIp-KLp-gPEAIQDg</string>
+    <string name="leaderboard_brands">CgkIp-KLp-gPEAIQDw</string>
+</resources>
