@@ -134,20 +134,31 @@ public class Timer extends View {
         startAnimation(seconds);
     }
 
+    public void pause() {
+        isPaused = true;
+    }
+
+    public void run() {
+        isPaused = false;
+    }
+
     public void stop() {
         stopAnimation();
     }
 
+    private boolean isPaused = false;
     private TimerCallback callback;
-    private int originalTime = 0;
-    private       int time = 30;
-    private final int spf  = 20;
+    private       int originalTime = 0;
+    private       int time         = 30;
+    private final int spf          = 20;
 
     Handler  mHandler = new Handler();
     Runnable mTick    = new Runnable() {
         public void run() {
-            time -= spf;
-            invalidate();
+            if (!isPaused) {
+                time -= spf;
+                invalidate();
+            }
             if (time <= 0) {
                 callback.onTimer();
             } else {

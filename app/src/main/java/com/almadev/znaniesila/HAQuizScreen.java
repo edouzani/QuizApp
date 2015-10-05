@@ -170,6 +170,12 @@ public class HAQuizScreen extends Activity implements OnClickListener, Callback,
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        mTimer.run();
+    }
+
+    @Override
     protected void onDestroy() {
         super.onDestroy();
 
@@ -181,6 +187,7 @@ public class HAQuizScreen extends Activity implements OnClickListener, Callback,
         if (adSupportEnabled && this.cb != null && !adsDisabledAfterPurchase) {
             this.cb.onStop(this);
         }
+        mTimer.stop();
     }
 
     @Override
@@ -253,7 +260,9 @@ public class HAQuizScreen extends Activity implements OnClickListener, Callback,
         Question question = mQuestions.get(mCurrentQuestion);
 
         maxPoints += question.getPoints();
-        question.setState(QuestionState.VIEWED);
+        if (question.getState() != QuestionState.CORRECT) {
+            question.setState(QuestionState.VIEWED);
+        }
 
         if (question.getQuestion_type() == 4) {
             //
@@ -385,7 +394,9 @@ public class HAQuizScreen extends Activity implements OnClickListener, Callback,
                 playSoundForAnswer(true);
                 isCorrect = true;
             } else {
-                question.setState(QuestionState.WRONG);
+                if (question.getState() != QuestionState.CORRECT) {
+                    question.setState(QuestionState.WRONG);
+                }
                 mScore -= question.getNegative_points();
                 playSoundForAnswer(false);
                 isCorrect = false;
@@ -554,6 +565,7 @@ public class HAQuizScreen extends Activity implements OnClickListener, Callback,
         super.onPause();
         releaseMediaPlayer();
         doCleanUp();
+        mTimer.pause();
     }
 
     private void releaseMediaPlayer() {

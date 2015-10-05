@@ -25,6 +25,8 @@ import java.io.OutputStream;
 import java.io.StreamCorruptedException;
 import java.io.Writer;
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Created by Aleksey on 25.09.2015.
@@ -168,6 +170,28 @@ public class QuizHolder {
 
         mCategoriesList = list;
         setQuizVersion(list.getVersion());
+    }
+
+    public List<Category> getPassedCategories() {
+        List<Category> res = new LinkedList<>();
+        Quiz qQuiz;
+        for (Category c : getCategories().getCategories()) {
+            qQuiz = getQuiz(c.getCategory_id());
+            if (qQuiz.getAnsweredQuestions() == qQuiz.getQuestions().size()) {
+                res.add(c);
+            }
+        }
+        return res;
+    }
+
+    public List<Category> getPurchasableCategories() {
+        List<Category> res = new LinkedList<>();
+        for (Category c : getCategories().getCategories()) {
+            if (c.getPrice() != null && !c.getPrice().isEmpty() && !c.isPurchased()) {
+                res.add(c);
+            }
+        }
+        return res;
     }
 
     public CategoriesList getCategories() {

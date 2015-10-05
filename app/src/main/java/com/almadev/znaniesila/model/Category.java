@@ -17,8 +17,9 @@ public class Category implements Serializable {
     private String category_image_path;
     private int category_questions_max_limit;
     private String productIdentifier;
-
+    private String price;
     private int record;
+    private boolean isPurchased = false;
 
     public String getCategory_color() {
         return category_color;
@@ -54,5 +55,21 @@ public class Category implements Serializable {
 
     public String getProductIdentifier() {
         return productIdentifier;
+    }
+
+    public String getPrice() {
+        return price;
+    }
+
+    public void setPrice(String pPrice) {
+        price = pPrice;
+    }
+
+    public boolean isPurchased() {
+        return isPurchased;
+    }
+
+    public void setIsPurchased(boolean pIsPurchased) {
+        isPurchased = pIsPurchased;
     }
 }

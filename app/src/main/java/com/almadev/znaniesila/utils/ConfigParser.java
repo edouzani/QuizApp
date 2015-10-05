@@ -10,6 +10,8 @@ import android.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.almadev.znaniesila.BuildConfig;
+
 public class ConfigParser {
 	
 	private static RunningState mState;
@@ -21,7 +23,9 @@ public class ConfigParser {
 	}
 	
 	public void parse(String data) {
-		Log.d("Parser", data);
+		if (BuildConfig.DEBUG) {
+			Log.d("Parser", data);
+		}
 		resetPreferences();
 		try {
 			JSONObject jObject = new JSONObject(data);
