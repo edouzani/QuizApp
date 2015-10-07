@@ -252,6 +252,8 @@ public class HAQuizScreen extends Activity implements OnClickListener, Callback,
         mTimer.stop();
         int animType = mPrefsManager.getInt(Constants.OPTIONS_ANIMATION, 1);
 
+        mLeftBtn.setBackgroundResource(R.drawable.btn_left);
+        mRightBtn.setBackgroundResource(R.drawable.btn_right);
         mNextQuest.setEnabled(false);
 
         if (mCurrentQuestion >= mQuestions.size()) {
@@ -389,11 +391,22 @@ public class HAQuizScreen extends Activity implements OnClickListener, Callback,
             }
         } else {
             if (question.getAnswer() == option) {
+                if (option == 1) {
+                    mLeftBtn.setBackgroundResource(R.drawable.btn_left_true);
+                } else if (option == 0){
+                    mRightBtn.setBackgroundResource(R.drawable.btn_right_true);
+                }
                 question.setState(QuestionState.CORRECT);
                 mScore += question.getPoints();
                 playSoundForAnswer(true);
                 isCorrect = true;
             } else {
+                if (option == 1) {
+                    mLeftBtn.setBackgroundResource(R.drawable.btn_left_false);
+                } else if (option == 0){
+                    mRightBtn.setBackgroundResource(R.drawable.btn_right_false);
+                }
+
                 if (question.getState() != QuestionState.CORRECT) {
                     question.setState(QuestionState.WRONG);
                 }
@@ -410,8 +423,14 @@ public class HAQuizScreen extends Activity implements OnClickListener, Callback,
         mLeftBtn.setEnabled(false);
         mRightBtn.setEnabled(false);
 
-        showAnswerDescription(isCorrect, question);
-
+        final boolean finalIsCorrect = isCorrect;
+        final Question finalQuestion = question;
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                showAnswerDescription(finalIsCorrect, finalQuestion);
+            }
+        }, 200);
     }
 
     private void showAnswerDescription(boolean correct, Question question) {

@@ -64,7 +64,7 @@ public class HAFinalScreen extends BaseGameActivity implements OnClickListener {
         } else {
             beginUserInitiatedSignIn();
             mGamesClient = this.getGamesClient();
-            Log.d("Google Play Game Services", "mGamesClient=" + mGamesClient);
+            Log.d("GplayServices", "mGamesClient=" + mGamesClient);
             rating.setVisibility(View.VISIBLE);
         }
 
@@ -156,11 +156,11 @@ public class HAFinalScreen extends BaseGameActivity implements OnClickListener {
                 startActivityForResult(mGamesClient.getLeaderboardIntent(leaderBoard_Id), 1);
 //                startActivityForResult(mGamesClient.getAllLeaderboardsIntent(), 1);
             } catch (Exception e) {
-                Log.d("Google Play Game Services", "Problem connecting to playservices");
+                Log.d("GplayServices", "Problem connecting to playservices");
                 e.printStackTrace();
             }
         } else {
-            Log.d("Google Play Game Services", "Still not connected");
+            Log.d("GplayServices", "Still not connected");
         }
     }
 
@@ -249,14 +249,14 @@ public class HAFinalScreen extends BaseGameActivity implements OnClickListener {
     @Override
     public void onSignInFailed() {
         // TODO Auto-generated method stub
-        Log.d("Google Play Game Services", "Sign In Failed");
+        Log.d("GplayServices", "Sign In Failed");
 
     }
 
     @Override
     public void onSignInSucceeded() {
         // TODO Auto-generated method stub
-        Log.d("Google Play Game Services", "Sign In Successful. Submitting scores");
+        Log.d("GplayServices", "Sign In Successful. Submitting scores");
         if (mPoints <= 0)
             mPoints = 0;
         mGamesClient.submitScore(leaderBoard_Id, mPoints);

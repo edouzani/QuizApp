@@ -6,13 +6,13 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Random;
 
 import android.app.ListActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -21,11 +21,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,14 +31,10 @@ import com.almadev.znaniesila.billing.utils.IabHelper;
 import com.almadev.znaniesila.billing.utils.IabResult;
 import com.almadev.znaniesila.billing.utils.Inventory;
 import com.almadev.znaniesila.billing.utils.Purchase;
-import com.almadev.znaniesila.model.CategoriesList;
 import com.almadev.znaniesila.model.Category;
-import com.almadev.znaniesila.model.Question;
 import com.almadev.znaniesila.model.Quiz;
 import com.almadev.znaniesila.model.QuizHolder;
 import com.almadev.znaniesila.utils.Constants;
-import com.almadev.znaniesila.utils.RunningState;
-import com.almadev.znaniesila.utils.RunningState.QuizCategory;
 import com.chartboost.sdk.Chartboost;
 
 public class HACategoriesScreen extends ListActivity implements View.OnClickListener {
@@ -67,10 +61,12 @@ public class HACategoriesScreen extends ListActivity implements View.OnClickList
         Intent intent = getIntent();
         pContext = this;
         isKnowledgeCats = intent.getBooleanExtra(Constants.CATEGORY_FOR_KNOWLEDGE, false);
-        if (isKnowledgeCats) {
-            ///
-        }
         setContentView(R.layout.quiz_categories_layout);
+
+        if (isKnowledgeCats) {
+            findViewById(R.id.purchasable_cats).setVisibility(View.GONE);
+        }
+
         mPrefsmanager = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
         fetchCategories();
@@ -155,12 +151,16 @@ public class HACategoriesScreen extends ListActivity implements View.OnClickList
             intent = new Intent(this, KnowledgeActivity.class);
             intent.putExtra(Constants.CATEGORY, category);
         } else {
+            if (category.isPurchased() == false && category.getProductIdentifier() != null &&
+                    !category.getProductIdentifier().isEmpty()) {
+
+                mHelper.launchPurchaseFlow(this, category.getProductIdentifier(), 10001,
+                                           mPurchaseFinishedListener, "");
+                return;
+            }
             intent = new Intent(this, HAQuizScreen.class);
             intent.putExtra(Constants.CATEGORY_ID, category.getCategory_id());
         }
-
-        mHelper.launchPurchaseFlow(this, SKU_REMOVE_ADS, 10001,
-                                   mPurchaseFinishedListener, "");
 
         startActivity(intent);
         finish();
@@ -291,6 +291,10 @@ public class HACategoriesScreen extends ListActivity implements View.OnClickList
 
             numberAnswered.setText(qQuiz.getAnsweredQuestions() + "/" + qQuiz.getQuestions().size());
             description.setText(qCategory.getCategory_description());
+
+            ProgressBar progressBar = (ProgressBar) root.findViewById(R.id.category_progress_bar);
+            progressBar.setMax(qQuiz.getQuestions().size());
+            progressBar.setProgress(qQuiz.getAnsweredQuestions());
 
             try {
                 Drawable d = Drawable.createFromStream(wContext.get().getAssets().open(

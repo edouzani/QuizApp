@@ -15,6 +15,7 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.View;
 import android.webkit.WebView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import java.io.IOException;
@@ -24,7 +25,7 @@ public class AboutScreen extends Activity{
 	private TextView aboutText;
 	private SharedPreferences mPrefsmanager;
     private WebView webView;
-
+    private ProgressBar mProgressBar;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -36,6 +37,7 @@ public class AboutScreen extends Activity{
                 finish();
             }
         });
+        mProgressBar = (ProgressBar) findViewById(R.id.about_progress);
 
         webView = (WebView) findViewById(R.id.webView);
         webView.setBackgroundColor(Color.TRANSPARENT);
@@ -74,6 +76,7 @@ public class AboutScreen extends Activity{
                         + html
                         + "</body></html>";
                 webView.loadData(text, "text/html; charset=UTF-8", null);
+                mProgressBar.setVisibility(View.GONE);
             }
         });
     }

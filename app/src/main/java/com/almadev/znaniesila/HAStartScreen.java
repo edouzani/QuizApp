@@ -1,6 +1,7 @@
 package com.almadev.znaniesila;
 
 import com.almadev.znaniesila.model.Category;
+import com.almadev.znaniesila.network.SecurityChecker;
 import com.crashlytics.android.Crashlytics;
 
 import io.fabric.sdk.android.Fabric;
@@ -120,6 +121,8 @@ public class HAStartScreen extends BaseGameActivity implements OnClickListener {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        SecurityChecker.get.start();
     }
 
     public void onEventMainThread(QuizDownloadedEvent e) {

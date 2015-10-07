@@ -23,8 +23,8 @@ android {
         applicationId "com.almadev.znaniesila"
         minSdkVersion 15
         targetSdkVersion 21
-        versionCode 5
-        versionName "1.1"
+        versionCode 6
+        versionName "1.2"
     }
 
     signingConfigs {
@@ -43,7 +43,7 @@ android {
         release {
             debuggable false
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.release
         }
 
