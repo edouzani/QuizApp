@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/quest_bg"
+                android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/home"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_margin="30dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/icon_home"/>
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_alignBottom="@id/home"
+        android:gravity="center"
+        android:text="НАСТРОЙКИ"
+        android:textColor="@color/white"
+        android:textSize="20sp"/>
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@id/title"
+        android:layout_marginTop="40dp">
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp">
+
+            <TextView
+                android:id="@+id/textMute"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ЗВУК"
+                android:textColor="@color/white"
+                android:textSize="30sp"/>
+
+            <android.support.v7.widget.SwitchCompat
+                android:id="@+id/soundSwitch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@id/textMute"
+
+                android:layout_alignParentRight="true"/>
+        </RelativeLayout>
+    </ScrollView>
+</RelativeLayout>

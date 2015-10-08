@@ -501,7 +501,8 @@ public class HAQuizScreen extends Activity implements OnClickListener, Callback,
 
     private void playSoundForAnswer(boolean isCorrect) //send YES if answer is correct No if wrong. Also call this method for True false questions too.
     {
-        boolean playSound = mPrefsManager.getBoolean(Constants.PLAY_SOUND_ON_ANSWERING, false);
+//        boolean playSound = mPrefsManager.getBoolean(Constants.PLAY_SOUND_ON_ANSWERING, false);
+        boolean playSound = mPrefsManager.getBoolean(Constants.SOUND_ON, true);
 
         if (playSound) {
             MediaPlayer player;

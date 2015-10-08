@@ -84,6 +84,7 @@ public class HAStartScreen extends BaseGameActivity implements OnClickListener {
         worldScoreButton = (Button) findViewById(R.id.world_score);
         worldScoreButton.setOnClickListener(this);
         findViewById(R.id.wiki).setOnClickListener(this);
+        findViewById(R.id.settings).setOnClickListener(this);
 
         parseConfig();
 
@@ -250,19 +251,21 @@ public class HAStartScreen extends BaseGameActivity implements OnClickListener {
             case R.id.world_score:
                 beginUserInitiatedSignIn();
                 mGamesClient = this.getGamesClient();
-                Log.d("Google Play Game Services", "mGamesClient=" + mGamesClient);
+                Log.d("GPLay services", "mGamesClient=" + mGamesClient);
                 if (mGamesClient != null) {
                     try {
                         startActivityForResult(mGamesClient.getAllLeaderboardsIntent(), 1);
                     } catch (Exception e) {
-                        Log.d("Google Play Game Services", "Problem connecting to playservices");
+                        Log.d("GPLay services", "Problem connecting to playservices");
                         e.printStackTrace();
                     }
                 } else {
-                    Log.d("Google Play Game Services", "Still not connected");
+                    Log.d("GPLay services", "Still not connected");
                 }
                 break;
-
+            case R.id.settings:
+                startActivity(new Intent(this, SettingsActivity.class));
+                break;
         }
     }
 
@@ -277,19 +280,19 @@ public class HAStartScreen extends BaseGameActivity implements OnClickListener {
     @Override
     public void onSignInFailed() {
         // TODO Auto-generated method stub
-        Log.d("Google Play Game Services", "Sign In Failed");
+        Log.d("GPLay services", "Sign In Failed");
 
     }
 
     @Override
     public void onSignInSucceeded() {
         // TODO Auto-generated method stub
-        Log.d("Google Play Game Services", "Sign In Successful. Submitting scores");
+        Log.d("GPLay services", "Sign In Successful. Submitting scores");
         if (mGamesClient != null) {
             try {
 //				 startActivityForResult(mGamesClient.getAllLeaderboardsIntent(), 1);
             } catch (Exception e) {
-                Log.d("Google Play Game Services", "Problem connecting to playservices");
+                Log.d("GPLay services", "Problem connecting to playservices");
                 e.printStackTrace();
             }
         }

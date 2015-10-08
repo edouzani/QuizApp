@@ -1,8 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Theme.TransparencyDemo" parent="@android:style/Theme.Black.NoTitleBar">
+    <style name="Theme.TransparencyDemo" parent="Theme.AppCompat.NoActionBar">
+        <item name="colorPrimary">@color/placeholder</item>
+        <item name="colorPrimaryDark">@color/dark</item>
+        <item name="colorAccent">@color/white</item>
 
+        <!-- Active thumb color & Active track color(30% transparency) -->
+        <item name="colorControlActivated">@color/white</item>
+        <!-- Inactive thumb color -->
+        <!--<item name="colorSwitchThumbNormal">@color/grey300</item>-->
+        <!-- Inactive track color(30% transparency) -->
+        <!--<item name="android:colorForeground">@color/grey600</item>-->
     </style>
 
     <style name="knowledge_cell_text">

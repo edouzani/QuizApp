@@ -178,6 +178,7 @@ public class HACategoriesScreen extends ListActivity implements View.OnClickList
                 findViewById(R.id.home).setVisibility(View.INVISIBLE);
                 findViewById(R.id.back).setVisibility(View.VISIBLE);
                 findViewById(R.id.passed).setVisibility(View.INVISIBLE);
+                findViewById(R.id.restore).setVisibility(View.VISIBLE);
                 mAdapter.setItems(true, QuizHolder.getInstance(this).getPurchasableCategories());
                 mAdapter.notifyDataSetChanged();
                 break;
@@ -187,6 +188,7 @@ public class HACategoriesScreen extends ListActivity implements View.OnClickList
                 findViewById(R.id.home).setVisibility(View.VISIBLE);
                 findViewById(R.id.back).setVisibility(View.GONE);
                 findViewById(R.id.passed).setVisibility(View.VISIBLE);
+                findViewById(R.id.restore).setVisibility(View.GONE);
                 fetchCategories();
                 mAdapter.setItems(false, mListItems);
                 mAdapter.notifyDataSetChanged();
@@ -207,15 +209,6 @@ public class HACategoriesScreen extends ListActivity implements View.OnClickList
                     e.printStackTrace();
                 }
                 break;
-//
-//			case R.id.remove_ads :
-//				try{
-//					mHelper.launchPurchaseFlow(this, SKU_REMOVE_ADS, 10001,
-//							mPurchaseFinishedListener, "");
-//				}catch(Exception e){
-//					e.printStackTrace();
-//				}
-//				break;
         }
     }
 
