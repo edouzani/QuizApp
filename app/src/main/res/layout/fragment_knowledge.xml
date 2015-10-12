@@ -30,7 +30,7 @@
                 android:layout_height="220dp"
                 android:layout_marginTop="40dp"
                 android:gravity="center"
-                android:text="@string/hello_blank_fragment"
+                android:text=""
                 android:textColor="@color/white"
                 android:textSize="16sp"/>
 
@@ -53,34 +53,34 @@
 
                 <ImageView
                     android:id="@+id/share_vk"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
+                    android:layout_width="@dimen/social_share_button_size"
+                    android:layout_height="@dimen/social_share_button_size"
                     android:layout_marginRight="25dp"
                     android:src="@drawable/vk_logo"/>
 
                 <ImageView
                     android:layout_width="1dp"
-                    android:layout_height="60dp"
+                    android:layout_height="@dimen/social_share_button_size"
                     android:layout_marginRight="25dp"
                     android:src="@drawable/share_divider"/>
 
                 <ImageView
                     android:id="@+id/share_fb"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
+                    android:layout_width="@dimen/social_share_button_size"
+                    android:layout_height="@dimen/social_share_button_size"
                     android:layout_marginRight="25dp"
                     android:src="@drawable/fb_logo"/>
 
                 <ImageView
                     android:layout_width="1dp"
-                    android:layout_height="60dp"
+                    android:layout_height="@dimen/social_share_button_size"
                     android:layout_marginRight="25dp"
                     android:src="@drawable/share_divider"/>
 
                 <ImageView
                     android:id="@+id/share_ok"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
+                    android:layout_width="@dimen/social_share_button_size"
+                    android:layout_height="@dimen/social_share_button_size"
                     android:layout_marginRight="25dp"
                     android:src="@drawable/ok_logo"/>
 

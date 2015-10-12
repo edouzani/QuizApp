@@ -264,12 +264,14 @@ public class IabHelper {
 
         Intent serviceIntent = new Intent("com.android.vending.billing.InAppBillingService.BIND");
         serviceIntent.setPackage("com.android.vending");
-        if (!mContext.getPackageManager().queryIntentServices(serviceIntent, 0).isEmpty()) {
+        if (mContext.getPackageManager().queryIntentServices(serviceIntent, 0) != null &&
+                !mContext.getPackageManager().queryIntentServices(serviceIntent, 0).isEmpty()) {
             // service available to handle that Intent
             mContext.bindService(serviceIntent, mServiceConn, Context.BIND_AUTO_CREATE);
         }
         else {
             // no service available to handle that Intent
+            mDisposed = true;
             if (listener != null) {
                 listener.onIabSetupFinished(
                         new IabResult(BILLING_RESPONSE_RESULT_BILLING_UNAVAILABLE,
@@ -285,6 +287,9 @@ public class IabHelper {
      * disposed of, it can't be used again.
      */
     public void dispose() {
+        if (mDisposed) {
+            return;
+        }
         logDebug("Disposing.");
         mSetupDone = false;
         if (mServiceConn != null) {

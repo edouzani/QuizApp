@@ -20,6 +20,7 @@ public class Question implements Serializable {
     private int question_type;
     private String story_order_id;
     private String story;
+    private boolean isStoryViewed = false;
 
     private QuestionState state = QuestionState.UNDEF;
 
@@ -77,5 +78,13 @@ public class Question implements Serializable {
 
     public void setLocal_id(int id) {
         local_id = id;
+    }
+
+    public boolean isStoryViewed() {
+        return isStoryViewed;
+    }
+
+    public void setIsStoryViewed(boolean pIsStoryViewed) {
+        isStoryViewed = pIsStoryViewed;
     }
 }

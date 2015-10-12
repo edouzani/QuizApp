@@ -24,4 +24,5 @@
     <dimen name="category_item_img_margin">10dp</dimen>
     <dimen name="category_item_text_width">175dp</dimen>
     <dimen name="category_item_answered_question_margin_top">0dp</dimen>
+    <dimen name="social_share_button_size">40dp</dimen>
 </resources>

@@ -7,6 +7,7 @@ import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.graphics.Color;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.v13.app.FragmentPagerAdapter;
@@ -23,6 +24,7 @@ import com.almadev.znaniesila.fragments.KnowledgeFragment;
 import com.almadev.znaniesila.model.Category;
 import com.almadev.znaniesila.model.Question;
 import com.almadev.znaniesila.model.QuestionState;
+import com.almadev.znaniesila.model.Quiz;
 import com.almadev.znaniesila.model.QuizHolder;
 import com.almadev.znaniesila.utils.Constants;
 import com.astuetz.PagerSlidingTabStrip;
@@ -37,6 +39,14 @@ public class KnowledgeActivity extends Activity implements View.OnClickListener 
     private ViewPager            mViewPager;
     private SectionsPagerAdapter mSectionsPagerAdapter;
     private List<Question>       mQuestions;
+    private PagerSlidingTabStrip mTabs;
+    private Quiz                 mQuiz;
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        QuizHolder.getInstance(this).saveQuiz(mQuiz);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +55,8 @@ public class KnowledgeActivity extends Activity implements View.OnClickListener 
 
         Intent intent = getIntent();
         mCategory = (Category) intent.getSerializableExtra(Constants.CATEGORY);
-        mQuestions = QuizHolder.getInstance(this).getQuiz(mCategory.getCategory_id()).getQuestions();
+        mQuiz = QuizHolder.getInstance(this).getQuiz(mCategory.getCategory_id());
+        mQuestions = mQuiz.getQuestions();
         ((TextView) findViewById(R.id.catname)).setText(mCategory.getCategory_name());
 
         findViewById(R.id.home).setOnClickListener(this);
@@ -54,9 +65,10 @@ public class KnowledgeActivity extends Activity implements View.OnClickListener 
 
         mViewPager = (ViewPager) findViewById(R.id.containerPager);
         mViewPager.setAdapter(mSectionsPagerAdapter);
-        PagerSlidingTabStrip tabs = (PagerSlidingTabStrip) findViewById(R.id.tabs);
-        tabs.setViewPager(mViewPager);
-        tabs.setOnPageChangeListener(new PagerChangeListener());
+
+        mTabs = (PagerSlidingTabStrip) findViewById(R.id.tabs);
+        mTabs.setViewPager(mViewPager);
+        mTabs.setOnPageChangeListener(new PagerChangeListener());
 
         initRecycle();
 
@@ -96,7 +108,7 @@ public class KnowledgeActivity extends Activity implements View.OnClickListener 
                             return;
                         }
                     }
-                    for (int i = mQuestions.size(); i > position; i--) {
+                    for (int i = mQuestions.size() - 1; i > position; i--) {
                         if (mQuestions.get(i).getState() == QuestionState.CORRECT) {
                             mViewPager.setCurrentItem(i);
                             return;
@@ -104,6 +116,7 @@ public class KnowledgeActivity extends Activity implements View.OnClickListener 
                     }
                 }
             } else {
+                mQuestions.get(position).setIsStoryViewed(true);
                 mViewPager.setCurrentItem(position);
             }
         }
@@ -125,7 +138,8 @@ public class KnowledgeActivity extends Activity implements View.OnClickListener 
         @Override
         public Fragment getItem(int position) {
             // getItem is called to instantiate the fragment for the given page.
-            // Return a PlaceholderFragment (defined as a static inner class below).
+            // Return a PlaceholderFragment (defined as a static inner class below)
+            //
             String story = mQuestions.get(position).getStory();
             return KnowledgeFragment.newInstance(story == null ? mQuestions.get(position).getCorrect_ans_explanation() : story, "");
         }
@@ -144,25 +158,33 @@ public class KnowledgeActivity extends Activity implements View.OnClickListener 
         @Override
         public View getCustomTabView(final ViewGroup parent, final int position) {
             View tab = LayoutInflater.from(context).inflate(R.layout.knowledge_tab, parent, false);
-            if (mQuestions.get(position).getState() != QuestionState.CORRECT) {
-                tab.findViewById(R.id.psts_tab_title).setAlpha(0.2f);
+            Question question = mQuestions.get(position);
+            TextView tabTitle = (TextView)tab.findViewById(R.id.tab_title);
+            tabTitle.setText(getPageTitle(position));
+
+            if (question.getState() != QuestionState.CORRECT) {
+                tabTitle.setAlpha(0.2f);
                 tab.setEnabled(false);
             }
+            if (question.isStoryViewed()) {
+                tabTitle.setTextColor(getResources().getColor(R.color.gold));
+            }
+
+
             return tab;
-//            View root = inflater.inflate(R.layout.fragment_knowledge, parent, false);
-//            return root;
         }
 
         @Override
         public void tabSelected(final View tab) {
             tab.findViewById(R.id.hexagon).setVisibility(View.VISIBLE);
-            ((TextView)tab.findViewById(R.id.psts_tab_title)).setTextSize(40);
+            ((TextView)tab.findViewById(R.id.tab_title)).setTextSize(40);
+            ((TextView)tab.findViewById(R.id.tab_title)).setTextColor(getResources().getColor(R.color.gold));
         }
 
         @Override
         public void tabUnselected(final View tab) {
             tab.findViewById(R.id.hexagon).setVisibility(View.INVISIBLE);
-            ((TextView)tab.findViewById(R.id.psts_tab_title)).setTextSize(20);
+            ((TextView)tab.findViewById(R.id.tab_title)).setTextSize(20);
         }
     }
 

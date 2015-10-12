@@ -322,7 +322,10 @@ public class HACategoriesScreen extends ListActivity implements View.OnClickList
                 public void onIabSetupFinished(IabResult result) {
                     if (!result.isSuccess()) {
                         // Oh noes, there was a problem.
+
                         Log.d(TAG, "Problem setting up In-app Billing: " + result);
+
+                        return;
                     } else {
                         // Hooray, IAB is fully set up!
                         Log.d(TAG, "Setup is sucessful " + result);
@@ -341,7 +344,9 @@ public class HACategoriesScreen extends ListActivity implements View.OnClickList
                             @Override
                             public void onQueryInventoryFinished(final IabResult result, final Inventory inv) {
                                 Log.e(TAG, result.getMessage());
-
+                                if (inv == null) {
+                                    return;
+                                }
                                 for (Category c : payCats) {
                                     if (inv.hasDetails(c.getProductIdentifier())) {
                                         String[] priceArray = inv.getSkuDetails(c.getProductIdentifier()).getPrice().split("\\s");
