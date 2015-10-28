@@ -3,6 +3,7 @@ package com.almadev.znaniesila.model;
 import android.content.Context;
 import android.util.Log;
 
+import com.almadev.znaniesila.BuildConfig;
 import com.almadev.znaniesila.questions.QuestionsAdapter;
 import com.google.gson.Gson;
 
@@ -39,9 +40,9 @@ public class QuizHolder {
 
     private volatile static QuizHolder instance = null;
 
-    private CategoriesList        mCategoriesList = null;
-    private HashMap<String, Quiz> quizes          = new HashMap<>();
-    private static String quizVersion = "0";
+    private        CategoriesList        mCategoriesList = null;
+    private        HashMap<String, Quiz> quizes          = new HashMap<>();
+    private static String                quizVersion     = "0";
 
     private QuizHolder(Context context) {
 //        questionsDir = new File(context.getExternalFilesDir(null).getAbsolutePath() + File.separatorChar + QUESTIONS_DIR);
@@ -78,6 +79,15 @@ public class QuizHolder {
         if (!questionsDir.exists()) {
             questionsDir.mkdirs();
         }
+
+        Quiz local = getQuiz(quiz.getId());
+        if (local != null) {
+            if (BuildConfig.DEBUG) {
+                Log.i("QuizHolder", "merging quiz#" + quiz.getId());
+            }
+            quiz = mergeQuizes(local, quiz);
+        }
+
         try {
             quizFile.createNewFile();
 
@@ -94,12 +104,25 @@ public class QuizHolder {
         quizes.put(quiz.getId(), quiz);
     }
 
+    private Quiz mergeQuizes(Quiz local, Quiz remote) {
+        for (Question mQuestion : local.getQuestions()) {
+            Question remoteQuestion = remote.getById(mQuestion.getStory_order_id());
+            if (remoteQuestion != null) {
+                remoteQuestion.setState(mQuestion.getState());
+                remoteQuestion.setIsStoryViewed(mQuestion.isStoryViewed());
+            }
+        }
+        return remote;
+    }
+
+
     public void clear() {
         deleteAllQuizes();
         final File categoriesListFile = new File(questionsDir.getAbsolutePath(), CATEGORIES_LIST_FILE);
         if (categoriesListFile.exists()) {
             categoriesListFile.delete();
         }
+        mCategoriesList = null;
     }
 
     public void deleteAllQuizes() {
@@ -130,7 +153,7 @@ public class QuizHolder {
             InputStream buffer = new BufferedInputStream(file);
             ObjectInput input = new ObjectInputStream(buffer);
 
-            quiz = (Quiz)input.readObject();
+            quiz = (Quiz) input.readObject();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
             return null;
@@ -211,7 +234,7 @@ public class QuizHolder {
             InputStream buffer = new BufferedInputStream(file);
             ObjectInput input = new ObjectInputStream(buffer);
 
-            list = (CategoriesList)input.readObject();
+            list = (CategoriesList) input.readObject();
             if (list != null) {
                 setQuizVersion(list.getVersion());
             } else {

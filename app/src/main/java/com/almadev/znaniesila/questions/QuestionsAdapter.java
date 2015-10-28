@@ -68,7 +68,7 @@ public class QuestionsAdapter {
                 CategoriesList list = QuizHolder.getInstance(context).getCategories();
                 try {
                     for (Category c : list.getCategories()) {
-                        if (getQuiz("" + c.getCategory_id()) == null) {
+                        if (getQuiz("" + c.getCategory_id(), true) == null) {
                             EventBus.getDefault().post(new QuizesUpdateFailedEvent());
                             return;
                         }
@@ -83,30 +83,25 @@ public class QuestionsAdapter {
         }).start();
     }
 
-    public void getQuiz(final String id, final QuizGetCallback callback) throws IOException {
+    public void getQuiz(final String id, final boolean forceDownload, final QuizGetCallback callback) throws IOException {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                Quiz quiz = QuizHolder.getInstance(mContext).getQuiz(id);
-
-                if (quiz != null) {
-                    callback.callback(quiz);
-                } else {
-                    quiz = CategoriesDownloader.downloadQuiz(id);
-                    if (quiz == null) {
-                        Log.e("QUIZ_DOWNLOADER", "download failed");
-                        callback.callback(null);
-                        return;
-                    }
-                    QuizHolder.getInstance(mContext).saveQuiz(quiz);
-                    callback.callback(quiz);
+                try {
+                    callback.callback(getQuiz(id, forceDownload));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    callback.callback(null);
                 }
             }
         }).start();
     }
 
-    public Quiz getQuiz(final String id) throws IOException {
-        Quiz quiz = QuizHolder.getInstance(mContext).getQuiz(id);
+    public Quiz getQuiz(final String id, final boolean forceDownload) throws IOException {
+        Quiz quiz = null;
+        if (!forceDownload) {
+            quiz = QuizHolder.getInstance(mContext).getQuiz(id);
+        }
 
         if (quiz != null) {
             return quiz;
@@ -120,4 +115,6 @@ public class QuestionsAdapter {
             return quiz;
         }
     }
+
+
 }

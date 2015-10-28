@@ -2,6 +2,7 @@ package com.almadev.znaniesila.network;
 
 import android.util.Log;
 
+import com.almadev.znaniesila.BuildConfig;
 import com.almadev.znaniesila.events.NeedUpdateQuizesEvent;
 import com.almadev.znaniesila.model.CategoriesList;
 import com.almadev.znaniesila.model.Question;
@@ -79,6 +80,7 @@ public class CategoriesDownloader {
                     String jsonStr = response.body().string();
                     list = new Gson().fromJson(jsonStr, CategoriesList.class);
                     list.setVersion(response.header(ETAG_HEADER));
+//                    list.setVersion("39");
                     quizHolder.saveCategories(list);
                     EventBus.getDefault().post(new NeedUpdateQuizesEvent(list.getVersion()));
                 } catch (IOException e) {
@@ -96,7 +98,7 @@ public class CategoriesDownloader {
 
         Request request = new Request.Builder().url(Constants.API_CATEGORY + quizId + ".json")
                                                .addHeader(QZ_VERSION_HEADER, QuizHolder.getQuizVersion())
-//                                               .addHeader(QZ_VERSION_HEADER, "34")
+//                                               .addHeader(QZ_VERSION_HEADER, "39")
                                                .addHeader("Content-Type", "application/json").build();
 
         Response response = null;
@@ -113,6 +115,9 @@ public class CategoriesDownloader {
         Quiz quiz = null;
         try {
             String jsonStr = response.body().string();
+//            if (BuildConfig.DEBUG) {
+//                Log.i("QUIZ_DOWNLOADER " + quizId, jsonStr);
+//            }
             quiz = new Gson().fromJson(jsonStr, Quiz.class);
             quiz.setId(quizId);
         } catch (IOException e) {

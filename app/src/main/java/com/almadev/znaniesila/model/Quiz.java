@@ -59,4 +59,13 @@ public class Quiz implements Serializable {
             Questions.get(q.getLocal_id()).setState(q.getState());
         }
     }
+
+    public Question getById(String id) {
+        for (Question q : Questions) {
+            if (q.getStory_order_id().equals(id)) {
+                return q;
+            }
+        }
+        return null;
+    }
 }

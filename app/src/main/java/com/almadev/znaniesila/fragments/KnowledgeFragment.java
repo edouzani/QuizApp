@@ -8,9 +8,11 @@ import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.almadev.znaniesila.R;
+import com.squareup.picasso.Picasso;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -65,6 +67,8 @@ public class KnowledgeFragment extends Fragment implements View.OnClickListener 
         // Inflate the layout for this fragment
         View root = inflater.inflate(R.layout.fragment_knowledge, container, false);
         ((TextView)root.findViewById(R.id.story_text)).setText(mStory);
+        Picasso.with(root.getContext()).load(mImgUrl).
+                into((ImageView) root.findViewById(R.id.story_img));
 
         root.findViewById(R.id.share_fb).setOnClickListener(this);
         root.findViewById(R.id.share_vk).setOnClickListener(this);

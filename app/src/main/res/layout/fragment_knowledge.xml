@@ -27,7 +27,8 @@
                 android:id="@+id/story_text"
                 android:layout_alignParentTop="true"
                 android:layout_width="match_parent"
-                android:layout_height="220dp"
+                android:layout_height="wrap_content"
+                android:minHeight="220dp"
                 android:layout_marginTop="40dp"
                 android:gravity="center"
                 android:text=""
@@ -38,6 +39,8 @@
                 android:id="@+id/story_img"
                 android:layout_below="@id/story_text"
                 android:layout_width="wrap_content"
+                android:scaleType="centerInside"
+                android:layout_centerHorizontal="true"
                 android:layout_height="220dp"
                 android:layout_marginTop="0dp"/>
 

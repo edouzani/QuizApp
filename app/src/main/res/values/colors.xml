@@ -5,7 +5,8 @@
     <color name="white">#ffffff</color>
     <color name="correct_green">#34d614</color>
     <color name="wrong_red">#d61424</color>
-    <color name="placeholder">#e38a98c4</color>
+    <color name="placeholder">#e34783D0</color>
     <color name="gold">#e09323</color>
     <color name="knowledge_transparent_bg">#af11244f</color>
+    <color name="dark_transparent_bg">#e9091838</color>
 </resources>

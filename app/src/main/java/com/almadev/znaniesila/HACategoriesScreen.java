@@ -54,6 +54,7 @@ public class HACategoriesScreen extends ListActivity implements View.OnClickList
     private TextView          mTitle;
     private List<String>      additionalSkuList;
     private Context pContext;
+    private boolean haveCategories = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,14 +70,20 @@ public class HACategoriesScreen extends ListActivity implements View.OnClickList
 
         mPrefsmanager = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
+        findViewById(R.id.home).setOnClickListener(this);
+        adSupportEnabled = mPrefsmanager.getBoolean(Constants.AD_SUPPORT_NEEDED, false);
+        adsDisabledAfterPurchase = mPrefsmanager.getBoolean(Constants.ADS_DISABLED_AFTER_PURCHASE, false);
+
+        if (QuizHolder.getInstance(this).getCategories() == null ||
+                QuizHolder.getInstance(this).getCategories().getCategories() == null) {
+            Toast.makeText(this, "Ошибка при загрузке категорий. Возможно отсутствует интернет. Включите интернет и перезапустите приложение.", Toast.LENGTH_LONG).show();
+            haveCategories = false;
+            return;
+        }
         fetchCategories();
         mAdapter = new CategoryAdapter(new WeakReference<Context>(this), mListItems);
         setListAdapter(mAdapter);
 
-        adSupportEnabled = mPrefsmanager.getBoolean(Constants.AD_SUPPORT_NEEDED, false);
-        adsDisabledAfterPurchase = mPrefsmanager.getBoolean(Constants.ADS_DISABLED_AFTER_PURCHASE, false);
-
-        findViewById(R.id.home).setOnClickListener(this);
         findViewById(R.id.purchasable_cats).setOnClickListener(this);
         findViewById(R.id.back).setOnClickListener(this);
         findViewById(R.id.passed).setOnClickListener(this);
@@ -103,7 +110,9 @@ public class HACategoriesScreen extends ListActivity implements View.OnClickList
             this.cb.onStart(this);
             this.cb.startSession();
         }
-        initIAB(this);
+        if (haveCategories) {
+            initIAB(this);
+        }
     }
 
     @Override
@@ -264,6 +273,9 @@ public class HACategoriesScreen extends ListActivity implements View.OnClickList
 
             Category qCategory = getItem(position);
             Quiz qQuiz = QuizHolder.getInstance(convertiView.getContext()).getQuiz(qCategory.getCategory_id());
+            if (qQuiz == null) {
+                return new View(parent.getContext());
+            }
             root.setBackgroundColor(Color.parseColor("#" + qCategory.getCategory_color().trim()));
             name.setText(qCategory.getCategory_name());
 

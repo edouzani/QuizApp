@@ -3,7 +3,7 @@
     android:id="@+id/category_item_layout"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="@dimen/category_item_height"
+    android:layout_height="@dimen/category_item_plus_progress"
     android:focusable="false"
     android:focusableInTouchMode="false"
     android:orientation="horizontal"
@@ -63,6 +63,18 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/price"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_marginTop="10dp"
+                android:text="69,90 руб."
+                android:layout_alignParentTop="true"
+                android:textColor="@color/white"
+                android:visibility="gone"
+                android:textSize="25sp"/>
+
+            <TextView
                 android:id="@+id/record_text_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -99,4 +111,15 @@
 
         </RelativeLayout>
     </RelativeLayout>
+
+
+    <ProgressBar
+        android:progressDrawable="@drawable/category_progress"
+        android:id="@+id/category_progress_bar"
+        android:layout_marginTop="@dimen/category_item_height"
+        android:max="100"
+        android:indeterminate="false"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"/>
 </FrameLayout><!-- From: file:/D:/Android_Projects/QuizApp_Android%202.0/app/src/main/res/layout/quiz_category_item.xml -->

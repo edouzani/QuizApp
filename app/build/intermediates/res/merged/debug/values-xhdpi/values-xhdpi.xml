@@ -6,5 +6,6 @@
     <dimen name="left_offset1">24dip</dimen>
     <dimen name="left_offset2">18dip</dimen>
     <dimen name="progress_bar_max_height">15dip</dimen>
+    <dimen name="question_number_text_size">40sp</dimen>
     <dimen name="top_offset">1dip</dimen>
 </resources>

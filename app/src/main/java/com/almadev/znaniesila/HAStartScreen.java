@@ -112,16 +112,12 @@ public class HAStartScreen extends BaseGameActivity implements OnClickListener {
 
         QuizHolder quizHolder = QuizHolder.getInstance(this);
         mQuestionsAdapter = new QuestionsAdapter(this);
-        try {
-            mQuestionsAdapter.getCategories(new QuestionsAdapter.CategoriesGetCallback() {
-                @Override
-                public void getCategories(final CategoriesList list) {
-                    //close splash
-                }
-            }, true);
-        } catch (IOException e) {
-            e.printStackTrace();
+
+        String versionText = BuildConfig.VERSION_CODE + "/" + BuildConfig.VERSION_NAME;
+        if (BuildConfig.DEBUG) {
+            versionText += "-test";
         }
+        ((TextView)findViewById(R.id.versionText)).setText(versionText);
 
         SecurityChecker.get.start();
     }
@@ -134,8 +130,8 @@ public class HAStartScreen extends BaseGameActivity implements OnClickListener {
     }
 
     public void onEventMainThread(NeedUpdateQuizesEvent e) {
-        //open splash
         Log.e("Update", "fetching started");
+        Log.e("Update", "updating to version " + e.getVersion());
         progressText = (TextView) findViewById(R.id.progressText);
         progressText.setVisibility(View.VISIBLE);
         progressText.setText("Идет обновление викторин: 0/" + QuizHolder.getInstance(this).getCategories().getCategories().size());
@@ -145,15 +141,18 @@ public class HAStartScreen extends BaseGameActivity implements OnClickListener {
 
     public void onEventMainThread(QuizesUpdateFinishedEvent e) {
         findViewById(R.id.splash).setVisibility(View.GONE);
+        if (!BuildConfig.DEBUG) {
+            findViewById(R.id.versionText).setVisibility(View.GONE);
+        }
         findViewById(R.id.progressText).setVisibility(View.GONE);
         Log.e("Update", "update finished");
     }
 
 
     public void onEventMainThread(QuizesUpdateFailedEvent e) {
-//        findViewById(R.id.splash).setVisibility(View.GONE);
-//        findViewById(R.id.progressText).setVisibility(View.GONE);
         Log.e("Update", "update failed");
+        QuizHolder.getInstance(this).clear();
+
         Toast.makeText(this, "Ошибка загрузки. Попробуйте открыть приложение позднее", Toast.LENGTH_SHORT).show();
 
         Handler mHandler = new Handler(this.getMainLooper());
@@ -180,7 +179,18 @@ public class HAStartScreen extends BaseGameActivity implements OnClickListener {
     @Override
     protected void onResume() {
         super.onResume();
-
+        try {
+            findViewById(R.id.splash).setVisibility(View.VISIBLE);
+            findViewById(R.id.versionText).setVisibility(View.VISIBLE);
+            mQuestionsAdapter.getCategories(new QuestionsAdapter.CategoriesGetCallback() {
+                @Override
+                public void getCategories(final CategoriesList list) {
+                    //close splash
+                }
+            }, true);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

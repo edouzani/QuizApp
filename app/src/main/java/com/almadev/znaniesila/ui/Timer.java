@@ -4,16 +4,20 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.LinearGradient;
+import android.graphics.ColorFilter;
+import android.graphics.ColorMatrix;
+import android.graphics.ColorMatrixColorFilter;
 import android.graphics.Paint;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffXfermode;
 import android.graphics.RadialGradient;
 import android.graphics.RectF;
 import android.graphics.Shader;
-import android.graphics.SweepGradient;
 import android.os.Handler;
-import android.os.SystemClock;
 import android.util.AttributeSet;
+import android.util.DisplayMetrics;
 import android.view.View;
+import android.view.WindowManager;
 
 import com.almadev.znaniesila.R;
 
@@ -29,27 +33,47 @@ public class Timer extends View {
     //circle and text colors
     private int circleCol, labelCol;
 
+    private final static int SPEED = 5;
+    private ColorMatrix cm;
+
     public interface TimerCallback {
         void onTimer();
+    }
+
+    private float getDPFromPixels(Context context, float pixels) {
+        DisplayMetrics metrics = new DisplayMetrics();
+        WindowManager wmanager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+        wmanager.getDefaultDisplay().getMetrics(metrics);
+        switch (metrics.densityDpi) {
+            case DisplayMetrics.DENSITY_LOW:
+                pixels = pixels * 0.75f;
+                break;
+            case DisplayMetrics.DENSITY_MEDIUM:
+                //pixels = pixels * 1;
+                break;
+            case DisplayMetrics.DENSITY_HIGH:
+                pixels = pixels * 1.5f;
+                break;
+            case DisplayMetrics.DENSITY_XHIGH:
+                pixels = pixels * 2f;
+        }
+        return pixels;
     }
 
     public Timer(final Context context, final AttributeSet attrs) {
         super(context, attrs);
 
+        setLayerType(View.LAYER_TYPE_SOFTWARE, null);
+
         paint = new Paint();
 
-        arcPaint = new Paint();
-        wedgePaint = new Paint();
-        fontPaint = new Paint();
-        fontPaint.setTextSize(60);
+        arcPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        wedgePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        fontPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+//        fontPaint.setTextSize(getDPFromPixels(context, 30));
+        fontPaint.setTextSize(getResources().getDimension(R.dimen.question_number_text_size));
         fontPaint.setStyle(Paint.Style.FILL);
         fontPaint.setColor(Color.WHITE);
-
-//        Shader gradient = new SweepGradient(0, getMeasuredHeight() / 2, Color.RED, Color.WHITE);
-//        arcPaint.setShader(new LinearGradient(0, 0, 0, getHeight(), Color.GREEN, Color.BLACK, Shader.TileMode.MIRROR));
-//        arcPaint.setShader(gradient);
-//        arcPaint.setStyle(Paint.Style.STROKE);
-//        arcPaint.setStrokeWidth();
 
         //get the attributes specified in attrs.xml using the name we included
         TypedArray a = context.getTheme().obtainStyledAttributes(attrs,
@@ -63,6 +87,16 @@ public class Timer extends View {
         } finally {
             a.recycle();
         }
+
+        PorterDuff.Mode xorMode = PorterDuff.Mode.SRC;
+        arcPaint.setStyle(Paint.Style.STROKE);
+        arcPaint.setXfermode(new PorterDuffXfermode(xorMode));
+        arcPaint.setStrokeWidth(6);
+        arcPaint.setColor(Color.GREEN);
+        cm = new ColorMatrix();
+
+        wedgePaint.setStyle(Paint.Style.FILL_AND_STROKE);
+        wedgePaint.setStrokeWidth(0);
     }
 
     @Override
@@ -89,36 +123,38 @@ public class Timer extends View {
 
         canvas.drawCircle(viewWidthHalf, viewHeightHalf, radius, paint);
 
-
-//        canvas.drawArc(oval, -90, time / 30 * 360, true, wedgePaint);
-//        canvas.drawArc(oval, -90, time / 30 * 360, false, arcPaint);
+        float timeNormal = interpolate();
+        drawArc(canvas, viewWidthHalf, viewHeightHalf, radius, timeNormal);
 
         String timeStr = "" + (time / 1000 < 10 ? "0" + time / 1000 : time / 1000);
-        canvas.drawText( timeStr, viewWidthHalf - 35, viewHeightHalf + 20, fontPaint);
+        float stringWidth = fontPaint.measureText(timeStr);
+        float stringHeight = fontPaint.descent() - fontPaint.ascent();
+
+        canvas.drawText(timeStr, viewWidthHalf - stringWidth / 2.0f, viewHeightHalf + stringHeight / 3.0f, fontPaint);
     }
 
-    private void drawArc(Canvas canvas, float centerX, float centerY, float radius) {
-        arcPaint.setShader(new RadialGradient(centerX, centerY, radius,
-                                              new int[]{Color.BLACK, Color.GREEN}, null,
-                                              Shader.TileMode.MIRROR));
-        arcPaint.setStyle(Paint.Style.STROKE);
-        arcPaint.setStrokeWidth(6);
-
+    private void drawArc(Canvas canvas, float centerX, float centerY, float radius, float timeNormal) {
         RectF oval = new RectF(centerX - radius,
                                centerY - radius,
                                centerX + radius,
                                centerY + radius
         );
 
-        canvas.drawArc(oval, -90, time / 30 * 360, false, arcPaint);
+        int arcLength = Math.round(360 * timeNormal);
+
+        cm.setRotate(2, arcLength / 4);
+        ColorFilter filter = new ColorMatrixColorFilter(cm);
+        arcPaint.setColorFilter(filter);
+
+        canvas.drawArc(oval, -90 + 360 * timeNormal * SPEED, arcLength, false, arcPaint);
+
+        drawWedge(canvas, centerX, centerY, radius - 3, timeNormal);
     }
 
-    private void drawWedge(Canvas canvas, float centerX, float centerY, float radius) {
+    private void drawWedge(Canvas canvas, float centerX, float centerY, float radius, float timeNormal) {
         wedgePaint.setShader(new RadialGradient(centerX, centerY, radius,
-                                                new int[]{Color.GREEN, Color.BLACK}, null,
+                                                new int[]{Color.argb(250, 255, 255, 255),Color.argb(30, 255, 255, 255)}, null,
                                                 Shader.TileMode.MIRROR));
-        wedgePaint.setStyle(Paint.Style.FILL);
-        wedgePaint.setStrokeWidth(0);
 
         RectF oval = new RectF(centerX - radius,
                                centerY - radius,
@@ -126,7 +162,9 @@ public class Timer extends View {
                                centerY + radius
         );
 
-        canvas.drawArc(oval, -90, time / 30 * 360, false, wedgePaint);
+        int arcLength = Math.round(360 * timeNormal);
+
+        canvas.drawArc(oval, -90 + 360 * timeNormal * SPEED, arcLength, true, wedgePaint);
     }
 
     public void start(int seconds, TimerCallback pCallback) {
@@ -168,7 +206,11 @@ public class Timer extends View {
     };
 
     public int interpolatePoints(int points) {
-        return Math.round(time / originalTime * points);
+        return Math.round((float) time / (float) originalTime * points);
+    }
+
+    private float interpolate() {
+        return (float) (originalTime - time) / (float) originalTime;
     }
 
     void startAnimation(int seconds) {

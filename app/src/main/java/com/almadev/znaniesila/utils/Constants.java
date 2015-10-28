@@ -1,11 +1,23 @@
 package com.almadev.znaniesila.utils;
 
-public class Constants {
-    public static final String HOST = "http://app.znanie.tv/api/";
+import com.almadev.znaniesila.BuildConfig;
 
-    public static final String API_CATEGORIES_LIST = HOST + "v1/categories.json";
-    public static final String API_CATEGORY        = HOST + "v1/category/";
-    public static final String API_PAGE_ABOUT      = HOST + "v1/page/about";
+public class Constants {
+    public static final String HOST      = "http://app.znanie.tv/api/";
+    public static final String TEST_HOST = "http://app.znanie.tv/test/api/";
+
+    public static String API_CATEGORIES_LIST;
+
+    static {
+        if (BuildConfig.DEBUG) {
+            API_CATEGORIES_LIST = TEST_HOST + "v1/categories.json";
+        } else {
+            API_CATEGORIES_LIST = HOST + "v1/categories.json";
+        }
+    }
+
+    public static final String API_CATEGORY   = HOST + "v1/category/";
+    public static final String API_PAGE_ABOUT = HOST + "v1/page/about";
 
     public static final String CATEGORY_ID    = "category_id";
     public static final String CATEGORY       = "category";

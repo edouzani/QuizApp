@@ -10,16 +10,17 @@ public class Question implements Serializable {
 
     private int local_id;
 
-    private int points;
-    private int Answer;
+    private int    points;
+    private int    Answer;
     private String correct_ans_explanation;
     private String wrong_ans_explanation;
     private String question;
-    private int negative_points;
-    private int duration_in_seconds;
-    private int question_type;
-    private String story_order_id;
+    private int    negative_points;
+    private int    duration_in_seconds;
+    private int    question_type;
+    private String story_order_id = "";
     private String story;
+    private String image_url;
     private boolean isStoryViewed = false;
 
     private QuestionState state = QuestionState.UNDEF;
@@ -86,5 +87,12 @@ public class Question implements Serializable {
 
     public void setIsStoryViewed(boolean pIsStoryViewed) {
         isStoryViewed = pIsStoryViewed;
+    }
+
+    public String getImage_url() {
+        if (image_url == null || image_url.isEmpty()) {
+            return null;
+        }
+        return image_url;
     }
 }

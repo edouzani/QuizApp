@@ -141,7 +141,8 @@ public class KnowledgeActivity extends Activity implements View.OnClickListener 
             // Return a PlaceholderFragment (defined as a static inner class below)
             //
             String story = mQuestions.get(position).getStory();
-            return KnowledgeFragment.newInstance(story == null ? mQuestions.get(position).getCorrect_ans_explanation() : story, "");
+            String imgUrl = mQuestions.get(position).getImage_url();
+            return KnowledgeFragment.newInstance(story == null || story.isEmpty() ? mQuestions.get(position).getCorrect_ans_explanation() : story, imgUrl);
         }
 
         @Override

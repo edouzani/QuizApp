@@ -19,8 +19,8 @@
         style="@style/CatName_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
         android:layout_marginLeft="10dp"
+        android:layout_marginTop="30dp"
         android:layout_toRightOf="@id/home"
         android:text="КОСМОС"
         />
@@ -32,9 +32,9 @@
         android:layout_marginLeft="@dimen/quiz_points_margin"
         android:layout_marginTop="@dimen/quiz_points_top_margin"
         android:gravity="center_horizontal"
-        android:text="2/5"
+        android:text="12/15"
         android:textColor="#FFFFFF"
-        android:textSize="40sp"
+        android:textSize="@dimen/question_number_text_size"
         android:textStyle="bold"/>
 
     <TextView
@@ -66,7 +66,7 @@
         android:gravity="center_horizontal"
         android:text="5"
         android:textColor="#FFFFFF"
-        android:textSize="40sp"
+        android:textSize="@dimen/question_number_text_size"
         android:textStyle="bold"/>
 
     <TextView
@@ -81,10 +81,13 @@
         android:textSize="16sp"/>
 
 
-    <ImageView
+    <com.almadev.znaniesila.ui.RoundedImage
         android:id="@+id/small_image"
         android:layout_width="80dip"
         android:layout_height="80dip"
+        android:layout_below="@id/question_number_text"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
         android:scaleType="fitXY"/>
 
     <View
@@ -182,10 +185,10 @@
     </FrameLayout>
 
     <RelativeLayout
-        android:layout_width="fill_parent"
         android:id="@+id/answer_result_layout"
-        android:visibility="gone"
+        android:layout_width="fill_parent"
         android:layout_height="fill_parent"
+        android:visibility="gone"
         >
 
         <View
@@ -221,4 +224,23 @@
             android:textSize="20sp"
             android:textStyle="normal"/>
     </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/fullscreen_image"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@color/dark_transparent_bg"
+        android:clickable="true"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/big_image"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:clickable="false"
+            android:scaleType="centerInside"/>
+    </RelativeLayout>
+
 </RelativeLayout>

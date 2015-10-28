@@ -19,9 +19,10 @@ import java.util.List;
  */
 public class KnowledgeAdapter extends android.support.v7.widget.RecyclerView.Adapter {
 
-    private static final int FIRST_LINE = 1;
-    private static final int ODD_LINE   = 2;
-    private static final int EVEN_LINE  = 3;
+    private static final int FIRST_LINE = -10;
+
+    // private static final int ODD_LINE   = 2;
+    // private static final int EVEN_LINE  = 3;
 
     private List<Question> mQuestions;
     private KnowledgeActivity mActivity;
@@ -37,11 +38,10 @@ public class KnowledgeAdapter extends android.support.v7.widget.RecyclerView.Ada
 
     @Override
     public int getItemViewType(final int position) {
-//        return position % 7 > 3 ? EVEN_LINE : ODD_LINE;
         if (position == 0) {
             return FIRST_LINE;
         }
-        return position % 2 == 1 ? EVEN_LINE : ODD_LINE;
+        return position;
     }
 
     @Override
@@ -59,22 +59,13 @@ public class KnowledgeAdapter extends android.support.v7.widget.RecyclerView.Ada
     @Override
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position) {
         KnowledgeViewHolder mKnowledgeViewHolder = (KnowledgeViewHolder) holder;
-//        int itemType = getItemViewType(position);
-        mKnowledgeViewHolder.render(mQuestions.subList(position * 7, (position * 7) + 7 > mQuestions.size() ? mQuestions.size() : (position * 7 )+ 7));
+        mKnowledgeViewHolder.render(mQuestions.subList(position * 7, 
+                (position * 7) + 7 > mQuestions.size() ? mQuestions.size() : (position * 7 ) + 7));
     }
 
     @Override
     public int getItemCount() {
         int fullGroups = mQuestions.size() / 7;
-//        int leftItems = mQuestions.size() - fullGroups * 7;
-//        if (leftItems  == 0) {
-//            return fullGroups * 2;
-//        }
-//        if (leftItems % 7 > 4 || leftItems % 7 == 0) {
-//            return fullGroups * 2 + 2;
-//        } else {
-//            return  fullGroups * 2 + 1;
-//        }
         return mQuestions.size() % 7 > 0 ? fullGroups + 1 : fullGroups;
     }
 

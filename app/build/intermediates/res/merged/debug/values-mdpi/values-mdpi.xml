@@ -5,5 +5,7 @@
     <dimen name="left_offset1">20dip</dimen>
     <dimen name="left_offset2">14dip</dimen>
     <dimen name="progress_bar_max_height">14dip</dimen>
+    <dimen name="question_number_text_size">35sp</dimen>
+    <dimen name="quiz_points_margin">20dp</dimen>
     <dimen name="top_offset">1dip</dimen>
 </resources>

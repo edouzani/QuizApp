@@ -44,6 +44,7 @@ import com.almadev.znaniesila.ui.TwoTextButton;
 import com.almadev.znaniesila.utils.Constants;
 import com.almadev.znaniesila.utils.LeaderboardConverter;
 import com.chartboost.sdk.Chartboost;
+import com.squareup.picasso.Picasso;
 
 public class HAQuizScreen extends Activity implements OnClickListener, Callback,
                                                       OnBufferingUpdateListener, OnCompletionListener {
@@ -87,6 +88,9 @@ public class HAQuizScreen extends Activity implements OnClickListener, Callback,
     private Timer               mTimer;
     private int                 maxPoints;
     private Timer.TimerCallback mTimerCallback;
+    private ImageView           mBigImage;
+    private View                mFullScreenImage;
+    private String              imgUrl = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,7 +110,13 @@ public class HAQuizScreen extends Activity implements OnClickListener, Callback,
             @Override
             public int compare(final Question pQuestion, final Question pT1) {
                 int lw = pQuestion.getState().getWeight() + pQuestion.getLocal_id();
+                if (BuildConfig.DEBUG) {
+                    lw += (pQuestion.getImage_url() != null) ? -500000 : 0;
+                }
                 int rw = pT1.getState().getWeight() + pT1.getLocal_id();
+                if (BuildConfig.DEBUG) {
+                    rw += (pT1.getImage_url() != null) ? -500000 : 0;
+                }
                 if (lw < rw) {
                     return -1;
                 } else if (lw > rw) {
@@ -213,7 +223,13 @@ public class HAQuizScreen extends Activity implements OnClickListener, Callback,
     }
 
     private void setupViews() {
+        mBigImage = (ImageView) findViewById(R.id.big_image);
+
+        mFullScreenImage = findViewById(R.id.fullscreen_image);
+        mFullScreenImage.setOnClickListener(this);
+
         mSmallImage = (ImageView) findViewById(R.id.small_image);
+        mSmallImage.setOnClickListener(this);
 
         mQuestion = (TextView) findViewById(R.id.question);
         mQuestionNumber = (TextView) findViewById(R.id.question_number);
@@ -294,15 +310,19 @@ public class HAQuizScreen extends Activity implements OnClickListener, Callback,
 
         mQuestion.setText(question.getQuestion());
         mQuestionNumber.setText((mCurrentQuestion + 1) + "/" + maxQuestions);
-        mCurrentPoints.setText(question.getPoints() + "");
+//        mCurrentPoints.setText(question.getPoints() + "");
+        mCurrentPoints.setText(mScore + "");
 
         String text = mScore + "";
         if (mScore > 0) {
             text = "+" + mScore;
         }
 
-        if (mSmallImage.getDrawable() != null) {
-            mSmallImage.getDrawable().setCallback(null);
+        imgUrl = question.getImage_url();
+        if (imgUrl != null) {
+            Picasso.with(this).load(imgUrl).into(mSmallImage);
+        } else {
+            mSmallImage.setImageDrawable(null);
         }
 
         if (question.getQuestion_type() == 4) {
@@ -365,6 +385,7 @@ public class HAQuizScreen extends Activity implements OnClickListener, Callback,
         intent = new Intent(this, HAFinalScreen.class);
         intent.putExtra(Constants.CATEGORY, mCategory);
         intent.putExtra(Constants.LEADERBOARD_ID, LeaderboardConverter.getLeaderboard(this, mCategory.getLeaderboard_id()));
+//        intent.putExtra(Constants.POINTS, mScore < 0 ? 0 : mScore);
         intent.putExtra(Constants.POINTS, mScore);
         intent.putExtra(Constants.MAX_POINTS, maxPoints);
         startActivity(intent);
@@ -393,17 +414,17 @@ public class HAQuizScreen extends Activity implements OnClickListener, Callback,
             if (question.getAnswer() == option) {
                 if (option == 1) {
                     mLeftBtn.setBackgroundResource(R.drawable.btn_left_true);
-                } else if (option == 0){
+                } else if (option == 0) {
                     mRightBtn.setBackgroundResource(R.drawable.btn_right_true);
                 }
                 question.setState(QuestionState.CORRECT);
-                mScore += question.getPoints();
+                mScore += mTimer.interpolatePoints(question.getPoints());
                 playSoundForAnswer(true);
                 isCorrect = true;
             } else {
                 if (option == 1) {
                     mLeftBtn.setBackgroundResource(R.drawable.btn_left_false);
-                } else if (option == 0){
+                } else if (option == 0) {
                     mRightBtn.setBackgroundResource(R.drawable.btn_right_false);
                 }
 
@@ -415,6 +436,8 @@ public class HAQuizScreen extends Activity implements OnClickListener, Callback,
                 isCorrect = false;
             }
         }
+
+        mCurrentPoints.setText(mScore + "");
 
         mOption0.setEnabled(false);
         mOption1.setEnabled(false);
@@ -439,13 +462,13 @@ public class HAQuizScreen extends Activity implements OnClickListener, Callback,
             ((TextView) findViewById(R.id.correct_text)).setTextColor(
                     getResources().getColor(R.color.correct_green)
             );
-            ((TextView)findViewById(R.id.answer_description)).setText(question.getCorrect_ans_explanation());
+            ((TextView) findViewById(R.id.answer_description)).setText(question.getCorrect_ans_explanation());
         } else {
             ((TextView) findViewById(R.id.correct_text)).setText("НЕПРАВИЛЬНО!");
             ((TextView) findViewById(R.id.correct_text)).setTextColor(
                     getResources().getColor(R.color.wrong_red)
             );
-            ((TextView)findViewById(R.id.answer_description)).setText(question.getWrong_ans_explanation());
+            ((TextView) findViewById(R.id.answer_description)).setText(question.getWrong_ans_explanation());
         }
 
         findViewById(R.id.answer_result_layout).setVisibility(View.VISIBLE);
@@ -508,9 +531,9 @@ public class HAQuizScreen extends Activity implements OnClickListener, Callback,
             MediaPlayer player;
 
             if (isCorrect) {
-                player = MediaPlayer.create(this, R.raw.yes);
+                player = MediaPlayer.create(this, R.raw.yes_cutted);
             } else {
-                player = MediaPlayer.create(this, R.raw.no);
+                player = MediaPlayer.create(this, R.raw.no_cutted);
             }
             player.start();
 
@@ -552,6 +575,17 @@ public class HAQuizScreen extends Activity implements OnClickListener, Callback,
 
             case R.id.option4:
                 answerSelected(3);
+                break;
+
+            case R.id.small_image:
+                if (imgUrl != null) {
+                    Picasso.with(this).load(imgUrl).into(mBigImage);
+                    findViewById(R.id.fullscreen_image).setVisibility(View.VISIBLE);
+                }
+                break;
+
+            case R.id.fullscreen_image:
+                findViewById(R.id.fullscreen_image).setVisibility(View.GONE);
                 break;
         }
 

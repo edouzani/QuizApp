@@ -2,12 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.almadev.znaniesila"
     android:installLocation="preferExternal"
-    android:versionCode="1"
-    android:versionName="1.0" >
+    android:versionCode="12"
+    android:versionName="1.8" >
 
     <uses-sdk
         android:minSdkVersion="15"
-        android:targetSdkVersion="21" />
+        android:targetSdkVersion="22" />
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
@@ -16,6 +16,9 @@
     <uses-permission android:name="ANDROID.PERMISSION.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="ANDROID.PERMISSION.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="com.android.vending.BILLING" />
+
+    <android:uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <android:uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <!-- android:theme="@android:style/Theme.Black.NoTitleBar"> -->
     <application
@@ -74,6 +77,9 @@
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="8c55be5eb3d4573c25f8350239df3642763a9d32" />
+
+        <activity android:name="com.almadev.znaniesila.SettingsActivity" >
+        </activity>
     </application>
 
 </manifest>
