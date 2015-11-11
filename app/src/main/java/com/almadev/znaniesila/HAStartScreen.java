@@ -1,6 +1,5 @@
 package com.almadev.znaniesila;
 
-import com.almadev.znaniesila.model.Category;
 import com.almadev.znaniesila.network.SecurityChecker;
 import com.crashlytics.android.Crashlytics;
 
@@ -8,22 +7,19 @@ import io.fabric.sdk.android.Fabric;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Message;
 import android.preference.PreferenceManager;
+import android.support.v7.widget.SwitchCompat;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -33,17 +29,10 @@ import com.almadev.znaniesila.events.QuizDownloadedEvent;
 import com.almadev.znaniesila.events.QuizesUpdateFailedEvent;
 import com.almadev.znaniesila.events.QuizesUpdateFinishedEvent;
 import com.almadev.znaniesila.model.CategoriesList;
-import com.almadev.znaniesila.model.Question;
-import com.almadev.znaniesila.model.Quiz;
 import com.almadev.znaniesila.model.QuizHolder;
-import com.almadev.znaniesila.network.CategoriesDownloader;
 import com.almadev.znaniesila.questions.QuestionsAdapter;
-import com.chartboost.sdk.Chartboost;
+import com.google.ads.conversiontracking.AdWordsConversionReporter;
 import com.google.android.gms.games.GamesClient;
-import com.almadev.znaniesila.billing.utils.IabHelper;
-import com.almadev.znaniesila.billing.utils.IabResult;
-import com.almadev.znaniesila.billing.utils.Inventory;
-import com.almadev.znaniesila.billing.utils.Purchase;
 import com.almadev.znaniesila.utils.ConfigParser;
 import com.almadev.znaniesila.utils.Constants;
 import com.almadev.znaniesila.utils.RunningState;
@@ -58,7 +47,6 @@ public class HAStartScreen extends BaseGameActivity implements OnClickListener {
     private static final String TAG = "HAStartScreen";
     private Button            play_quiz;
     private ImageView         about;
-    private Chartboost        cb;
     private Boolean           adSupportEnabled;
     private Boolean           adsDisabledAfterPurchase;
     private Boolean           gameServicesEnabled;
@@ -98,18 +86,6 @@ public class HAStartScreen extends BaseGameActivity implements OnClickListener {
             worldScoreButton.setVisibility(View.VISIBLE);
         }
 
-        if (adSupportEnabled && !adsDisabledAfterPurchase) {
-            String appId = mPrefsmanager.getString(Constants.CHARTBOOST_APPID, "");
-            String appSecret = mPrefsmanager.getString(Constants.CHARTBOOST_APPSECRET, "");
-            if (appId.trim().equals("") || appSecret.trim().equals("")) {
-                Toast.makeText(this, getResources().getString(R.string.chartboost_error_msg), Toast.LENGTH_SHORT).show();
-            } else {
-                this.cb = Chartboost.sharedChartboost();
-                this.cb.onCreate(this, appId, appSecret, null);
-            }
-        } else {
-        }
-
         QuizHolder quizHolder = QuizHolder.getInstance(this);
         mQuestionsAdapter = new QuestionsAdapter(this);
 
@@ -120,6 +96,20 @@ public class HAStartScreen extends BaseGameActivity implements OnClickListener {
         ((TextView)findViewById(R.id.versionText)).setText(versionText);
 
         SecurityChecker.get.start();
+
+        //init first run
+
+        mPrefsmanager = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        boolean isFirstRun = mPrefsmanager.getBoolean(Constants.PREF_FIRS_RUN, true);
+
+        if (isFirstRun) {
+            AdWordsConversionReporter.reportWithConversionId(this.getApplicationContext(),
+                                                             "956867547", "yqeQCLfzmGEQ28eiyAM", "3.00", true);
+
+            SharedPreferences.Editor e = mPrefsmanager.edit();
+            e.putBoolean(Constants.PREF_FIRS_RUN, false);
+            e.commit();
+        }
     }
 
     public void onEventMainThread(QuizDownloadedEvent e) {
@@ -167,11 +157,6 @@ public class HAStartScreen extends BaseGameActivity implements OnClickListener {
     @Override
     protected void onStart() {
         super.onStart();
-        if (adSupportEnabled && this.cb != null && !adsDisabledAfterPurchase) {
-            this.cb.onStart(this);
-            this.cb.startSession();
-            this.cb.showInterstitial();
-        }
 //        EventBus.getDefault().register(this);
         EventBus.getDefault().registerSticky(this);
     }
@@ -202,31 +187,22 @@ public class HAStartScreen extends BaseGameActivity implements OnClickListener {
     @Override
     protected void onStop() {
         super.onStop();
-        if (adSupportEnabled && this.cb != null && !adsDisabledAfterPurchase) {
-            this.cb.onStop(this);
-        }
+
         EventBus.getDefault().unregister(this);
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (adSupportEnabled && this.cb != null && !adsDisabledAfterPurchase) {
-            this.cb.onStop(this);
-        }
     }
 
     @Override
     public void onBackPressed() {
-        if (this.cb != null && this.cb.onBackPressed())
-            return;
-        else
-            super.onBackPressed();
+        super.onBackPressed();
     }
 
     public void onMoreButtonClick(View view) {
-        if (adSupportEnabled && this.cb != null && !adsDisabledAfterPurchase)
-            this.cb.showMoreApps();
+        //
     }
 
     private void parseConfig() {
@@ -283,7 +259,6 @@ public class HAStartScreen extends BaseGameActivity implements OnClickListener {
         Editor edit = mPrefsmanager.edit();
         edit.putBoolean(Constants.ADS_DISABLED_AFTER_PURCHASE, true);
         edit.commit();
-        this.cb = null;
     }
 
 

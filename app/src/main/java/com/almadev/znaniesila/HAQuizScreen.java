@@ -43,7 +43,6 @@ import com.almadev.znaniesila.ui.Timer;
 import com.almadev.znaniesila.ui.TwoTextButton;
 import com.almadev.znaniesila.utils.Constants;
 import com.almadev.znaniesila.utils.LeaderboardConverter;
-import com.chartboost.sdk.Chartboost;
 import com.squareup.picasso.Picasso;
 
 public class HAQuizScreen extends Activity implements OnClickListener, Callback,
@@ -82,7 +81,6 @@ public class HAQuizScreen extends Activity implements OnClickListener, Callback,
     private SharedPreferences   mPrefsManager;
     private boolean             isStarting;
     private View                mNextQuest;
-    private Chartboost          cb;
     private Boolean             adSupportEnabled;
     private Boolean             adsDisabledAfterPurchase;
     private Timer               mTimer;
@@ -144,16 +142,16 @@ public class HAQuizScreen extends Activity implements OnClickListener, Callback,
         setupViews();
         adSupportEnabled = mPrefsManager.getBoolean(Constants.AD_SUPPORT_NEEDED, false);
         adsDisabledAfterPurchase = mPrefsManager.getBoolean(Constants.ADS_DISABLED_AFTER_PURCHASE, false);
-        if (adSupportEnabled && !adsDisabledAfterPurchase) {
-            String appId = mPrefsManager.getString(Constants.CHARTBOOST_APPID, "");
-            String appSecret = mPrefsManager.getString(Constants.CHARTBOOST_APPSECRET, "");
-            if (appId.trim().equals("") || appSecret.trim().equals("")) {
-                Toast.makeText(this, getResources().getString(R.string.chartboost_error_msg), Toast.LENGTH_SHORT).show();
-            } else {
-                this.cb = Chartboost.sharedChartboost();
-                this.cb.onCreate(this, appId, appSecret, null);
-            }
-        }
+//        if (adSupportEnabled && !adsDisabledAfterPurchase) {
+//            String appId = mPrefsManager.getString(Constants.CHARTBOOST_APPID, "");
+//            String appSecret = mPrefsManager.getString(Constants.CHARTBOOST_APPSECRET, "");
+//            if (appId.trim().equals("") || appSecret.trim().equals("")) {
+//                Toast.makeText(this, getResources().getString(R.string.chartboost_error_msg), Toast.LENGTH_SHORT).show();
+//            } else {
+//                this.cb = Chartboost.sharedChartboost();
+//                this.cb.onCreate(this, appId, appSecret, null);
+//            }
+//        }
         mTimerCallback = new TimerCallbackImpl();
     }
 
@@ -164,19 +162,11 @@ public class HAQuizScreen extends Activity implements OnClickListener, Callback,
             setupData();
             isStarting = false;
         }
-        if (adSupportEnabled && this.cb != null && !adsDisabledAfterPurchase) {
-            this.cb.onStart(this);
-            this.cb.startSession();
-            this.cb.showInterstitial();
-        }
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        if (adSupportEnabled && this.cb != null && !adsDisabledAfterPurchase) {
-            this.cb.onStop(this);
-        }
     }
 
     @Override
@@ -194,18 +184,12 @@ public class HAQuizScreen extends Activity implements OnClickListener, Callback,
         if (mThread != null) {
             mThread.quit();
         }
-        if (adSupportEnabled && this.cb != null && !adsDisabledAfterPurchase) {
-            this.cb.onStop(this);
-        }
         mTimer.stop();
     }
 
     @Override
     public void onBackPressed() {
-        if (this.cb != null && this.cb.onBackPressed())
-            return;
-        else
-            super.onBackPressed();
+        super.onBackPressed();
     }
 
     @Override
@@ -458,17 +442,15 @@ public class HAQuizScreen extends Activity implements OnClickListener, Callback,
 
     private void showAnswerDescription(boolean correct, Question question) {
         if (correct) {
-            ((TextView) findViewById(R.id.correct_text)).setText("ПРАВИЛЬНО!");
-            ((TextView) findViewById(R.id.correct_text)).setTextColor(
-                    getResources().getColor(R.color.correct_green)
-            );
+            findViewById(R.id.wrong_text).setVisibility(View.GONE);
+            findViewById(R.id.correct_text).setVisibility(View.VISIBLE);
+            findViewById(R.id.answer_description).setVisibility(View.VISIBLE);
             ((TextView) findViewById(R.id.answer_description)).setText(question.getCorrect_ans_explanation());
         } else {
-            ((TextView) findViewById(R.id.correct_text)).setText("НЕПРАВИЛЬНО!");
-            ((TextView) findViewById(R.id.correct_text)).setTextColor(
-                    getResources().getColor(R.color.wrong_red)
-            );
-            ((TextView) findViewById(R.id.answer_description)).setText(question.getWrong_ans_explanation());
+            findViewById(R.id.correct_text).setVisibility(View.GONE);
+            findViewById(R.id.wrong_text).setVisibility(View.VISIBLE);
+            findViewById(R.id.answer_description).setVisibility(View.GONE);
+//            ((TextView) findViewById(R.id.answer_description)).setText(question.getWrong_ans_explanation());
         }
 
         findViewById(R.id.answer_result_layout).setVisibility(View.VISIBLE);
@@ -525,7 +507,7 @@ public class HAQuizScreen extends Activity implements OnClickListener, Callback,
     private void playSoundForAnswer(boolean isCorrect) //send YES if answer is correct No if wrong. Also call this method for True false questions too.
     {
 //        boolean playSound = mPrefsManager.getBoolean(Constants.PLAY_SOUND_ON_ANSWERING, false);
-        boolean playSound = mPrefsManager.getBoolean(Constants.SOUND_ON, true);
+        boolean playSound = mPrefsManager.getBoolean(Constants.PREF_SOUND_ON, true);
 
         if (playSound) {
             MediaPlayer player;

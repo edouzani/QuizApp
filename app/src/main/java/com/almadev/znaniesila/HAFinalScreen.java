@@ -20,7 +20,6 @@ import android.widget.TextView;
 
 import com.almadev.znaniesila.model.Category;
 import com.almadev.znaniesila.utils.Constants;
-import com.chartboost.sdk.Chartboost;
 import com.google.android.gms.games.GamesClient;
 
 public class HAFinalScreen extends BaseGameActivity implements OnClickListener {
@@ -29,7 +28,6 @@ public class HAFinalScreen extends BaseGameActivity implements OnClickListener {
     private int               mPoints;
     private SharedPreferences mPrefsmanager;
     public static final String HIGH_SCORES = "high_scores";
-    private Chartboost  cb;
     private Boolean     adSupportEnabled;
     private Boolean     adsDisabledAfterPurchase;
     private Boolean     gameServicesEnabled;
@@ -109,11 +107,6 @@ public class HAFinalScreen extends BaseGameActivity implements OnClickListener {
     @Override
     protected void onStart() {
         super.onStart();
-        if (adSupportEnabled && this.cb != null && !adsDisabledAfterPurchase) {
-            this.cb.onStart(this);
-            this.cb.startSession();
-            this.cb.showInterstitial();
-        }
     }
 
     @Override
@@ -124,30 +117,19 @@ public class HAFinalScreen extends BaseGameActivity implements OnClickListener {
     @Override
     protected void onStop() {
         super.onStop();
-        if (adSupportEnabled && this.cb != null && !adsDisabledAfterPurchase) {
-            this.cb.onStop(this);
-        }
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (adSupportEnabled && this.cb != null && !adsDisabledAfterPurchase) {
-            this.cb.onStop(this);
-        }
     }
 
     @Override
     public void onBackPressed() {
-        if (this.cb != null && this.cb.onBackPressed())
-            return;
-        else
-            super.onBackPressed();
+        super.onBackPressed();
     }
 
     public void onMoreButtonClick(View view) {
-        if (adSupportEnabled && this.cb != null && !adsDisabledAfterPurchase)
-            this.cb.showMoreApps();
     }
 
     public void onLeaderBoardButtonClick(View view) {

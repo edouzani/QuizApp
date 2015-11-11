@@ -52,3 +52,11 @@
   -keepclasseswithmembers class * {
     public void onEventMainThread(...);
   }
+
+  #Yandex metrica
+  -keep class com.yandex.metrica.impl.* { *; }
+  -dontwarn com.yandex.metrica.impl.*
+
+  -keep class com.yandex.metrica.* { *; }
+
+  -dontwarn com.yandex.metrica.*

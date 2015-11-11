@@ -62,7 +62,7 @@ public class Quiz implements Serializable {
 
     public Question getById(String id) {
         for (Question q : Questions) {
-            if (q.getStory_order_id().equals(id)) {
+            if (q.getStory_order_id() != null && q.getStory_order_id().equals(id)) {
                 return q;
             }
         }

@@ -35,18 +35,15 @@ import com.almadev.znaniesila.model.Category;
 import com.almadev.znaniesila.model.Quiz;
 import com.almadev.znaniesila.model.QuizHolder;
 import com.almadev.znaniesila.utils.Constants;
-import com.chartboost.sdk.Chartboost;
 
 public class HACategoriesScreen extends ListActivity implements View.OnClickListener {
 
     private static final String TAG = "CATEGORIES_SCREEN";
     private IabHelper mHelper;
     public static final int BILLING_RESPONSE_RESULT_ITEM_ALREADY_OWNED = 7;
-    private String SKU_REMOVE_ADS;
 
     private CategoryAdapter   mAdapter;
     private SharedPreferences mPrefsmanager;
-    private Chartboost        cb;
     private Boolean           adsDisabledAfterPurchase;
     private Boolean           adSupportEnabled;
     private boolean           isKnowledgeCats;
@@ -106,10 +103,7 @@ public class HACategoriesScreen extends ListActivity implements View.OnClickList
     @Override
     protected void onStart() {
         super.onStart();
-        if (adSupportEnabled && this.cb != null && !adsDisabledAfterPurchase) {
-            this.cb.onStart(this);
-            this.cb.startSession();
-        }
+
         if (haveCategories) {
             initIAB(this);
         }
@@ -123,32 +117,21 @@ public class HACategoriesScreen extends ListActivity implements View.OnClickList
     @Override
     protected void onStop() {
         super.onStop();
-        if (adSupportEnabled && this.cb != null && !adsDisabledAfterPurchase) {
-            this.cb.onStop(this);
-        }
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (adSupportEnabled && this.cb != null && !adsDisabledAfterPurchase) {
-            this.cb.onDestroy(this);
-        }
         if (mHelper != null) mHelper.dispose();
         mHelper = null;
     }
 
     @Override
     public void onBackPressed() {
-        if (this.cb != null && this.cb.onBackPressed())
-            return;
-        else
-            super.onBackPressed();
+        super.onBackPressed();
     }
 
     public void onMoreButtonClick(View view) {
-        if (adSupportEnabled && this.cb != null && !adsDisabledAfterPurchase)
-            this.cb.showMoreApps();
     }
 
     @Override

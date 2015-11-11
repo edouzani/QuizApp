@@ -34,7 +34,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_toRightOf="@id/image"
-            android:gravity="center"
+            android:gravity="left|center_vertical"
             android:paddingTop="2dp"
             android:textColor="#FFFFFF"
             android:textSize="18sp"
@@ -48,6 +48,7 @@
             android:layout_toRightOf="@id/image"
             android:ellipsize="end"
             android:maxLines="5"
+            android:paddingRight="2dp"
             android:textColor="#FFFFFF"
             android:textSize="14sp"/>
     </RelativeLayout>

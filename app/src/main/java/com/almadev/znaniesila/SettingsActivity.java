@@ -1,16 +1,15 @@
 package com.almadev.znaniesila;
 
-import android.app.Activity;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SwitchCompat;
 import android.view.View;
 import android.widget.CompoundButton;
 
 import com.almadev.znaniesila.utils.Constants;
+import com.yandex.metrica.YandexMetrica;
 
 public class SettingsActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -24,8 +23,10 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
 
         findViewById(R.id.home).setOnClickListener(this);
 
+//        YandexMetrica.reportEvent("TEST_EVENT");
+
         mPrefsmanager = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        isSoundOn = mPrefsmanager.getBoolean(Constants.SOUND_ON, true);
+        isSoundOn = mPrefsmanager.getBoolean(Constants.PREF_SOUND_ON, true);
 
         SwitchCompat mSoundSwitch = (SwitchCompat) findViewById(R.id.soundSwitch);
         mSoundSwitch.setChecked(isSoundOn);
@@ -33,7 +34,7 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
             @Override
             public void onCheckedChanged(final CompoundButton pCompoundButton, final boolean b) {
                 SharedPreferences.Editor e = mPrefsmanager.edit();
-                e.putBoolean(Constants.SOUND_ON, b);
+                e.putBoolean(Constants.PREF_SOUND_ON, b);
                 e.commit();
             }
         });
