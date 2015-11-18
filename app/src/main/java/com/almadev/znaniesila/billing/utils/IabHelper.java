@@ -29,6 +29,7 @@ import android.os.RemoteException;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.almadev.znaniesila.ZSApp;
 import com.android.vending.billing.IInAppBillingService;
 
 import org.json.JSONException;
@@ -161,7 +162,7 @@ public class IabHelper {
      *     is NOT your "developer public key".
      */
     public IabHelper(Context ctx, String base64PublicKey) {
-        mContext = ctx.getApplicationContext();
+        mContext = ZSApp.sContext;
         mSignatureBase64 = base64PublicKey;
         logDebug("IAB helper created.");
     }
@@ -837,6 +838,10 @@ public class IabHelper {
 
     int queryPurchases(Inventory inv, String itemType) throws JSONException, RemoteException {
         // Query purchases
+        if (mContext == null) {
+            return IABHELPER_BAD_RESPONSE;
+        }
+
         logDebug("Querying owned items, item type: " + itemType);
         logDebug("Package name: " + mContext.getPackageName());
         boolean verificationFailed = false;

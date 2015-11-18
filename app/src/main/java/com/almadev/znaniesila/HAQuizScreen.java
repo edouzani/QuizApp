@@ -88,7 +88,7 @@ public class HAQuizScreen extends Activity implements OnClickListener, Callback,
     private Timer.TimerCallback mTimerCallback;
     private ImageView           mBigImage;
     private View                mFullScreenImage;
-    private String              imgUrl = null;
+    private String imgUrl = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -266,29 +266,6 @@ public class HAQuizScreen extends Activity implements OnClickListener, Callback,
             question.setState(QuestionState.VIEWED);
         }
 
-        if (question.getQuestion_type() == 4) {
-            //
-        } else {
-            mOption0.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
-            mOption1.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
-            mOption2.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
-            mOption3.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
-
-            float margin = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 8, mMetrics);
-
-            LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) mOption0.getLayoutParams();
-            lp.topMargin = (int) margin;
-            lp.bottomMargin = (int) margin;
-
-            lp = (LinearLayout.LayoutParams) mOption1.getLayoutParams();
-            lp.bottomMargin = (int) margin;
-
-            lp = (LinearLayout.LayoutParams) mOption2.getLayoutParams();
-            lp.bottomMargin = (int) margin;
-
-            lp = (LinearLayout.LayoutParams) mOption3.getLayoutParams();
-            lp.bottomMargin = (int) margin;
-        }
 
 //		mTimeout.setMax((question.duration + 4)*1000);
 
@@ -309,40 +286,38 @@ public class HAQuizScreen extends Activity implements OnClickListener, Callback,
             mSmallImage.setImageDrawable(null);
         }
 
-        if (question.getQuestion_type() == 4) {
 //			mSmallLayout.setVisibility(View.GONE);
 //			mLargeVideo.setVisibility(View.GONE);
-            mOption0.setBackgroundResource(R.drawable.boolean_options_normal);
-            mOption0.setText("True");
+        mOption0.setBackgroundResource(R.drawable.boolean_options_normal);
+        mOption0.setText("True");
 
-            if (animType == 1) {
+        if (animType == 1) {
 //				mOption0.setVisibility(View.VISIBLE);
-                OptionsSlideAnimation anim = new OptionsSlideAnimation(mMetrics.widthPixels, 0, 0, 0, 1);
-                anim.setDuration(400);
-                mLeftBtn.startAnimation(anim);
+            OptionsSlideAnimation anim = new OptionsSlideAnimation(mMetrics.widthPixels, 0, 0, 0, 1);
+            anim.setDuration(400);
+            mLeftBtn.startAnimation(anim);
 
 //				mOption1.setVisibility(View.VISIBLE);
-                anim = new OptionsSlideAnimation(mMetrics.widthPixels, 0, 0, 0, 2);
-                anim.setDuration(600);
-                mRightBtn.startAnimation(anim);
+            anim = new OptionsSlideAnimation(mMetrics.widthPixels, 0, 0, 0, 2);
+            anim.setDuration(600);
+            mRightBtn.startAnimation(anim);
 
-                mTimer.start(question.getDuration_in_seconds(), mTimerCallback);
-            }
-
-            mOption0.setAlternateText("");
-            mOption0.setGravity(Gravity.CENTER);
-            mOption0.setPadding(0, 0, 0, 0);
-
-            mOption1.setText("False");
-            mOption1.setBackgroundResource(R.drawable.boolean_options_normal);
-            mOption1.setAlternateText("");
-            mOption1.setGravity(Gravity.CENTER);
-            mOption1.setPadding(0, 0, 0, 0);
+            mTimer.start(question.getDuration_in_seconds(), mTimerCallback);
         }
 
-        if (animType == 2) {
-            startOptionsFadeAnimation();
-        }
+        mOption0.setAlternateText("");
+        mOption0.setGravity(Gravity.CENTER);
+        mOption0.setPadding(0, 0, 0, 0);
+
+        mOption1.setText("False");
+        mOption1.setBackgroundResource(R.drawable.boolean_options_normal);
+        mOption1.setAlternateText("");
+        mOption1.setGravity(Gravity.CENTER);
+        mOption1.setPadding(0, 0, 0, 0);
+
+//        if (animType == 2) {
+//            startOptionsFadeAnimation();
+//        }
     }
 
     private Handler mUiHandler = new Handler() {
@@ -372,6 +347,7 @@ public class HAQuizScreen extends Activity implements OnClickListener, Callback,
 //        intent.putExtra(Constants.POINTS, mScore < 0 ? 0 : mScore);
         intent.putExtra(Constants.POINTS, mScore);
         intent.putExtra(Constants.MAX_POINTS, maxPoints);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
         finish();
     }
@@ -384,41 +360,30 @@ public class HAQuizScreen extends Activity implements OnClickListener, Callback,
 
         mTimer.stop();
         Question question = mQuestions.get(mCurrentQuestion);
-        if (question.getQuestion_type() != 4) {
-            if (question.getAnswer() == option) {
-                mScore += mTimer.interpolatePoints(question.getPoints());
-                playSoundForAnswer(true);
-                isCorrect = true;
-            } else {
-                mScore -= question.getNegative_points();
-                playSoundForAnswer(false);
-                isCorrect = false;
-            }
-        } else {
-            if (question.getAnswer() == option) {
-                if (option == 1) {
-                    mLeftBtn.setBackgroundResource(R.drawable.btn_left_true);
-                } else if (option == 0) {
-                    mRightBtn.setBackgroundResource(R.drawable.btn_right_true);
-                }
-                question.setState(QuestionState.CORRECT);
-                mScore += mTimer.interpolatePoints(question.getPoints());
-                playSoundForAnswer(true);
-                isCorrect = true;
-            } else {
-                if (option == 1) {
-                    mLeftBtn.setBackgroundResource(R.drawable.btn_left_false);
-                } else if (option == 0) {
-                    mRightBtn.setBackgroundResource(R.drawable.btn_right_false);
-                }
 
-                if (question.getState() != QuestionState.CORRECT) {
-                    question.setState(QuestionState.WRONG);
-                }
-                mScore -= question.getNegative_points();
-                playSoundForAnswer(false);
-                isCorrect = false;
+        if (question.getAnswer() == option) {
+            if (option == 1) {
+                mLeftBtn.setBackgroundResource(R.drawable.btn_left_true);
+            } else if (option == 0) {
+                mRightBtn.setBackgroundResource(R.drawable.btn_right_true);
             }
+            question.setState(QuestionState.CORRECT);
+            mScore += mTimer.interpolatePoints(question.getPoints());
+            playSoundForAnswer(true);
+            isCorrect = true;
+        } else {
+            if (option == 1) {
+                mLeftBtn.setBackgroundResource(R.drawable.btn_left_false);
+            } else if (option == 0) {
+                mRightBtn.setBackgroundResource(R.drawable.btn_right_false);
+            }
+
+            if (question.getState() != QuestionState.CORRECT) {
+                question.setState(QuestionState.WRONG);
+            }
+            mScore -= question.getNegative_points();
+            playSoundForAnswer(false);
+            isCorrect = false;
         }
 
         mCurrentPoints.setText(mScore + "");
@@ -639,8 +604,7 @@ public class HAQuizScreen extends Activity implements OnClickListener, Callback,
             }
             Question question = mQuestions.get(mCurrentQuestion);
 
-            if ((question.getQuestion_type() == 4 && mOption == 2 && interpolatedTime > 0.95) ||
-                    (question.getQuestion_type() != 4 && mOption == 4 && interpolatedTime > 0.95)) {
+            if (interpolatedTime > 0.95) {
                 mOption0.setEnabled(true);
                 mOption1.setEnabled(true);
                 mOption2.setEnabled(true);

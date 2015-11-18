@@ -115,9 +115,6 @@ public class CategoriesDownloader {
         Quiz quiz = null;
         try {
             String jsonStr = response.body().string();
-//            if (BuildConfig.DEBUG) {
-//                Log.i("QUIZ_DOWNLOADER " + quizId, jsonStr);
-//            }
             quiz = new Gson().fromJson(jsonStr, Quiz.class);
             quiz.setId(quizId);
         } catch (IOException e) {

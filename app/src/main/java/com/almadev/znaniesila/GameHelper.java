@@ -32,6 +32,7 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
+import android.widget.Toast;
 
 import com.almadev.znaniesila.R;
 import com.google.android.gms.appstate.AppStateClient;
@@ -863,8 +864,8 @@ public class GameHelper implements GooglePlayServicesClient.ConnectionCallbacks,
 
     void succeedSignIn() {
         checkState(TYPE_GAMEHELPER_BUG, "succeedSignIn", "succeedSignIn should only " +
-                "get called in the connecting or connected state. Proceeding anyway.",
-                STATE_CONNECTING, STATE_CONNECTED);
+                           "get called in the connecting or connected state. Proceeding anyway.",
+                   STATE_CONNECTING, STATE_CONNECTED);
         debugLog("All requested clients connected. Sign-in succeeded!");
         setState(STATE_CONNECTED);
         mSignInFailureReason = null;
@@ -1015,14 +1016,20 @@ public class GameHelper implements GooglePlayServicesClient.ConnectionCallbacks,
             default:
                 // No meaningful Activity response code, so generate default Google
                 // Play services dialog
-                errorDialog = GooglePlayServicesUtil.getErrorDialog(errorCode, mActivity,
-                        RC_UNUSED, null);
-                if (errorDialog == null) {
-                    // get fallback dialog
-                    debugLog("No standard error dialog available. Making fallback dialog.");
-                    errorDialog = makeSimpleDialog(ctx.getString(R.string.gamehelper_unknown_error)
-                            + " " + errorCodeToString(errorCode));
-                }
+                Toast.makeText(getContext(), "К сожалению, ваше устройство не поддерживает сервисы Google Play.\nРейтинг не может быть отображен", Toast.LENGTH_SHORT).show();
+//                try {
+//                    errorDialog = GooglePlayServicesUtil.getErrorDialog(errorCode, mActivity,
+//                                                                        RC_UNUSED, null);
+//                    if (errorDialog == null) {
+//                        // get fallback dialog
+//                        debugLog("No standard error dialog available. Making fallback dialog.");
+//                        errorDialog = makeSimpleDialog(ctx.getString(R.string.gamehelper_unknown_error)
+//                                                               + " " + errorCodeToString(errorCode));
+//                    }
+//                } catch (Exception e) {
+//                    errorDialog = makeSimpleDialog(ctx.getString(R.string.gamehelper_unknown_error)
+//                                                           + " " + errorCodeToString(errorCode));
+//                }
         }
 
         debugLog("Showing error dialog.");

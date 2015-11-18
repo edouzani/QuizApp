@@ -23,8 +23,8 @@ android {
         applicationId "com.almadev.znaniesila"
         minSdkVersion 15
         targetSdkVersion 22
-        versionCode 15
-        versionName "1.87"
+        versionCode 17
+        versionName "1.88"
     }
 
     signingConfigs {
@@ -81,4 +81,5 @@ dependencies {
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile files('libs/GoogleConversionTrackingSdk-2.2.4.jar')
     compile files('libs/google-play-services.jar')
+    compile files('libs/FlurryAnalytics-6.2.0.jar')
 }

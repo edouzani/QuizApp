@@ -41,6 +41,18 @@ public class HAFinalScreen extends BaseGameActivity implements OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.final_screen);
+    }
+
+    @Override
+    protected void onNewIntent(final Intent intent) {
+        super.onNewIntent(intent);
+        setIntent(intent);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
         mCategory = (Category) getIntent().getSerializableExtra(Constants.CATEGORY);
         mPoints = getIntent().getIntExtra(Constants.POINTS, 0);
         mMaxPoints = getIntent().getIntExtra(Constants.MAX_POINTS, 0);
@@ -66,18 +78,17 @@ public class HAFinalScreen extends BaseGameActivity implements OnClickListener {
             rating.setVisibility(View.VISIBLE);
         }
 
-
         record_text = (TextView) findViewById(R.id.record);
         HashMap<String, Integer> highScores = (HashMap<String, Integer>) preferences.getAll();
         int record = 0;
-//		if (highScores != null && highScores.size() > 0) {
-//			for (Integer score : highScores.values()) {
-//                if (score > max) {
-//                    max = score;
-//                }
-//            }
-//		}
-        record = highScores.get(mCategory.getCategory_id());
+
+//        if (mCategory == null || highScores == null) {
+//            Intent startMainIntent = new Intent(this, HAStartScreen.class);
+//            startMainIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK );
+//            startActivity(startMainIntent);
+//        }
+        Integer lastRecord = highScores.get(mCategory.getCategory_id());
+        record = lastRecord != null ? lastRecord : 0;
         record_text.setText(record + " БАЛЛОВ");
 
         TextView title = (TextView) findViewById(R.id.catname);
@@ -102,11 +113,6 @@ public class HAFinalScreen extends BaseGameActivity implements OnClickListener {
 
         findViewById(R.id.restart).setOnClickListener(this);
         findViewById(R.id.leaderboard).setOnClickListener(this);
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
     }
 
     @Override
