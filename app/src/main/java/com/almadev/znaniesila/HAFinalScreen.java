@@ -20,7 +20,6 @@ import android.widget.TextView;
 
 import com.almadev.znaniesila.model.Category;
 import com.almadev.znaniesila.utils.Constants;
-import com.google.android.gms.games.GamesClient;
 
 public class HAFinalScreen extends BaseGameActivity implements OnClickListener {
 
@@ -32,7 +31,6 @@ public class HAFinalScreen extends BaseGameActivity implements OnClickListener {
     private Boolean     adsDisabledAfterPurchase;
     private Boolean     gameServicesEnabled;
     private View        rating;
-    private GamesClient mGamesClient;
     private String      leaderBoard_Id;
     private TextView    record_text;
     private int         mMaxPoints;
@@ -72,9 +70,7 @@ public class HAFinalScreen extends BaseGameActivity implements OnClickListener {
         if (!gameServicesEnabled) {
 //			rating.setVisibility(View.GONE);
         } else {
-            beginUserInitiatedSignIn();
-            mGamesClient = this.getGamesClient();
-            Log.d("GplayServices", "mGamesClient=" + mGamesClient);
+            gpSignIn();
             rating.setVisibility(View.VISIBLE);
         }
 
@@ -139,17 +135,7 @@ public class HAFinalScreen extends BaseGameActivity implements OnClickListener {
     }
 
     public void onLeaderBoardButtonClick(View view) {
-        if (mGamesClient != null) {
-            try {
-                startActivityForResult(mGamesClient.getLeaderboardIntent(leaderBoard_Id), 1);
-//                startActivityForResult(mGamesClient.getAllLeaderboardsIntent(), 1);
-            } catch (Exception e) {
-                Log.d("GplayServices", "Problem connecting to playservices");
-                e.printStackTrace();
-            }
-        } else {
-            Log.d("GplayServices", "Still not connected");
-        }
+        openLeaderBoard(leaderBoard_Id, 1);
     }
 
     private static class HSAdapter extends BaseAdapter {
@@ -234,19 +220,13 @@ public class HAFinalScreen extends BaseGameActivity implements OnClickListener {
         }
     }
 
-    @Override
-    public void onSignInFailed() {
-        // TODO Auto-generated method stub
-        Log.d("GplayServices", "Sign In Failed");
-
-    }
 
     @Override
-    public void onSignInSucceeded() {
-        // TODO Auto-generated method stub
+    public void onConnected(final Bundle pBundle) {
+        super.onConnected(pBundle);
         Log.d("GplayServices", "Sign In Successful. Submitting scores");
         if (mPoints <= 0)
             mPoints = 0;
-        mGamesClient.submitScore(leaderBoard_Id, mPoints);
+        submitScore(leaderBoard_Id, mPoints);
     }
 }

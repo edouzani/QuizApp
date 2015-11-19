@@ -12,7 +12,7 @@
     <Button
         android:id="@+id/play_quiz"
         android:layout_width="match_parent"
-        android:layout_height="70dp"
+        android:layout_height="@dimen/main_menu_buttons_width"
         android:layout_centerInParent="true"
         android:layout_gravity="center"
         android:layout_marginBottom="20dp"
@@ -25,7 +25,7 @@
     <Button
         android:id="@+id/world_score"
         android:layout_width="match_parent"
-        android:layout_height="70dp"
+        android:layout_height="@dimen/main_menu_buttons_width"
         android:layout_gravity="center"
         android:background="@drawable/btn_rating_selector"
         android:layout_below="@id/play_quiz"
@@ -35,7 +35,7 @@
     <Button
         android:id="@+id/wiki"
         android:layout_width="match_parent"
-        android:layout_height="70dp"
+        android:layout_height="@dimen/main_menu_buttons_width"
         android:layout_gravity="center"
         android:background="@drawable/btn_wiki_selector"
         android:layout_below="@id/world_score"
@@ -66,7 +66,7 @@
         android:id="@+id/splash"
         android:layout_width="fill_parent"
         android:scaleType="centerCrop"
-        android:visibility="visible"
+        android:visibility="invisible"
         android:clickable="true"
         android:background="@drawable/splash"
         android:layout_height="fill_parent"/>

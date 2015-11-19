@@ -17,110 +17,121 @@
 
     <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="@dimen/category_item_height">
-
-        <ImageView
-            android:id="@+id/image"
-            android:layout_width="@dimen/category_item_img_width"
-            android:layout_height="@dimen/category_item_img_height"
-            android:layout_alignParentLeft="true"
-            android:layout_margin="@dimen/category_item_img_margin"
-            android:scaleType="centerCrop"
-            />
-
-        <TextView
-            android:id="@+id/name"
-            android:layout_width="@dimen/category_item_text_width"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_toRightOf="@id/image"
-            android:gravity="left|center_vertical"
-            android:paddingTop="2dp"
-            android:textColor="#FFFFFF"
-            android:textSize="18sp"
-            android:textStyle="bold"/>
-
-        <TextView
-            android:id="@+id/description"
-            android:layout_width="@dimen/category_item_text_width"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/name"
-            android:layout_toRightOf="@id/image"
-            android:ellipsize="end"
-            android:maxLines="5"
-            android:paddingRight="2dp"
-            android:textColor="#FFFFFF"
-            android:textSize="14sp"/>
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/category_item_height"
-        android:layout_gravity="right">
+        android:layout_height="wrap_content">
 
         <RelativeLayout
-            android:layout_width="@dimen/category_item_img_height"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:id="@+id/rating_layout"
+            android:layout_width="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_height="@dimen/category_item_height"
+            android:layout_gravity="right">
 
-            <TextView
-                android:id="@+id/price"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:layout_marginTop="10dp"
-                android:text="69,90 руб."
-                android:layout_alignParentTop="true"
-                android:textColor="@color/white"
-                android:visibility="gone"
-                android:textSize="25sp"/>
+            <RelativeLayout
+                android:layout_width="@dimen/cat_item_price_width"
+                android:layout_height="match_parent"
+                android:layout_centerHorizontal="true"
+                android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/record_text_view"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:layout_marginTop="10dp"
-                android:text="Рекорд"
-                android:layout_alignParentTop="true"
-                android:textColor="@color/white"
-                android:textSize="14sp"/>
+                <TextView
+                    android:id="@+id/price"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center"
+                    android:text="69,90 руб."
+                    android:textColor="@color/white"
+                    android:textSize="25sp"
+                    android:visibility="gone"/>
 
-            <TextView
-                android:id="@+id/record_value"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/record_text_view"
-                android:gravity="center"
-                android:textColor="@color/white"
-                android:text="0"
-                android:textSize="30sp"/>
+                <TextView
+                    android:id="@+id/record_text_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center"
+                    android:text="Рекорд"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"/>
+
+                <TextView
+                    android:id="@+id/record_value"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/record_text_view"
+                    android:gravity="center"
+                    android:text="0"
+                    android:textColor="@color/white"
+                    android:textSize="30sp"/>
 
 
-            <!--android:layout_marginTop="@dimen/category_item_answered_question_margin_top"-->
-            <TextView
-                android:id="@+id/answeredQuestions"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="0/100"
-                android:gravity="center"
-                android:layout_alignParentBottom="true"
-                android:textColor="@color/white"
-                android:layout_marginBottom="5dp"
-                android:textSize="20sp"
+                <!--android:layout_marginTop="@dimen/category_item_answered_question_margin_top"-->
+                <TextView
+                    android:id="@+id/answeredQuestions"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginBottom="5dp"
+                    android:gravity="center"
+                    android:text="0/100"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+                    />
+
+            </RelativeLayout>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/category_item_height"
+            android:layout_toLeftOf="@id/rating_layout">
+
+            <ImageView
+                android:id="@+id/image"
+                android:layout_width="@dimen/category_item_img_width"
+                android:layout_height="@dimen/category_item_img_height"
+                android:layout_alignParentLeft="true"
+                android:layout_margin="@dimen/category_item_img_margin"
+                android:scaleType="centerCrop"
                 />
 
+            <TextView
+                android:id="@+id/name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_toRightOf="@id/image"
+                android:gravity="left|center_vertical"
+                android:paddingTop="2dp"
+                android:text="Some name"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/name"
+                android:layout_toRightOf="@id/image"
+                android:ellipsize="end"
+                android:maxLines="5"
+                android:paddingRight="2dp"
+                android:text="Some very long description, that will be on three lines on older devices, like small phones"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp"/>
         </RelativeLayout>
+
     </RelativeLayout>
 
-
     <ProgressBar
-        android:progressDrawable="@drawable/category_progress"
         android:id="@+id/category_progress_bar"
-        android:layout_marginTop="@dimen/category_item_height"
-        android:max="100"
-        android:indeterminate="false"
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="match_parent"
-        android:layout_height="2dp"/>
+        android:layout_height="2dp"
+        android:layout_marginTop="@dimen/category_item_height"
+        android:indeterminate="false"
+        android:max="100"
+        android:progressDrawable="@drawable/category_progress"/>
 </FrameLayout>

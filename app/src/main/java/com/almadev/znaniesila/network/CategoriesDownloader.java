@@ -9,12 +9,16 @@ import com.almadev.znaniesila.model.Question;
 import com.almadev.znaniesila.model.Quiz;
 import com.almadev.znaniesila.model.QuizHolder;
 import com.almadev.znaniesila.utils.Constants;
+import com.flurry.android.FlurryAgent;
 import com.google.gson.Gson;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
+import com.yandex.metrica.YandexMetrica;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import de.greenrobot.event.EventBus;
 
@@ -76,13 +80,19 @@ public class CategoriesDownloader {
                 }
 
                 CategoriesList list = null;
+                String jsonStr = "";
                 try {
-                    String jsonStr = response.body().string();
+                    jsonStr = response.body().string();
                     list = new Gson().fromJson(jsonStr, CategoriesList.class);
                     list.setVersion(response.header(ETAG_HEADER));
 //                    list.setVersion("39");
                     quizHolder.saveCategories(list);
                     EventBus.getDefault().post(new NeedUpdateQuizesEvent(list.getVersion()));
+                } catch (IllegalStateException ise) {
+                    Log.e("CategoryParser", "cannot parse - " + jsonStr);
+                    Map<String, Object> eventAttributes = new HashMap<String, Object>();
+                    eventAttributes.put("CategoryParserCrash", jsonStr);
+                    YandexMetrica.reportEvent("CrashStat", eventAttributes);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

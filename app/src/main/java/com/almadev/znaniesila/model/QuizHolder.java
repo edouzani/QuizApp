@@ -4,6 +4,7 @@ import android.content.Context;
 import android.util.Log;
 
 import com.almadev.znaniesila.BuildConfig;
+import com.almadev.znaniesila.ZSApp;
 import com.almadev.znaniesila.questions.QuestionsAdapter;
 import com.google.gson.Gson;
 
@@ -82,7 +83,7 @@ public class QuizHolder {
 
         Quiz local = getQuiz(quiz.getId());
         if (local != null) {
-            if (BuildConfig.DEBUG) {
+            if (ZSApp.DEBUG_ENV) {
                 Log.i("QuizHolder", "merging quiz#" + quiz.getId());
             }
             quiz = mergeQuizes(local, quiz);

@@ -26,6 +26,7 @@ import android.view.SurfaceHolder.Callback;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.animation.AlphaAnimation;
+import android.view.animation.DecelerateInterpolator;
 import android.view.animation.Transformation;
 import android.view.animation.TranslateAnimation;
 import android.widget.Button;
@@ -108,12 +109,12 @@ public class HAQuizScreen extends Activity implements OnClickListener, Callback,
             @Override
             public int compare(final Question pQuestion, final Question pT1) {
                 int lw = pQuestion.getState().getWeight() + pQuestion.getLocal_id();
-                if (BuildConfig.DEBUG) {
-                    lw += (pQuestion.getImage_url() != null) ? -500000 : 0;
+                if (ZSApp.DEBUG_ENV) {
+                    lw += (pQuestion.getImage_url() != null) ? -50000 : 0;
                 }
                 int rw = pT1.getState().getWeight() + pT1.getLocal_id();
-                if (BuildConfig.DEBUG) {
-                    rw += (pT1.getImage_url() != null) ? -500000 : 0;
+                if (ZSApp.DEBUG_ENV) {
+                    rw += (pT1.getImage_url() != null) ? -50000 : 0;
                 }
                 if (lw < rw) {
                     return -1;
@@ -592,7 +593,7 @@ public class HAQuizScreen extends Activity implements OnClickListener, Callback,
             super(fromXDelta, toXDelta, fromYDelta, toYDelta);
             mOption = option;
 //			setDuration(222);
-            setInterpolator(getBaseContext(), android.R.anim.accelerate_decelerate_interpolator);
+            setInterpolator(new DecelerateInterpolator());
         }
 
         @Override

@@ -23,8 +23,8 @@ android {
         applicationId "com.almadev.znaniesila"
         minSdkVersion 15
         targetSdkVersion 22
-        versionCode 17
-        versionName "1.88"
+        versionCode 20
+        versionName "1.891"
     }
 
     signingConfigs {
@@ -56,7 +56,7 @@ android {
 
     applicationVariants.all { variant ->
         variant.outputs.each { output ->
-            output.outputFile = file("$project.buildDir/binary/znanie-sila-${variant.buildType.name}.apk")
+            output.outputFile = file("$project.buildDir/binary2/znanie-sila-${variant.buildType.name}.apk")
         }
     }
 }
@@ -66,7 +66,10 @@ dependencies {
     //    compile files('libs/chartboost.jar')
     compile files('libs/commons-io-2.0.1.jar')
     compile files('libs/gson-2.3.1.jar')
-    //    compile 'com.google.android.gms:play-services:8.3.0'
+    compile 'com.google.android.gms:play-services-base:8.3.0'
+    compile 'com.google.android.gms:play-services-games:8.3.0'
+    compile 'com.google.android.gms:play-services-auth:8.3.0'
+    compile 'com.google.android.gms:play-services-plus:8.3.0'
     compile 'com.android.support:support-v4:23.0.1'
     compile 'com.android.support:cardview-v7:23.0.1'
     compile 'com.android.support:recyclerview-v7:23.0.1'
@@ -80,6 +83,7 @@ dependencies {
     }
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile files('libs/GoogleConversionTrackingSdk-2.2.4.jar')
-    compile files('libs/google-play-services.jar')
+    //    compile files('libs/google-play-services.jar')
     compile files('libs/FlurryAnalytics-6.2.0.jar')
+    compile project(':BaseGameUtils')
 }

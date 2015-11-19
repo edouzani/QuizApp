@@ -32,7 +32,6 @@ import com.almadev.znaniesila.model.CategoriesList;
 import com.almadev.znaniesila.model.QuizHolder;
 import com.almadev.znaniesila.questions.QuestionsAdapter;
 import com.google.ads.conversiontracking.AdWordsConversionReporter;
-import com.google.android.gms.games.GamesClient;
 import com.almadev.znaniesila.utils.ConfigParser;
 import com.almadev.znaniesila.utils.Constants;
 import com.almadev.znaniesila.utils.RunningState;
@@ -52,7 +51,6 @@ public class HAStartScreen extends BaseGameActivity implements OnClickListener {
     private Boolean           gameServicesEnabled;
     private Button            worldScoreButton;
     private SharedPreferences mPrefsmanager;
-    private GamesClient       mGamesClient;
     private QuestionsAdapter  mQuestionsAdapter;
     private TextView          progressText;
 
@@ -90,7 +88,7 @@ public class HAStartScreen extends BaseGameActivity implements OnClickListener {
         mQuestionsAdapter = new QuestionsAdapter(this);
 
         String versionText = BuildConfig.VERSION_CODE + "/" + BuildConfig.VERSION_NAME;
-        if (BuildConfig.DEBUG) {
+        if (ZSApp.DEBUG_ENV) {
             versionText += "-test";
         }
         ((TextView)findViewById(R.id.versionText)).setText(versionText);
@@ -131,7 +129,7 @@ public class HAStartScreen extends BaseGameActivity implements OnClickListener {
 
     public void onEventMainThread(QuizesUpdateFinishedEvent e) {
         findViewById(R.id.splash).setVisibility(View.GONE);
-        if (!BuildConfig.DEBUG) {
+        if (!ZSApp.DEBUG_ENV) {
             findViewById(R.id.versionText).setVisibility(View.GONE);
         }
         findViewById(R.id.progressText).setVisibility(View.GONE);
@@ -152,6 +150,12 @@ public class HAStartScreen extends BaseGameActivity implements OnClickListener {
                 finish();
             }
         }, 3000);
+    }
+
+    @Override
+    public void onConnected(final Bundle pBundle) {
+        super.onConnected(pBundle);
+        getAllLeaderboards();
     }
 
     @Override
@@ -235,19 +239,7 @@ public class HAStartScreen extends BaseGameActivity implements OnClickListener {
                 startActivity(wikiIntent);
                 break;
             case R.id.world_score:
-                beginUserInitiatedSignIn();
-                mGamesClient = this.getGamesClient();
-                Log.d("GPLay services", "mGamesClient=" + mGamesClient);
-                if (mGamesClient != null) {
-                    try {
-                        startActivityForResult(mGamesClient.getAllLeaderboardsIntent(), 1);
-                    } catch (Exception e) {
-                        Log.d("GPLay services", "Problem connecting to playservices");
-                        e.printStackTrace();
-                    }
-                } else {
-                    Log.d("GPLay services", "Still not connected");
-                }
+                getAllLeaderboards();
                 break;
             case R.id.settings:
                 startActivity(new Intent(this, SettingsActivity.class));
@@ -259,27 +251,5 @@ public class HAStartScreen extends BaseGameActivity implements OnClickListener {
         Editor edit = mPrefsmanager.edit();
         edit.putBoolean(Constants.ADS_DISABLED_AFTER_PURCHASE, true);
         edit.commit();
-    }
-
-
-    @Override
-    public void onSignInFailed() {
-        // TODO Auto-generated method stub
-        Log.d("GPLay services", "Sign In Failed");
-
-    }
-
-    @Override
-    public void onSignInSucceeded() {
-        // TODO Auto-generated method stub
-        Log.d("GPLay services", "Sign In Successful. Submitting scores");
-        if (mGamesClient != null) {
-            try {
-//				 startActivityForResult(mGamesClient.getAllLeaderboardsIntent(), 1);
-            } catch (Exception e) {
-                Log.d("GPLay services", "Problem connecting to playservices");
-                e.printStackTrace();
-            }
-        }
     }
 }

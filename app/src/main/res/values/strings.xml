@@ -37,4 +37,6 @@
     <string name="cats_choose_title">ВЫБЕРИТЕ КАТЕГОРИЮ</string>
     <string name="correct_text">ПРАВИЛЬНО!</string>
     <string name="wrong_text">НЕПРАВИЛЬНО!</string>
+    <string name="signin_other_error">К сожаление, подключение к сервису Google Games в данный момент невозможно.</string>
+    <string name="signin_failure">Произошла ошибка во время подключения к сервису Google Games, попробуйте позднее</string>
 </resources>

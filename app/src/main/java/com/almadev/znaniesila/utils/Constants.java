@@ -1,6 +1,7 @@
 package com.almadev.znaniesila.utils;
 
 import com.almadev.znaniesila.BuildConfig;
+import com.almadev.znaniesila.ZSApp;
 
 public class Constants {
     public static final String HOST      = "http://app.znanie.tv/api/";
@@ -9,7 +10,7 @@ public class Constants {
     public static String API_CATEGORIES_LIST;
 
     static {
-        if (BuildConfig.DEBUG) {
+        if (ZSApp.DEBUG_ENV) {
             API_CATEGORIES_LIST = TEST_HOST + "v1/categories.json";
         } else {
             API_CATEGORIES_LIST = HOST + "v1/categories.json";

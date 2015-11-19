@@ -19,10 +19,13 @@ package com.almadev.znaniesila;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.util.Log;
+import android.widget.Toast;
 
-import com.google.android.gms.appstate.AppStateClient;
-import com.google.android.gms.games.GamesClient;
-import com.google.android.gms.plus.PlusClient;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.games.Games;
+import com.google.example.games.basegameutils.BaseGameUtils;
 
 /**
  * Example base class for games. This implementation takes care of setting up
@@ -36,158 +39,167 @@ import com.google.android.gms.plus.PlusClient;
  * PlusClient and GamesClient, use BaseGameActivity(CLIENT_GAMES | CLIENT_PLUS).
  * To request all available clients, use BaseGameActivity(CLIENT_ALL).
  * Alternatively, you can also specify the requested clients via
- * @link{#setRequestedClients}, but you must do so before @link{#onCreate}
- * gets called, otherwise the call will have no effect.
  *
  * @author Bruno Oliveira (Google)
+ * @link{#setRequestedClients}, but you must do so before @link{#onCreate}
+ * gets called, otherwise the call will have no effect.
  */
 public abstract class BaseGameActivity extends FragmentActivity implements
-        GameHelper.GameHelperListener {
+                                                                GoogleApiClient.ConnectionCallbacks,
+                                                                GoogleApiClient.OnConnectionFailedListener {
 
-    // The game helper object. This class is mainly a wrapper around this object.
-    protected GameHelper mHelper;
+    private GoogleApiClient mGoogleApiClient;
 
-    // We expose these constants here because we don't want users of this class
-    // to have to know about GameHelper at all.
-    public static final int CLIENT_GAMES = GameHelper.CLIENT_GAMES;
-    public static final int CLIENT_APPSTATE = GameHelper.CLIENT_APPSTATE;
-    public static final int CLIENT_PLUS = GameHelper.CLIENT_PLUS;
-    public static final int CLIENT_ALL = GameHelper.CLIENT_ALL;
+    @Override
+    public void onConnectionSuspended(final int i) {
+        mGoogleApiClient.connect();
+    }
 
-    // Requested clients. By default, that's just the games client.
-    protected int mRequestedClients = CLIENT_GAMES;
+    private static int RC_SIGN_IN = 9001;
 
-    // stores any additional scopes.
-    private String[] mAdditionalScopes;
+    private boolean mResolvingConnectionFailure = false;
+    private boolean mAutoStartSignInFlow        = true;
+    private boolean mSignInClicked              = false;
 
-    protected String mDebugTag = "BaseGameActivity";
-    protected boolean mDebugLog = false;
+    protected void gpSignIn() {
+        mSignInClicked = true;
+        mGoogleApiClient.connect();
+    }
 
-    /** Constructs a BaseGameActivity with default client (GamesClient). */
+    protected void gpSignOut() {
+        mSignInClicked = false;
+        Games.signOut(mGoogleApiClient);
+    }
+
+    @Override
+    public void onConnectionFailed(final ConnectionResult pConnectionResult) {
+        if (mResolvingConnectionFailure) {
+            // already resolving
+            return;
+        }
+
+        // if the sign-in button was clicked or if auto sign-in is enabled,
+        // launch the sign-in flow
+        if (mSignInClicked || mAutoStartSignInFlow) {
+            mAutoStartSignInFlow = false;
+            mSignInClicked = false;
+            mResolvingConnectionFailure = true;
+
+            // Attempt to resolve the connection failure using BaseGameUtils.
+            // The R.string.signin_other_error value should reference a generic
+            // error string in your strings.xml file, such as "There was
+            // an issue with sign-in, please try again later."
+            if (!BaseGameUtils.resolveConnectionFailure(this,
+                                                        mGoogleApiClient, pConnectionResult,
+                                                        RC_SIGN_IN, getResources().getString(R.string.signin_other_error))) {
+                mResolvingConnectionFailure = false;
+
+//                Toast.makeText(this, "К сожалению, подключение к сервису Google Games в данный момент невозможно", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    protected void getAllLeaderboards() {
+        if (mGoogleApiClient != null) {
+            if (!mGoogleApiClient.isConnected()) {
+                mGoogleApiClient.connect();
+            }
+            try {
+                startActivityForResult(Games.Leaderboards.getAllLeaderboardsIntent(mGoogleApiClient), 2);
+            } catch (Exception e) {
+                Log.d("GplayServices", "Problem connecting to playservices");
+                e.printStackTrace();
+            }
+        } else {
+            Log.d("GplayServices", "Still not connected");
+        }
+    }
+
+    protected void openLeaderBoard(String leaderBoardId, int requestId) {
+        if (mGoogleApiClient != null) {
+            try {
+                startActivityForResult(Games.Leaderboards.getLeaderboardIntent(mGoogleApiClient, leaderBoardId), requestId);
+            } catch (Exception e) {
+                Log.d("GplayServices", "Problem connecting to playservices");
+                e.printStackTrace();
+            }
+        } else {
+            Log.d("GplayServices", "Still not connected");
+        }
+    }
+
+    protected void submitScore(String leaderboardId, int score) {
+     if (mGoogleApiClient != null) {
+         Games.Leaderboards.submitScore(mGoogleApiClient, leaderboardId, score);
+     }
+    }
+
+    @Override
+    public void onConnected(final Bundle pBundle) {
+
+    }
+
+    /**
+     * Constructs a BaseGameActivity with default client (GamesClient).
+     */
     protected BaseGameActivity() {
         super();
-        mHelper = new GameHelper(this);
     }
 
     /**
      * Constructs a BaseGameActivity with the requested clients.
+     *
      * @param requestedClients The requested clients (a combination of CLIENT_GAMES,
-     *         CLIENT_PLUS and CLIENT_APPSTATE).
+     *                         CLIENT_PLUS and CLIENT_APPSTATE).
      */
     protected BaseGameActivity(int requestedClients) {
         super();
-        setRequestedClients(requestedClients);
-    }
-
-    /**
-     * Sets the requested clients. The preferred way to set the requested clients is
-     * via the constructor, but this method is available if for some reason your code
-     * cannot do this in the constructor. This must be called before onCreate in order to
-     * have any effect. If called after onCreate, this method is a no-op.
-     *
-     * @param requestedClients A combination of the flags CLIENT_GAMES, CLIENT_PLUS
-     *         and CLIENT_APPSTATE, or CLIENT_ALL to request all available clients.
-     * @param additionalScopes.  Scopes that should also be requested when the auth
-     *         request is made.
-     */
-    protected void setRequestedClients(int requestedClients, String... additionalScopes) {
-        mRequestedClients = requestedClients;
-        mAdditionalScopes = additionalScopes;
     }
 
     @Override
     protected void onCreate(Bundle b) {
         super.onCreate(b);
-        mHelper = new GameHelper(this);
-//        if (BuildConfig.DEBUG) {
-            mDebugLog = true;
-            mDebugTag = "GameHelperMe";
-//        }
-        if (mDebugLog) {
-            mHelper.enableDebugLog(mDebugLog, mDebugTag);
-        }
-        mHelper.setup(this, mRequestedClients, mAdditionalScopes);
+        // Create the Google Api Client with access to the Play Games services
+        mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .addConnectionCallbacks(this)
+                .addOnConnectionFailedListener(this)
+                .addApi(Games.API).addScope(Games.SCOPE_GAMES)
+                        // add other APIs and scopes here as needed
+                .build();
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        mHelper.onStart(this);
+//        mGoogleApiClient.connect();
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        mHelper.onStop();
+      if (mGoogleApiClient.isConnected()) {
+          mGoogleApiClient.disconnect();
+      }
     }
 
     @Override
     protected void onActivityResult(int request, int response, Intent data) {
         super.onActivityResult(request, response, data);
-        mHelper.onActivityResult(request, response, data);
-    }
 
-    protected GamesClient getGamesClient() {
-        return mHelper.getGamesClient();
-    }
-
-    protected AppStateClient getAppStateClient() {
-        return mHelper.getAppStateClient();
-    }
-
-    protected PlusClient getPlusClient() {
-        return mHelper.getPlusClient();
-    }
-
-    protected boolean isSignedIn() {
-        return mHelper.isSignedIn();
-    }
-
-    protected void beginUserInitiatedSignIn() {
-        mHelper.beginUserInitiatedSignIn();
-    }
-
-    protected void signOut() {
-        mHelper.signOut();
-    }
-
-    protected void showAlert(String title, String message) {
-        mHelper.showAlert(title, message);
-    }
-
-    protected void showAlert(String message) {
-        mHelper.showAlert(message);
-    }
-
-    protected void enableDebugLog(boolean enabled, String tag) {
-        mDebugLog = true;
-        mDebugTag = tag;
-        if (mHelper != null) {
-            mHelper.enableDebugLog(enabled, tag);
+        if (request == RC_SIGN_IN) {
+            mSignInClicked = false;
+            mResolvingConnectionFailure = false;
+            if (response == RESULT_OK) {
+                mGoogleApiClient.connect();
+            } else {
+                // Bring up an error dialog to alert the user th    at sign-in
+                // failed. The R.string.signin_failure should reference an error
+                // string in your strings.xml file that tells the user they
+                // could not be signed in, such as "Unable to sign in."
+                BaseGameUtils.showActivityResultError(this,
+                                                      request, response, R.string.signin_failure);
+            }
         }
     }
 
-    protected String getInvitationId() {
-        return mHelper.getInvitationId();
-    }
-
-    protected void reconnectClients(int whichClients) {
-        mHelper.reconnectClients(whichClients);
-    }
-
-    protected String getScopes() {
-        return mHelper.getScopes();
-    }
-
-    protected String[] getScopesArray() {
-        return mHelper.getScopesArray();
-    }
-
-    protected boolean hasSignInError() {
-        return mHelper.hasSignInError();
-    }
-
-    protected GameHelper.SignInFailureReason getSignInError() {
-        return mHelper.getSignInError();
-    }
 }

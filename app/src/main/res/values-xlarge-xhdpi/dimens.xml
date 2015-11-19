@@ -4,6 +4,7 @@
     <dimen name="left_offset2">18dip</dimen>
     <dimen name="top_offset">1dip</dimen>
     <dimen name="progress_bar_max_height">15dip</dimen>
-    <dimen name="category_item_answered_question_margin_top">10dp</dimen>
-    <dimen name="main_menu_buttons_width">70dp</dimen>
+    <dimen name="category_item_answered_question_margin_top">0dp</dimen>
+    <dimen name="question_number_text_size">40sp</dimen>
+    <dimen name="cat_item_price_width">120dp</dimen>
 </resources>
