@@ -60,7 +60,6 @@ public class HAStartScreen extends BaseGameActivity implements OnClickListener {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Fabric.with(this, new Crashlytics());
         setContentView(R.layout.main);
         mPrefsmanager = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         play_quiz = (Button) findViewById(R.id.play_quiz);

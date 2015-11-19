@@ -3,9 +3,12 @@ package com.almadev.znaniesila;
 import android.app.Application;
 import android.content.Context;
 
+import com.crashlytics.android.Crashlytics;
 import com.flurry.android.FlurryAgent;
 import com.google.ads.conversiontracking.InstallReceiver;
 import com.yandex.metrica.YandexMetrica;
+
+import io.fabric.sdk.android.Fabric;
 
 /**
  * Created by Aleksey on 11.11.2015.
@@ -24,6 +27,8 @@ public class ZSApp extends Application {
 
         sContext = getApplicationContext();
 
+        Fabric.with(this, new Crashlytics());
+
         if (YA_API_KEY != null) {
             YandexMetrica.activate(getApplicationContext(), YA_API_KEY);
             // Отслеживание активности пользователей
@@ -32,8 +37,8 @@ public class ZSApp extends Application {
             }
 
             YandexMetrica.enableActivityAutoTracking(this);
-            YandexMetrica.setReportCrashesEnabled(false);
-            YandexMetrica.setReportNativeCrashesEnabled(false);
+            YandexMetrica.setReportCrashesEnabled(true);
+            YandexMetrica.setReportNativeCrashesEnabled(true);
             YandexMetrica.setTrackLocationEnabled(false);
 
             InstallReceiver mInstallReceiver = new InstallReceiver();
