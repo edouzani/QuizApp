@@ -167,6 +167,10 @@ public class QuizHolder {
         }
 
         quizes.put(id, quiz);
+
+        if (quiz == null) {
+            quiz = new Quiz();
+        }
         return quiz;
     }
 
@@ -201,6 +205,9 @@ public class QuizHolder {
         Quiz qQuiz;
         for (Category c : getCategories().getCategories()) {
             qQuiz = getQuiz(c.getCategory_id());
+            if (qQuiz == null) {
+                return new LinkedList<>();
+            }
             if (qQuiz.getAnsweredQuestions() == qQuiz.getQuestions().size()) {
                 res.add(c);
             }

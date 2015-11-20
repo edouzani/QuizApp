@@ -31,6 +31,8 @@ import android.util.Log;
 
 import com.almadev.znaniesila.ZSApp;
 import com.android.vending.billing.IInAppBillingService;
+import com.yandex.metrica.MetricaEventHandler;
+import com.yandex.metrica.MetricaService;
 
 import org.json.JSONException;
 
@@ -785,7 +787,8 @@ public class IabHelper {
     void checkSetupDone(String operation) {
         if (!mSetupDone) {
             logError("Illegal state for operation (" + operation + "): IAB helper is not set up.");
-            throw new IllegalStateException("IAB helper is not set up. Can't perform operation: " + operation);
+            //throw new IllegalStateException("IAB helper is not set up. Can't perform operation: " + operation);
+
         }
     }
 

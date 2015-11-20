@@ -78,18 +78,6 @@
             android:scaleType="centerCrop"
             />
 
-
-        <ListView
-            android:id="@android:id/list"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:cacheColorHint="#00000000"
-            android:divider="@android:color/transparent"
-            android:dividerHeight="0dip"
-            android:listSelector="@android:color/transparent"
-            android:visibility="gone"
-            android:textFilterEnabled="true"/>
-
         <android.support.v7.widget.RecyclerView
             android:id="@+id/catsList"
             android:layout_width="match_parent"

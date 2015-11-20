@@ -23,8 +23,8 @@ android {
         applicationId "com.almadev.znaniesila"
         minSdkVersion 15
         targetSdkVersion 22
-        versionCode 24
-        versionName "1.893"
+        versionCode 28
+        versionName "1.897"
     }
 
     signingConfigs {
