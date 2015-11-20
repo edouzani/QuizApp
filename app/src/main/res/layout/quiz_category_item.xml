@@ -106,7 +106,7 @@
                 android:paddingTop="2dp"
                 android:text="Some name"
                 android:textColor="#FFFFFF"
-                android:textSize="18sp"
+                android:textSize="@dimen/cat_name_text_size"
                 android:textStyle="bold"/>
 
             <TextView
@@ -120,7 +120,7 @@
                 android:paddingRight="2dp"
                 android:text="Some very long description, that will be on three lines on older devices, like small phones"
                 android:textColor="#FFFFFF"
-                android:textSize="14sp"/>
+                android:textSize="@dimen/cat_desc_text_size"/>
         </RelativeLayout>
 
     </RelativeLayout>

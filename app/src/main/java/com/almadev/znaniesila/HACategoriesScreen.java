@@ -7,6 +7,7 @@ import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 
+import android.app.Activity;
 import android.app.ListActivity;
 import android.content.Context;
 import android.content.Intent;
@@ -16,6 +17,8 @@ import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -36,13 +39,15 @@ import com.almadev.znaniesila.model.Quiz;
 import com.almadev.znaniesila.model.QuizHolder;
 import com.almadev.znaniesila.utils.Constants;
 
-public class HACategoriesScreen extends ListActivity implements View.OnClickListener {
+import it.gmariotti.recyclerview.itemanimator.SlideInOutLeftItemAnimator;
+
+public class HACategoriesScreen extends Activity implements View.OnClickListener, CategoryRecycleAdapter.CategoryClickListener {
 
     private static final String TAG = "CATEGORIES_SCREEN";
     private IabHelper mHelper;
     public static final int BILLING_RESPONSE_RESULT_ITEM_ALREADY_OWNED = 7;
 
-    private CategoryAdapter   mAdapter;
+    private CategoryRecycleAdapter   mAdapter;
     private SharedPreferences mPrefsmanager;
     private Boolean           adsDisabledAfterPurchase;
     private Boolean           adSupportEnabled;
@@ -50,8 +55,9 @@ public class HACategoriesScreen extends ListActivity implements View.OnClickList
     private List<Category>    mListItems;
     private TextView          mTitle;
     private List<String>      additionalSkuList;
-    private Context pContext;
+    private Context           pContext;
     private boolean haveCategories = true;
+    private RecyclerView mRecyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,8 +84,8 @@ public class HACategoriesScreen extends ListActivity implements View.OnClickList
             return;
         }
         fetchCategories();
-        mAdapter = new CategoryAdapter(new WeakReference<Context>(this), mListItems);
-        setListAdapter(mAdapter);
+        initRecycle();
+
 
         findViewById(R.id.purchasable_cats).setOnClickListener(this);
         findViewById(R.id.back).setOnClickListener(this);
@@ -98,6 +104,18 @@ public class HACategoriesScreen extends ListActivity implements View.OnClickList
             }
         }
         Collections.sort(mListItems, new CategoryComparator());
+    }
+
+
+    private void initRecycle() {
+        mRecyclerView = (RecyclerView) findViewById(R.id.catsList);
+        mRecyclerView.setHasFixedSize(true);
+        LinearLayoutManager llm = new LinearLayoutManager(this);
+        mRecyclerView.setLayoutManager(llm);
+        mAdapter = new CategoryRecycleAdapter(new WeakReference<Context>(this), mListItems);
+        mAdapter.addClickListener(new WeakReference<CategoryRecycleAdapter.CategoryClickListener>(this));
+        mRecyclerView.setItemAnimator(new SlideInOutLeftItemAnimator(mRecyclerView));
+        mRecyclerView.setAdapter(mAdapter);
     }
 
     @Override
@@ -131,13 +149,8 @@ public class HACategoriesScreen extends ListActivity implements View.OnClickList
         super.onBackPressed();
     }
 
-    public void onMoreButtonClick(View view) {
-    }
-
     @Override
-    protected void onListItemClick(ListView l, View v, int position, long id) {
-        super.onListItemClick(l, v, position, id);
-        Category category = mAdapter.getItem(position);
+    public void onClick(final Category category, final boolean payCat) {
         Intent intent;
         if (isKnowledgeCats) {
             intent = new Intent(this, KnowledgeActivity.class);
@@ -171,7 +184,8 @@ public class HACategoriesScreen extends ListActivity implements View.OnClickList
                 findViewById(R.id.back).setVisibility(View.VISIBLE);
                 findViewById(R.id.passed).setVisibility(View.INVISIBLE);
                 findViewById(R.id.restore).setVisibility(View.VISIBLE);
-                mAdapter.setItems(true, QuizHolder.getInstance(this).getPurchasableCategories());
+                mAdapter.setPayCats(true);
+                mAdapter.setItems(QuizHolder.getInstance(this).getPurchasableCategories());
                 mAdapter.notifyDataSetChanged();
                 break;
             case R.id.back:
@@ -182,7 +196,8 @@ public class HACategoriesScreen extends ListActivity implements View.OnClickList
                 findViewById(R.id.passed).setVisibility(View.VISIBLE);
                 findViewById(R.id.restore).setVisibility(View.GONE);
                 fetchCategories();
-                mAdapter.setItems(false, mListItems);
+                mAdapter.setPayCats(false);
+                mAdapter.setItems(mListItems);
                 mAdapter.notifyDataSetChanged();
                 break;
             case R.id.passed:
@@ -190,7 +205,8 @@ public class HACategoriesScreen extends ListActivity implements View.OnClickList
                 findViewById(R.id.passed).setVisibility(View.INVISIBLE);
                 findViewById(R.id.home).setVisibility(View.INVISIBLE);
                 findViewById(R.id.back).setVisibility(View.VISIBLE);
-                mAdapter.setItems(false, QuizHolder.getInstance(this).getPassedCategories());
+                mAdapter.setPayCats(false);
+                mAdapter.setItems(QuizHolder.getInstance(this).getPassedCategories());
                 mAdapter.notifyDataSetChanged();
                 break;
             case R.id.restore:
@@ -204,98 +220,6 @@ public class HACategoriesScreen extends ListActivity implements View.OnClickList
         }
     }
 
-    private static class CategoryAdapter extends BaseAdapter {
-
-        private List<Category>         mData;
-        private LayoutInflater         sInflater;
-        private WeakReference<Context> wContext;
-        private boolean                payCats;
-
-        public CategoryAdapter(WeakReference<Context> context, List<Category> data) {
-            wContext = context;
-            mData = data;
-            sInflater = (LayoutInflater) context.get().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            payCats = false;
-        }
-
-        public void setItems(boolean isPayable, List<Category> data) {
-            mData = data;
-            payCats = isPayable;
-        }
-
-        @Override
-        public int getCount() {
-            return mData != null ? mData.size() : 0;
-        }
-
-        @Override
-        public Category getItem(int position) {
-            return mData.get(position);
-        }
-
-        @Override
-        public long getItemId(int position) {
-            // TODO Auto-generated method stub
-            return 0;
-        }
-
-        @Override
-        public View getView(int position, View convertiView, ViewGroup parent) {
-            if (convertiView == null) {
-                convertiView = sInflater.inflate(R.layout.quiz_category_item, null);
-            }
-            View root = convertiView.findViewById(R.id.category_item_layout);
-
-            TextView name = (TextView) convertiView.findViewById(R.id.name);
-            TextView description = (TextView) convertiView.findViewById(R.id.description);
-            TextView numberAnswered = (TextView) convertiView.findViewById(R.id.answeredQuestions);
-            ImageView image = (ImageView) convertiView.findViewById(R.id.image);
-            if (image.getDrawable() != null) {
-                image.getDrawable().setCallback(null);
-            }
-
-            Category qCategory = getItem(position);
-            Quiz qQuiz = QuizHolder.getInstance(convertiView.getContext()).getQuiz(qCategory.getCategory_id());
-            if (qQuiz == null) {
-                return new View(parent.getContext());
-            }
-            root.setBackgroundColor(Color.parseColor("#" + qCategory.getCategory_color().trim()));
-            name.setText(qCategory.getCategory_name());
-
-            TextView record_value = (TextView) convertiView.findViewById(R.id.record_value);
-            if (!payCats) {
-                root.findViewById(R.id.record_text_view).setVisibility(View.VISIBLE);
-                root.findViewById(R.id.price).setVisibility(View.INVISIBLE);
-                record_value.setVisibility(View.VISIBLE);
-                SharedPreferences preferences = convertiView.getContext().getSharedPreferences(HAFinalScreen.HIGH_SCORES, MODE_PRIVATE);
-                int recordScore = preferences.getInt(qCategory.getCategory_id(), 0);
-                record_value.setText("" + recordScore);
-            } else {
-                root.findViewById(R.id.record_text_view).setVisibility(View.INVISIBLE);
-                record_value.setVisibility(View.INVISIBLE);
-                root.findViewById(R.id.price).setVisibility(View.VISIBLE);
-                ((TextView) root.findViewById(R.id.price)).setText(qCategory.getPrice());
-            }
-
-            numberAnswered.setText(qQuiz.getAnsweredQuestions() + "/" + qQuiz.getQuestions().size());
-            description.setText(qCategory.getCategory_description());
-
-            ProgressBar progressBar = (ProgressBar) root.findViewById(R.id.category_progress_bar);
-            progressBar.setMax(qQuiz.getQuestions().size());
-            progressBar.setProgress(qQuiz.getAnsweredQuestions());
-
-            try {
-                Drawable d = Drawable.createFromStream(wContext.get().getAssets().open(
-                        qCategory.getCategory_image_path()), null);
-                image.setImageDrawable(d);
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            return convertiView;
-        }
-    }
-
     private class CategoryComparator implements Comparator<Category> {
 
         @Override
@@ -305,7 +229,6 @@ public class HACategoriesScreen extends ListActivity implements View.OnClickList
             else
                 return -1;
         }
-
     }
 
     //In-App billing related stuff
@@ -344,8 +267,8 @@ public class HACategoriesScreen extends ListActivity implements View.OnClickList
                                 }
                                 for (Category c : payCats) {
                                     if (inv.hasDetails(c.getProductIdentifier())) {
-                                        String[] priceArray = inv.getSkuDetails(c.getProductIdentifier()).getPrice().split("\\s");
-                                        c.setPrice(priceArray[0] + "\n" + priceArray[1]);
+                                        String newPrice = inv.getSkuDetails(c.getProductIdentifier()).getPrice().replaceAll("\\s", "\n");
+                                        c.setPrice(newPrice);
                                     }
                                     if (inv.hasPurchase(c.getProductIdentifier())) {
                                         c.setIsPurchased(true);

@@ -11,6 +11,7 @@ import com.almadev.znaniesila.model.QuizHolder;
 import com.almadev.znaniesila.utils.Constants;
 import com.flurry.android.FlurryAgent;
 import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
@@ -18,6 +19,7 @@ import com.yandex.metrica.YandexMetrica;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.IllegalFormatException;
 import java.util.Map;
 
 import de.greenrobot.event.EventBus;
@@ -88,13 +90,24 @@ public class CategoriesDownloader {
 //                    list.setVersion("39");
                     quizHolder.saveCategories(list);
                     EventBus.getDefault().post(new NeedUpdateQuizesEvent(list.getVersion()));
+                } catch (JsonSyntaxException jse) {
+                    Log.e("CategoryParser", "cannot parse - " + jsonStr);
+                    Map<String, Object> eventAttributes = new HashMap<String, Object>();
+                    eventAttributes.put("CategoryParserCrash", jsonStr);
+                    YandexMetrica.reportEvent("CrashStat", eventAttributes);
+
+                    callback.downloadFinished(null, -1);
+                    return;
                 } catch (IllegalStateException ise) {
                     Log.e("CategoryParser", "cannot parse - " + jsonStr);
                     Map<String, Object> eventAttributes = new HashMap<String, Object>();
                     eventAttributes.put("CategoryParserCrash", jsonStr);
                     YandexMetrica.reportEvent("CrashStat", eventAttributes);
-                } catch (IOException e) {
-                    e.printStackTrace();
+
+                    callback.downloadFinished(null, -1);
+                    return;
+                } catch (Exception e) {
+                    throw new UnsupportedOperationException("Cannot parse - " + jsonStr);
                 }
 
                 callback.downloadFinished(list, 200);

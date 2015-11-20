@@ -483,8 +483,9 @@ public class HAQuizScreen extends Activity implements OnClickListener, Callback,
             } else {
                 player = MediaPlayer.create(this, R.raw.no_cutted);
             }
-            player.start();
-
+            if (player != null ) {
+                player.start();
+            }
         }
 
     }

@@ -5,5 +5,7 @@
     <dimen name="top_offset">1dip</dimen>
     <dimen name="progress_bar_max_height">14dip</dimen>
     <dimen name="question_number_text_size">40sp</dimen>
-    <dimen name="cat_item_price_width">65dp</dimen>
+    <dimen name="cat_item_price_width">60dp</dimen>
+    <dimen name="cat_name_text_size">14sp</dimen>
+    <dimen name="cat_desc_text_size">12sp</dimen>
 </resources>
