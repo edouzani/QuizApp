@@ -126,6 +126,7 @@
     <orderEntry type="library" exported="" name="play-services-basement-8.3.0" level="project" />
     <orderEntry type="library" exported="" name="support-v13-23.1.1" level="project" />
     <orderEntry type="library" exported="" name="answers-1.3.2" level="project" />
+    <orderEntry type="module" module-name="vksdk_library" exported="" />
     <orderEntry type="module" module-name="RecycleAnimation" exported="" />
     <orderEntry type="module" module-name="BaseGameUtils" exported="" />
   </component>

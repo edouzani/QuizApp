@@ -34,11 +34,13 @@ import com.almadev.znaniesila.billing.utils.IabHelper;
 import com.almadev.znaniesila.billing.utils.IabResult;
 import com.almadev.znaniesila.billing.utils.Inventory;
 import com.almadev.znaniesila.billing.utils.Purchase;
+import com.almadev.znaniesila.events.NeedUpdateQuizesEvent;
 import com.almadev.znaniesila.model.Category;
 import com.almadev.znaniesila.model.Quiz;
 import com.almadev.znaniesila.model.QuizHolder;
 import com.almadev.znaniesila.utils.Constants;
 
+import de.greenrobot.event.EventBus;
 import it.gmariotti.recyclerview.itemanimator.SlideInOutLeftItemAnimator;
 
 public class HACategoriesScreen extends Activity implements View.OnClickListener, CategoryRecycleAdapter.CategoryClickListener {
@@ -87,22 +89,40 @@ public class HACategoriesScreen extends Activity implements View.OnClickListener
         initRecycle();
 
 
+        if (QuizHolder.getInstance(this).getPassedCategories().size() == 0) {
+            findViewById(R.id.passed).setVisibility(View.GONE);
+        }
         findViewById(R.id.purchasable_cats).setOnClickListener(this);
         findViewById(R.id.back).setOnClickListener(this);
         findViewById(R.id.passed).setOnClickListener(this);
         findViewById(R.id.restore).setOnClickListener(this);
 
         mTitle = (TextView) findViewById(R.id.title);
+        mTitle.setText(R.string.cats_choose_title);
     }
 
     private void fetchCategories() {
         mListItems = new LinkedList<>();
-        for (Category c : QuizHolder.getInstance(this).getCategories().getCategories()) {
+
+//        QuizHolder.getInstance(this).deleteQuiz("3");
+
+        for (Category c : QuizHolder.getInstance(this).getUnPassedCategories()) {
             if (c.getProductIdentifier() == null || c.getProductIdentifier().isEmpty() ||
                     c.isPurchased()) {
-                mListItems.add(c);
+
+                if (c == null ||
+                        QuizHolder.getInstance(this).getQuiz(c.getCategory_id()) == null ||
+                        QuizHolder.getInstance(this).getQuiz(c.getCategory_id()).getQuestions().size() == 0) {
+                    if (c != null) {
+                        QuizHolder.getInstance(this).deleteQuiz(c.getCategory_id());
+                    }
+                    EventBus.getDefault().post(new NeedUpdateQuizesEvent(QuizHolder.getQuizVersion()));
+                } else {
+                    mListItems.add(c);
+                }
             }
         }
+
         Collections.sort(mListItems, new CategoryComparator());
     }
 
@@ -251,11 +271,20 @@ public class HACategoriesScreen extends Activity implements View.OnClickListener
                         additionalSkuList = new ArrayList<>();
                         final List<Category> payCats = new LinkedList<Category>();
 
+                        if (pContext == null || QuizHolder.getInstance(pContext) == null ||
+                                QuizHolder.getInstance(pContext).getCategories() == null ||
+                                QuizHolder.getInstance(pContext).getCategories().getCategories() == null) {
+                            return;
+                        }
                         for (Category cat : QuizHolder.getInstance(pContext).getCategories().getCategories()) {
                             if (cat.getProductIdentifier() != null && !cat.getProductIdentifier().isEmpty()) {
                                 additionalSkuList.add(cat.getProductIdentifier());
                                 payCats.add(cat);
                             }
+                        }
+
+                        if (mHelper == null) {
+                            return;
                         }
 
                         mHelper.queryInventoryAsync(true, additionalSkuList, new IabHelper.QueryInventoryFinishedListener() {

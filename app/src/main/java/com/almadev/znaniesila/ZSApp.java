@@ -6,6 +6,7 @@ import android.content.Context;
 import com.crashlytics.android.Crashlytics;
 import com.flurry.android.FlurryAgent;
 import com.google.ads.conversiontracking.InstallReceiver;
+import com.vk.sdk.VKSdk;
 import com.yandex.metrica.YandexMetrica;
 
 import io.fabric.sdk.android.Fabric;
@@ -28,6 +29,8 @@ public class ZSApp extends Application {
         sContext = getApplicationContext();
 
         Fabric.with(this, new Crashlytics());
+
+        VKSdk.initialize(sContext);
 
         if (YA_API_KEY != null) {
             YandexMetrica.activate(getApplicationContext(), YA_API_KEY);

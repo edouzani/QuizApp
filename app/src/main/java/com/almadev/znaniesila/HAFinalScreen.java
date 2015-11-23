@@ -20,6 +20,7 @@ import android.widget.TextView;
 
 import com.almadev.znaniesila.model.Category;
 import com.almadev.znaniesila.utils.Constants;
+import com.almadev.znaniesila.utils.social.SocialController;
 
 public class HAFinalScreen extends BaseGameActivity implements OnClickListener {
 
@@ -198,10 +199,11 @@ public class HAFinalScreen extends BaseGameActivity implements OnClickListener {
                 startActivity(shareIntentFb);
                 break;
             case R.id.share_vk:
-                Intent shareIntentVk = new Intent(Intent.ACTION_VIEW,
-                                                Uri.parse("http://vk.com/share.php?url=http://www.znanie.tv/&title=Знание-сила!" +
-                                                                  "&description=" + comments + "&image=http://www.znanie.tv/zshare.jpg&noparse=true"));
-                startActivity(shareIntentVk);
+//                Intent shareIntentVk = new Intent(Intent.ACTION_VIEW,
+//                                                Uri.parse("http://vk.com/share.php?url=http://www.znanie.tv/&title=Знание-сила!" +
+//                                                                  "&description=" + comments + "&image=http://www.znanie.tv/zshare.jpg&noparse=true"));
+//                startActivity(shareIntentVk);
+                SocialController.vkShare(getSupportFragmentManager(), comments);
                 break;
             case R.id.share_ok:
                 Intent shareIntentOk = new Intent(Intent.ACTION_VIEW,

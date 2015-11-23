@@ -107,7 +107,7 @@ public class CategoriesDownloader {
                     callback.downloadFinished(null, -1);
                     return;
                 } catch (Exception e) {
-                    throw new UnsupportedOperationException("Cannot parse - " + jsonStr);
+//                    throw new UnsupportedOperationException("Cannot parse - " + jsonStr);
                 }
 
                 callback.downloadFinished(list, 200);

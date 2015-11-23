@@ -23,8 +23,8 @@ android {
         applicationId "com.almadev.znaniesila"
         minSdkVersion 15
         targetSdkVersion 22
-        versionCode 28
-        versionName "1.897"
+        versionCode 31
+        versionName "1.899"
     }
 
     signingConfigs {
@@ -87,4 +87,5 @@ dependencies {
     compile files('libs/FlurryAnalytics-6.2.0.jar')
     compile project(':BaseGameUtils')
     compile project(':RecycleAnimation')
+    compile project(':vksdk_library')
 }

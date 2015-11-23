@@ -28,6 +28,7 @@ import android.os.IBinder;
 import android.os.RemoteException;
 import android.text.TextUtils;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.almadev.znaniesila.ZSApp;
 import com.android.vending.billing.IInAppBillingService;
@@ -381,6 +382,11 @@ public class IabHelper {
         flagStartAsync("launchPurchaseFlow");
         IabResult result;
 
+
+        if (mService == null || mContext == null) {
+            Toast.makeText(act, "Сервис покупок в данный момент недоступен, попробуйте позднее", Toast.LENGTH_SHORT).show();
+            return;
+        }
         if (itemType.equals(ITEM_TYPE_SUBS) && !mSubscriptionsSupported) {
             IabResult r = new IabResult(IABHELPER_SUBSCRIPTIONS_NOT_AVAILABLE,
                     "Subscriptions are not available.");

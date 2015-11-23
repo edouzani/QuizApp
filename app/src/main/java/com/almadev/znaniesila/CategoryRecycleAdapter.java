@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.almadev.znaniesila.events.NeedUpdateQuizesEvent;
 import com.almadev.znaniesila.model.Category;
 import com.almadev.znaniesila.model.QuestionState;
 import com.almadev.znaniesila.model.Quiz;
@@ -24,6 +25,8 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+
+import de.greenrobot.event.EventBus;
 
 /**
  * Created by Aleksey on 20.11.2015.
@@ -39,10 +42,12 @@ public class CategoryRecycleAdapter extends android.support.v7.widget.RecyclerVi
     private boolean                isPayCats;
     private int lastPosition = -1;
     private List<WeakReference<CategoryClickListener>> listeners = new LinkedList<>();
+    private boolean isBrokenContent = false;
 
     public CategoryRecycleAdapter(WeakReference<Context> wContext, List<Category> pCategories) {
         mCategories = pCategories;
         this.wContext = wContext;
+        isBrokenContent = false;
     }
 
     public void addClickListener(WeakReference<CategoryClickListener> listener) {

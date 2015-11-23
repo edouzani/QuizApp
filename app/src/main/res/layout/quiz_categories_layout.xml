@@ -40,9 +40,9 @@
 
             <TextView
                 android:textColor="@color/white"
-                android:textSize="20sp"
+                android:textSize="@dimen/category_layout_title_text_size"
                 android:layout_alignBottom="@id/home"
-                android:text="@string/cats_choose_title"
+                android:text="ПРОЙДЕННЫЕ КАТЕГОРИИ"
                 android:id="@+id/title"
                 android:layout_width="match_parent"
                 android:gravity="center"

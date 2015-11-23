@@ -1,1 +1,1 @@
-include ':BaseGameUtils', ':app', ':RecycleAnimation'
+include ':BaseGameUtils', ':vksdk_library', ':app', ':RecycleAnimation'

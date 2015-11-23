@@ -101,8 +101,10 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/center"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
         android:gravity="center"
-        android:text="Asdfsdfsdfsdfsdfsdfsdfsdfsd\nsdfsdfdfsdf\nsdfsdfsdfsdfsdf\nsdfsdfsdfsdf\nasdasdasd"
+        android:text="Нержавеющую сталь изобрели вовсе не для того, чтобы бороться со ржавчиной \nsdfsdfdfsdf\nsdfsdfsdfsdfsdf\nsdfsdfsdfsdf\nasdasdasd"
         android:textColor="#FFFFFF"
         android:textSize="17sp"/>
 
@@ -175,7 +177,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="50dp">
+        android:layout_marginBottom="@dimen/quiz_skip_bottom_margin">
 
         <TextView
             android:layout_width="wrap_content"

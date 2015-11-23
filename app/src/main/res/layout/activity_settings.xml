@@ -21,7 +21,7 @@
         android:gravity="center"
         android:text="НАСТРОЙКИ"
         android:textColor="@color/white"
-        android:textSize="20sp"/>
+        android:textSize="@dimen/category_layout_title_text_size"/>
 
     <ScrollView
         android:layout_width="fill_parent"
@@ -41,7 +41,7 @@
                 android:layout_height="wrap_content"
                 android:text="ЗВУК"
                 android:textColor="@color/white"
-                android:textSize="30sp"/>
+                android:textSize="@dimen/settings_item_name_text_size"/>
 
             <android.support.v7.widget.SwitchCompat
                 android:id="@+id/soundSwitch"

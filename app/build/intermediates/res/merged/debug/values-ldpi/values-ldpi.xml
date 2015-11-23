@@ -2,6 +2,9 @@
 <resources>
     <!-- From: file:/D:/Android_Projects/QuizApp_Android%202.0/app/src/main/res/values-ldpi/dimens.xml -->
     <eat-comment/>
+    <dimen name="cat_desc_text_size">10sp</dimen>
+    <dimen name="cat_name_text_size">14sp</dimen>
+    <dimen name="category_layout_title_text_size">13sp</dimen>
     <dimen name="left_offset1">16dip</dimen>
     <dimen name="left_offset2">11dip</dimen>
     <dimen name="progress_bar_max_height">14dip</dimen>

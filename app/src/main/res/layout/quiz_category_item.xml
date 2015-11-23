@@ -74,9 +74,9 @@
                     android:layout_alignParentBottom="true"
                     android:layout_marginBottom="5dp"
                     android:gravity="center"
-                    android:text="0/100"
+                    android:text="100/100"
                     android:textColor="@color/white"
-                    android:textSize="20sp"
+                    android:textSize="@dimen/answered_questions_textsize"
                     />
 
             </RelativeLayout>
@@ -118,7 +118,7 @@
                 android:ellipsize="end"
                 android:maxLines="5"
                 android:paddingRight="2dp"
-                android:text="Some very long description, that will be on three lines on older devices, like small phones"
+                android:text="Назовите всех представителей России на --Евровидении--, знаете о тайнах звезд - докажите"
                 android:textColor="#FFFFFF"
                 android:textSize="@dimen/cat_desc_text_size"/>
         </RelativeLayout>

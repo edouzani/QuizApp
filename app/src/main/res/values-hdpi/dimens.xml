@@ -7,5 +7,7 @@
     <dimen name="question_number_text_size">40sp</dimen>
     <dimen name="cat_item_price_width">60dp</dimen>
     <dimen name="cat_name_text_size">14sp</dimen>
-    <dimen name="cat_desc_text_size">12sp</dimen>
+    <dimen name="cat_desc_text_size">11sp</dimen>
+    <dimen name="answered_questions_textsize">15sp</dimen>
+    <dimen name="category_layout_title_text_size">13sp</dimen>
 </resources>

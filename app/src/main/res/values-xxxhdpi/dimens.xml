@@ -7,4 +7,6 @@
     <dimen name="category_item_answered_question_margin_top">10dp</dimen>
     <dimen name="main_menu_buttons_width">100dp</dimen>
     <dimen name="cat_item_price_width">75dp</dimen>
+    <dimen name="quiz_skip_bottom_margin">70dp</dimen>
+
 </resources>

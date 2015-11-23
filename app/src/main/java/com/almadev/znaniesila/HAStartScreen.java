@@ -46,16 +46,9 @@ public class HAStartScreen extends BaseGameActivity implements OnClickListener {
     private static final String TAG = "HAStartScreen";
     private Button            play_quiz;
     private ImageView         about;
-    private Boolean           adSupportEnabled;
-    private Boolean           adsDisabledAfterPurchase;
     private Boolean           gameServicesEnabled;
     private Button            worldScoreButton;
     private SharedPreferences mPrefsmanager;
-    private QuestionsAdapter  mQuestionsAdapter;
-    private TextView          progressText;
-
-    private Object lock             = new Object();
-    private int    downloadedQuizes = 0;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -74,25 +67,12 @@ public class HAStartScreen extends BaseGameActivity implements OnClickListener {
         parseConfig();
 
         gameServicesEnabled = mPrefsmanager.getBoolean(Constants.GAME_SERVICES_ENABLED, false);
-        adSupportEnabled = mPrefsmanager.getBoolean(Constants.AD_SUPPORT_NEEDED, false);
-        adsDisabledAfterPurchase = mPrefsmanager.getBoolean(Constants.ADS_DISABLED_AFTER_PURCHASE, false);
 
         if (!gameServicesEnabled) {
             worldScoreButton.setVisibility(View.GONE);
         } else {
             worldScoreButton.setVisibility(View.VISIBLE);
         }
-
-        QuizHolder quizHolder = QuizHolder.getInstance(this);
-        mQuestionsAdapter = new QuestionsAdapter(this);
-
-        String versionText = BuildConfig.VERSION_CODE + "/" + BuildConfig.VERSION_NAME;
-        if (ZSApp.DEBUG_ENV) {
-            versionText += "-test";
-        }
-        ((TextView)findViewById(R.id.versionText)).setText(versionText);
-
-        SecurityChecker.get.start();
 
         //init first run
 
@@ -109,48 +89,6 @@ public class HAStartScreen extends BaseGameActivity implements OnClickListener {
         }
     }
 
-    public void onEventMainThread(QuizDownloadedEvent e) {
-        synchronized (lock) {
-            downloadedQuizes++;
-            progressText.setText("Идет обновление викторин:" + downloadedQuizes + "/" + QuizHolder.getInstance(this).getCategories().getCategories().size());
-        }
-    }
-
-    public void onEventMainThread(NeedUpdateQuizesEvent e) {
-        Log.e("Update", "fetching started");
-        Log.e("Update", "updating to version " + e.getVersion());
-        progressText = (TextView) findViewById(R.id.progressText);
-        progressText.setVisibility(View.VISIBLE);
-        progressText.setText("Идет обновление викторин: 0/" + QuizHolder.getInstance(this).getCategories().getCategories().size());
-
-        mQuestionsAdapter.fetchQuizes(this);
-    }
-
-    public void onEventMainThread(QuizesUpdateFinishedEvent e) {
-        findViewById(R.id.splash).setVisibility(View.GONE);
-        if (!ZSApp.DEBUG_ENV) {
-            findViewById(R.id.versionText).setVisibility(View.GONE);
-        }
-        findViewById(R.id.progressText).setVisibility(View.GONE);
-        Log.e("Update", "update finished");
-    }
-
-
-    public void onEventMainThread(QuizesUpdateFailedEvent e) {
-        Log.e("Update", "update failed");
-        QuizHolder.getInstance(this).clear();
-
-        Toast.makeText(this, "Ошибка загрузки. Попробуйте открыть приложение позднее", Toast.LENGTH_SHORT).show();
-
-        Handler mHandler = new Handler(this.getMainLooper());
-        mHandler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                finish();
-            }
-        }, 3000);
-    }
-
     @Override
     public void onConnected(final Bundle pBundle) {
         super.onConnected(pBundle);
@@ -161,24 +99,11 @@ public class HAStartScreen extends BaseGameActivity implements OnClickListener {
     protected void onStart() {
         super.onStart();
 //        EventBus.getDefault().register(this);
-        EventBus.getDefault().registerSticky(this);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        try {
-            findViewById(R.id.splash).setVisibility(View.VISIBLE);
-            findViewById(R.id.versionText).setVisibility(View.VISIBLE);
-            mQuestionsAdapter.getCategories(new QuestionsAdapter.CategoriesGetCallback() {
-                @Override
-                public void getCategories(final CategoriesList list) {
-                    //close splash
-                }
-            }, true);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     @Override
@@ -190,8 +115,6 @@ public class HAStartScreen extends BaseGameActivity implements OnClickListener {
     @Override
     protected void onStop() {
         super.onStop();
-
-        EventBus.getDefault().unregister(this);
     }
 
     @Override
@@ -199,13 +122,19 @@ public class HAStartScreen extends BaseGameActivity implements OnClickListener {
         super.onDestroy();
     }
 
+    private static final int TIME_INTERVAL = 3000; // # milliseconds, desired time passed between two back presses.
+    private long mBackPressed;
+
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
-    }
+        if (mBackPressed + TIME_INTERVAL > System.currentTimeMillis())
+        {
+            super.onBackPressed();
+            return;
+        }
+        else { Toast.makeText(getBaseContext(), "Нажмите еще раз для выхода из приложения", Toast.LENGTH_SHORT).show(); }
 
-    public void onMoreButtonClick(View view) {
-        //
+        mBackPressed = System.currentTimeMillis();
     }
 
     private void parseConfig() {

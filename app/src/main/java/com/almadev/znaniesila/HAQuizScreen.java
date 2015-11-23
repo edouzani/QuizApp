@@ -5,6 +5,8 @@ import java.util.Comparator;
 import java.util.List;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -45,6 +47,10 @@ import com.almadev.znaniesila.ui.TwoTextButton;
 import com.almadev.znaniesila.utils.Constants;
 import com.almadev.znaniesila.utils.LeaderboardConverter;
 import com.squareup.picasso.Picasso;
+import com.vk.sdk.VKAccessToken;
+import com.vk.sdk.VKCallback;
+import com.vk.sdk.VKSdk;
+import com.vk.sdk.api.VKError;
 
 public class HAQuizScreen extends Activity implements OnClickListener, Callback,
                                                       OnBufferingUpdateListener, OnCompletionListener {
@@ -89,7 +95,9 @@ public class HAQuizScreen extends Activity implements OnClickListener, Callback,
     private Timer.TimerCallback mTimerCallback;
     private ImageView           mBigImage;
     private View                mFullScreenImage;
-    private String imgUrl = null;
+    private String                   imgUrl                    = null;
+    private boolean                  mDescriptionVisible       = false;
+    private DescriptionClickListener mDescriptionClickListener = new DescriptionClickListener();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -188,15 +196,58 @@ public class HAQuizScreen extends Activity implements OnClickListener, Callback,
         mTimer.stop();
     }
 
-    @Override
-    public void onBackPressed() {
+    private void backPress() {
         super.onBackPressed();
     }
 
     @Override
+    public void onBackPressed() {
+        if (mDescriptionVisible) {
+            mDescriptionClickListener.onClick(null);
+        } else {
+            AlertDialog.Builder ad;
+            ad = new AlertDialog.Builder(this);
+            ad.setTitle("Выход");  // заголовок
+            ad.setMessage("Действительно ли Вы хотите покинуть викторину?"); // сообщение
+            ad.setPositiveButton("Да", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int arg1) {
+                    Toast.makeText(HAQuizScreen.this, "Вы сделали правильный выбор",
+                                   Toast.LENGTH_LONG).show();
+                    backPress();
+                }
+            });
+            ad.setNegativeButton("Нет", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int arg1) {
+                    Toast.makeText(HAQuizScreen.this, "Возможно вы правы", Toast.LENGTH_LONG)
+                         .show();
+                }
+            });
+            ad.setCancelable(true);
+            ad.setOnCancelListener(new DialogInterface.OnCancelListener() {
+                public void onCancel(DialogInterface dialog) {
+                    Toast.makeText(HAQuizScreen.this, "Вы ничего не выбрали",
+                                   Toast.LENGTH_LONG).show();
+                }
+            });
+        }
+//        super.onBackPressed();
+    }
+
+    @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        Log.d(TAG, "!inside onActivityResult, request code: " + requestCode + ", result code: " + resultCode);
+        if (!VKSdk.onActivityResult(requestCode, resultCode, data, new VKCallback<VKAccessToken>() {
+            @Override
+            public void onResult(VKAccessToken res) {
+                // Пользователь успешно авторизовался
+            }
+
+            @Override
+            public void onError(VKError error) {
+                // Произошла ошибка авторизации (например, пользователь запретил авторизацию)
+            }
+        })) {
+            super.onActivityResult(requestCode, resultCode, data);
+        }
     }
 
     class TimerCallbackImpl implements Timer.TimerCallback {
@@ -407,6 +458,7 @@ public class HAQuizScreen extends Activity implements OnClickListener, Callback,
     }
 
     private void showAnswerDescription(boolean correct, Question question) {
+        mDescriptionVisible = true;
         if (correct) {
             findViewById(R.id.wrong_text).setVisibility(View.GONE);
             findViewById(R.id.correct_text).setVisibility(View.VISIBLE);
@@ -420,19 +472,22 @@ public class HAQuizScreen extends Activity implements OnClickListener, Callback,
         }
 
         findViewById(R.id.answer_result_layout).setVisibility(View.VISIBLE);
-        findViewById(R.id.answer_result_layout).setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(final View pView) {
-                findViewById(R.id.answer_result_layout).setVisibility(View.GONE);
+        findViewById(R.id.answer_result_layout).setOnClickListener(mDescriptionClickListener);
+    }
 
-                mCurrentQuestion++;
-                if (mCurrentQuestion < maxQuestions) {
-                    setupData();
-                } else {
-                    showFinalScreen();
-                }
+    class DescriptionClickListener implements OnClickListener {
+        @Override
+        public void onClick(final View pView) {
+            mDescriptionVisible = false;
+            findViewById(R.id.answer_result_layout).setVisibility(View.GONE);
+
+            mCurrentQuestion++;
+            if (mCurrentQuestion < maxQuestions) {
+                setupData();
+            } else {
+                showFinalScreen();
             }
-        });
+        }
     }
 
     private void changeDrawableState(int selectedOption) {
@@ -483,7 +538,7 @@ public class HAQuizScreen extends Activity implements OnClickListener, Callback,
             } else {
                 player = MediaPlayer.create(this, R.raw.no_cutted);
             }
-            if (player != null ) {
+            if (player != null) {
                 player.start();
             }
         }

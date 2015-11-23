@@ -106,6 +106,9 @@ public class QuizHolder {
     }
 
     private Quiz mergeQuizes(Quiz local, Quiz remote) {
+        if (local.getQuestions() == null || local.getQuestions().size() == 0) {
+            return remote;
+        }
         for (Question mQuestion : local.getQuestions()) {
             Question remoteQuestion = remote.getById(mQuestion.getStory_order_id());
             if (remoteQuestion != null) {
@@ -136,6 +139,16 @@ public class QuizHolder {
         }
 
         quizes.clear();
+    }
+
+    public void deleteQuiz(String id) {
+        File quizFile = null;
+            quizFile = new File(questionsDir.getAbsolutePath(), id + ".qz");
+            if (quizFile.exists()) {
+                quizFile.delete();
+            }
+
+        quizes.remove(id);
     }
 
     public Quiz getQuiz(String id) {
@@ -198,6 +211,21 @@ public class QuizHolder {
 
         mCategoriesList = list;
         setQuizVersion(list.getVersion());
+    }
+
+    public List<Category> getUnPassedCategories() {
+        List<Category> res = new LinkedList<>();
+        Quiz qQuiz;
+        for (Category c : getCategories().getCategories()) {
+            qQuiz = getQuiz(c.getCategory_id());
+            if (qQuiz == null) {
+                return new LinkedList<>();
+            }
+            if (qQuiz.getAnsweredQuestions() < qQuiz.getQuestions().size()) {
+                res.add(c);
+            }
+        }
+        return res;
     }
 
     public List<Category> getPassedCategories() {
