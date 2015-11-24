@@ -1,17 +1,20 @@
 package com.almadev.znaniesila.fragments;
 
 
+import android.app.FragmentManager;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.almadev.znaniesila.KnowledgeActivity;
 import com.almadev.znaniesila.R;
+import com.almadev.znaniesila.utils.social.SocialController;
 import com.squareup.picasso.Picasso;
 
 /**
@@ -24,10 +27,11 @@ public class KnowledgeFragment extends Fragment implements View.OnClickListener 
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_STORY = "param1";
     private static final String ARG_IMG   = "param2";
+    private static final String ARG_FM    = "fm";
 
     // TODO: Rename and change types of parameters
-    private String mStory;
-    private String mImgUrl;
+    private String          mStory;
+    private String          mImgUrl;
 
 
     /**
@@ -87,10 +91,11 @@ public class KnowledgeFragment extends Fragment implements View.OnClickListener 
                 startActivity(shareIntentFb);
                 break;
             case R.id.share_vk:
-                Intent shareIntentVk = new Intent(Intent.ACTION_VIEW,
-                                                  Uri.parse("http://vk.com/share.php?url=http://www.znanie.tv/&title=Знание-сила!" +
-                                                                    "&description=" + comments + "&image=http://www.znanie.tv/zshare.jpg&noparse=true"));
-                startActivity(shareIntentVk);
+//                Intent shareIntentVk = new Intent(Intent.ACTION_VIEW,
+//                                                  Uri.parse("http://vk.com/share.php?url=http://www.znanie.tv/&title=Знание-сила!" +
+//                                                                    "&description=" + comments + "&image=http://www.znanie.tv/zshare.jpg&noparse=true"));
+//                startActivity(shareIntentVk);
+                SocialController.vkShare(getActivity(), getActivity().getSupportFragmentManager(), null, comments);
                 break;
             case R.id.share_ok:
                 Intent shareIntentOk = new Intent(Intent.ACTION_VIEW,

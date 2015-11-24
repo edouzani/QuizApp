@@ -100,6 +100,7 @@ public class SplashActivity extends AppCompatActivity {
         Intent mIntent = new Intent(this, HAStartScreen.class);
         mIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(mIntent);
+        finish();
     }
 
 

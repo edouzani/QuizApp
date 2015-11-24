@@ -21,7 +21,6 @@ import android.os.Message;
 import android.preference.PreferenceManager;
 import android.util.DisplayMetrics;
 import android.util.Log;
-import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.SurfaceHolder;
 import android.view.SurfaceHolder.Callback;
@@ -33,9 +32,7 @@ import android.view.animation.Transformation;
 import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.almadev.znaniesila.model.Category;
 import com.almadev.znaniesila.model.Question;
@@ -98,6 +95,7 @@ public class HAQuizScreen extends Activity implements OnClickListener, Callback,
     private String                   imgUrl                    = null;
     private boolean                  mDescriptionVisible       = false;
     private DescriptionClickListener mDescriptionClickListener = new DescriptionClickListener();
+    private MediaPlayer bgMusicPlayer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -162,6 +160,17 @@ public class HAQuizScreen extends Activity implements OnClickListener, Callback,
 //            }
 //        }
         mTimerCallback = new TimerCallbackImpl();
+
+        initBackgroundMusic();
+    }
+
+    private void initBackgroundMusic() {
+        boolean playSound = mPrefsManager.getBoolean(Constants.PREF_MUSIC_ON, true);
+
+        if (playSound) {
+            bgMusicPlayer = MediaPlayer.create(this, R.raw.bg_music_game);
+            bgMusicPlayer.setLooping(true);
+        }
     }
 
     @Override
@@ -182,6 +191,9 @@ public class HAQuizScreen extends Activity implements OnClickListener, Callback,
     protected void onResume() {
         super.onResume();
         mTimer.run();
+        if (bgMusicPlayer != null) {
+            bgMusicPlayer.start();
+        }
     }
 
     @Override
@@ -211,26 +223,26 @@ public class HAQuizScreen extends Activity implements OnClickListener, Callback,
             ad.setMessage("Действительно ли Вы хотите покинуть викторину?"); // сообщение
             ad.setPositiveButton("Да", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int arg1) {
-                    Toast.makeText(HAQuizScreen.this, "Вы сделали правильный выбор",
-                                   Toast.LENGTH_LONG).show();
+//                    Toast.makeText(HAQuizScreen.this, "Вы сделали правильный выбор",
+//                                   Toast.LENGTH_LONG).show();
                     backPress();
                 }
             });
             ad.setNegativeButton("Нет", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int arg1) {
-                    Toast.makeText(HAQuizScreen.this, "Возможно вы правы", Toast.LENGTH_LONG)
-                         .show();
+//                    Toast.makeText(HAQuizScreen.this, "Возможно вы правы", Toast.LENGTH_LONG)
+//                         .show();
                 }
             });
             ad.setCancelable(true);
             ad.setOnCancelListener(new DialogInterface.OnCancelListener() {
                 public void onCancel(DialogInterface dialog) {
-                    Toast.makeText(HAQuizScreen.this, "Вы ничего не выбрали",
-                                   Toast.LENGTH_LONG).show();
+//                    Toast.makeText(HAQuizScreen.this, "Вы ничего не выбрали",
+//                                   Toast.LENGTH_LONG).show();
                 }
             });
+            ad.show();
         }
-//        super.onBackPressed();
     }
 
     @Override
@@ -534,15 +546,14 @@ public class HAQuizScreen extends Activity implements OnClickListener, Callback,
             MediaPlayer player;
 
             if (isCorrect) {
-                player = MediaPlayer.create(this, R.raw.yes_cutted);
+                player = MediaPlayer.create(this, R.raw.yes);
             } else {
-                player = MediaPlayer.create(this, R.raw.no_cutted);
+                player = MediaPlayer.create(this, R.raw.no);
             }
             if (player != null) {
                 player.start();
             }
         }
-
     }
 
     @Override
@@ -621,6 +632,9 @@ public class HAQuizScreen extends Activity implements OnClickListener, Callback,
     @Override
     protected void onPause() {
         super.onPause();
+        if (bgMusicPlayer != null) {
+            bgMusicPlayer.pause();
+        }
         releaseMediaPlayer();
         doCleanUp();
         mTimer.pause();

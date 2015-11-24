@@ -44,6 +44,7 @@ public class Constants {
     public static final String REMOVE_ADS_SKU              = "removeads_sku";
     public static final String GAME_SERVICES_ENABLED       = "gameservices_enabled";
     public static final String PREF_SOUND_ON               = "sound_on";
+    public static final String PREF_MUSIC_ON               = "music_on";
     public static final String ABOUT_TEXT                  = "about_text";
     public static final String PREF_FIRS_RUN               = "first_run";
 

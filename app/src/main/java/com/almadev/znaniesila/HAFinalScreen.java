@@ -21,6 +21,10 @@ import android.widget.TextView;
 import com.almadev.znaniesila.model.Category;
 import com.almadev.znaniesila.utils.Constants;
 import com.almadev.znaniesila.utils.social.SocialController;
+import com.vk.sdk.VKAccessToken;
+import com.vk.sdk.VKCallback;
+import com.vk.sdk.VKSdk;
+import com.vk.sdk.api.VKError;
 
 public class HAFinalScreen extends BaseGameActivity implements OnClickListener {
 
@@ -123,6 +127,23 @@ public class HAFinalScreen extends BaseGameActivity implements OnClickListener {
     }
 
     @Override
+    protected void onActivityResult(final int request, final int response, final Intent data) {
+        if (!VKSdk.onActivityResult(request, response, data, new VKCallback<VKAccessToken>() {
+            @Override
+            public void onResult(VKAccessToken res) {
+                // Пользователь успешно авторизовался
+            }
+
+            @Override
+            public void onError(VKError error) {
+                // Произошла ошибка авторизации (например, пользователь запретил авторизацию)
+            }
+        })) {
+            super.onActivityResult(request, response, data);
+        }
+    }
+
+    @Override
     protected void onDestroy() {
         super.onDestroy();
     }
@@ -132,55 +153,8 @@ public class HAFinalScreen extends BaseGameActivity implements OnClickListener {
         super.onBackPressed();
     }
 
-    public void onMoreButtonClick(View view) {
-    }
-
     public void onLeaderBoardButtonClick(View view) {
         openLeaderBoard(leaderBoard_Id, 1);
-    }
-
-    private static class HSAdapter extends BaseAdapter {
-
-        private WeakReference<Context>   wContext;
-        private HashMap<String, Integer> mData;
-        private LayoutInflater           sInflater;
-
-        public HSAdapter(WeakReference<Context> context, HashMap<String, Integer> data) {
-            wContext = context;
-            mData = data;
-            sInflater = (LayoutInflater) wContext.get().getSystemService(LAYOUT_INFLATER_SERVICE);
-        }
-
-        @Override
-        public int getCount() {
-            return mData != null ? mData.size() : 0;
-        }
-
-        @Override
-        public Object getItem(int position) {
-            // TODO Auto-generated method stub
-            return null;
-        }
-
-        @Override
-        public long getItemId(int position) {
-            // TODO Auto-generated method stub
-            return 0;
-        }
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            if (convertView == null) {
-                convertView = sInflater.inflate(R.layout.high_score_item, null);
-            }
-            TextView category = (TextView) convertView.findViewById(R.id.category);
-            TextView score = (TextView) convertView.findViewById(R.id.score);
-
-            Object[] keys = mData.keySet().toArray();
-            category.setText((CharSequence) keys[position]);
-            score.setText(mData.get(keys[position]).toString());
-            return convertView;
-        }
     }
 
     @Override
@@ -203,7 +177,7 @@ public class HAFinalScreen extends BaseGameActivity implements OnClickListener {
 //                                                Uri.parse("http://vk.com/share.php?url=http://www.znanie.tv/&title=Знание-сила!" +
 //                                                                  "&description=" + comments + "&image=http://www.znanie.tv/zshare.jpg&noparse=true"));
 //                startActivity(shareIntentVk);
-                SocialController.vkShare(this, getSupportFragmentManager(), comments);
+                SocialController.vkShare(this, getSupportFragmentManager(), null, comments);
                 break;
             case R.id.share_ok:
                 Intent shareIntentOk = new Intent(Intent.ACTION_VIEW,

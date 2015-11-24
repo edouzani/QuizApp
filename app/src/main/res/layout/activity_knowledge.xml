@@ -43,6 +43,7 @@
         android:id="@+id/description_fragment"
         android:layout_marginTop="00dp"
         android:background="@color/knowledge_transparent_bg"
+        android:clickable="true"
         android:layout_height="fill_parent">
 
         <ImageView android:id="@+id/home_fragment"

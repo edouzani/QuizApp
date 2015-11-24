@@ -15,6 +15,7 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
 
     private SharedPreferences mPrefsmanager;
     private boolean           isSoundOn;
+    private boolean           isMusicOn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +36,19 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
             public void onCheckedChanged(final CompoundButton pCompoundButton, final boolean b) {
                 SharedPreferences.Editor e = mPrefsmanager.edit();
                 e.putBoolean(Constants.PREF_SOUND_ON, b);
+                e.commit();
+            }
+        });
+
+        isMusicOn = mPrefsmanager.getBoolean(Constants.PREF_MUSIC_ON, true);
+
+        SwitchCompat mMusicSwitch = (SwitchCompat) findViewById(R.id.musicSwitch);
+        mMusicSwitch.setChecked(isMusicOn);
+        mMusicSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(final CompoundButton pCompoundButton, final boolean b) {
+                SharedPreferences.Editor e = mPrefsmanager.edit();
+                e.putBoolean(Constants.PREF_MUSIC_ON, b);
                 e.commit();
             }
         });

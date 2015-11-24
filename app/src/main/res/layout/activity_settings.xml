@@ -29,27 +29,56 @@
         android:layout_below="@id/title"
         android:layout_marginTop="40dp">
 
-        <RelativeLayout
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="match_parent">
 
-            <TextView
-                android:id="@+id/textMute"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="ЗВУК"
-                android:textColor="@color/white"
-                android:textSize="@dimen/settings_item_name_text_size"/>
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp">
 
-            <android.support.v7.widget.SwitchCompat
-                android:id="@+id/soundSwitch"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBaseline="@id/textMute"
+                <TextView
+                    android:id="@+id/textMute"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="ЗВУК"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/settings_item_name_text_size"/>
 
-                android:layout_alignParentRight="true"/>
-        </RelativeLayout>
+                <android.support.v7.widget.SwitchCompat
+                    android:id="@+id/soundSwitch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@id/textMute"
+
+                    android:layout_alignParentRight="true"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:paddingLeft="16dp"
+                android:layout_marginTop="16dp"
+                android:paddingRight="16dp">
+
+                <TextView
+                    android:id="@+id/textMusic"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="МУЗЫКА"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/settings_item_name_text_size"/>
+
+                <android.support.v7.widget.SwitchCompat
+                    android:id="@+id/musicSwitch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@id/textMusic"
+                    android:layout_alignParentRight="true"/>
+            </RelativeLayout>
+        </LinearLayout>
     </ScrollView>
 </RelativeLayout>

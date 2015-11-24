@@ -277,7 +277,7 @@ public class QuizHolder {
             return null;
         }
 
-        CategoriesList list = null;
+        CategoriesList list = new CategoriesList();
         try {
             InputStream file = new FileInputStream(categoriesListFile);
             InputStream buffer = new BufferedInputStream(file);
@@ -287,6 +287,7 @@ public class QuizHolder {
             if (list != null) {
                 setQuizVersion(list.getVersion());
             } else {
+                setQuizVersion("1");
                 Log.e("QuizHolder", "deserealization failed");
             }
         } catch (FileNotFoundException e) {

@@ -94,7 +94,7 @@ public class HACategoriesScreen extends Activity implements View.OnClickListener
         }
         findViewById(R.id.purchasable_cats).setOnClickListener(this);
         findViewById(R.id.back).setOnClickListener(this);
-        findViewById(R.id.passed).setOnClickListener(this);
+//        findViewById(R.id.passed).setOnClickListener(this);
         findViewById(R.id.restore).setOnClickListener(this);
 
         mTitle = (TextView) findViewById(R.id.title);
@@ -104,9 +104,7 @@ public class HACategoriesScreen extends Activity implements View.OnClickListener
     private void fetchCategories() {
         mListItems = new LinkedList<>();
 
-//        QuizHolder.getInstance(this).deleteQuiz("3");
-
-        for (Category c : QuizHolder.getInstance(this).getUnPassedCategories()) {
+        for (Category c : QuizHolder.getInstance(this).getCategories().getCategories()) {
             if (c.getProductIdentifier() == null || c.getProductIdentifier().isEmpty() ||
                     c.isPurchased()) {
 
@@ -202,7 +200,7 @@ public class HACategoriesScreen extends Activity implements View.OnClickListener
                 findViewById(R.id.purchasable_cats).setVisibility(View.GONE);
                 findViewById(R.id.home).setVisibility(View.INVISIBLE);
                 findViewById(R.id.back).setVisibility(View.VISIBLE);
-                findViewById(R.id.passed).setVisibility(View.INVISIBLE);
+//                findViewById(R.id.passed).setVisibility(View.INVISIBLE);
                 findViewById(R.id.restore).setVisibility(View.VISIBLE);
                 mAdapter.setPayCats(true);
                 mAdapter.setItems(QuizHolder.getInstance(this).getPurchasableCategories());
@@ -213,7 +211,7 @@ public class HACategoriesScreen extends Activity implements View.OnClickListener
                 findViewById(R.id.purchasable_cats).setVisibility(View.VISIBLE);
                 findViewById(R.id.home).setVisibility(View.VISIBLE);
                 findViewById(R.id.back).setVisibility(View.GONE);
-                findViewById(R.id.passed).setVisibility(View.VISIBLE);
+//                findViewById(R.id.passed).setVisibility(View.VISIBLE);
                 findViewById(R.id.restore).setVisibility(View.GONE);
                 fetchCategories();
                 mAdapter.setPayCats(false);
@@ -234,7 +232,7 @@ public class HACategoriesScreen extends Activity implements View.OnClickListener
                     mHelper.queryInventoryAsync(true, additionalSkuList,
                                                 mQueryFinishedListener);
                 } catch (Exception e) {
-                    e.printStackTrace();
+//                    e.printStackTrace();
                 }
                 break;
         }

@@ -1,6 +1,7 @@
 package com.almadev.znaniesila.model;
 
 import java.io.Serializable;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -9,7 +10,7 @@ import java.util.List;
 public class CategoriesList implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    private List<Category> Categories;
+    private List<Category> Categories = new LinkedList<>();
 
     private String version;
 

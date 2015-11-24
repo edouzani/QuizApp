@@ -1,42 +1,23 @@
 package com.almadev.znaniesila;
 
-import com.almadev.znaniesila.network.SecurityChecker;
-import com.crashlytics.android.Crashlytics;
-
-import io.fabric.sdk.android.Fabric;
-
-import java.io.IOException;
 import java.io.InputStream;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.os.Handler;
 import android.preference.PreferenceManager;
-import android.support.v7.widget.SwitchCompat;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.CompoundButton;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.almadev.znaniesila.events.NeedUpdateQuizesEvent;
-import com.almadev.znaniesila.events.QuizDownloadedEvent;
-import com.almadev.znaniesila.events.QuizesUpdateFailedEvent;
-import com.almadev.znaniesila.events.QuizesUpdateFinishedEvent;
-import com.almadev.znaniesila.model.CategoriesList;
-import com.almadev.znaniesila.model.QuizHolder;
-import com.almadev.znaniesila.questions.QuestionsAdapter;
 import com.google.ads.conversiontracking.AdWordsConversionReporter;
 import com.almadev.znaniesila.utils.ConfigParser;
 import com.almadev.znaniesila.utils.Constants;
 import com.almadev.znaniesila.utils.RunningState;
-
-import de.greenrobot.event.EventBus;
 
 public class HAStartScreen extends BaseGameActivity implements OnClickListener {
     /**
@@ -48,13 +29,14 @@ public class HAStartScreen extends BaseGameActivity implements OnClickListener {
     private ImageView         about;
     private Boolean           gameServicesEnabled;
     private Button            worldScoreButton;
-    private SharedPreferences mPrefsmanager;
+    private SharedPreferences mPrefsManager;
+    private MediaPlayer       player;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
-        mPrefsmanager = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        mPrefsManager = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         play_quiz = (Button) findViewById(R.id.play_quiz);
         play_quiz.setOnClickListener(this);
         about = (ImageView) findViewById(R.id.about);
@@ -66,7 +48,7 @@ public class HAStartScreen extends BaseGameActivity implements OnClickListener {
 
         parseConfig();
 
-        gameServicesEnabled = mPrefsmanager.getBoolean(Constants.GAME_SERVICES_ENABLED, false);
+        gameServicesEnabled = mPrefsManager.getBoolean(Constants.GAME_SERVICES_ENABLED, false);
 
         if (!gameServicesEnabled) {
             worldScoreButton.setVisibility(View.GONE);
@@ -76,16 +58,27 @@ public class HAStartScreen extends BaseGameActivity implements OnClickListener {
 
         //init first run
 
-        mPrefsmanager = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        boolean isFirstRun = mPrefsmanager.getBoolean(Constants.PREF_FIRS_RUN, true);
+        mPrefsManager = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        boolean isFirstRun = mPrefsManager.getBoolean(Constants.PREF_FIRS_RUN, true);
 
         if (isFirstRun) {
             AdWordsConversionReporter.reportWithConversionId(this.getApplicationContext(),
                                                              "956867547", "yqeQCLfzmGEQ28eiyAM", "3.00", true);
 
-            SharedPreferences.Editor e = mPrefsmanager.edit();
+            SharedPreferences.Editor e = mPrefsManager.edit();
             e.putBoolean(Constants.PREF_FIRS_RUN, false);
             e.commit();
+        }
+
+        initPlayer();
+    }
+
+    private void initPlayer() {
+        boolean playSound = mPrefsManager.getBoolean(Constants.PREF_MUSIC_ON, true);
+
+        if (playSound) {
+            player = MediaPlayer.create(this, R.raw.main);
+            player.setLooping(false);
         }
     }
 
@@ -104,12 +97,17 @@ public class HAStartScreen extends BaseGameActivity implements OnClickListener {
     @Override
     protected void onResume() {
         super.onResume();
+        if (player != null) {
+            player.start();
+        }
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-
+        if (player != null) {
+            player.pause();
+        }
     }
 
     @Override
@@ -127,12 +125,12 @@ public class HAStartScreen extends BaseGameActivity implements OnClickListener {
 
     @Override
     public void onBackPressed() {
-        if (mBackPressed + TIME_INTERVAL > System.currentTimeMillis())
-        {
+        if (mBackPressed + TIME_INTERVAL > System.currentTimeMillis()) {
             super.onBackPressed();
             return;
+        } else {
+            Toast.makeText(getBaseContext(), "Нажмите еще раз для выхода из приложения", Toast.LENGTH_SHORT).show();
         }
-        else { Toast.makeText(getBaseContext(), "Нажмите еще раз для выхода из приложения", Toast.LENGTH_SHORT).show(); }
 
         mBackPressed = System.currentTimeMillis();
     }
@@ -176,7 +174,7 @@ public class HAStartScreen extends BaseGameActivity implements OnClickListener {
     }
 
     private void disableAds() {
-        Editor edit = mPrefsmanager.edit();
+        Editor edit = mPrefsManager.edit();
         edit.putBoolean(Constants.ADS_DISABLED_AFTER_PURCHASE, true);
         edit.commit();
     }

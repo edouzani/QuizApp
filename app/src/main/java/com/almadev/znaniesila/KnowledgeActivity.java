@@ -1,16 +1,15 @@
 package com.almadev.znaniesila;
 
-import android.app.Activity;
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.Rect;
 import android.os.Bundle;
-import android.support.v13.app.FragmentPagerAdapter;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -31,7 +30,9 @@ import com.astuetz.PagerSlidingTabStrip;
 
 import java.util.List;
 
-public class KnowledgeActivity extends Activity implements View.OnClickListener {
+public class KnowledgeActivity extends FragmentActivity implements View.OnClickListener {
+
+    private static final String KNOWLEDGE_IS_NOT_OPEN_YET = "Знание еще не открыто";
 
     private RecyclerView         mRecyclerView;
     private RecyclerView.Adapter mAdapter;
@@ -61,7 +62,7 @@ public class KnowledgeActivity extends Activity implements View.OnClickListener 
 
         findViewById(R.id.home).setOnClickListener(this);
 
-        mSectionsPagerAdapter = new SectionsPagerAdapter(getFragmentManager(), this);
+        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager(), this);
 
         mViewPager = (ViewPager) findViewById(R.id.containerPager);
         mViewPager.setAdapter(mSectionsPagerAdapter);
@@ -116,7 +117,9 @@ public class KnowledgeActivity extends Activity implements View.OnClickListener 
                     }
                 }
             } else {
-                mQuestions.get(position).setIsStoryViewed(true);
+                if (mQuestions.get(position).getState() == QuestionState.CORRECT) {
+                    mQuestions.get(position).setIsStoryViewed(true);
+                }
                 mViewPager.setCurrentItem(position);
             }
         }
@@ -129,6 +132,7 @@ public class KnowledgeActivity extends Activity implements View.OnClickListener 
 
     public class SectionsPagerAdapter extends FragmentPagerAdapter implements PagerSlidingTabStrip.CustomTabProvider{
         private Context context;
+        private int previousColor = -1;
 
         public SectionsPagerAdapter(FragmentManager fm, Context pContext) {
             super(fm);
@@ -140,8 +144,14 @@ public class KnowledgeActivity extends Activity implements View.OnClickListener 
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below)
             //
-            String story = mQuestions.get(position).getStory();
-            String imgUrl = mQuestions.get(position).getImage_url();
+            boolean isOpened = mQuestions.get(position).getState() == QuestionState.CORRECT;
+
+            String story = KNOWLEDGE_IS_NOT_OPEN_YET;
+            String imgUrl = null;
+            if (isOpened) {
+                story = mQuestions.get(position).getStory();
+                imgUrl = mQuestions.get(position).getImage_url();
+            }
             return KnowledgeFragment.newInstance(story == null || story.isEmpty() ? mQuestions.get(position).getCorrect_ans_explanation() : story, imgUrl);
         }
 
@@ -178,6 +188,7 @@ public class KnowledgeActivity extends Activity implements View.OnClickListener 
         public void tabSelected(final View tab) {
             tab.findViewById(R.id.hexagon).setVisibility(View.VISIBLE);
             ((TextView)tab.findViewById(R.id.tab_title)).setTextSize(35);
+            previousColor = ((TextView)tab.findViewById(R.id.tab_title)).getCurrentTextColor();
             ((TextView)tab.findViewById(R.id.tab_title)).setTextColor(getResources().getColor(R.color.gold));
         }
 
@@ -185,6 +196,7 @@ public class KnowledgeActivity extends Activity implements View.OnClickListener 
         public void tabUnselected(final View tab) {
             tab.findViewById(R.id.hexagon).setVisibility(View.INVISIBLE);
             ((TextView)tab.findViewById(R.id.tab_title)).setTextSize(16);
+            ((TextView)tab.findViewById(R.id.tab_title)).setTextColor(previousColor);
         }
     }
 
