@@ -216,10 +216,15 @@ public class QuizHolder {
     public List<Category> getUnPassedCategories() {
         List<Category> res = new LinkedList<>();
         Quiz qQuiz;
+        if (getCategories() == null) {
+            setQuizVersion("1");
+            return res;
+        }
         for (Category c : getCategories().getCategories()) {
             qQuiz = getQuiz(c.getCategory_id());
             if (qQuiz == null) {
-                return new LinkedList<>();
+                setQuizVersion("1");
+                return res;
             }
             if (qQuiz.getAnsweredQuestions() < qQuiz.getQuestions().size()) {
                 res.add(c);
@@ -231,6 +236,10 @@ public class QuizHolder {
     public List<Category> getPassedCategories() {
         List<Category> res = new LinkedList<>();
         Quiz qQuiz;
+        if (getCategories() == null) {
+            setQuizVersion("1");
+            return res;
+        }
         for (Category c : getCategories().getCategories()) {
             qQuiz = getQuiz(c.getCategory_id());
             if (qQuiz == null) {
@@ -245,6 +254,10 @@ public class QuizHolder {
 
     public List<Category> getPurchasableCategories() {
         List<Category> res = new LinkedList<>();
+        if (getCategories() == null) {
+            setQuizVersion("1");
+            return res;
+        }
         for (Category c : getCategories().getCategories()) {
             if (c.getPrice() != null && !c.getPrice().isEmpty() && !c.isPurchased()) {
                 res.add(c);

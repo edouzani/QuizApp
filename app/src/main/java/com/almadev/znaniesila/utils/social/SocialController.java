@@ -22,7 +22,9 @@ public class SocialController {
 
     public static void vkShare(Activity activity, FragmentManager fm, String text) {
 
-        VKSdk.login(activity, sMyScope);
+        if (!VKSdk.isLoggedIn()) {
+            VKSdk.login(activity, sMyScope);
+        }
 
         new VKShareDialog()
                 .setText(text)

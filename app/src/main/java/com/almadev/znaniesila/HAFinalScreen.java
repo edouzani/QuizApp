@@ -203,7 +203,7 @@ public class HAFinalScreen extends BaseGameActivity implements OnClickListener {
 //                                                Uri.parse("http://vk.com/share.php?url=http://www.znanie.tv/&title=Знание-сила!" +
 //                                                                  "&description=" + comments + "&image=http://www.znanie.tv/zshare.jpg&noparse=true"));
 //                startActivity(shareIntentVk);
-                SocialController.vkShare(getSupportFragmentManager(), comments);
+                SocialController.vkShare(this, getSupportFragmentManager(), comments);
                 break;
             case R.id.share_ok:
                 Intent shareIntentOk = new Intent(Intent.ACTION_VIEW,

@@ -171,21 +171,20 @@ public class KnowledgeActivity extends Activity implements View.OnClickListener 
                 tabTitle.setTextColor(getResources().getColor(R.color.gold));
             }
 
-
             return tab;
         }
 
         @Override
         public void tabSelected(final View tab) {
             tab.findViewById(R.id.hexagon).setVisibility(View.VISIBLE);
-            ((TextView)tab.findViewById(R.id.tab_title)).setTextSize(40);
+            ((TextView)tab.findViewById(R.id.tab_title)).setTextSize(35);
             ((TextView)tab.findViewById(R.id.tab_title)).setTextColor(getResources().getColor(R.color.gold));
         }
 
         @Override
         public void tabUnselected(final View tab) {
             tab.findViewById(R.id.hexagon).setVisibility(View.INVISIBLE);
-            ((TextView)tab.findViewById(R.id.tab_title)).setTextSize(20);
+            ((TextView)tab.findViewById(R.id.tab_title)).setTextSize(16);
         }
     }
 
