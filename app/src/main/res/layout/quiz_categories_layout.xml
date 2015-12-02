@@ -70,17 +70,10 @@
                 android:layout_height="40dp"/>
         </RelativeLayout>
 
-        <ImageView
-            android:id="@+id/purchasable_cats"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/category_item_height"
-            android:src="@drawable/buy_cat"
-            android:scaleType="centerCrop"
-            />
-
         <android.support.v7.widget.RecyclerView
             android:id="@+id/catsList"
             android:layout_width="match_parent"
+            android:layout_marginBottom="40dp"
             android:layout_height="match_parent">
 
         </android.support.v7.widget.RecyclerView>

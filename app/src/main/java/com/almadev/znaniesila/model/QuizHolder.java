@@ -51,6 +51,9 @@ public class QuizHolder {
     }
 
     public static String getQuizVersion() {
+        if (quizVersion == null) {
+            quizVersion = "0";
+        }
         return quizVersion;
     }
 

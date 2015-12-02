@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SwitchCompat;
 import android.view.View;
 import android.widget.CompoundButton;
+import android.widget.TextView;
 
 import com.almadev.znaniesila.utils.Constants;
 import com.yandex.metrica.YandexMetrica;
@@ -52,6 +53,15 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
                 e.commit();
             }
         });
+
+
+
+        String versionText = "v" + BuildConfig.VERSION_CODE + "/" + BuildConfig.VERSION_NAME;
+        if (ZSApp.DEBUG_ENV) {
+            versionText += "-test";
+        }
+        ((TextView) findViewById(R.id.versionText)).setText(versionText);
+
     }
 
     @Override

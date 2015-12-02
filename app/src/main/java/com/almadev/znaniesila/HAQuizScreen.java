@@ -41,6 +41,7 @@ import com.almadev.znaniesila.model.Quiz;
 import com.almadev.znaniesila.model.QuizHolder;
 import com.almadev.znaniesila.ui.Timer;
 import com.almadev.znaniesila.ui.TwoTextButton;
+import com.almadev.znaniesila.utils.AchievementsConstants;
 import com.almadev.znaniesila.utils.Constants;
 import com.almadev.znaniesila.utils.LeaderboardConverter;
 import com.squareup.picasso.Picasso;
@@ -169,7 +170,9 @@ public class HAQuizScreen extends Activity implements OnClickListener, Callback,
 
         if (playSound) {
             bgMusicPlayer = MediaPlayer.create(this, R.raw.bg_music_game);
-            bgMusicPlayer.setLooping(true);
+            if (bgMusicPlayer != null) {
+                bgMusicPlayer.setLooping(true);
+            }
         }
     }
 
@@ -433,6 +436,15 @@ public class HAQuizScreen extends Activity implements OnClickListener, Callback,
             }
             question.setState(QuestionState.CORRECT);
             mScore += mTimer.interpolatePoints(question.getPoints());
+            int correctAnswers = mPrefsManager.getInt(AchievementsConstants.PREF_CORRECT_ANSWERS, 0);
+            correctAnswers++;
+
+            SharedPreferences.Editor editor = mPrefsManager.edit();
+            editor.putInt(AchievementsConstants.PREF_CORRECT_ANSWERS, correctAnswers);
+            editor.commit();
+
+
+
             playSoundForAnswer(true);
             isCorrect = true;
         } else {

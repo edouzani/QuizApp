@@ -4,7 +4,7 @@
     <string name="app_id">543395344679</string>
 
     <string name="hello">Hello World, QuizAppActivity!</string>
-    <string name="app_name">Знание - сила</string>
+    <string name="app_name">Знание сила</string>
     <!--<string name="app_id">286312204670</string>-->
 
 	<string name="no_categories">Please add Quiz Categories</string>

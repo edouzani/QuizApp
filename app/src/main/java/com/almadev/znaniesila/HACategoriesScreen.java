@@ -69,10 +69,6 @@ public class HACategoriesScreen extends Activity implements View.OnClickListener
         isKnowledgeCats = intent.getBooleanExtra(Constants.CATEGORY_FOR_KNOWLEDGE, false);
         setContentView(R.layout.quiz_categories_layout);
 
-        if (isKnowledgeCats) {
-            findViewById(R.id.purchasable_cats).setVisibility(View.GONE);
-        }
-
         mPrefsmanager = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
         findViewById(R.id.home).setOnClickListener(this);
@@ -92,7 +88,7 @@ public class HACategoriesScreen extends Activity implements View.OnClickListener
         if (QuizHolder.getInstance(this).getPassedCategories().size() == 0) {
             findViewById(R.id.passed).setVisibility(View.GONE);
         }
-        findViewById(R.id.purchasable_cats).setOnClickListener(this);
+//        findViewById(R.id.purchasable_cats).setOnClickListener(this);
         findViewById(R.id.back).setOnClickListener(this);
 //        findViewById(R.id.passed).setOnClickListener(this);
         findViewById(R.id.restore).setOnClickListener(this);
@@ -110,7 +106,7 @@ public class HACategoriesScreen extends Activity implements View.OnClickListener
 
                 if (c == null ||
                         QuizHolder.getInstance(this).getQuiz(c.getCategory_id()) == null ||
-                        QuizHolder.getInstance(this).getQuiz(c.getCategory_id()).getQuestions().size() == 0) {
+                        QuizHolder.getInstance(this).getQuiz(c.getCategory_id()).getQuestions() == null) {
                     if (c != null) {
                         QuizHolder.getInstance(this).deleteQuiz(c.getCategory_id());
                     }
@@ -190,32 +186,30 @@ public class HACategoriesScreen extends Activity implements View.OnClickListener
     }
 
     @Override
+    public void onFooterClick() {
+        mTitle.setText(R.string.cats_purchasable_title);
+        findViewById(R.id.home).setVisibility(View.INVISIBLE);
+        findViewById(R.id.back).setVisibility(View.VISIBLE);
+//                findViewById(R.id.passed).setVisibility(View.INVISIBLE);
+        findViewById(R.id.restore).setVisibility(View.VISIBLE);
+        mAdapter.setItems(QuizHolder.getInstance(this).getPurchasableCategories(), true, false);
+        mAdapter.notifyDataSetChanged();
+    }
+
+    @Override
     public void onClick(final View pView) {
         switch (pView.getId()) {
             case R.id.home:
                 finish();
                 break;
-            case R.id.purchasable_cats:
-                mTitle.setText(R.string.cats_purchasable_title);
-                findViewById(R.id.purchasable_cats).setVisibility(View.GONE);
-                findViewById(R.id.home).setVisibility(View.INVISIBLE);
-                findViewById(R.id.back).setVisibility(View.VISIBLE);
-//                findViewById(R.id.passed).setVisibility(View.INVISIBLE);
-                findViewById(R.id.restore).setVisibility(View.VISIBLE);
-                mAdapter.setPayCats(true);
-                mAdapter.setItems(QuizHolder.getInstance(this).getPurchasableCategories());
-                mAdapter.notifyDataSetChanged();
-                break;
             case R.id.back:
                 mTitle.setText(R.string.cats_choose_title);
-                findViewById(R.id.purchasable_cats).setVisibility(View.VISIBLE);
                 findViewById(R.id.home).setVisibility(View.VISIBLE);
                 findViewById(R.id.back).setVisibility(View.GONE);
 //                findViewById(R.id.passed).setVisibility(View.VISIBLE);
                 findViewById(R.id.restore).setVisibility(View.GONE);
                 fetchCategories();
-                mAdapter.setPayCats(false);
-                mAdapter.setItems(mListItems);
+                mAdapter.setItems(mListItems, false, true);
                 mAdapter.notifyDataSetChanged();
                 break;
             case R.id.passed:
@@ -223,8 +217,7 @@ public class HACategoriesScreen extends Activity implements View.OnClickListener
                 findViewById(R.id.passed).setVisibility(View.INVISIBLE);
                 findViewById(R.id.home).setVisibility(View.INVISIBLE);
                 findViewById(R.id.back).setVisibility(View.VISIBLE);
-                mAdapter.setPayCats(false);
-                mAdapter.setItems(QuizHolder.getInstance(this).getPassedCategories());
+                mAdapter.setItems(QuizHolder.getInstance(this).getPassedCategories(), false, true);
                 mAdapter.notifyDataSetChanged();
                 break;
             case R.id.restore:

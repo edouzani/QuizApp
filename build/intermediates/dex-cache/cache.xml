@@ -2,158 +2,228 @@
 <items version="2" >
 
     <item
-        jar="D:\Android_Projects\QuizApp_Android 2.0\app\libs\google-play-services.jar"
+        jar="D:\Android_Projects\QuizApp_Android 2.0\app\libs\GoogleConversionTrackingSdk-2.2.4.jar"
         jumboMode="false"
         revision="23.0.1"
-        sha1="826507592fec9d8e26db18364e709df133c749ce">
-        <dex dex="D:\Android_Projects\QuizApp_Android 2.0\app\build\intermediates\pre-dexed\release\google-play-services-f0065bcc3d93b9d764c31430503dbbffc120172e.jar" />
-    </item>
-    <item
-        jar="C:\Users\Aleksey\.gradle\caches\modules-2\files-2.1\com.squareup.picasso\picasso\2.5.2\7446d06ec8d4f7ffcc53f1da37c95f200dcb9387\picasso-2.5.2.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="7446d06ec8d4f7ffcc53f1da37c95f200dcb9387">
-        <dex dex="D:\Android_Projects\QuizApp_Android 2.0\app\build\intermediates\pre-dexed\debug\picasso-2.5.2-913f364c194591dc3aca9cbb4b6f2d4591515f35.jar" />
+        sha1="1b178dd030b222412a96435782c0dc24aac48a8f">
+        <dex dex="D:\Android_Projects\QuizApp_Android 2.0\app\build\intermediates\pre-dexed\dev\debug\GoogleConversionTrackingSdk-2.2.4-e4363be0b1d9338c1cb40a9c1be01745f6c87973.jar" />
     </item>
     <item
         jar="D:\Android_Projects\QuizApp_Android 2.0\app\build\intermediates\exploded-aar\com.jpardogo.materialtabstrip\library\1.1.0\jars\classes.jar"
         jumboMode="false"
         revision="23.0.1"
         sha1="611c7708cd3df0d7ae99105d4df5af8eb25c4b32">
-        <dex dex="D:\Android_Projects\QuizApp_Android 2.0\app\build\intermediates\pre-dexed\release\classes-6711d11aaaa231f0777d25483c2e8562a7246a52.jar" />
+        <dex dex="D:\Android_Projects\QuizApp_Android 2.0\app\build\intermediates\pre-dexed\dev\debug\classes-6711d11aaaa231f0777d25483c2e8562a7246a52.jar" />
     </item>
     <item
-        jar="C:\Users\Aleksey\.gradle\caches\modules-2\files-2.1\com.squareup.okio\okio\1.6.0\98476622f10715998eacf9240d6b479f12c66143\okio-1.6.0.jar"
+        jar="D:\Android_Projects\QuizApp_Android 2.0\app\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\23.1.1\jars\classes.jar"
         jumboMode="false"
         revision="23.0.1"
-        sha1="98476622f10715998eacf9240d6b479f12c66143">
-        <dex dex="D:\Android_Projects\QuizApp_Android 2.0\app\build\intermediates\pre-dexed\release\okio-1.6.0-40a9b81b1c2008bb472e4ea2d7cb8324f8f25dd4.jar" />
-    </item>
-    <item
-        jar="D:\Android_Projects\QuizApp_Android 2.0\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.0.1\jars\classes.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="c31e21b53ff2f74664e498248d01453a32e32d48">
-        <dex dex="D:\Android_Projects\QuizApp_Android 2.0\app\build\intermediates\pre-dexed\release\classes-2f74a2234d0700cc915a3868a11c44d4b14d23f1.jar" />
-    </item>
-    <item
-        jar="D:\Android_Projects\QuizApp_Android 2.0\app\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\23.0.1\jars\classes.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="4356e230a981d1bbf047d848b91bc0d9b7c5bacc">
-        <dex dex="D:\Android_Projects\QuizApp_Android 2.0\app\build\intermediates\pre-dexed\release\classes-13792a3365a25edddee1ef1751533192a0103317.jar" />
-    </item>
-    <item
-        jar="D:\Android\extras\android\m2repository\com\android\support\support-annotations\23.0.1\support-annotations-23.0.1.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="1fce89a6428c51467090d7f424e4c9c3dbd55f7e">
-        <dex dex="D:\Android_Projects\QuizApp_Android 2.0\app\build\intermediates\pre-dexed\release\support-annotations-23.0.1-60355b4bc9a05b0bf8e264a519c837ef3d3076a8.jar" />
-    </item>
-    <item
-        jar="D:\Android_Projects\QuizApp_Android 2.0\app\build\intermediates\exploded-aar\com.crashlytics.sdk.android\answers\1.3.2\jars\classes.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="e99413cdc93bd7b001d312a4a33d25ac21042f69">
-        <dex dex="D:\Android_Projects\QuizApp_Android 2.0\app\build\intermediates\pre-dexed\release\classes-088d0d7af6814f7d84953080f2d194ba46978903.jar" />
-    </item>
-    <item
-        jar="D:\Android_Projects\QuizApp_Android 2.0\app\build\intermediates\exploded-aar\com.android.support\support-v13\23.0.1\jars\libs\internal_impl-23.0.1.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="a0c456a59e1edab84702b48a626705aa1d830ccc">
-        <dex dex="D:\Android_Projects\QuizApp_Android 2.0\app\build\intermediates\pre-dexed\release\internal_impl-23.0.1-27bc882aacdbfb427c4d5aa3a1bd30d00f939249.jar" />
+        sha1="09c5e804bc67fc0580360043dff067df574a60d4">
+        <dex dex="D:\Android_Projects\QuizApp_Android 2.0\app\build\intermediates\pre-dexed\dev\debug\classes-d0140f6640b9ebd223e7e0292aec3f31d5dfa5d0.jar" />
     </item>
     <item
         jar="D:\Android_Projects\QuizApp_Android 2.0\app\build\intermediates\exploded-aar\io.fabric.sdk.android\fabric\1.3.6\jars\classes.jar"
         jumboMode="false"
         revision="23.0.1"
         sha1="fc82596d7f7683c8b3a7e5715a2ed5295c586887">
-        <dex dex="D:\Android_Projects\QuizApp_Android 2.0\app\build\intermediates\pre-dexed\release\classes-d513fa3f18393b0beb1d56af1640ca52fb28a409.jar" />
+        <dex dex="D:\Android_Projects\QuizApp_Android 2.0\app\build\intermediates\pre-dexed\dev\debug\classes-d513fa3f18393b0beb1d56af1640ca52fb28a409.jar" />
     </item>
     <item
-        jar="D:\Android_Projects\QuizApp_Android 2.0\app\libs\commons-io-2.0.1.jar"
+        jar="D:\Android_Projects\QuizApp_Android 2.0\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-games\8.3.0\jars\classes.jar"
         jumboMode="false"
         revision="23.0.1"
-        sha1="7ffdb02f95af1c1a208544e076cea5b8e66e731a">
-        <dex dex="D:\Android_Projects\QuizApp_Android 2.0\app\build\intermediates\pre-dexed\release\commons-io-2.0.1-b42e026db5e996be9c9a2c82bee1fc0e585b48ff.jar" />
+        sha1="2c6fcd6267cbac6509a2e72a61127534a1d616cf">
+        <dex dex="D:\Android_Projects\QuizApp_Android 2.0\app\build\intermediates\pre-dexed\dev\debug\classes-76c2a28e8eca2083d101b400e30113714bf43655.jar" />
     </item>
     <item
-        jar="D:\Android_Projects\QuizApp_Android 2.0\app\build\intermediates\exploded-aar\com.crashlytics.sdk.android\beta\1.1.3\jars\classes.jar"
+        jar="D:\Android\extras\android\m2repository\com\android\support\support-annotations\23.1.1\support-annotations-23.1.1.jar"
         jumboMode="false"
         revision="23.0.1"
-        sha1="b7a78990c10481f43cb4909f535ef4f11e60f1ab">
-        <dex dex="D:\Android_Projects\QuizApp_Android 2.0\app\build\intermediates\pre-dexed\release\classes-651a83d6c31d2bc821088522e334df4249e0c89d.jar" />
+        sha1="8d680ba5a623724d1fb0e81c36a790f023a6cede">
+        <dex dex="D:\Android_Projects\QuizApp_Android 2.0\app\build\intermediates\pre-dexed\dev\debug\support-annotations-23.1.1-e05a52316c98a1d5ae1194531dae9b777a6da94a.jar" />
+    </item>
+    <item
+        jar="D:\Android_Projects\QuizApp_Android 2.0\app\build\intermediates\exploded-aar\com.crashlytics.sdk.android\answers\1.3.2\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="e99413cdc93bd7b001d312a4a33d25ac21042f69">
+        <dex dex="D:\Android_Projects\QuizApp_Android 2.0\app\build\intermediates\pre-dexed\dev\debug\classes-088d0d7af6814f7d84953080f2d194ba46978903.jar" />
     </item>
     <item
         jar="C:\Users\Aleksey\.gradle\caches\modules-2\files-2.1\com.squareup.okhttp\okhttp\2.5.0\4de2b4ed3445c37ec1720a7d214712e845a24636\okhttp-2.5.0.jar"
         jumboMode="false"
         revision="23.0.1"
         sha1="4de2b4ed3445c37ec1720a7d214712e845a24636">
-        <dex dex="D:\Android_Projects\QuizApp_Android 2.0\app\build\intermediates\pre-dexed\release\okhttp-2.5.0-40e99fbf80a9f327a199ff68f6344b883dc3c3fb.jar" />
+        <dex dex="D:\Android_Projects\QuizApp_Android 2.0\app\build\intermediates\pre-dexed\dev\debug\okhttp-2.5.0-40e99fbf80a9f327a199ff68f6344b883dc3c3fb.jar" />
     </item>
     <item
-        jar="D:\Android_Projects\QuizApp_Android 2.0\app\build\intermediates\exploded-aar\com.crashlytics.sdk.android\crashlytics\2.5.2\jars\classes.jar"
+        jar="D:\Android_Projects\QuizApp_Android 2.0\app\build\intermediates\exploded-aar\QuizApp_Android 2.0\BaseGameUtils\unspecified\jars\classes.jar"
         jumboMode="false"
         revision="23.0.1"
-        sha1="0c7f9fb9a729166c69fa585e01be2fe8fab4f45c">
-        <dex dex="D:\Android_Projects\QuizApp_Android 2.0\app\build\intermediates\pre-dexed\release\classes-99a8d7448965f13a4ef0b351c2cf60a4f55cdef5.jar" />
+        sha1="705bb2197438af83c6bea77b9ddbfdaed2899d1b">
+        <dex dex="D:\Android_Projects\QuizApp_Android 2.0\app\build\intermediates\pre-dexed\dev\debug\classes-e7b1aca7de35154ecbaa54a2cd14eda9c0061640.jar" />
+    </item>
+    <item
+        jar="D:\Android_Projects\QuizApp_Android 2.0\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-basement\8.3.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="345a1b5cf5b144ce18ba6962bc66a7e2f26c1c1b">
+        <dex dex="D:\Android_Projects\QuizApp_Android 2.0\app\build\intermediates\pre-dexed\dev\debug\classes-28b5fba7704a0e9025df6384bb1db214aa8248e5.jar" />
+    </item>
+    <item
+        jar="D:\Android_Projects\QuizApp_Android 2.0\app\build\intermediates\exploded-aar\QuizApp_Android 2.0\RecycleAnimation\unspecified\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="8ca584d9cad84ee9ccce93e4f98dbe7696b5f52d">
+        <dex dex="D:\Android_Projects\QuizApp_Android 2.0\app\build\intermediates\pre-dexed\dev\debug\classes-cd97a75dbffbb152c999f3d446c12706d416f713.jar" />
+    </item>
+    <item
+        jar="D:\Android_Projects\QuizApp_Android 2.0\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-drive\8.3.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="0a1897426566e408a5c20a3d931f77d89771d07f">
+        <dex dex="D:\Android_Projects\QuizApp_Android 2.0\app\build\intermediates\pre-dexed\dev\debug\classes-81098ac665c274f98f8dc310b9e05dc7a27a8b71.jar" />
+    </item>
+    <item
+        jar="D:\Android_Projects\QuizApp_Android 2.0\app\build\intermediates\exploded-aar\com.crashlytics.sdk.android\beta\1.1.3\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="b7a78990c10481f43cb4909f535ef4f11e60f1ab">
+        <dex dex="D:\Android_Projects\QuizApp_Android 2.0\app\build\intermediates\pre-dexed\dev\debug\classes-651a83d6c31d2bc821088522e334df4249e0c89d.jar" />
+    </item>
+    <item
+        jar="D:\Android_Projects\QuizApp_Android 2.0\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.1.1\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="5c5699834e9722f1c288fea2de82725d078ba127">
+        <dex dex="D:\Android_Projects\QuizApp_Android 2.0\app\build\intermediates\pre-dexed\dev\debug\classes-4713e9f11c9191c188a0d8ec809aaec3c3c527a6.jar" />
+    </item>
+    <item
+        jar="D:\Android_Projects\QuizApp_Android 2.0\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.1.1\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="6cbc7773921fcfedbe55657578f0cbfe614778dc">
+        <dex dex="D:\Android_Projects\QuizApp_Android 2.0\app\build\intermediates\pre-dexed\dev\debug\classes-289661205d55e2244f0eab1b80fdb906e45d60c3.jar" />
+    </item>
+    <item
+        jar="D:\Android_Projects\QuizApp_Android 2.0\app\libs\commons-io-2.0.1.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="7ffdb02f95af1c1a208544e076cea5b8e66e731a">
+        <dex dex="D:\Android_Projects\QuizApp_Android 2.0\app\build\intermediates\pre-dexed\dev\debug\commons-io-2.0.1-b42e026db5e996be9c9a2c82bee1fc0e585b48ff.jar" />
+    </item>
+    <item
+        jar="C:\Users\Aleksey\.gradle\caches\modules-2\files-2.1\com.squareup.picasso\picasso\2.5.2\7446d06ec8d4f7ffcc53f1da37c95f200dcb9387\picasso-2.5.2.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="7446d06ec8d4f7ffcc53f1da37c95f200dcb9387">
+        <dex dex="D:\Android_Projects\QuizApp_Android 2.0\app\build\intermediates\pre-dexed\dev\debug\picasso-2.5.2-913f364c194591dc3aca9cbb4b6f2d4591515f35.jar" />
+    </item>
+    <item
+        jar="D:\Android_Projects\QuizApp_Android 2.0\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-auth\8.3.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="fd76d95678a6b2b8a49bb8a9fb5bcef7aedb70e7">
+        <dex dex="D:\Android_Projects\QuizApp_Android 2.0\app\build\intermediates\pre-dexed\dev\debug\classes-fa2380c921b3f770750972639542fa0686ee7b42.jar" />
+    </item>
+    <item
+        jar="D:\Android_Projects\QuizApp_Android 2.0\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\8.3.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="01a90bbb9495a8bbf6f3cfdf12f1b35caaa9524b">
+        <dex dex="D:\Android_Projects\QuizApp_Android 2.0\app\build\intermediates\pre-dexed\dev\debug\classes-30fe92504cbfd4ed20c5edaa4f8df9572684cd99.jar" />
+    </item>
+    <item
+        jar="D:\Android_Projects\QuizApp_Android 2.0\app\build\intermediates\exploded-aar\com.android.support\support-v13\23.1.1\jars\libs\internal_impl-23.1.1.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="f4d7a07120e76988f3a15403838d323c2400db83">
+        <dex dex="D:\Android_Projects\QuizApp_Android 2.0\app\build\intermediates\pre-dexed\dev\debug\internal_impl-23.1.1-0a1c44d41c16ac4a533c74ee16686ce9e38f3579.jar" />
     </item>
     <item
         jar="C:\Users\Aleksey\.gradle\caches\modules-2\files-2.1\de.greenrobot\eventbus\2.4.0\ddd166d01b3158d1c00576d29f7ed15c030df719\eventbus-2.4.0.jar"
         jumboMode="false"
         revision="23.0.1"
         sha1="ddd166d01b3158d1c00576d29f7ed15c030df719">
-        <dex dex="D:\Android_Projects\QuizApp_Android 2.0\app\build\intermediates\pre-dexed\release\eventbus-2.4.0-37b4d13fc4aec387d0b526f539f58d4779b15e1c.jar" />
+        <dex dex="D:\Android_Projects\QuizApp_Android 2.0\app\build\intermediates\pre-dexed\dev\debug\eventbus-2.4.0-37b4d13fc4aec387d0b526f539f58d4779b15e1c.jar" />
     </item>
     <item
-        jar="D:\Android_Projects\QuizApp_Android 2.0\app\build\intermediates\exploded-aar\com.android.support\cardview-v7\23.0.1\jars\classes.jar"
+        jar="D:\Android_Projects\QuizApp_Android 2.0\app\libs\FlurryAnalytics-6.2.0.jar"
         jumboMode="false"
         revision="23.0.1"
-        sha1="39ae02ce40c3ac828abbf780ce0ff5d7a28b7d6a">
-        <dex dex="D:\Android_Projects\QuizApp_Android 2.0\app\build\intermediates\pre-dexed\release\classes-a1c0a72bdf960a4ff93b8032ed2129feeb17bb9b.jar" />
+        sha1="29f6ed3b09bf57965c501c0de4a25efad01c8aa2">
+        <dex dex="D:\Android_Projects\QuizApp_Android 2.0\app\build\intermediates\pre-dexed\dev\debug\FlurryAnalytics-6.2.0-bbb267ee2c2c484968d45b43a8522d83131cb879.jar" />
     </item>
     <item
-        jar="D:\Android_Projects\QuizApp_Android 2.0\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.0.1\jars\classes.jar"
+        jar="D:\Android_Projects\QuizApp_Android 2.0\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-plus\8.3.0\jars\classes.jar"
         jumboMode="false"
         revision="23.0.1"
-        sha1="d86429b0f0b3f3cafbeb78dda1b9d89119ccb05d">
-        <dex dex="D:\Android_Projects\QuizApp_Android 2.0\app\build\intermediates\pre-dexed\release\classes-d6d740efbe9c02f07cea426980d5f26406eddff5.jar" />
+        sha1="0af4f577b4a21eb9be2a7f52e33b077b67e6d9f8">
+        <dex dex="D:\Android_Projects\QuizApp_Android 2.0\app\build\intermediates\pre-dexed\dev\debug\classes-b36c0e683cb1576905af95d10245285482a714a7.jar" />
+    </item>
+    <item
+        jar="D:\Android_Projects\QuizApp_Android 2.0\app\build\intermediates\exploded-aar\com.android.support\support-v13\23.1.1\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="5ddf5f4817565c9db82613c16093f76640a54e15">
+        <dex dex="D:\Android_Projects\QuizApp_Android 2.0\app\build\intermediates\pre-dexed\dev\debug\classes-1df9e1ae60fdce1edc863b5066ff41336d908315.jar" />
+    </item>
+    <item
+        jar="D:\Android_Projects\QuizApp_Android 2.0\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.1.1\jars\libs\internal_impl-23.1.1.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="a4de9c81ae239414e1ed0f86441b02abaf29bca9">
+        <dex dex="D:\Android_Projects\QuizApp_Android 2.0\app\build\intermediates\pre-dexed\dev\debug\internal_impl-23.1.1-0905dfc666dc869dc36a7551ed26001ba420d900.jar" />
     </item>
     <item
         jar="D:\Android_Projects\QuizApp_Android 2.0\app\libs\gson-2.3.1.jar"
         jumboMode="false"
         revision="23.0.1"
         sha1="ecb6e1f8e4b0e84c4b886c2f14a1500caf309757">
-        <dex dex="D:\Android_Projects\QuizApp_Android 2.0\app\build\intermediates\pre-dexed\release\gson-2.3.1-dbb870a54fdd36e7a332b51c57137399d447025f.jar" />
-    </item>
-    <item
-        jar="D:\Android_Projects\QuizApp_Android 2.0\app\build\intermediates\exploded-aar\com.android.support\support-v13\23.0.1\jars\classes.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="8c046c952177602c858ed41c8fc492c939bde9aa">
-        <dex dex="D:\Android_Projects\QuizApp_Android 2.0\app\build\intermediates\pre-dexed\release\classes-3e5c3e4080f268ad1dcae0a134a6ede671ead52b.jar" />
-    </item>
-    <item
-        jar="D:\Android_Projects\QuizApp_Android 2.0\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.0.1\jars\libs\internal_impl-23.0.1.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="aa92916125166649d8ad4ba3940c3dd7515596d3">
-        <dex dex="D:\Android_Projects\QuizApp_Android 2.0\app\build\intermediates\pre-dexed\release\internal_impl-23.0.1-dd02d1cd817834690a0c0b52aed3a42d9cc1c8a4.jar" />
-    </item>
-    <item
-        jar="D:\Android_Projects\QuizApp_Android 2.0\app\libs\chartboost.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="093026760409f1c029bf98964444101c46f318ea">
-        <dex dex="D:\Android_Projects\QuizApp_Android 2.0\app\build\intermediates\pre-dexed\release\chartboost-e0746d56b82f6bd15f48c14d54d0f00c1b15f504.jar" />
+        <dex dex="D:\Android_Projects\QuizApp_Android 2.0\app\build\intermediates\pre-dexed\dev\debug\gson-2.3.1-dbb870a54fdd36e7a332b51c57137399d447025f.jar" />
     </item>
     <item
         jar="D:\Android_Projects\QuizApp_Android 2.0\app\build\intermediates\exploded-aar\com.crashlytics.sdk.android\crashlytics-core\2.3.5\jars\classes.jar"
         jumboMode="false"
         revision="23.0.1"
         sha1="d18ba1d0eff55680fdf9a35f70a6091e4bc1adcb">
-        <dex dex="D:\Android_Projects\QuizApp_Android 2.0\app\build\intermediates\pre-dexed\release\classes-63f9727ed67be4ce0bc392af1bffee140b7886fa.jar" />
+        <dex dex="D:\Android_Projects\QuizApp_Android 2.0\app\build\intermediates\pre-dexed\dev\debug\classes-63f9727ed67be4ce0bc392af1bffee140b7886fa.jar" />
+    </item>
+    <item
+        jar="D:\Android_Projects\QuizApp_Android 2.0\app\build\intermediates\exploded-aar\com.android.support\cardview-v7\23.1.1\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="5e412e954a24c5310a459c09870e4e2081aceb03">
+        <dex dex="D:\Android_Projects\QuizApp_Android 2.0\app\build\intermediates\pre-dexed\dev\debug\classes-bbd591a388b1173b7ecfffc645e934b08a91ec3a.jar" />
+    </item>
+    <item
+        jar="C:\Users\Aleksey\.gradle\caches\modules-2\files-2.1\com.squareup.okio\okio\1.6.0\98476622f10715998eacf9240d6b479f12c66143\okio-1.6.0.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="98476622f10715998eacf9240d6b479f12c66143">
+        <dex dex="D:\Android_Projects\QuizApp_Android 2.0\app\build\intermediates\pre-dexed\dev\debug\okio-1.6.0-40a9b81b1c2008bb472e4ea2d7cb8324f8f25dd4.jar" />
+    </item>
+    <item
+        jar="D:\Android_Projects\QuizApp_Android 2.0\app\build\intermediates\exploded-aar\com.crashlytics.sdk.android\crashlytics\2.5.2\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="0c7f9fb9a729166c69fa585e01be2fe8fab4f45c">
+        <dex dex="D:\Android_Projects\QuizApp_Android 2.0\app\build\intermediates\pre-dexed\dev\debug\classes-99a8d7448965f13a4ef0b351c2cf60a4f55cdef5.jar" />
+    </item>
+    <item
+        jar="D:\Android_Projects\QuizApp_Android 2.0\app\build\intermediates\exploded-aar\com.yandex.android\mobmetricalib\2.21\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="40a487b6cadb4bc589b41bdf8d36dd5819a79c6e">
+        <dex dex="D:\Android_Projects\QuizApp_Android 2.0\app\build\intermediates\pre-dexed\dev\debug\classes-11ebc6972ade4b092dd298bd08d81841c49b3403.jar" />
+    </item>
+    <item
+        jar="D:\Android_Projects\QuizApp_Android 2.0\app\build\intermediates\exploded-aar\QuizApp_Android 2.0\vksdk_library\unspecified\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="8f34680c54464c8a709f468a3294391e2aa6493b">
+        <dex dex="D:\Android_Projects\QuizApp_Android 2.0\app\build\intermediates\pre-dexed\dev\debug\classes-7d195edba3d684fb12ef1fd95e3a9e03fc1892ce.jar" />
     </item>
 
 </items>

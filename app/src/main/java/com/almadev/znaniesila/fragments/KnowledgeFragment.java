@@ -71,8 +71,11 @@ public class KnowledgeFragment extends Fragment implements View.OnClickListener 
         // Inflate the layout for this fragment
         View root = inflater.inflate(R.layout.fragment_knowledge, container, false);
         ((TextView)root.findViewById(R.id.story_text)).setText(mStory);
-        Picasso.with(root.getContext()).load(mImgUrl).
-                into((ImageView) root.findViewById(R.id.story_img));
+        Picasso.with(root.getContext()).load(mImgUrl)
+                .placeholder(getResources().getDrawable(R.drawable.plate_txt))
+                .centerCrop()
+                .fit()
+                .into((ImageView) root.findViewById(R.id.story_img));
 
         root.findViewById(R.id.share_fb).setOnClickListener(this);
         root.findViewById(R.id.share_vk).setOnClickListener(this);

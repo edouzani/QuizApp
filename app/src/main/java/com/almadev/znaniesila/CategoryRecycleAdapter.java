@@ -33,19 +33,28 @@ import de.greenrobot.event.EventBus;
  */
 public class CategoryRecycleAdapter extends android.support.v7.widget.RecyclerView.Adapter {
 
+
+
     interface CategoryClickListener {
         void onClick(Category category, boolean payCat);
+
+        void onFooterClick();
     }
 
     private List<Category>         mCategories;
     private WeakReference<Context> wContext;
-    private boolean                isPayCats;
-    private int lastPosition = -1;
-    private List<WeakReference<CategoryClickListener>> listeners = new LinkedList<>();
-    private boolean isBrokenContent = false;
+    private boolean                                    isPayCats       = false;
+    private int                                        lastPosition    = -1;
+    private List<WeakReference<CategoryClickListener>> listeners       = new LinkedList<>();
+    private boolean                                    isBrokenContent = false;
+    private boolean mHaveFooter = true;
+
+    private final int NORMAL_ELEM_TYPE = -20;
+    private final int LAST_ELEM_TYPE   = -10;
 
     public CategoryRecycleAdapter(WeakReference<Context> wContext, List<Category> pCategories) {
         mCategories = pCategories;
+        mCategories.add(new Category());
         this.wContext = wContext;
         isBrokenContent = false;
     }
@@ -59,19 +68,36 @@ public class CategoryRecycleAdapter extends android.support.v7.widget.RecyclerVi
     }
 
     @Override
+    public int getItemViewType(final int position) {
+        if (position == getItemCount() - 1 && mHaveFooter) {
+            return LAST_ELEM_TYPE;
+        } else {
+            return NORMAL_ELEM_TYPE;
+        }
+    }
+
+    @Override
     public RecyclerView.ViewHolder onCreateViewHolder(final ViewGroup parent, final int viewType) {
         LayoutInflater inflater = getLayoutInflater(parent);
         View line = null;
-        line = inflater.inflate(R.layout.quiz_category_item, parent, false);
 
-        return new CategoryViewHolder(line);
+        if (viewType == NORMAL_ELEM_TYPE) {
+            line = inflater.inflate(R.layout.quiz_category_item, parent, false);
+            return new CategoryViewHolder(line);
+        } else if (viewType == LAST_ELEM_TYPE) {
+            line = inflater.inflate(R.layout.pay_cat_item_layout, parent, false);
+            return new FooterViewHolder(line);
+        }
+        return null;
     }
 
     @Override
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position) {
-        CategoryViewHolder mCategoryViewHolder = (CategoryViewHolder) holder;
-        mCategoryViewHolder.render(mCategories.get(position), isPayCats);
-//        setAnimation(mCategoryViewHolder.getRoot(), position);
+        if (!mHaveFooter || position != getItemCount() - 1) {
+            CategoryViewHolder mCategoryViewHolder = (CategoryViewHolder) holder;
+            mCategoryViewHolder.render(mCategories.get(position), isPayCats);
+            //        setAnimation(mCategoryViewHolder.getRoot(), position);
+        }
     }
 
     private void setAnimation(View viewToAnimate, int position)
@@ -88,17 +114,33 @@ public class CategoryRecycleAdapter extends android.support.v7.widget.RecyclerVi
         }
     }
 
-    public void setPayCats(boolean value) {
-        this.isPayCats = value;
-    }
-
-    public void setItems(List<Category> items) {
+    public void setItems(List<Category> items, boolean pIsPayCats, boolean haveFooter) {
         mCategories = items;
+        isPayCats = pIsPayCats;
+        mHaveFooter = haveFooter;
+        if (mHaveFooter) {
+            mCategories.add(new Category());
+        }
     }
 
     @Override
     public int getItemCount() {
         return mCategories.size();
+    }
+
+    class FooterViewHolder extends RecyclerView.ViewHolder {
+
+        public FooterViewHolder(final View itemView) {
+            super(itemView);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(final View pView) {
+                    for (WeakReference<CategoryClickListener> wListener : listeners) {
+                        wListener.get().onFooterClick();
+                    }
+                }
+            });
+        }
     }
 
     class CategoryViewHolder extends RecyclerView.ViewHolder {

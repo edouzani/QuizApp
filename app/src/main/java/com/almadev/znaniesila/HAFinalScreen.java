@@ -1,9 +1,7 @@
 package com.almadev.znaniesila;
 
-import java.lang.ref.WeakReference;
 import java.util.HashMap;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
@@ -11,11 +9,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.almadev.znaniesila.model.Category;
@@ -114,6 +109,12 @@ public class HAFinalScreen extends BaseGameActivity implements OnClickListener {
 
         findViewById(R.id.restart).setOnClickListener(this);
         findViewById(R.id.leaderboard).setOnClickListener(this);
+
+        checkAchievements();
+    }
+
+    private void checkAchievements() {
+
     }
 
     @Override

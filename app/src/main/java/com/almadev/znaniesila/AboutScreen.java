@@ -11,12 +11,14 @@ import com.squareup.okhttp.Response;
 import android.app.Activity;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.View;
 import android.webkit.WebView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.IOException;
 
@@ -42,6 +44,9 @@ public class AboutScreen extends Activity{
         webView = (WebView) findViewById(R.id.webView);
         webView.setBackgroundColor(Color.TRANSPARENT);
         webView.getSettings().setJavaScriptEnabled(true);
+        if (Build.VERSION.SDK_INT <= 16) {
+            webView.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
+        }
 //        webView.set
         new Thread(new Runnable() {
             @Override
@@ -57,6 +62,8 @@ public class AboutScreen extends Activity{
                         String jsonStr = response.body().string();
                         Page page = new Gson().fromJson(jsonStr, Page.class);
                         callback(page.getHtml());
+                    } else {
+
                     }
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -69,11 +76,26 @@ public class AboutScreen extends Activity{
         this.runOnUiThread( new Runnable() {
             @Override
             public void run() {
+                if (html == null) {
+                    mProgressBar.setVisibility(View.GONE);
+                    Toast.makeText(AboutScreen.this, "Ошибка соединения с сетью, попробуйте позднее", Toast.LENGTH_SHORT).show();
+                    return ;
+                }
+                int imgIdxStart = html.indexOf("http://s3.scena.tv");
+                int imgIdxEnd = html.indexOf(".JPG") + 4;
+                String htmlWithImg;
+//                if (imgIdxStart != -1 && imgIdxEnd != -1) {
+                    htmlWithImg = html.substring(0, imgIdxStart) + "<img src=\"" + html.substring(imgIdxStart, imgIdxEnd) +
+                            "\" width=\"220\" height=\"220\"/>" +
+                            html.substring(imgIdxEnd);
+//                } else {
+//                    htmlWithImg = html;
+//                }
                 String text = "<html><head>"
                         + "<style type=\"text/css\">body{color: #fff;}"
                         + "</style></head>"
                         + "<body>"
-                        + html
+                        + htmlWithImg
                         + "</body></html>";
                 webView.loadData(text, "text/html; charset=UTF-8", null);
                 mProgressBar.setVisibility(View.GONE);

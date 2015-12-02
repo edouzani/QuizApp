@@ -9,16 +9,18 @@ import com.google.ads.conversiontracking.InstallReceiver;
 import com.vk.sdk.VKSdk;
 import com.yandex.metrica.YandexMetrica;
 
+import java.io.BufferedInputStream;
+
 import io.fabric.sdk.android.Fabric;
 
 /**
  * Created by Aleksey on 11.11.2015.
  */
 public class ZSApp extends Application {
-    private static final String YA_API_KEY = "6f03830c-8106-4325-abf6-bb75d347d387";//"2c8dd60e-e769-4708-ab48-6e68b733ebd6";
+    private static final String YA_API_KEY     = "6f03830c-8106-4325-abf6-bb75d347d387";//"2c8dd60e-e769-4708-ab48-6e68b733ebd6";
     private static final String FLURRY_API_KEY = "GX2NGYFFF3TSWSPSMBTC";
 
-    public static final boolean DEBUG_ENV = false;
+    public static final boolean DEBUG_ENV = BuildConfig.TEST_ENV;
 
     public static Context sContext;
 
@@ -28,7 +30,9 @@ public class ZSApp extends Application {
 
         sContext = getApplicationContext();
 
-        Fabric.with(this, new Crashlytics());
+        if (!BuildConfig.DEBUG) {
+            Fabric.with(this, new Crashlytics());
+        }
 
         VKSdk.initialize(sContext);
 

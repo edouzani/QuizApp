@@ -10,6 +10,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -130,7 +131,7 @@ public class KnowledgeActivity extends FragmentActivity implements View.OnClickL
         }
     }
 
-    public class SectionsPagerAdapter extends FragmentPagerAdapter implements PagerSlidingTabStrip.CustomTabProvider{
+    public class SectionsPagerAdapter extends FragmentStatePagerAdapter implements PagerSlidingTabStrip.CustomTabProvider{
         private Context context;
         private int previousColor = -1;
 
@@ -181,6 +182,8 @@ public class KnowledgeActivity extends FragmentActivity implements View.OnClickL
                 tabTitle.setTextColor(getResources().getColor(R.color.gold));
             }
 
+            tab.setTag(position);
+
             return tab;
         }
 
@@ -188,7 +191,6 @@ public class KnowledgeActivity extends FragmentActivity implements View.OnClickL
         public void tabSelected(final View tab) {
             tab.findViewById(R.id.hexagon).setVisibility(View.VISIBLE);
             ((TextView)tab.findViewById(R.id.tab_title)).setTextSize(35);
-            previousColor = ((TextView)tab.findViewById(R.id.tab_title)).getCurrentTextColor();
             ((TextView)tab.findViewById(R.id.tab_title)).setTextColor(getResources().getColor(R.color.gold));
         }
 
@@ -196,7 +198,11 @@ public class KnowledgeActivity extends FragmentActivity implements View.OnClickL
         public void tabUnselected(final View tab) {
             tab.findViewById(R.id.hexagon).setVisibility(View.INVISIBLE);
             ((TextView)tab.findViewById(R.id.tab_title)).setTextSize(16);
-            ((TextView)tab.findViewById(R.id.tab_title)).setTextColor(previousColor);
+            if (mQuestions.get((Integer)tab.getTag()).isStoryViewed()) {
+                ((TextView) tab.findViewById(R.id.tab_title)).setTextColor(getResources().getColor(R.color.gold));
+            } else {
+                ((TextView) tab.findViewById(R.id.tab_title)).setTextColor(getResources().getColor(R.color.white));
+            }
         }
     }
 
