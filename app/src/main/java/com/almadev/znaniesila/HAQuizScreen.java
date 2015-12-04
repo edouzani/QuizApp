@@ -2,7 +2,9 @@ package com.almadev.znaniesila;
 
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Random;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -97,6 +99,8 @@ public class HAQuizScreen extends Activity implements OnClickListener, Callback,
     private boolean                  mDescriptionVisible       = false;
     private DescriptionClickListener mDescriptionClickListener = new DescriptionClickListener();
     private MediaPlayer bgMusicPlayer;
+    private TextView    mCurrentPointsText;
+    private boolean     optionClicked;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,56 +114,18 @@ public class HAQuizScreen extends Activity implements OnClickListener, Callback,
         mCategory = mQuizHolder.getCategories().getCategoryById(mCategoryId);
         //readQuestions();
         mQuiz = mQuizHolder.getQuiz(mCategoryId);
-        mQuestions = mQuiz.getQuestions();
-
-        Collections.sort(mQuestions, new Comparator<Question>() {
-            @Override
-            public int compare(final Question pQuestion, final Question pT1) {
-                int lw = pQuestion.getState().getWeight() + pQuestion.getLocal_id();
-                if (ZSApp.DEBUG_ENV) {
-                    lw += (pQuestion.getImage_url() != null) ? -50000 : 0;
-                }
-                int rw = pT1.getState().getWeight() + pT1.getLocal_id();
-                if (ZSApp.DEBUG_ENV) {
-                    rw += (pT1.getImage_url() != null) ? -50000 : 0;
-                }
-                if (lw < rw) {
-                    return -1;
-                } else if (lw > rw) {
-                    return 1;
-                } else {
-                    return 0;
-                }
-            }
-        });
-
+        mQuestions = mQuiz.getSortedQuestions(mCategory.getCategory_question_max_limit());
+        maxQuestions = mQuestions.size();
 
         mCurrentQuestion = 0;
-        maxQuestions = mQuestions.size() < mCategory.getCategory_question_max_limit() ?
-                mQuestions.size() : mCategory.getCategory_question_max_limit();
-
-        mQuestions = mQuestions.subList(0, maxQuestions);
-        Collections.shuffle(mQuestions);
 
         mTimer = (Timer) findViewById(R.id.timer);
         mThread = new HandlerThread(TAG, android.os.Process.THREAD_PRIORITY_BACKGROUND);
         mThread.start();
-//		mServiceHandler = new ServiceHandler(mThread.getLooper());
-//		mServiceHandler.obtainMessage(RETRIEVE_DATA).sendToTarget();
-
         setupViews();
         adSupportEnabled = mPrefsManager.getBoolean(Constants.AD_SUPPORT_NEEDED, false);
         adsDisabledAfterPurchase = mPrefsManager.getBoolean(Constants.ADS_DISABLED_AFTER_PURCHASE, false);
-//        if (adSupportEnabled && !adsDisabledAfterPurchase) {
-//            String appId = mPrefsManager.getString(Constants.CHARTBOOST_APPID, "");
-//            String appSecret = mPrefsManager.getString(Constants.CHARTBOOST_APPSECRET, "");
-//            if (appId.trim().equals("") || appSecret.trim().equals("")) {
-//                Toast.makeText(this, getResources().getString(R.string.chartboost_error_msg), Toast.LENGTH_SHORT).show();
-//            } else {
-//                this.cb = Chartboost.sharedChartboost();
-//                this.cb.onCreate(this, appId, appSecret, null);
-//            }
-//        }
+
         mTimerCallback = new TimerCallbackImpl();
 
         initBackgroundMusic();
@@ -285,6 +251,7 @@ public class HAQuizScreen extends Activity implements OnClickListener, Callback,
         mQuestion = (TextView) findViewById(R.id.question);
         mQuestionNumber = (TextView) findViewById(R.id.question_number);
         mCurrentPoints = (TextView) findViewById(R.id.current_points);
+        mCurrentPointsText = (TextView) findViewById(R.id.current_points_text);
 
         mLeftBtn = (Button) findViewById(R.id.left_btn);
         mLeftBtn.setOnClickListener(this);
@@ -340,11 +307,7 @@ public class HAQuizScreen extends Activity implements OnClickListener, Callback,
         mQuestionNumber.setText((mCurrentQuestion + 1) + "/" + maxQuestions);
 //        mCurrentPoints.setText(question.getPoints() + "");
         mCurrentPoints.setText(mScore + "");
-
-        String text = mScore + "";
-        if (mScore > 0) {
-            text = "+" + mScore;
-        }
+        mCurrentPointsText.setText(ZSApp.getPlurarPointsWord(mScore, false));
 
         imgUrl = question.getImage_url();
         if (imgUrl != null) {
@@ -385,6 +348,8 @@ public class HAQuizScreen extends Activity implements OnClickListener, Callback,
 //        if (animType == 2) {
 //            startOptionsFadeAnimation();
 //        }
+
+        optionClicked = false;
     }
 
     private Handler mUiHandler = new Handler() {
@@ -406,8 +371,8 @@ public class HAQuizScreen extends Activity implements OnClickListener, Callback,
 
     private void showFinalScreen() {
         mTimer.stop();
-        mQuizHolder.saveQuiz(mQuiz);
-        Intent intent = null;
+        mQuizHolder.dumpQuiz(mQuiz);
+        Intent intent;
         intent = new Intent(this, HAFinalScreen.class);
         intent.putExtra(Constants.CATEGORY, mCategory);
         intent.putExtra(Constants.LEADERBOARD_ID, LeaderboardConverter.getLeaderboard(this, mCategory.getLeaderboard_id()));
@@ -443,8 +408,6 @@ public class HAQuizScreen extends Activity implements OnClickListener, Callback,
             editor.putInt(AchievementsConstants.PREF_CORRECT_ANSWERS, correctAnswers);
             editor.commit();
 
-
-
             playSoundForAnswer(true);
             isCorrect = true;
         } else {
@@ -463,6 +426,7 @@ public class HAQuizScreen extends Activity implements OnClickListener, Callback,
         }
 
         mCurrentPoints.setText(mScore + "");
+        mCurrentPointsText.setText(ZSApp.getPlurarPointsWord(mScore, false));
 
         mOption0.setEnabled(false);
         mOption1.setEnabled(false);
@@ -514,41 +478,6 @@ public class HAQuizScreen extends Activity implements OnClickListener, Callback,
         }
     }
 
-    private void changeDrawableState(int selectedOption) {
-        if (mCurrentQuestion >= mQuestions.size()) {
-            return;
-        }
-        Question question = mQuestions.get(mCurrentQuestion);
-        if (question.getQuestion_type() != 4) {
-            try {
-                TwoTextButton clicked = (TwoTextButton) HAQuizScreen.class.getDeclaredField(
-                        "mOption" + selectedOption).get(this);
-                TwoTextButton correct = (TwoTextButton) HAQuizScreen.class.getDeclaredField(
-                        "mOption" + question.getAnswer()).get(this);
-
-                ((LevelListDrawable) correct.getBackground()).setLevel(1);
-                if (clicked != correct) {
-                    ((LevelListDrawable) clicked.getBackground()).setLevel(0);
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        } else {
-            if (question.getAnswer() == 1 && selectedOption == 0) { //true, true
-                mOption0.setTextColor(Color.GREEN);
-            } else if (question.getAnswer() == 1 && selectedOption == 1) { //true, false
-                mOption0.setTextColor(Color.GREEN);
-                mOption1.setTextColor(Color.RED);
-            } else if (question.getAnswer() == 0 && selectedOption == 0) { //false, true
-                mOption0.setTextColor(Color.RED);
-                mOption1.setTextColor(Color.GREEN);
-            } else if (question.getAnswer() == 0 && selectedOption == 1) { //false, false
-                mOption1.setTextColor(Color.GREEN);
-            }
-        }
-        mUiHandler.sendEmptyMessageDelayed(SET_NEXT_DATA, 777);
-    }
-
     private void playSoundForAnswer(boolean isCorrect) //send YES if answer is correct No if wrong. Also call this method for True false questions too.
     {
 //        boolean playSound = mPrefsManager.getBoolean(Constants.PLAY_SOUND_ON_ANSWERING, false);
@@ -588,12 +517,22 @@ public class HAQuizScreen extends Activity implements OnClickListener, Callback,
 
             case R.id.right_btn:
             case R.id.option1:
+                if (optionClicked) {
+                    break;
+                }
                 answerSelected(0);
+                mRightBtn.setEnabled(false);
+                optionClicked = true;
                 break;
 
             case R.id.left_btn:
             case R.id.option2:
+                if (optionClicked) {
+                    break;
+                }
+                mLeftBtn.setEnabled(false);
                 answerSelected(1);
+                optionClicked = true;
                 break;
 
             case R.id.option3:

@@ -76,7 +76,7 @@
         android:layout_alignLeft="@id/current_points"
         android:layout_below="@id/current_points"
         android:gravity="center"
-        android:text="баллов"
+        android:text="@string/points_text_5"
         android:textColor="#FFFFFF"
         android:textSize="16sp"/>
 
@@ -88,7 +88,7 @@
         android:layout_below="@id/question_number_text"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
-        android:scaleType="fitXY"/>
+        android:scaleType="centerCrop"/>
 
     <View
         android:id="@+id/center"

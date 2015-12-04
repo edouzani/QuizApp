@@ -189,6 +189,7 @@ public class Timer extends View {
     private       int originalTime = 0;
     private       int time         = 30;
     private final int spf          = 20;
+    private final int BONUS_TIME = 3 * 1000;
 
     Handler  mHandler = new Handler();
     Runnable mTick    = new Runnable() {
@@ -206,7 +207,8 @@ public class Timer extends View {
     };
 
     public int interpolatePoints(int points) {
-        return Math.round((float) time / (float) originalTime * points);
+        int res = Math.round((float) time / (float) (originalTime - BONUS_TIME) * points);
+        return res > points ? points : res;
     }
 
     private float interpolate() {

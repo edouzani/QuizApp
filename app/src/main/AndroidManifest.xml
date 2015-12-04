@@ -70,7 +70,8 @@
 
         <meta-data
             android:name="io.fabric.ApiKey"
-            android:value="8c55be5eb3d4573c25f8350239df3642763a9d32" />
+            android:value="20b2bf69ab3c21d152d9ab99f1f9e3f6135777bd" />
+            <!--android:value="8c55be5eb3d4573c25f8350239df3642763a9d32" />-->
 
         <activity android:name=".SettingsActivity"
             android:screenOrientation="portrait" >

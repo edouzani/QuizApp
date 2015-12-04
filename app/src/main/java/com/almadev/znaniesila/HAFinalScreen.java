@@ -85,7 +85,7 @@ public class HAFinalScreen extends BaseGameActivity implements OnClickListener {
 //        }
         Integer lastRecord = highScores.get(mCategory.getCategory_id());
         record = lastRecord != null ? lastRecord : 0;
-        record_text.setText(record + " БАЛЛОВ");
+        record_text.setText(record + " " + ZSApp.getPlurarPointsWord(record, false));
 
         TextView title = (TextView) findViewById(R.id.catname);
         title.setText(mCategory.getCategory_name());
@@ -94,7 +94,9 @@ public class HAFinalScreen extends BaseGameActivity implements OnClickListener {
         result.setText("" + mPoints);
 
         TextView maxPoints = (TextView) findViewById(R.id.total_points);
-        maxPoints.setText(String.format(getResources().getString(R.string.points_record), mMaxPoints));
+        maxPoints.setText(String.format(getResources().getString(R.string.points_record),
+                                        ZSApp.getPlurarPointsWord(mPoints, true),
+                                        mMaxPoints));
 
         int size = mPrefsmanager.getInt(Constants.FINAL_SCREEN_FONT_SIZE, 18);
         title.setTextSize(size);

@@ -29,16 +29,18 @@
     <string name="quiz_skip_text">ПРОПУСТИТЬ</string>
     <string name="cats_purchasable_title">КУПИТЬ КАТЕГОРИЮ</string>
     <string name="cats_passed_title">\u0020\u0020ПРОЙДЕННЫЕ КАТЕГОРИИ</string>
-    <string name="points_record">БАЛЛОВ НАБРАНО ВАМИ ИЗ %d</string>
+    <string formatted="false" name="points_record">%s НАБРАНО ВАМИ ИЗ %d</string>
     <string name="title_activity_knwoledge_description">KnwoledgeDescription</string>
     <string name="action_settings">Settings</string>
     <string name="section_format">Hello World from section: %1$d</string>
 
-<!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="cats_choose_title">ВЫБЕРИТЕ КАТЕГОРИЮ</string>
     <string name="correct_text">ПРАВИЛЬНО!</string>
     <string name="wrong_text">НЕПРАВИЛЬНО!</string>
     <string name="signin_other_error">К сожаление, подключение к сервису Google Games в данный момент невозможно.</string>
     <string name="signin_failure">Произошла ошибка во время подключения к сервису Google Games, попробуйте позднее</string>
+    <string name="points_text_5">баллов</string>
+    <string name="points_text_1">балл</string>
+    <string name="points_text_2">балла</string>
 </resources>

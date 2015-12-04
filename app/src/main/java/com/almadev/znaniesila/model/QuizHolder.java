@@ -74,22 +74,12 @@ public class QuizHolder {
         return result;
     }
 
-    public void saveQuiz(Quiz quiz) {
+    public void dumpQuiz(Quiz quiz) {
         final File quizFile = new File(questionsDir.getAbsolutePath(), quiz.getId() + ".qz");
-        for (int i = 0; i < quiz.getQuestions().size(); i++) {
-            quiz.getQuestions().get(i).setLocal_id(i);
-        }
+
 
         if (!questionsDir.exists()) {
             questionsDir.mkdirs();
-        }
-
-        Quiz local = getQuiz(quiz.getId());
-        if (local != null) {
-            if (ZSApp.DEBUG_ENV) {
-                Log.i("QuizHolder", "merging quiz#" + quiz.getId());
-            }
-            quiz = mergeQuizes(local, quiz);
         }
 
         try {
@@ -106,6 +96,22 @@ public class QuizHolder {
         }
 
         quizes.put(quiz.getId(), quiz);
+    }
+
+    public void saveQuiz(Quiz quiz) {
+        for (int i = 0; i < quiz.getQuestions().size(); i++) {
+            quiz.getQuestions().get(i).setLocal_id(i);
+        }
+
+        Quiz local = getQuiz(quiz.getId());
+        if (local != null) {
+            if (ZSApp.DEBUG_ENV) {
+                Log.i("QuizHolder", "merging quiz#" + quiz.getId());
+            }
+            quiz = mergeQuizes(local, quiz);
+        }
+
+        dumpQuiz(quiz);
     }
 
     private Quiz mergeQuizes(Quiz local, Quiz remote) {

@@ -76,7 +76,7 @@ public class HAStartScreen extends BaseGameActivity implements OnClickListener {
     private void initPlayer() {
         boolean playSound = mPrefsManager.getBoolean(Constants.PREF_MUSIC_ON, true);
 
-        if (playSound) {
+        if (playSound && player == null) {
             player = MediaPlayer.create(this, R.raw.main);
             if (player != null) {
                 player.setLooping(false);
@@ -100,7 +100,8 @@ public class HAStartScreen extends BaseGameActivity implements OnClickListener {
     protected void onResume() {
         super.onResume();
         boolean playSound = mPrefsManager.getBoolean(Constants.PREF_MUSIC_ON, true);
-        if (player != null && playSound) {
+        if (playSound) {
+            initPlayer();
             player.start();
         }
     }

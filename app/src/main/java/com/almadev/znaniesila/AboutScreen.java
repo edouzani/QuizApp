@@ -81,16 +81,18 @@ public class AboutScreen extends Activity{
                     Toast.makeText(AboutScreen.this, "Ошибка соединения с сетью, попробуйте позднее", Toast.LENGTH_SHORT).show();
                     return ;
                 }
-                int imgIdxStart = html.indexOf("http://s3.scena.tv");
+
+                String htmlWithImg = html;
+                /*int imgIdxStart = html.indexOf("http://s3.scena.tv");
                 int imgIdxEnd = html.indexOf(".JPG") + 4;
                 String htmlWithImg;
-//                if (imgIdxStart != -1 && imgIdxEnd != -1) {
+                if (imgIdxStart != -1 && imgIdxEnd != -1) {
                     htmlWithImg = html.substring(0, imgIdxStart) + "<img src=\"" + html.substring(imgIdxStart, imgIdxEnd) +
                             "\" width=\"220\" height=\"220\"/>" +
                             html.substring(imgIdxEnd);
-//                } else {
-//                    htmlWithImg = html;
-//                }
+                } else {
+                    htmlWithImg = html;
+                }*/
                 String text = "<html><head>"
                         + "<style type=\"text/css\">body{color: #fff;}"
                         + "</style></head>"

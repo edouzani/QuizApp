@@ -2,6 +2,7 @@ package com.almadev.znaniesila;
 
 import android.app.Application;
 import android.content.Context;
+import android.content.res.Resources;
 
 import com.crashlytics.android.Crashlytics;
 import com.flurry.android.FlurryAgent;
@@ -55,5 +56,23 @@ public class ZSApp extends Application {
         if (FLURRY_API_KEY != null) {
             FlurryAgent.init(this, FLURRY_API_KEY);
         }
+    }
+
+    public static String getPlurarPointsWord(int points, boolean caps) {
+        Resources r = sContext.getResources();
+        String res;
+        switch(points % 10) {
+            case 1: res = r.getString(R.string.points_text_1);
+                break;
+            case 2:
+            case 3:
+            case 4: res = r.getString(R.string.points_text_2);
+                break;
+            default: res = r.getString(R.string.points_text_5);
+        }
+        if (caps) {
+            res = res.toUpperCase();
+        }
+        return res;
     }
 }
